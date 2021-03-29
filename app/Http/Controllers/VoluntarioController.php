@@ -18,8 +18,8 @@ class VoluntarioController extends Controller
     public function index()
     {
         //
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
-        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC')->get();
+        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC')->get();
         //dd($municipios);
         return view('volunteers.registration', compact('municipios', 'instituciones'));
     }
