@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Voluntario;
 use Illuminate\Http\Request;
+use DB;
+use App\Municipio;
+use App\Institucion;
 
 class VoluntarioController extends Controller
 {
@@ -15,6 +18,10 @@ class VoluntarioController extends Controller
     public function index()
     {
         //
+        $municipios = Municipio::orderBy('nombre', 'ASC');
+        $instituciones = Institucion::orderBy('nombre', 'ASC');
+        return view('voluntarios', compact('municipios', 'instituciones'));
+
     }
 
     /**
@@ -25,6 +32,10 @@ class VoluntarioController extends Controller
     public function create()
     {
         //
+        $municipios = Municipio::orderBy('nombre', 'ASC');
+        $instituciones = Institucion::orderBy('nombre', 'ASC');
+        return view('voluntarios', compact('municipios', 'instituciones'));
+
     }
 
     /**
@@ -36,6 +47,10 @@ class VoluntarioController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required']);
+        Voluntario::create($request->all(), 'activo');
+        $mensaje = "success";
+        return redirect()->route('');
     }
 
     /**
