@@ -17,7 +17,7 @@ class Usuario extends Migration
             $table->bigIncrements('id_user');
             $table->string ('nombre', 100);
             $table->string ('ape_pat', 100);
-            $table->string ('ape_mat', 100);
+            $table->string ('ape_mat', 100)->nullable();
             $table->unsignedBigInteger('id_insti');
             $table->string('cargo', 50);
             $table->string('rol', 50);

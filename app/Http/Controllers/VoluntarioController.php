@@ -32,8 +32,8 @@ class VoluntarioController extends Controller
     public function create()
     {
         //
-        $municipios = Municipio::orderBy('nombre', 'ASC');
-        $instituciones = Institucion::orderBy('nombre', 'ASC');
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
         return view('voluntarios', compact('municipios', 'instituciones'));
 
     }
@@ -47,8 +47,8 @@ class VoluntarioController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required']);
-        Voluntario::create($request->all(), 'activo');
+        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required|unique', 'tel' => 'required']);
+        DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), $request->input('id_insti'), $request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
         $mensaje = "success";
         return redirect()->route('');
     }
