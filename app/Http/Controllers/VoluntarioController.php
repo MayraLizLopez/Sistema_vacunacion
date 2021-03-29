@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Voluntario;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\Municipio;
 use App\Models\Institucion;
 
@@ -18,9 +18,9 @@ class VoluntarioController extends Controller
     public function index()
     {
         //
-        $municipios = Municipio::orderBy('nombre', 'ASC');
-        $instituciones = Institucion::orderBy('nombre', 'ASC');
-        dd($municipios);
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        //dd($municipios);
         return view('volunteers.registration', compact('municipios', 'instituciones'));
     }
 

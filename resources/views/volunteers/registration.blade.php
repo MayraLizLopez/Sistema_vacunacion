@@ -26,9 +26,9 @@
                     <label for="instututionVoluntary">Institución</label>
                     <select class="form-control" id="instututionVoluntary">
                       <option disabled>Institución</option>
-                      @foreach ($instituciones as $instituto)
+                      {{-- @foreach ($instituciones as $instituto)
                         <option value="{{$instituto['id_municipio']}}">{{$instituto['nombre']}} </option>
-                      @endforeach
+                      @endforeach --}}
                     </select>
                 </div>
                 <div class="form-group">
@@ -43,9 +43,9 @@
                     <label for="townVoluntary">Municipio</label>
                     <select class="form-control" id="townVoluntary">
                       <option  disabled>Municipio</option>
-                      @foreach ($municipios as $municipio)
+                      {{-- @foreach ($municipios as $municipio)
                         <option value="{{$municipio['id_insti']}}">{{$instituto['nombre']}} </option>
-                      @endforeach
+                      @endforeach --}}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
