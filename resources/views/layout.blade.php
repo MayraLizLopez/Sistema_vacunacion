@@ -12,5 +12,6 @@
         @yield('content')
         <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
         <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
+        @yield('scripts')
     </body>
 </html>

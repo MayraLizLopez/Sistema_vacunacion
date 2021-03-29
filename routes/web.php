@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\VoluntaryController;
+use App\Http\Controllers\VoluntarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 
-Route::get('voluntarios/registro', [VoluntaryController::class, "register"]);
+Route::get('voluntarios/index', [VoluntarioController::class, "index"]);
+
+Route::get('voluntarios/create', [VoluntarioController::class, "create"]);
+
+Route::get('voluntarios/store', [VoluntarioController::class, "store"]);
