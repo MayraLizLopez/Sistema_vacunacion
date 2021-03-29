@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Voluntario;
 use Illuminate\Http\Request;
 use DB;
-use App\Municipio;
-use App\Institucion;
+use App\Models\Municipio;
+use App\Models\Institucion;
 
 class VoluntarioController extends Controller
 {
@@ -20,8 +20,8 @@ class VoluntarioController extends Controller
         //
         $municipios = Municipio::orderBy('nombre', 'ASC');
         $instituciones = Institucion::orderBy('nombre', 'ASC');
-        return view('voluntarios', compact('municipios', 'instituciones'));
-
+        dd($municipios);
+        return view('volunteers.registration', compact('municipios', 'instituciones'));
     }
 
     /**
