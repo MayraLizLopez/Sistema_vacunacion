@@ -32,8 +32,8 @@ class VoluntarioController extends Controller
     public function create()
     {
         //
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
-        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC')->get();
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC')->get();
         return view('voluntarios', compact('municipios', 'instituciones'));
 
     }
