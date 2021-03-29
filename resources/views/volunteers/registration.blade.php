@@ -43,9 +43,9 @@
                     <label for="townVoluntary">Municipio</label>
                     <select class="form-control" id="townVoluntary">
                       <option  disabled>Municipio</option>
-                      {{-- @foreach ($municipios as $municipio)
-                        <option value="{{$municipio['id_insti']}}">{{$instituto['nombre']}} </option>
-                      @endforeach --}}
+                      @foreach ($municipios as $municipio)
+                        <option value="{{$municipio['id_municipio']}}">{{$municipio['nombre']}} </option>
+                      @endforeach
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
@@ -56,6 +56,6 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-        console.log(@json($municipios));
+        let municipios = @json($municipios);
     </script>
 @endsection
