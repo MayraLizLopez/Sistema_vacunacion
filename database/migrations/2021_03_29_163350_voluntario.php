@@ -17,7 +17,7 @@ class Voluntario extends Migration
             $table->bigIncrements('id_voluntario');
             $table->string ('nombre', 100);
             $table->string ('ape_pat', 100);
-            $table->string ('ape_mat', 100);
+            $table->string ('ape_mat', 100)->nullable();
             $table->unsignedBigInteger('id_insti');
             $table->unsignedBigInteger('id_municipio');
             $table->string('tel', 20);
