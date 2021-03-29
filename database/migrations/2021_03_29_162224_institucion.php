@@ -18,7 +18,7 @@ class Institucion extends Migration
             $table->bigIncrements('id_insti');
             $table->string ('nombre', 100);
             $table->string ('domicilio', 200);
-            $table->unsignedBigInteger('id_munici');
+            $table->unsignedBigInteger('id_municipio');
             $table->string('nombre_enlace', 100);
             $table->string('cargo_enlace', 50);
             $table->string('tel', 20);
@@ -26,7 +26,7 @@ class Institucion extends Migration
             $table->string('password', 100);
             $table->boolean('activo');
             //$table->timestamps();
-            $table->foreign('id_munici')->references('id_municipio')->on('municipios');
+            $table->foreign('id_municipio')->references('id_municipio')->on('municipios');
         });
     }
 

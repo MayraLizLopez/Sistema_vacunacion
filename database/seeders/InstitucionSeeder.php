@@ -19,7 +19,7 @@ class InstitucionSeeder extends Seeder
       	DB::table('instituciones')->insert([
             'nombre' => 'Auditorio Benito Juárez',
             'domicilio' => Str::random(10),
-            'id_munici' => 1,
+            'id_municipio' => 1,
             'tel' => Str::random(9),
             'nombre_enlace' => 'Juan Perez',
             'cargo_enlace' => 'director',
@@ -37,7 +37,7 @@ class InstitucionSeeder extends Seeder
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
             'activo' => true,
-            'id_munici' => 2,
+            'id_municipio' => 2,
         ]);
     }
 }
