@@ -18,8 +18,11 @@ class VoluntarioController extends Controller
     public function index()
     {
         //
-        $voluntarios = DB::select('SELECT * FROM voluntarios ORDER BY nombre ASC');
-        return view('volunteers.index', compact('voluntarios'));
+        //$voluntarios = DB::select('SELECT * FROM voluntarios ORDER BY nombre ASC');
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        return view('volunteers.registration', compact('municipios', 'instituciones'));
+        //return view('volunteers.registration', compact('voluntarios'));
     }
 
     /**
@@ -32,7 +35,7 @@ class VoluntarioController extends Controller
         //
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('voluntarios', compact('municipios', 'instituciones'));
+        return view('volunteers.registration', compact('municipios', 'instituciones'));
 
     }
 
@@ -68,9 +71,10 @@ class VoluntarioController extends Controller
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
      */
-    public function show(Voluntario $voluntario)
+    public function show()
     {
-        //
+        $voluntarios = DB::select('SELECT * FROM voluntarios ORDER BY nombre ASC');
+        return view('admin.voluntaries', compact('voluntarios'));
     }
 
     /**
