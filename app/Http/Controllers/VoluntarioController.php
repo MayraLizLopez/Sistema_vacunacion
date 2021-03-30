@@ -18,8 +18,8 @@ class VoluntarioController extends Controller
     public function index()
     {
         //
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC')->get();
-        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC')->get();
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
         //dd($municipios);
         return view('volunteers.registration', compact('municipios', 'instituciones'));
     }
@@ -32,8 +32,8 @@ class VoluntarioController extends Controller
     public function create()
     {
         //
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC')->get();
-        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC')->get();
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
         return view('voluntarios', compact('municipios', 'instituciones'));
 
     }
@@ -46,11 +46,11 @@ class VoluntarioController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
-        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required|unique', 'tel' => 'required']);
-        DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), $request->input('id_insti'), $request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
+        //dd($request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'));
+        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required']);
+        DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
         $mensaje = "success";
-        return redirect()->route('');
+        return redirect()->route('/');
     }
 
     /**

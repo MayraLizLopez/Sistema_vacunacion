@@ -21,4 +21,4 @@ Route::get('voluntarios/index', [VoluntarioController::class, "index"]);
 
 Route::get('voluntarios/create', [VoluntarioController::class, "create"]);
 
-Route::get('voluntarios/store', [VoluntarioController::class, "store"]);
+Route::post('voluntarios/store', [VoluntarioController::class, "store"]);
