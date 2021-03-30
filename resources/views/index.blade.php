@@ -16,7 +16,7 @@
             <h1>Banco de voluntarios</h1>
     </div>
     <div class="row justify-content-center">
-        <a href="{{ url("/voluntarios/index") }}" class="btn btn-primary">Registrarse como voluntario</a>
+        <a href="{{ url("voluntarios/index") }}" class="btn btn-primary">Registrarse como voluntario</a>
     </div>
 </div>
 @endsection
