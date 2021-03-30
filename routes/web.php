@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VoluntarioController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class);
 
-Route::get('voluntarios/index', [VoluntarioController::class, "index"]);
+//voluntarios
+Route::get('voluntario/index', [VoluntarioController::class, "index"]);
 
-Route::get('voluntarios/create', [VoluntarioController::class, "create"]);
+Route::get('voluntario/create', [VoluntarioController::class, "create"]);
 
-Route::post('voluntarios/store', [VoluntarioController::class, "store"]);
+Route::post('voluntario/store', [VoluntarioController::class, "store"]);
+
+//adminstrador
+Route::get('admin/panel', [AdminController::class, "panel"]);
+
+Route::get('admin/panel/index', [AdminController::class, "index"]);
+
+Route::get('admin/panel/voluntaries', [AdminController::class, "voluntaries"]);

@@ -55,12 +55,12 @@
         console.log(municipios);
 
         $(document).ready(()=>{
-            getAllTowns(municipios);
-            getAllInstitutes(institutos);
-           
+            startEvents();
         });
 
-        function starEvents(){
+        function startEvents(){
+            getAllTowns(municipios);
+            getAllInstitutes(institutos);
         }
 
         function getAllInstitutes(institutos){
