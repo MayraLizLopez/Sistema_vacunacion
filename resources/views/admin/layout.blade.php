@@ -65,7 +65,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Custom Components:</h6>
                             <a class="collapse-item" href="{{url("/admin/panel/index")}}">Buttons</a>
-                            <a class="collapse-item" href="{{url("/admin/panel/voluntaries")}}">Cards</a>
+                            <a class="collapse-item" href="{{url("/admin/panel/show")}}">Cards</a>
                         </div>
                     </div>
                 </li>

@@ -20,9 +20,10 @@
             data-pagination="true">
                 <thead>
                   <tr>
-                    <th data-field="id">ID</th>
-                    <th data-field="name">Item Name</th>
-                    <th data-field="price">Item Price</th>
+                    <th data-field="nombre">Nombre</th>
+                    <th data-field="ape_pat">Apellido Paterno</th>
+                    <th data-field="ape_pat">Apellido Materno</th>
+                    <th data-field="email">Email</th>
                   </tr>
                 </thead>
             </table>
@@ -32,5 +33,16 @@
 @endsection
 @section('scripts')
     <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
-    <script src="{{ url("../resources/js/voluntaries.js") }}"></script>
+    <script>
+        $(document).ready(()=>{
+            getAllVolunataries();
+        });
+
+        function getAllVolunataries(){
+            let $table = $('#voluntariesTable');
+            let voluntarios = @json($voluntarios);
+            console.log(voluntarios);     
+            $table.bootstrapTable({data: voluntarios});
+        }
+    </script>
 @endsection

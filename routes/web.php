@@ -26,6 +26,8 @@ Route::get('voluntario/create', [VoluntarioController::class, "create"]);
 
 Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
+Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
+
 //adminstrador
 Route::get('admin/panel', [AdminController::class, "panel"]);
 

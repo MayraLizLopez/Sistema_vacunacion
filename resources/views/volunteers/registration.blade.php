@@ -9,7 +9,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <form method="POST" action="{{url("/voluntarios/store")}}">
+            <form method="POST" action="{{url("/voluntario/store")}}">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="nameVoluntary">Nombre (s)</label>
