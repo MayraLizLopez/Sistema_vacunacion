@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Voluntario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Voluntario;
 use App\Models\Municipio;
 use App\Models\Institucion;
 
@@ -18,10 +18,8 @@ class VoluntarioController extends Controller
     public function index()
     {
         //
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
-        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        //dd($municipios);
-        return view('volunteers.registration', compact('municipios', 'instituciones'));
+        $voluntarios = DB::select('SELECT * FROM voluntarios ORDER BY nombre ASC');
+        return view('volunteers.index', compact('voluntarios'));
     }
 
     /**
@@ -48,9 +46,20 @@ class VoluntarioController extends Controller
     {
         //dd($request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'));
         $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required']);
-        DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
-        $mensaje = "success";
-        return redirect()->route('/');
+        $emailUnico = DB::select('SELECT COUNT(*) FROM voluntarios WHERE email = '.$request->input('email'));
+        if($emailUnico == 0){
+            DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
+            $mensaje = "success";
+
+            return redirect()->route('/');
+        }else{
+            $mensaje = "El email ya fue registrado";
+            $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+            $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+
+            return view('voluntarios', compact('municipios', 'instituciones', 'mensaje'));
+        }
+    
     }
 
     /**
