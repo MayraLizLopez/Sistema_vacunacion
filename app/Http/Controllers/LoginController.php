@@ -38,13 +38,16 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        return redirect('/');
+        if(session()->has('LoggedUser')){
+           session()->pull('LoggedUser'); 
+        }
+        return redirect('security/login');
     }
 
     public function dashboard(){
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        return view('admin/panel/index');     
+        //<span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
+        return view('admin.index', $data);     
     
     }
 }

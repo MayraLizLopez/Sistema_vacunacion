@@ -33,7 +33,7 @@
         @foreach($instituciones as $item)
         <tr>
             <td>{{$item->nombre}}</td>
-            <td>{{$item->domicilio}}}</td>
+            <td>{{$item->domicilio}}</td>
             <td>{{$item->nombre_enlace}}</td>
             @foreach ($municipios as $municipio)
                 @if ($item->id_municipio == $municipio->id_municipio)
@@ -54,80 +54,6 @@
     </table>
     </div>
 </div>
-{{-- start modal section --}}
-<div class="modal" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Editar voluntario</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="content">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="nameVoluntary">Nombre</label>
-                                <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="paternalSurnameVoluntary">Domicilio</label>
-                                <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" placeholder="Apellido Paterno">
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="maternalSurnameVoluntary">Nombre Enlace</label>
-                                <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" placeholder="Apellido Materno">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="emailVoluntary">Municipio</label>
-                                <input type="text" class="form-control" id="emailVoluntary" name="id_municipio" placeholder="Correo electrónico">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="phoneVoluntary">Cargo</label>
-                                <input type="text" class="form-control" id="phoneVoluntary" name="cargo" placeholder="Número celular o fijo">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="townVoluntary">Teléfono</label>
-                                <select class="form-control" id="townVoluntary" name="tel">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="instututionVoluntary">Correo</label>
-                                <select class="form-control" id="instututionVoluntary" name="email">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Save changes</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{-- end modal section --}}
 @endsection
 @section('scripts')
 @endsection

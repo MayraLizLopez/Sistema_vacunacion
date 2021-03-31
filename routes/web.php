@@ -38,17 +38,21 @@ Route::post('voluntario/destroy', [VoluntarioController::class, "destroy"]);
 //adminstrador
 Route::get('admin/panel', [AdminController::class, "panel"]);
 
-Route::get('admin/panel/index', [AdminController::class, "index"]);
 
 Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
 
-Route::get('admin/panel/institutions', [InstitucionController::class, "show"]);
+Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
 Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 
 Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::Class, "update"])->name('updateInstitucion');
 
-//Security
+//Securitys
 Route::get('security/login', [LoginController::class, "login"])->name('login');
 
 Route::post('security/authenticate', [LoginController::class, "authenticate"]);
+
+
+Route::group(['middleware' =>['AuthCheck']], function(){
+    Route::get('admin/panel/index', [LoginController::class, "dashboard"]);
+});
