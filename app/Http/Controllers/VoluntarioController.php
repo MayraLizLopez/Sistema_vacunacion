@@ -126,28 +126,29 @@ class VoluntarioController extends Controller
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Voluntario $voluntario)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nombre' => 'required', 
             'ape_pat' => 'required',
             'id_municipio' => 'required',
             'id_insti' => 'required', 
-            'email' => 'required|email|unique:voluntarios', 
+            'email' => 'required|email',
             'tel' => 'required',
         ]);
 
-        $voluntarioEditado = Usuario::findOrFail($voluntario->id_volunario);
-        $voluntarioEditado->nombre = $voluntario->nombre;
-        $voluntarioEditado->ape_pat = $voluntario->ape_pat;
-        $voluntarioEditado->ape_mat = $voluntario->ape_mat;
-        $voluntarioEditado->id_municipio = (int)$voluntario->id_municipio;
-        $voluntarioEditado->id_insti = (int)$voluntario->id_insti;
-        $voluntarioEditado->tel = $voluntario->tel;
-        $voluntarioEditado->email = $voluntario->email;
+        $voluntarioEditado = Usuario::findOrFail($id);
+        $voluntarioEditado->nombre = $request->nombre;
+        $voluntarioEditado->ape_pat = $request->ape_pat;
+        $voluntarioEditado->ape_mat = $request->ape_mat;
+        $voluntarioEditado->id_municipio = (int)$request->id_municipio;
+        $voluntarioEditado->id_insti = (int)$request->id_insti;
+        $voluntarioEditado->tel = $request->tel;
+        $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
         $voluntarioEditado->eliminado = false;
-        $save = $voluntario->save();
+        dd($voluntarioEditado);
+        $save = $voluntarioEditado->save();
         if($save){
             return back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
         }else{

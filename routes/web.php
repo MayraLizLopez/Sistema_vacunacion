@@ -44,9 +44,11 @@ Route::get('admin/panel/institutions', [InstitucionController::class, "show"]);
 
 Route::get('admin/panel/voluntario/edit/{id_voluntario}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
 
+Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
+
 Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 
-Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::Class, "update"])->name('updateInstitucion');
+Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::class, "update"])->name('updateInstitucion');
 
 //Security
 Route::get('security/login', [LoginController::class, "login"])->name('login');

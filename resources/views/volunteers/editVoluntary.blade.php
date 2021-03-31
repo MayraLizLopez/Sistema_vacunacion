@@ -7,7 +7,9 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <form class="mb-3" method="POST" action="{{url("/voluntario/store")}}">
+            <form action= "{{route('updateVoluntarios', $voluntarioEdit->id_voluntario)}}"  method="POST">
+                @method('PATCH')
+                @csrf
                 @if(Session::get('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
@@ -68,7 +70,7 @@
                     </select>
                 </div>
                 <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
-                <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
+                <button class="btn btn-primary" type="submit">Save changes</button>
             </form>
         </div>
     </div>
