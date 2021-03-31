@@ -45,15 +45,22 @@
                                         <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
                                     </div>
                                     <form class="user"  method="POST" action="{{url("/security/authenticate")}}">
+                                        @if(Session::get('fail'))
+                                            <div class="alert alert-danger">
+                                                {{ Session::get('fail') }}
+                                            </div>
+                                        @endif
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                 id="InputEmail" aria-describedby="emailHelp" name="email"
                                                 placeholder="Enter Email Address...">
+                                                <span class="text-danger">@error('email'){{ $message }} @enderror </span>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 id="InputPassword" name="password" placeholder="Password">
+                                                <span class="text-danger">@error('password'){{ $message }} @enderror </span>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
