@@ -64,7 +64,7 @@ class VoluntarioController extends Controller
              DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
              $mensaje = "success";
 
-             return view('index');
+             return redirect()->route('home');
          }else{
              $mensaje = "El email ya fue registrado";
              $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
