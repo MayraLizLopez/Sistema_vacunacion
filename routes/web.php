@@ -27,14 +27,14 @@ Route::get('voluntario/create', [VoluntarioController::class, "create"]);
 
 Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
-Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
 
 //adminstrador
 Route::get('admin/panel', [AdminController::class, "panel"]);
 
 Route::get('admin/panel/index', [AdminController::class, "index"]);
 
-Route::get('admin/panel/voluntaries', [AdminController::class, "voluntaries"]);
+Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
+
 
 //Security
 Route::get('security/login', [LoginController::class, "login"]);
