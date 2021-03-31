@@ -28,7 +28,7 @@ class LoginController extends Controller
             return back()->with('fail', 'Correo incorrecto');
         }else{
             if(Hash::check($request->password, $userInfo->password)){
-                $request->session()->put('LoggedUser', $userInfo->id);
+                $request->session()->put('LoggedUser', $userInfo->id_user);
                 return redirect('admin/panel/index');
             }else{
                 return back()->with('fail', 'Contraseña incorrecta');
@@ -40,5 +40,11 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function dashboard(){
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
+        return view('admin/panel/index');     
+    
     }
 }

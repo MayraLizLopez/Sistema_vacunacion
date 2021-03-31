@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VoluntarioController;
+use App\Http\Controllers\InstitucionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 
@@ -41,6 +42,9 @@ Route::get('admin/panel/index', [AdminController::class, "index"]);
 
 Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
 
+Route::get('admin/panel/institutions', [InstitucionController::Class, "show"]);
+
+Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::Class, "edit"])->name('editarInstituciones');
 
 //Security
 Route::get('security/login', [LoginController::class, "login"])->name('login');
