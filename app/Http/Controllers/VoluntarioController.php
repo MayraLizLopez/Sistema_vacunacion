@@ -101,14 +101,19 @@ class VoluntarioController extends Controller
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Voluntario $voluntario)
+    public function edit(int $id_voluntario)
     {
-        //
-        $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $voluntario->id_voluntario)->get();
+        dd($id_voluntario);
+        $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $id_voluntario)->get();
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return back()->with('editar', 'edicion de voluntario', compact('voluntarioEdit', 'municipios', 'instituciones'));
-        //return view('admin/panel/show', compact('voluntarioEdit', 'municipios', 'instituciones'));
+        // return response()->json([
+        //     'voluntarios' => $voluntarioEdit,
+        //     'municipios' => $municipios,
+        //     'instituciones' => $instituciones
+        // ]);
+        //return back()->with('editar', 'edicion de voluntario', compact('voluntarioEdit', 'municipios', 'instituciones'));
+        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'instituciones'));
     }
 
     /**
