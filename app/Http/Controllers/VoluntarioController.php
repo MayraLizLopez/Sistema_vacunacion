@@ -91,8 +91,10 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
-        $voluntarios =$voluntarioEdit = DB::table('voluntarios')->get();   
-        return view('admin.voluntaries', compact('voluntarios'));
+        $voluntarios = DB::table('voluntarios')->get();
+        $instituciones = DB::table('instituciones')->get();   
+        $municipios = DB::table('municipios')->get(); 
+        return view('admin.voluntaries', compact('voluntarios', 'municipios', 'instituciones'));
     }
 
     /**
@@ -104,9 +106,17 @@ class VoluntarioController extends Controller
     public function edit($id)
     {
         $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $id)->first();
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+
+        $municipios = DB::table('municipios')->get();   
+        $muni = DB::table('municipios')->where('id_municipio', $voluntarioEdit->id_municipio)->first();
+        $municipio_select = $muni->nombre;
+
+        $instituciones = DB::table('instituciones')->get();   
+        $insti = DB::table('instituciones')->where('id_insti', $voluntarioEdit->id_insti)->first();
+        $institucion_select = $insti->nombre;
+
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'instituciones'));
+        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'municipio_select', 'instituciones', 'institucion_select'));
     }
 
     /**

@@ -28,9 +28,37 @@
                     <th data-field="ape_pat" data-halign="center" data-align="center">Apellido Paterno</th>
                     <th data-field="ape_mat" data-halign="center" data-align="center">Apellido Materno</th>
                     <th data-field="email" data-halign="center" data-align="center">Email</th>
+                    <th data-field="id_municipio" data-halign="center" data-align="center">Municipio</th>
+                    <th data-field="id_insti" data-halign="center" data-align="center">Institución</th>
                     <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
                   </tr>
                 </thead>
+                <tbody>
+                    @foreach($voluntarios as $item)
+                    <tr>
+                        <td>{{$item->nombre}}</td>
+                        <td>{{$item->ape_pat}}}</td>
+                        <td>{{$item->ape_mat}}</td>
+                        <td>{{$item->email}}</td>
+                        <td>{{$item->tel}}</td>
+                        @foreach ($municipios as $municipio)
+                        @if ($item->id_municipio == $municipio->id_municipio)
+                            <td>{{$municipio->nombre}}</td>
+                        @endif
+                        @endforeach
+                        @foreach ($instituciones as $institucion)
+                        @if ($item->id_insti == $institucion->id_insti)
+                            <td>{{$institucion->nombre}}</td>
+                        @endif
+                        @endforeach
+                        <td>  
+                            <a class="like mr-3" href="{{route('editarVoluntarios', $item->id_voluntario)}}" title="Edit" type="reset"><i class="fas fa-edit"></i></a>
+                            <a class="remove" href="javascript:void(0)" title="Remove"><i class="fa fa-trash"></i></a>
+                        </td>
+            
+                    </tr>
+                    @endforeach()
+                </tbody>
             </table>
         </div>
     </div>

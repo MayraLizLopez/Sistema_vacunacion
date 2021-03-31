@@ -28,8 +28,6 @@ Route::get('voluntario/create', [VoluntarioController::class, "create"]);
 
 Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
-Route::get('voluntario/edit/{id}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
-
 Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
 Route::post('voluntario/destroy', [VoluntarioController::class, "destroy"]);
@@ -43,6 +41,8 @@ Route::get('admin/panel/index', [AdminController::class, "index"]);
 Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
 
 Route::get('admin/panel/institutions', [InstitucionController::class, "show"]);
+
+Route::get('admin/panel/voluntario/edit/{id_voluntario}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
 
 Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 
