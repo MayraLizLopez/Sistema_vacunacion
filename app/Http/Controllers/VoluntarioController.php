@@ -8,6 +8,7 @@ use App\Models\Voluntario;
 use App\Models\Municipio;
 use App\Models\Institucion;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Usuario;
 
 class VoluntarioController extends Controller
 {
@@ -106,7 +107,8 @@ class VoluntarioController extends Controller
         $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $voluntario->id_voluntario)->get();
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('admin/panel/show', compact('voluntarioEdit', 'municipios', 'instituciones'));
+        return back()->with('editar', 'edicion de voluntario', compact('voluntarioEdit', 'municipios', 'instituciones'));
+        //return view('admin/panel/show', compact('voluntarioEdit', 'municipios', 'instituciones'));
     }
 
     /**
