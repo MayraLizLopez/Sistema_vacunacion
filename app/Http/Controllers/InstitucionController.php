@@ -63,10 +63,11 @@ class InstitucionController extends Controller
     public function edit($id)
     {
         //dd($id);
-        $institucion = DB::table('instituciones')->where('id_insti', $id)->get();   
-        dd($institucion);
+        $institucion = DB::table('instituciones')->where('id_insti', $id)->first();   
         $municipios = DB::table('municipios')->get();   
-        return view('admin.institutions', compact('institucion', 'municipios'));
+        $muni = DB::table('municipios')->where('id_municipio', $institucion->id_municipio)->first();   
+        $municipio_select = $muni->nombre;
+        return view('admin.edit_institutions', compact('institucion', 'municipios', 'municipio_select'));
     }
 
     /**
