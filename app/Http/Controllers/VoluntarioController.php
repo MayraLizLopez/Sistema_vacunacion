@@ -132,12 +132,11 @@ class VoluntarioController extends Controller
             'nombre' => 'required', 
             'ape_pat' => 'required',
             'id_municipio' => 'required',
-            'id_insti' => 'required', 
-            'email' => 'required|email',
-            'tel' => 'required',
+            'id_insti' => 'required',
+            'tel' => 'required', 
+            'email' => 'required',
         ]);
-
-        $voluntarioEditado = Usuario::findOrFail($id);
+        $voluntarioEditado = Voluntario::findOrFail($id);
         $voluntarioEditado->nombre = $request->nombre;
         $voluntarioEditado->ape_pat = $request->ape_pat;
         $voluntarioEditado->ape_mat = $request->ape_mat;
@@ -147,7 +146,6 @@ class VoluntarioController extends Controller
         $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
         $voluntarioEditado->eliminado = false;
-        dd($voluntarioEditado);
         $save = $voluntarioEditado->save();
         if($save){
             return back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
