@@ -46,6 +46,8 @@ Route::get('admin/panel/institutions', [InstitucionController::Class, "show"]);
 
 Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::Class, "edit"])->name('editarInstituciones');
 
+Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::Class, "update"])->name('updateInstitucion');
+
 //Security
 Route::get('security/login', [LoginController::class, "login"])->name('login');
 
