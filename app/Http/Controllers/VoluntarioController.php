@@ -30,7 +30,7 @@ class VoluntarioController extends Controller
     {
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.registration', compact('municipios', 'instituciones'))
+        return view('volunteers.registration', compact('municipios', 'instituciones'));
     }
 
     /**
