@@ -128,7 +128,7 @@
 
         function operateFormatter(value, row, index) {
             return [
-            '<a class="like mr-3" href="javascript:void(0)" title="Edit">',
+            '<a class="like mr-3" href="/voluntario/edit, {}" title="Edit">',
             '<i class="fas fa-edit"></i>',
             '</a>',
             '<a class="remove" href="javascript:void(0)" title="Remove">',
@@ -138,11 +138,10 @@
         }
 
         window.operateEvents = {
-            'click .like': function (e, value, row, index) {
-                $('#myModal').modal('show');
-                updateVoluntary(row);
-                //alert('You click like action, row: ' + JSON.stringify(row))
-            },
+            // 'click .like': function (e, value, row, index) {               
+            //     updateVoluntary(row);
+            //     alert('You click like action, row: ' + JSON.stringify(row))
+            // },
 
             'click .remove': function (e, value, row, index) {
                 console.log(row);
