@@ -17,7 +17,7 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 //voluntarios
 Route::get('voluntario/index', [VoluntarioController::class, "index"]);
