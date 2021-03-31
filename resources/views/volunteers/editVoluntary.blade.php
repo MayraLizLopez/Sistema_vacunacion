@@ -7,7 +7,9 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <form class="mb-3" method="POST" action="{{url("/voluntario/store")}}">
+            <form action= "{{route('updateVoluntarios', $voluntarioEdit->id_voluntario)}}"  method="POST">
+                @method('PATCH')
+                @csrf
                 @if(Session::get('success'))
                     <div class="alert alert-success">
                         {{ Session::get('success') }}
@@ -36,10 +38,14 @@
                     <input type="text" class="form-control" id="maternalSurnameVoluntary" name="ape_mat" placeholder="Apellido Materno" value="{{ $voluntarioEdit->ape_mat }}">
                 </div>
                 <div class="form-group">
-                    <label for="instututionVoluntary">Institución</label>
-                    <select class="form-control" id="instututionVoluntary" name="id_insti">
-                        <option value="{{ $voluntarioEdit->id_insti }}" selected></option>
-                    <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
+                    <label for="townVoluntary">Institución</label>
+                    <select class="form-control" id="townVoluntary" name="id_municipio">
+                    <option value="{{$voluntarioEdit->id_insti}}">{{$institucion_select}}</option>
+                     @foreach ($instituciones as $institucion)
+                      @if ($institucion_select != $institucion->nombre)
+                     <option value="{{$institucion->id_insti}}">{{$institucion->nombre}} </option>
+                     @endif
+                     @endforeach
                     </select>
                 </div>
                 <div class="form-group">
@@ -55,11 +61,16 @@
                 <div class="form-group">
                     <label for="townVoluntary">Municipio</label>
                     <select class="form-control" id="townVoluntary" name="id_municipio">
-                        <option value="{{ $voluntarioEdit->id_municipio }}" selected></option>
+                    <option value="{{$voluntarioEdit->id_municipio}}">{{$municipio_select}}</option>
+                     @foreach ($municipios as $municipio)
+                      @if ($municipio_select != $municipio->nombre)
+                     <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
+                     @endif
+                     @endforeach
                     </select>
-                    <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
                 </div>
-                <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
+                <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
+                <button class="btn btn-primary" type="submit">Save changes</button>
             </form>
         </div>
     </div>

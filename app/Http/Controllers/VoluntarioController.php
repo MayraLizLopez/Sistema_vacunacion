@@ -91,8 +91,10 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
-        $voluntarios =$voluntarioEdit = DB::table('voluntarios')->get();   
-        return view('admin.voluntaries', compact('voluntarios'));
+        $voluntarios = DB::table('voluntarios')->get();
+        $instituciones = DB::table('instituciones')->get();   
+        $municipios = DB::table('municipios')->get(); 
+        return view('admin.voluntaries', compact('voluntarios', 'municipios', 'instituciones'));
     }
 
     /**
@@ -104,9 +106,17 @@ class VoluntarioController extends Controller
     public function edit($id)
     {
         $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $id)->first();
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+
+        $municipios = DB::table('municipios')->get();   
+        $muni = DB::table('municipios')->where('id_municipio', $voluntarioEdit->id_municipio)->first();
+        $municipio_select = $muni->nombre;
+
+        $instituciones = DB::table('instituciones')->get();   
+        $insti = DB::table('instituciones')->where('id_insti', $voluntarioEdit->id_insti)->first();
+        $institucion_select = $insti->nombre;
+
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'instituciones'));
+        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'municipio_select', 'instituciones', 'institucion_select'));
     }
 
     /**
@@ -116,28 +126,29 @@ class VoluntarioController extends Controller
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Voluntario $voluntario)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nombre' => 'required', 
             'ape_pat' => 'required',
             'id_municipio' => 'required',
             'id_insti' => 'required', 
-            'email' => 'required|email|unique:voluntarios', 
+            'email' => 'required|email',
             'tel' => 'required',
         ]);
 
-        $voluntarioEditado = Usuario::findOrFail($voluntario->id_volunario);
-        $voluntarioEditado->nombre = $voluntario->nombre;
-        $voluntarioEditado->ape_pat = $voluntario->ape_pat;
-        $voluntarioEditado->ape_mat = $voluntario->ape_mat;
-        $voluntarioEditado->id_municipio = (int)$voluntario->id_municipio;
-        $voluntarioEditado->id_insti = (int)$voluntario->id_insti;
-        $voluntarioEditado->tel = $voluntario->tel;
-        $voluntarioEditado->email = $voluntario->email;
+        $voluntarioEditado = Usuario::findOrFail($id);
+        $voluntarioEditado->nombre = $request->nombre;
+        $voluntarioEditado->ape_pat = $request->ape_pat;
+        $voluntarioEditado->ape_mat = $request->ape_mat;
+        $voluntarioEditado->id_municipio = (int)$request->id_municipio;
+        $voluntarioEditado->id_insti = (int)$request->id_insti;
+        $voluntarioEditado->tel = $request->tel;
+        $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
         $voluntarioEditado->eliminado = false;
-        $save = $voluntario->save();
+        dd($voluntarioEditado);
+        $save = $voluntarioEditado->save();
         if($save){
             return back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
         }else{

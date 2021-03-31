@@ -87,7 +87,7 @@ class InstitucionController extends Controller
             'nombre_enlace' => 'required', 
             'cargo_enlace' => 'required', 
             'tel' => 'required',
-            'email' => 'required|email|unique:voluntarios', 
+            'email' => 'required|email', 
         ]);
 
         $institucionEditado = Institucion::findOrFail($id);

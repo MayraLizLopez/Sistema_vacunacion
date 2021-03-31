@@ -28,8 +28,6 @@ Route::get('voluntario/create', [VoluntarioController::class, "create"]);
 
 Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
-Route::get('voluntario/edit/{id}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
-
 Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
 Route::post('voluntario/destroy', [VoluntarioController::class, "destroy"]);
@@ -43,9 +41,13 @@ Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
 
 Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
+Route::get('admin/panel/voluntario/edit/{id_voluntario}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
+
+Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
+
 Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 
-Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::Class, "update"])->name('updateInstitucion');
+Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::class, "update"])->name('updateInstitucion');
 
 //Securitys
 Route::get('security/login', [LoginController::class, "login"])->name('login');
