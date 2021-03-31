@@ -16,7 +16,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">           
-            <table id="voluntariesTable"
+            <table id="datatable" class="table table-striped table-bordered"
             data-pagination="true"
             data-single-select="true"
             data-click-to-select="true">
@@ -65,7 +65,7 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    {{-- <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
     <script>
         let $table = $('#voluntariesTable');
 
@@ -104,5 +104,5 @@
             }
         }
         //End table actions & operations
-    </script>
+    </script> --}}
 @endsection
