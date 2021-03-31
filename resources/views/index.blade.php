@@ -2,9 +2,6 @@
 @section('title', 'Inicio')
 @section('content')
 <div class="container">
-    {{-- <div class="row mt-3 justify-content-end">
-            <button class="btn btn-success">Login</button>
-    </div> --}}
     <div class="row mt-3 justify-content-center">
         <div class="col-sm-5">
             <img src="../resources/image/isologo_jalisco_v.svg" 
