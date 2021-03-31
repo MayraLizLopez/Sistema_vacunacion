@@ -77,9 +77,33 @@ class InstitucionController extends Controller
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Institucion $institucion)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $request->validate([
+            'nombre' => 'required', 
+            'domicilio' => 'required',
+            'id_municipio' => 'required',
+            'nombre_enlace' => 'required', 
+            'cargo_enlace' => 'required', 
+            'tel' => 'required',
+            'email' => 'required|email|unique:voluntarios', 
+        ]);
+
+        $institucionEditado = Institucion::findOrFail($id);
+        $institucionEditado->nombre = $request->nombre;
+        $institucionEditado->domicilio = $request->domicilio;
+        $institucionEditado->id_municipio = (int)$request->id_municipio;
+        $institucionEditado->nombre_enlace = $request->nombre_enlace;
+        $institucionEditado->cargo_enlace = $request->cargo_enlace;
+        $institucionEditado->email = $request->email;
+        $institucionEditado->activo = true;
+        $save = $institucionEditado->save();
+        if($save){
+            return back()->with('success', '¡Los datos de la institución fueron actualizados correctamente!');
+        }else{
+            return back()->with('fail', 'Error al actualizar los datos de la institución');
+        }
     }
 
     /**
