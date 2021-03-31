@@ -37,6 +37,6 @@ Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
 
 
 //Security
-Route::get('security/login', [LoginController::class, "login"]);
+Route::get('security/login', [LoginController::class, "login"])->name('login');
 
 Route::post('security/authenticate', [LoginController::class, "authenticate"]);

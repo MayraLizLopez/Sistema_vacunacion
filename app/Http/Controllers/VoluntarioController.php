@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Voluntario;
 use App\Models\Municipio;
 use App\Models\Institucion;
+use Illuminate\Support\Facades\Hash;
 
 class VoluntarioController extends Controller
 {
@@ -27,12 +28,9 @@ class VoluntarioController extends Controller
      */
     public function index()
     {
-        //
-        //$voluntarios = DB::select('SELECT * FROM voluntarios ORDER BY nombre ASC');
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
         return view('volunteers.registration', compact('municipios', 'instituciones'));
-        //return view('volunteers.registration', compact('voluntarios'));
     }
 
     /**
@@ -56,24 +54,32 @@ class VoluntarioController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'));
-        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required']);
-        $email = $request->input('email');
-        $emailUnico = DB::table('voluntarios')->where('email', $email)->count();
-         if($emailUnico == 0){
-             DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
-             $mensaje = "success";
+        $request->validate([
+            'nombre' => 'required', 
+            'ape_pat' => 'required',
+            'id_municipio' => 'required',
+            'id_insti' => 'required', 
+            'email' => 'required|email|unique:voluntarios', 
+            'tel' => 'required',
+        ]);
 
-             return redirect()->route('home');
-         }else{
-             $mensaje = "El email ya fue registrado";
-             $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
-             $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $voluntario = new Voluntario;
+        $voluntario->nombre = $request->nombre;
+        $voluntario->ape_pat = $request->ape_pat;
+        $voluntario->ape_mat = $request->ape_mat;
+        $voluntario->id_municipio = (int)$request->id_municipio;
+        $voluntario->id_insti = (int)$request->id_insti;
+        $voluntario->tel = $request->tel;
+        $voluntario->email = $request->email;
+        $voluntario->activo = false;
+        $voluntario->eliminado = false;
+        $save = $voluntario->save();
 
-             return view('volunteers.registration', compact('municipios', 'instituciones', 'mensaje'));
-         }
-        //DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
-        //return view('index');
+        if($save){
+            return back()->with('success', '¡Tus datos fueron agregados correctamente!');
+        }else{
+            return back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
+        }
     }
 
     /**
@@ -97,6 +103,10 @@ class VoluntarioController extends Controller
     public function edit(Voluntario $voluntario)
     {
         //
+        $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $voluntario->id_voluntario)->get();
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        return view('admin/panel/show', compact('voluntarioEdit', 'municipios', 'instituciones'));
     }
 
     /**
@@ -108,7 +118,31 @@ class VoluntarioController extends Controller
      */
     public function update(Request $request, Voluntario $voluntario)
     {
-        //
+        $request->validate([
+            'nombre' => 'required', 
+            'ape_pat' => 'required',
+            'id_municipio' => 'required',
+            'id_insti' => 'required', 
+            'email' => 'required|email|unique:voluntarios', 
+            'tel' => 'required',
+        ]);
+
+        $voluntarioEditado = Usuario::findOrFail($voluntario->id_volunario);
+        $voluntarioEditado->nombre = $voluntario->nombre;
+        $voluntarioEditado->ape_pat = $voluntario->ape_pat;
+        $voluntarioEditado->ape_mat = $voluntario->ape_mat;
+        $voluntarioEditado->id_municipio = (int)$voluntario->id_municipio;
+        $voluntarioEditado->id_insti = (int)$voluntario->id_insti;
+        $voluntarioEditado->tel = $voluntario->tel;
+        $voluntarioEditado->email = $voluntario->email;
+        $voluntarioEditado->activo = false;
+        $voluntarioEditado->eliminado = false;
+        $save = $voluntario->save();
+        if($save){
+            return back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
+        }else{
+            return back()->with('fail', 'Error al actualizar los datos del voluntario');
+        }
     }
 
     /**
@@ -120,5 +154,12 @@ class VoluntarioController extends Controller
     public function destroy(Voluntario $voluntario)
     {
         //
+        $voluntario->eliminado = true;
+        $save = $voluntario->save();
+        if($save){
+            return back()->with('success', '¡El volutario fue eliminado correctamente!');
+        }else{
+            return back()->with('fail', 'Error al eliminar al voluntario');
+        }
     }
 }

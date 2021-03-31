@@ -23,6 +23,7 @@ class Voluntario extends Migration
             $table->string('tel', 20);
             $table->string('email', 100);
             $table->boolean('activo');
+            $table->boolean('eliminado');
             //$table->timestamps();
             $table->foreign('id_insti')->references('id_insti')->on('instituciones');
             $table->foreign('id_municipio')->references('id_municipio')->on('municipios');
