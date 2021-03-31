@@ -1,4 +1,7 @@
 @extends('admin.layout')
+@section('css')
+    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+@endsection
 @section('content')
     <div class="row row justify-content-center">
         <div class="col-sm-12">
@@ -39,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="townVoluntary">Institución</label>
-                    <select class="form-control" id="townVoluntary" name="id_municipio">
+                    <select class="form-control" id="townVoluntary" name="id_insti">
                     <option value="{{$voluntarioEdit->id_insti}}">{{$institucion_select}}</option>
                      @foreach ($instituciones as $institucion)
                       @if ($institucion_select != $institucion->nombre)

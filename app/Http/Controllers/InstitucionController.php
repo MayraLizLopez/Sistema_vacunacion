@@ -97,6 +97,7 @@ class InstitucionController extends Controller
         $institucionEditado->nombre_enlace = $request->nombre_enlace;
         $institucionEditado->cargo_enlace = $request->cargo_enlace;
         $institucionEditado->email = $request->email;
+        $institucionEditado->tel = $request->tel;
         $institucionEditado->activo = true;
         $save = $institucionEditado->save();
         if($save){
@@ -114,6 +115,6 @@ class InstitucionController extends Controller
      */
     public function destroy(Institucion $institucion)
     {
-        //
+        
     }
 }
