@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Institucion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Municipio;
+use Illuminate\Support\Facades\Hash;
 
 class InstitucionController extends Controller
 {
@@ -44,9 +47,11 @@ class InstitucionController extends Controller
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function show(Institucion $institucion)
+    public function show()
     {
-        //
+        $instituciones = DB::table('instituciones')->get();   
+        $municipios = DB::table('municipios')->get();   
+        return view('admin.institutions', compact('instituciones', 'municipios'));
     }
 
     /**
@@ -55,9 +60,13 @@ class InstitucionController extends Controller
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Institucion $institucion)
+    public function edit($id)
     {
-        //
+        //dd($id);
+        $institucion = DB::table('instituciones')->where('id_insti', $id)->get();   
+        dd($institucion);
+        $municipios = DB::table('municipios')->get();   
+        return view('admin.institutions', compact('institucion', 'municipios'));
     }
 
     /**

@@ -66,6 +66,7 @@
                             <h6 class="collapse-header">Custom Components:</h6>
                             <a class="collapse-item" href="{{url("/admin/panel/index")}}">Buttons</a>
                             <a class="collapse-item" href="{{url("/admin/panel/show")}}">Cards</a>
+                            <a class="collapse-item" href="{{url("/admin/panel/institutions")}}">Instituciones</a>
                         </div>
                     </div>
                 </li>
