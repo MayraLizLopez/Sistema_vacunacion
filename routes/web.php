@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\VoluntarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
@@ -34,3 +35,8 @@ Route::get('admin/panel', [AdminController::class, "panel"]);
 Route::get('admin/panel/index', [AdminController::class, "index"]);
 
 Route::get('admin/panel/voluntaries', [AdminController::class, "voluntaries"]);
+
+//Security
+Route::get('security/login', [LoginController::class, "login"]);
+
+Route::post('security/authenticate', [LoginController::class, "authenticate"]);

@@ -9,9 +9,13 @@ use App\Models\Voluntario;
 
 class LoginController extends Controller
 {
+    public function login(){
+        return view('security.login');
+    }
     //
     public function authenticate(Request $request)
     {
+        dd($request);
         $credentials = $request->only('email', 'password');
 
         $usuarios = DB::select('SELECT * FROM usuarios');
@@ -23,8 +27,7 @@ class LoginController extends Controller
          if($nombre == $request->email && $usuario->password == $request->password){
            session(['sesionUsu' => $nombreC]);
            //Cambiar por la vista de logín exitoso
-           return view('templates.default');
-
+           return view('admin.layout');
          }
        }
 

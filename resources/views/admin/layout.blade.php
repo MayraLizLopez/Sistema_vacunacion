@@ -418,6 +418,9 @@
         <!-- Page level plugins -->
         <script src="{{ url("../resources/js/Chart.min.js") }}"></script>
 
+        <script src="{{ url("../resources/js/all.min.js") }}"></script>
+        <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
+
         <!-- Page level custom scripts -->
         <script src="{{ url("../resources/js/chart-area-demo.js") }}"></script>
         <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script>
