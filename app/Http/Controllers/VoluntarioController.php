@@ -10,6 +10,16 @@ use App\Models\Institucion;
 
 class VoluntarioController extends Controller
 {
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
+        return view('index', compact('municipios', 'instituciones'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,21 +58,22 @@ class VoluntarioController extends Controller
     {
         //dd($request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'));
         $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required']);
-        //$emailUnico = DB::select('SELECT COUNT(*) FROM voluntarios WHERE email = '.$request->input('email'));
-        // if($emailUnico == 0){
-        //     DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
-        //     $mensaje = "success";
+        $email = $request->input('email');
+        $emailUnico = DB::table('voluntarios')->where('email', $email)->count();
+         if($emailUnico == 0){
+             DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
+             $mensaje = "success";
 
-        //     return view('index');
-        // }else{
-        //     $mensaje = "El email ya fue registrado";
-        //     $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
-        //     $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+             return redirect()->route('home');
+         }else{
+             $mensaje = "El email ya fue registrado";
+             $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+             $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
 
-        //     return view('voluntario', compact('municipios', 'instituciones', 'mensaje'));
-        // }
-        DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
-        return view('index');
+             return view('volunteers.registration', compact('municipios', 'instituciones', 'mensaje'));
+         }
+        //DB::insert('insert into voluntarios (nombre, ape_pat, ape_mat, id_insti, id_municipio, tel, email, activo) values(?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), (int)$request->input('id_municipio'), $request->input('tel'), $request->input('email'), true]);
+        //return view('index');
     }
 
     /**
