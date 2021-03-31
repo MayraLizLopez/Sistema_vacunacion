@@ -90,7 +90,7 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
-        $voluntarios = DB::select('SELECT * FROM voluntarios ORDER BY nombre ASC');   
+        $voluntarios =$voluntarioEdit = DB::table('voluntarios')->get();   
         return view('admin.voluntaries', compact('voluntarios'));
     }
 
