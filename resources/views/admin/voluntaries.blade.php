@@ -4,10 +4,8 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Tables</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the <a target="_blank"
-        href="https://datatables.net">official DataTables documentation</a>.</p>
+<h1 class="h3 mb-2 text-gray-800">Voluntarios</h1>
+<p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados</p>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -28,6 +26,7 @@
                     <th data-field="ape_pat" data-halign="center" data-align="center">Apellido Paterno</th>
                     <th data-field="ape_mat" data-halign="center" data-align="center">Apellido Materno</th>
                     <th data-field="email" data-halign="center" data-align="center">Email</th>
+                    <th data-field="tel" data-halign="center" data-align="center">Teléfono</th>
                     <th data-field="id_municipio" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="id_insti" data-halign="center" data-align="center">Institución</th>
                     <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
@@ -37,7 +36,7 @@
                     @foreach($voluntarios as $item)
                     <tr>
                         <td>{{$item->nombre}}</td>
-                        <td>{{$item->ape_pat}}}</td>
+                        <td>{{$item->ape_pat}}</td>
                         <td>{{$item->ape_mat}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->tel}}</td>

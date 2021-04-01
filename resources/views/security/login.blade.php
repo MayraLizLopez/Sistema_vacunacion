@@ -19,10 +19,10 @@
     <!-- Custom styles for this template-->
     <link rel="stylesheet" href="{{ url("../resources/css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
-
+    <link rel="stylesheet" href="{{ url("../resources/css/login.css") }}">
 </head>
 
-<body class="bg-gradient-primary">
+<body class="background-login">
     <div class="container">
 
         <!-- Outer Row -->
