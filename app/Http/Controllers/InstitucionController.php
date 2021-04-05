@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Municipio;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Usuario;
 
 class InstitucionController extends Controller
 {
@@ -78,9 +79,10 @@ class InstitucionController extends Controller
      */
     public function show()
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $instituciones = DB::table('instituciones')->get();   
         $municipios = DB::table('municipios')->get();   
-        return view('admin.institutions', compact('instituciones', 'municipios'));
+        return view('admin.institutions', compact('instituciones', 'municipios', 'data'));
     }
 
     /**

@@ -28,17 +28,17 @@ Route::get('voluntario/create', [VoluntarioController::class, "create"]);
 
 Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
-Route::post('voluntario/update', [VoluntarioController::class, "update"]);
-
-//Route::post('voluntario/destroy/{id_voluntario}', [VoluntarioController::class, "destroy"]);
+//Route::post('voluntario/destroy', [VoluntarioController::class, "destroy"]);
 
 //Securitys
-Route::get('security/login', [LoginController::class, "login"])->name('login');
+
+Route::get('security/logout', [LoginController::class, "logout"])->name('logout');
 
 Route::post('security/authenticate', [LoginController::class, "authenticate"]);
 
 
 Route::group(['middleware' =>['AuthCheck']], function(){
+    Route::get('security/login', [LoginController::class, "login"])->name('login');
     //Index
     Route::get('admin/panel/index', [LoginController::class, "dashboard"]);
 
@@ -62,6 +62,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/institutions/create', [InstitucionController::class, "create"])->name('createInstitucion');
 
     Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');
+
+    Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
 
 });

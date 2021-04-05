@@ -40,14 +40,15 @@ class LoginController extends Controller
     {
         if(session()->has('LoggedUser')){
            session()->pull('LoggedUser'); 
+           return redirect('security/login');
         }
-        return redirect('security/login');
+        
     }
 
     public function dashboard(){
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        //<span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
         return view('admin.index', $data);     
+        //<span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span></span>
     
     }
 }
