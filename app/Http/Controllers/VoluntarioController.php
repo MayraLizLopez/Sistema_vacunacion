@@ -166,9 +166,15 @@ class VoluntarioController extends Controller
         $voluntarioEliminar->eliminado = true;
         $save = $voluntarioEliminar->save();
         if($save){
-            return back()->with('success', '¡El volutario fue eliminado correctamente!');
+            return response()->json([
+                'status' => 'ok',
+                'message' => '¡El volutario fue eliminado correctamente!'
+            ]);          
         }else{
-            return back()->with('fail', 'Error al eliminar al voluntario');
+            return response()->json([
+                'status' => 'fail',
+                'message'=> 'Error al eliminar al voluntario'
+            ]);  
         }
     }
 }

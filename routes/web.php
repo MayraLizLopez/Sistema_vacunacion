@@ -30,7 +30,7 @@ Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
 Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
-//Route::post('voluntario/destroy', [VoluntarioController::class, "destroy"]);
+//Route::post('voluntario/destroy/{id_voluntario}', [VoluntarioController::class, "destroy"]);
 
 //Securitys
 Route::get('security/login', [LoginController::class, "login"])->name('login');
@@ -53,7 +53,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
 
-    Route::patch('admin/panel/voluntario/destroy/{id_voluntario}', [VoluntarioController::class, "destroy"])->name('destroyVoluntarios');
+    Route::post('admin/panel/voluntario/destroy/{id_voluntario}', [VoluntarioController::class, "destroy"])->name('destroyVoluntarios');
 
     Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 

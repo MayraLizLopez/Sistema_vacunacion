@@ -75,8 +75,8 @@
         });
 
         //Start table actions & operations
-        function getAllVolunataries(){           
-            let voluntarios = @json($voluntarios);              
+        function getAllVolunataries(){      
+            let voluntarios = @json($voluntarios);          
             $table.bootstrapTable({data: voluntarios});            
         }
 
@@ -112,13 +112,25 @@
 
         function deleteVoluntary(id){
             $.ajax({
-                url: "/voluntario/destroy/" + id,
+                url: "voluntario/destroy/" + id,
                 type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function (response) {
-                    $table.bootstrapTable('destroy');
-                    getAllVolunataries();
-                    alert('Elimnado');
-                    console.log(response);
+                    if(response.status == 'ok'){
+                        Swal.fire({
+                        title: 'Hecho',
+                        text: "Voluntario eliminado correctamente",
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }
                 },
                 error: function (error, resp, text) {
                     console.log(error);
