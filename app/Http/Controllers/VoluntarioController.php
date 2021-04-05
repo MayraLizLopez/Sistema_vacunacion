@@ -160,11 +160,11 @@ class VoluntarioController extends Controller
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Voluntario $voluntario)
+    public function destroy($id)
     {
-        //
-        $voluntario->eliminado = true;
-        $save = $voluntario->save();
+        $voluntarioEliminar = Voluntario::findOrFail($id);
+        $voluntarioEliminar->eliminado = true;
+        $save = $voluntarioEliminar->save();
         if($save){
             return back()->with('success', '¡El volutario fue eliminado correctamente!');
         }else{
