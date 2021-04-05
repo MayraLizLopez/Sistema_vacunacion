@@ -49,6 +49,12 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
+    Route::get('admin/panel/voluntario/searchByVoluntaryName/{name}', [VoluntarioController::class, "searchByVoluntaryName"])->name('searchByVoluntaryName');
+
+    Route::get('admin/panel/voluntario/searchByTown/{id}', [VoluntarioController::class, "searchByTown"])->name('searchByTown');
+
+    Route::get('admin/panel/voluntario/getAllTowns', [VoluntarioController::class, "getAllTowns"])->name('getAllTowns');
+
     Route::get('admin/panel/voluntario/edit/{id_voluntario}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
 
     Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
@@ -66,6 +72,5 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');
 
     Route::post('voluntario/update', [VoluntarioController::class, "update"]);
-
 
 });

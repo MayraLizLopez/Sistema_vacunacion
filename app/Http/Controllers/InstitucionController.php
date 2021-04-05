@@ -6,6 +6,7 @@ use App\Models\Institucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Municipio;
+use App\Models\Voluntario;
 use Illuminate\Support\Facades\Hash;    
 use App\Models\Usuario;
 
