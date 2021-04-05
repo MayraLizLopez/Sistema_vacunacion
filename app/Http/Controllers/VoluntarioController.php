@@ -91,9 +91,9 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
-        $voluntarios = DB::table('voluntarios')->get();
+        $voluntarios = DB::select('SELECT * FROM voluntarios WHERE eliminado = 0');
         $instituciones = DB::table('instituciones')->get();   
-        $municipios = DB::table('municipios')->get(); 
+        $municipios = DB::table('municipios')->get();
         return view('admin.voluntaries', compact('voluntarios', 'municipios', 'instituciones'));
     }
 

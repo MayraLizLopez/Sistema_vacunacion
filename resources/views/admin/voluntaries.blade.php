@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
         <div class="table-responsive">           
-            <table id="datatable" class="table table-striped table-bordered"
+            <table id="voluntariesTable" class="table table-striped table-bordered"
             data-pagination="true"
             data-single-select="true"
             data-click-to-select="true">
@@ -32,7 +32,7 @@
                     <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
                   </tr>
                 </thead>
-                <tbody>
+                {{-- <tbody>
                     @foreach($voluntarios as $item)
                     @if ($item->eliminado == 0)
                     <tr>
@@ -59,14 +59,14 @@
                     </tr>
                     @endif
                     @endforeach()
-                </tbody>
+                </tbody> --}}
             </table>
         </div>
     </div>
 </div>
 @endsection
 @section('scripts')
-    {{-- <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
     <script>
         let $table = $('#voluntariesTable');
 
@@ -76,8 +76,8 @@
 
         //Start table actions & operations
         function getAllVolunataries(){           
-            let voluntarios = @json($voluntarios);    
-            $table.bootstrapTable({data: voluntarios});
+            let voluntarios = @json($voluntarios);              
+            $table.bootstrapTable({data: voluntarios});            
         }
 
         function operateFormatter(value, row, index) {
@@ -92,18 +92,38 @@
         }
 
         window.operateEvents = {
-            'click .like': function (e, value, row, index) {
-
-                //alert('You click like action, row: ' + JSON.stringify(row))
-            },
-
             'click .remove': function (e, value, row, index) {
-            $table.bootstrapTable('remove', {
-                    field: 'id_voluntario',
-                    values: [row.id_voluntario]
-                })
+                Swal.fire({
+                    title: 'Advertencia',
+                    text: "¿Está seguro que desea eliminar este voluntario?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteVoluntary(row.id_voluntario);
+                    }
+                    });
             }
         }
         //End table actions & operations
-    </script> --}}
+
+        function deleteVoluntary(id){
+            $.ajax({
+                url: "/voluntario/destroy/" + id,
+                type: "POST",
+                success: function (response) {
+                    $table.bootstrapTable('destroy');
+                    getAllVolunataries();
+                    alert('Elimnado');
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
 @endsection

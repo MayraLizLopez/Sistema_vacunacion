@@ -19,7 +19,8 @@
 
         <!-- Custom styles for this template-->
         <link rel="stylesheet" href="{{ url("../resources/css/bootstrap.min.css") }}">
-        <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">      
+        <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
+        <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">      
         @yield('css')    
     </head>
     <body id="page-top">
@@ -333,6 +334,7 @@
         <script src="{{ url("../resources/js/chart-area-demo.js") }}"></script>
         <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script>
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
+        <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
         @yield('scripts')
     </body>
 </html>
