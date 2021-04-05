@@ -20,7 +20,8 @@ class VoluntarioController extends Controller
      */
     public function home()
     {
-        return view('index', compact('municipios', 'instituciones'));
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
+        return view('index', compact('municipios', 'instituciones'), $data);
     }
     /**
      * Display a listing of the resource.
@@ -29,9 +30,10 @@ class VoluntarioController extends Controller
      */
     public function index()
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.registration', compact('municipios', 'instituciones'));
+        return view('volunteers.registration', compact('municipios', 'instituciones'), $data);
     }
 
     /**
@@ -41,10 +43,10 @@ class VoluntarioController extends Controller
      */
     public function create()
     {
-        //
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.registration', compact('municipios', 'instituciones'));
+        return view('volunteers.registration', compact('municipios', 'instituciones'), $data);
     }
 
     /**
@@ -91,13 +93,14 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $voluntarios = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
         ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
         ->where('eliminado', '=', 0)
         ->get();
-        return view('admin.voluntaries', compact('voluntarios'));
+        return view('admin.voluntaries', compact('voluntarios'), $data);
     }
 
     /**
@@ -108,6 +111,7 @@ class VoluntarioController extends Controller
      */
     public function edit($id)
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $voluntarioEdit = DB::table('voluntarios')->where('id_voluntario', $id)->first();
 
         $municipios = DB::table('municipios')->get();   
@@ -119,7 +123,7 @@ class VoluntarioController extends Controller
         $institucion_select = $insti->nombre;
 
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'municipio_select', 'instituciones', 'institucion_select'));
+        return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'municipio_select', 'instituciones', 'institucion_select'), $data);
     }
 
     /**

@@ -6,7 +6,7 @@ use App\Models\Institucion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Municipio;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;    
 use App\Models\Usuario;
 
 class InstitucionController extends Controller
@@ -18,8 +18,9 @@ class InstitucionController extends Controller
      */
     public function index()
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $municipios = DB::table('municipios')->get();   
-        return view('admin.create_institutions', compact('municipios'));
+        return view('admin.create_institutions', compact('municipios'), $data);
     }
 
     /**
@@ -29,8 +30,9 @@ class InstitucionController extends Controller
      */
     public function create()
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $municipios = DB::table('municipios')->get();   
-        return view('admin.create_institutions', compact('municipios'));
+        return view('admin.create_institutions', compact('municipios'), $data);
     }
 
     /**
@@ -79,12 +81,13 @@ class InstitucionController extends Controller
      */
     public function show()
     {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $instituciones = DB::table('instituciones')
         ->join('municipios', 'instituciones.id_municipio', '=', 'municipios.id_municipio')
         ->select('instituciones.*', 'municipios.nombre AS nombre_municipio')
         ->where('instituciones.activo', '=', 1)
         ->get();
-        return view('admin.institutions', compact('instituciones'));
+        return view('admin.institutions', compact('instituciones'), $data);
     }
 
     /**
@@ -96,11 +99,12 @@ class InstitucionController extends Controller
     public function edit($id)
     {
         //dd($id);
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $institucion = DB::table('instituciones')->where('id_insti', $id)->first();   
         $municipios = DB::table('municipios')->get();   
         $muni = DB::table('municipios')->where('id_municipio', $institucion->id_municipio)->first();   
         $municipio_select = $muni->nombre;
-        return view('admin.edit_institutions', compact('institucion', 'municipios', 'municipio_select'));
+        return view('admin.edit_institutions', compact('institucion', 'municipios', 'municipio_select'), $data);
     }
 
     /**
