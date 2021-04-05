@@ -10,7 +10,7 @@
 <div id="toolbar">
     <div class="form-inline" role="form">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Institucion" id="inSearchByVoluntary">
+            <input type="text" class="form-control" placeholder="Voluntario" id="inSearchByVoluntary">
         </div>
         <div class="form-group ml-1">
             <select class="custom-select" id="inSearchByTown">
