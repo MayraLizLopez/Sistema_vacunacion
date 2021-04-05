@@ -34,6 +34,7 @@
                 </thead>
                 <tbody>
                     @foreach($voluntarios as $item)
+                    @if ($item->eliminado == 0)
                     <tr>
                         <td>{{$item->nombre}}</td>
                         <td>{{$item->ape_pat}}</td>
@@ -56,6 +57,7 @@
                         </td>
             
                     </tr>
+                    @endif
                     @endforeach()
                 </tbody>
             </table>
