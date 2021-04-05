@@ -17,7 +17,8 @@
             <table id="voluntariesTable" class="table table-striped table-bordered"
             data-pagination="true"
             data-single-select="true"
-            data-click-to-select="true">
+            data-click-to-select="true"
+            data-search="true">
                 <thead>
                   <tr>
                     <th class="d-none" data-radio="true"></th>
@@ -27,39 +28,11 @@
                     <th data-field="ape_mat" data-halign="center" data-align="center">Apellido Materno</th>
                     <th data-field="email" data-halign="center" data-align="center">Email</th>
                     <th data-field="tel" data-halign="center" data-align="center">Teléfono</th>
-                    <th data-field="id_municipio" data-halign="center" data-align="center">Municipio</th>
-                    <th data-field="id_insti" data-halign="center" data-align="center">Institución</th>
+                    <th data-field="nombre_municipio" data-halign="center" data-align="center">Municipio</th>
+                    <th data-field="nombre_institucion" data-halign="center" data-align="center">Institución</th>
                     <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
                   </tr>
                 </thead>
-                {{-- <tbody>
-                    @foreach($voluntarios as $item)
-                    @if ($item->eliminado == 0)
-                    <tr>
-                        <td>{{$item->nombre}}</td>
-                        <td>{{$item->ape_pat}}</td>
-                        <td>{{$item->ape_mat}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->tel}}</td>
-                        @foreach ($municipios as $municipio)
-                        @if ($item->id_municipio == $municipio->id_municipio)
-                            <td>{{$municipio->nombre}}</td>
-                        @endif
-                        @endforeach
-                        @foreach ($instituciones as $institucion)
-                        @if ($item->id_insti == $institucion->id_insti)
-                            <td>{{$institucion->nombre}}</td>
-                        @endif
-                        @endforeach
-                        <td>  
-                            <a class="like mr-3" href="{{route('editarVoluntarios', $item->id_voluntario)}}" title="Edit" type="reset"><i class="fas fa-edit"></i></a>
-                            <a class="remove" href="javascript:void(0)" title="Remove"><i class="fa fa-trash"></i></a>
-                        </td>
-            
-                    </tr>
-                    @endif
-                    @endforeach()
-                </tbody> --}}
             </table>
         </div>
     </div>
@@ -76,7 +49,8 @@
 
         //Start table actions & operations
         function getAllVolunataries(){      
-            let voluntarios = @json($voluntarios);          
+            let voluntarios = @json($voluntarios);
+            console.log(voluntarios);       
             $table.bootstrapTable({data: voluntarios});            
         }
 
@@ -118,10 +92,10 @@
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
-                    if(response.status == 'ok'){
+                    if(response.isOk == true){
                         Swal.fire({
                         title: 'Hecho',
-                        text: "Voluntario eliminado correctamente",
+                        text: response.message,
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
@@ -130,10 +104,17 @@
                                 location.reload();
                             }
                         });
-                    }
+                    }else{
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message,
+                            icon: 'error',
+                            showCancelButton: true
+                        });
+                    } 
                 },
                 error: function (error, resp, text) {
-                    console.log(error);
+                    console.error(error);
                 }
             });
         }

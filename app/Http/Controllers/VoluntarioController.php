@@ -91,10 +91,13 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
-        $voluntarios = DB::select('SELECT * FROM voluntarios WHERE eliminado = 0');
-        $instituciones = DB::table('instituciones')->get();   
-        $municipios = DB::table('municipios')->get();
-        return view('admin.voluntaries', compact('voluntarios', 'municipios', 'instituciones'));
+        $voluntarios = DB::table('voluntarios')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->where('eliminado', '=', 0)
+        ->get();
+        return view('admin.voluntaries', compact('voluntarios'));
     }
 
     /**
@@ -167,12 +170,12 @@ class VoluntarioController extends Controller
         $save = $voluntarioEliminar->save();
         if($save){
             return response()->json([
-                'status' => 'ok',
+                'isOk' => true,
                 'message' => '¡El volutario fue eliminado correctamente!'
             ]);          
         }else{
             return response()->json([
-                'status' => 'fail',
+                'isOk' => false,
                 'message'=> 'Error al eliminar al voluntario'
             ]);  
         }

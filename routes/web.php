@@ -59,6 +59,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::class, "update"])->name('updateInstitucion');
 
+    Route::post('admin/panel/institutions/destroy/{id_voluntario}', [InstitucionController::class, "destroy"])->name('destroyInstitucion');
+
     Route::get('admin/panel/institutions/create', [InstitucionController::class, "create"])->name('createInstitucion');
 
     Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');

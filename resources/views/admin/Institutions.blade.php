@@ -10,10 +10,10 @@
         <h1 class="h3 mb-2 text-gray-800">Instituciones</h1>
         <p class="mb-4">La siguiente tabla contiene todas las instituciones registradas. </p>
     </div>
-    <div class="col-6 col-md-4 col-sm-4 col-xs-2">
-        <div class="nav justify-content-end">
+</div>
+
+<div id="toolbar">
             <button type="button" class="btn btn-primary "><a style="color:white;" href="{{route('createInstitucion')}}">Registrar Institución</a></button>
-        </div>
     </div>
 </div>
 <!-- DataTales Example -->
@@ -22,49 +22,107 @@
         <h6 class="m-0 font-weight-bold text-primary">Instituciones</h6>
     </div>
     <div class="card-body">
-    <table id="datatable" class="table table-striped table-bordered"  data-pagination="true" data-single-select="true" data-click-to-select="true">
-    
+    <table id="institutionsTable" class="table table-striped table-bordered"
+      data-pagination="true" 
+      data-single-select="true" 
+      data-click-to-select="true"
+      data-search="true"
+      data-toolbar="#toolbar"> 
         <thead>
         <tr>
-        <th class="d-none" data-radio="true"></th>
-        <th data-field="nombre" data-halign="center" data-align="center">Nombre</th>
-        <th data-field="domicilio" data-halign="center" data-align="center">Domicilio</th>
-        <th data-field="nombre_enlace" data-halign="center" data-align="center">Nombre Enlace</th>
-        <th data-field="id_municipio" data-halign="center" data-align="center">Municipio</th>
-        <th data-field="email" data-halign="center" data-align="center">Email</th>
-        <th data-field="tel" data-halign="center" data-align="center">Teléfono</th>
-        <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+            <th class="d-none" data-radio="true"></th>
+            <th class="d-none" data-field="id_insti">ID</th>
+            <th data-field="nombre" data-halign="center" data-align="center">Nombre</th>
+            <th data-field="domicilio" data-halign="center" data-align="center">Domicilio</th>
+            <th data-field="nombre_enlace" data-halign="center" data-align="center">Nombre Enlace</th>
+            <th data-field="nombre_municipio" data-halign="center" data-align="center">Municipio</th>
+            <th data-field="email" data-halign="center" data-align="center">Email</th>
+            <th data-field="tel" data-halign="center" data-align="center">Teléfono</th>
+            <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
         </tr>
         </thead>
-
-
-        <tbody>
-        @foreach($instituciones as $item)
-            @if($item->activo == 1)
-            <tr>
-                <td>{{$item->nombre}}</td>
-                <td>{{$item->domicilio}}</td>
-                <td>{{$item->nombre_enlace}}</td>
-                @foreach ($municipios as $municipio)
-                    @if ($item->id_municipio == $municipio->id_municipio)
-                        <td>{{$municipio->nombre}}</td>
-                    @endif
-                @endforeach
-                <td>{{$item->email}}</td>
-                <td>{{$item->tel}}</td>
-
-                <td>  
-                    <a class="like mr-3" href="{{route('editarInstituciones', $item->id_insti)}}" title="Edit" type="reset"><i class="fas fa-edit"></i></a>
-                    <a class="remove" href="javascript:void(0)" title="Remove"><i class="fa fa-trash"></i></a>
-                </td>
-
-            </tr>
-            @endif
-        @endforeach()
-        </tbody>
     </table>
     </div>
 </div>
 @endsection
 @section('scripts')
+<script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    <script>
+        let $table = $('#institutionsTable');
+
+        $(document).ready(()=>{
+            getAllInstitutions();
+        });
+
+        //Start table actions & operations
+        function getAllInstitutions(){      
+            let instituciones = @json($instituciones);       
+            $table.bootstrapTable({data: instituciones});           
+        }
+
+        function operateFormatter(value, row, index) {
+            return [
+            '<a class="like mr-3" href="institutions/edit/' + row.id_insti + '"' + 'title="Edit">',
+            '<i class="fas fa-edit"></i>',
+            '</a>',
+            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<i class="fa fa-trash"></i>',
+            '</a>'
+            ].join('')
+        }
+
+        window.operateEvents = {
+            'click .remove': function (e, value, row, index) {
+                Swal.fire({
+                    title: 'Advertencia',
+                    text: "¿Está seguro que desea eliminar esta institución?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteInstitution(row.id_insti);
+                    }
+                    });
+            }
+        }
+        //End table actions & operations
+
+        function deleteInstitution(id){
+            $.ajax({
+                url: "institutions/destroy/" + id,
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if(response.isOk == true){
+                        Swal.fire({
+                        title: 'Hecho',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message,
+                            icon: 'error',
+                            showCancelButton: true
+                        });
+                    } 
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
 @endsection

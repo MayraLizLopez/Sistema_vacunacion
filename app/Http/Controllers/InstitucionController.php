@@ -79,10 +79,12 @@ class InstitucionController extends Controller
      */
     public function show()
     {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        $instituciones = DB::table('instituciones')->get();   
-        $municipios = DB::table('municipios')->get();   
-        return view('admin.institutions', compact('instituciones', 'municipios', 'data'));
+        $instituciones = DB::table('instituciones')
+        ->join('municipios', 'instituciones.id_municipio', '=', 'municipios.id_municipio')
+        ->select('instituciones.*', 'municipios.nombre AS nombre_municipio')
+        ->where('instituciones.activo', '=', 1)
+        ->get();
+        return view('admin.institutions', compact('instituciones'));
     }
 
     /**
@@ -146,13 +148,19 @@ class InstitucionController extends Controller
      */
     public function destroy($id)
     {
-        $InstitucionEliminar = Voluntario::findOrFail($id);
+        $InstitucionEliminar = Institucion::findOrFail($id);
         $InstitucionEliminar->activo = false;
         $save = $InstitucionEliminar->save();
         if($save){
-            return back()->with('success', '¡La Institución fue eliminada correctamente!');
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡La Institución fue eliminada correctamente!'
+            ]); 
         }else{
-            return back()->with('fail', 'Error al eliminar la Institución');
+            return response()->json([
+                'isOk' => false,
+                'message' => 'Error al eliminar la Institución'
+            ]);
         }
     }
 }
