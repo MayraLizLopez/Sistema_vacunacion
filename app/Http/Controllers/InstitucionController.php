@@ -17,7 +17,8 @@ class InstitucionController extends Controller
      */
     public function index()
     {
-        //
+        $municipios = DB::table('municipios')->get();   
+        return view('admin.create_institutions', compact('municipios'));
     }
 
     /**
@@ -27,7 +28,8 @@ class InstitucionController extends Controller
      */
     public function create()
     {
-        //
+        $municipios = DB::table('municipios')->get();   
+        return view('admin.create_institutions', compact('municipios'));
     }
 
     /**
@@ -38,7 +40,34 @@ class InstitucionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required', 
+            'domicilio' => 'required',
+            'id_municipio' => 'required',
+            'nombre_enlace' => 'required', 
+            'cargo_enlace' => 'required', 
+            'password' => 'required', 
+            'email' => 'required|email|unique:instituciones', 
+            'tel' => 'required',
+        ]);
+
+        $institucion = new Institucion;
+        $institucion->nombre = $request->nombre;
+        $institucion->domicilio = $request->domicilio;
+        $institucion->nombre_enlace = $request->nombre_enlace;
+        $institucion->cargo_enlace = $request->cargo_enlace;
+        $institucion->id_municipio = (int)$request->id_municipio;
+        $institucion->tel = $request->tel;
+        $institucion->email = $request->email;
+        $institucion->activo = true;
+        $institucion->password = Hash::make($request->password);
+        $save = $institucion->save();
+
+        if($save){
+            return back()->with('success', '¡La institución fue registrada correctamente!');
+        }else{
+            return back()->with('fail', 'Error al registrar la institución');
+        }
     }
 
     /**
@@ -113,8 +142,15 @@ class InstitucionController extends Controller
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Institucion $institucion)
+    public function destroy($id)
     {
-        
+        $InstitucionEliminar = Voluntario::findOrFail($id);
+        $InstitucionEliminar->activo = false;
+        $save = $InstitucionEliminar->save();
+        if($save){
+            return back()->with('success', '¡La Institución fue eliminada correctamente!');
+        }else{
+            return back()->with('fail', 'Error al eliminar la Institución');
+        }
     }
 }

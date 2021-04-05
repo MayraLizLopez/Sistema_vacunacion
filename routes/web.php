@@ -32,23 +32,6 @@ Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
 Route::post('voluntario/destroy', [VoluntarioController::class, "destroy"]);
 
-
-//adminstrador
-Route::get('admin/panel', [AdminController::class, "panel"]);
-
-
-Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
-
-Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
-
-Route::get('admin/panel/voluntario/edit/{id_voluntario}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
-
-Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
-
-Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
-
-Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::class, "update"])->name('updateInstitucion');
-
 //Securitys
 Route::get('security/login', [LoginController::class, "login"])->name('login');
 
@@ -56,5 +39,27 @@ Route::post('security/authenticate', [LoginController::class, "authenticate"]);
 
 
 Route::group(['middleware' =>['AuthCheck']], function(){
+    //Index
     Route::get('admin/panel/index', [LoginController::class, "dashboard"]);
+
+    //adminstrador
+    Route::get('admin/panel', [AdminController::class, "panel"]);
+
+    Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
+
+    Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
+
+    Route::get('admin/panel/voluntario/edit/{id_voluntario}', [VoluntarioController::class, "edit"])->name('editarVoluntarios');
+
+    Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
+
+    Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
+
+    Route::patch('admin/panel/institutions/update/{id_insti}', [InstitucionController::class, "update"])->name('updateInstitucion');
+
+    Route::get('admin/panel/institutions/create', [InstitucionController::class, "create"])->name('createInstitucion');
+
+    Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');
+
+
 });
