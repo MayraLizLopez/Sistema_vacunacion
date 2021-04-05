@@ -23,7 +23,6 @@ class Institucion extends Migration
             $table->string('cargo_enlace', 50);
             $table->string('tel', 20);
             $table->string('email', 100);
-            $table->string('password', 100);
             $table->boolean('activo');
             //$table->timestamps();
             $table->foreign('id_municipio')->references('id_municipio')->on('municipios');

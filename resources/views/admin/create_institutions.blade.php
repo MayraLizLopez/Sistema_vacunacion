@@ -27,6 +27,7 @@
                 {{ Session::get('fail') }}
             </div>
         @endif 
+        <h1 class="h3 mb-2 text-gray-800">Información de la institución</h1><hr/>
             <div class="content">
                 <div class="row">
                     <div class="col-md-6">
@@ -45,23 +46,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                    <div class="form-group">
-                            <label for="maternalSurnameVoluntary">Nombre del Enlace</label>
-                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" placeholder="Nombre Enlace"/>
-                            <span class="text-danger">@error('nombre_enlace'){{ 'Ingrese el nombre del enlace' }} @enderror </span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="phoneVoluntary">Contraseña</label>
-                            <input type="password" class="form-control" id="phoneVoluntary" name="password" placeholder="Contraseña" />
-                            <span class="text-danger">@error('contraseña'){{ 'Ingrese una contraseña' }} @enderror </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="col-md-6">
                         <div class="form-group">
                             <label for="emailVoluntary">Municipio</label>
                             <select class="form-control" id="townVoluntary" name="id_municipio">
@@ -72,23 +57,55 @@
                             <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
                         </div>
                     </div>
+                </div>
+                <h1 class="h3 mb-2 text-gray-800">Información del enlace</h1><hr/>
+                <div class="row">
                     <div class="col-md-6">
+                    <div class="form-group">
+                            <label for="maternalSurnameVoluntary">Nombre del enlace</label>
+                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" placeholder="Nombre Enlace"/>
+                            <span class="text-danger">@error('nombre_enlace'){{ 'Ingrese el nombre del enlace' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phoneVoluntary">Apellido paterno</label>
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" placeholder="apellido paterno" />
+                            <span class="text-danger">@error('ape_pat'){{ 'Ingrese apellido paterno' }} @enderror </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group">
+                    <label for="phoneVoluntary">Apellido Materno</label>
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_mat" placeholder="apellido materno" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phoneVoluntary">Contraseña</label>
+                            <input type="password" class="form-control" id="phoneVoluntary" name="password" placeholder="Contraseña" />
+                            <span class="text-danger">@error('password'){{ 'Ingrese una contraseña' }} @enderror </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="phoneVoluntary">Cargo del enlace</label>
                             <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" placeholder="Cargo" />
                             <span class="text-danger">@error('cargo_enlace'){{ 'Ingrese el cargo del enlace' }} @enderror </span>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="townVoluntary">Teléfono del enlace</label>
                             <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono"/>
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Correo"/>
