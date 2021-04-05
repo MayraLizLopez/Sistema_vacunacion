@@ -18,24 +18,22 @@ class InstitucionSeeder extends Seeder
     {
       	DB::table('instituciones')->insert([
             'nombre' => 'Auditorio Benito Juárez',
-            'domicilio' => Str::random(10),
+            'domicilio' => 'Av. Mariano Barcena s/n, Auditorio, 45190.',
             'id_municipio' => 1,
             'tel' => Str::random(9),
             'nombre_enlace' => 'Juan Perez',
             'cargo_enlace' => 'director',
             'email' => Str::random(10).'@gmail.com',
-            'password' => Hash::make('password'),
             'activo' => true,
         ]);
 
         DB::table('instituciones')->insert([
             'nombre' => 'Auditorio Telmex',
-            'domicilio' => Str::random(10),
+            'domicilio' => 'Av. Obreros de Cananea 746, Industrial los Belenes, 45150',
             'tel' => Str::random(9),
             'nombre_enlace' => 'Mario López',
             'cargo_enlace' => 'director',
             'email' => Str::random(10).'@gmail.com',
-            'password' => Hash::make('password'),
             'activo' => true,
             'id_municipio' => 2,
         ]);

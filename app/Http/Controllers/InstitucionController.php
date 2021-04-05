@@ -47,26 +47,40 @@ class InstitucionController extends Controller
             'nombre' => 'required', 
             'domicilio' => 'required',
             'id_municipio' => 'required',
-            'nombre_enlace' => 'required', 
+            'nombre_enlace' => 'required',
+            'ape_pat' => 'required', 
             'cargo_enlace' => 'required', 
             'password' => 'required', 
-            'email' => 'required|email|unique:instituciones', 
+            'email' => 'required|email|unique:usuarios', 
             'tel' => 'required',
         ]);
 
         $institucion = new Institucion;
         $institucion->nombre = $request->nombre;
         $institucion->domicilio = $request->domicilio;
-        $institucion->nombre_enlace = $request->nombre_enlace;
+        $institucion->nombre_enlace = $request->nombre_enlace . ' ' . $request->ape_pat . ' ' . $request->ape_mat;
         $institucion->cargo_enlace = $request->cargo_enlace;
         $institucion->id_municipio = (int)$request->id_municipio;
         $institucion->tel = $request->tel;
         $institucion->email = $request->email;
         $institucion->activo = true;
-        $institucion->password = Hash::make($request->password);
+        //$institucion->password = Hash::make($request->password);
         $save = $institucion->save();
+        
+        $usuario = new Usuario;
+        $usuario->nombre = $request->nombre_enlace;
+        $usuario->ape_pat = $request->ape_pat;
+        $usuario->ape_mat = $request->ape_mat;
+        $usuario->id_insti = $institucion->id_insti;
+        $usuario->cargo = $request->cargo_enlace;
+        $usuario->rol = 'Enlace de institución';
+        $usuario->tel = $request->tel;
+        $usuario->email = $request->email;
+        $usuario->activo = true;
+        $usuario->password = Hash::make($request->password);
+        $save1 = $usuario->save();
 
-        if($save){
+        if($save && $save1){
             return back()->with('success', '¡La institución fue registrada correctamente!');
         }else{
             return back()->with('fail', 'Error al registrar la institución');
