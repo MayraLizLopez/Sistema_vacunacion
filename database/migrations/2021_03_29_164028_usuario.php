@@ -25,6 +25,8 @@ class Usuario extends Migration
             $table->string('email', 100);
             $table->string ('password', 100);
             $table->boolean('activo');
+            $table->date('fecha_creacion', 255);
+            $table->date('fecha_edicion', 255)->nullable();
             //$table->timestamps();
             $table->foreign('id_insti')->references('id_insti')->on('instituciones');
         });

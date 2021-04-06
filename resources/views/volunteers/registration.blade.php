@@ -1,4 +1,7 @@
 @extends('layout')
+@section('css')
+    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+@endsection
 @section('title', 'Registro de Voluntarios')
 @section('content')
 <div class="container">

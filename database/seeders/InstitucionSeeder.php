@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class InstitucionSeeder extends Seeder
 {
@@ -25,6 +26,7 @@ class InstitucionSeeder extends Seeder
             'cargo_enlace' => 'director',
             'email' => Str::random(10).'@gmail.com',
             'activo' => true,
+            'fecha_creacion' => Carbon::parse("2021-02-01")->format('y-m-d'),
         ]);
 
         DB::table('instituciones')->insert([
@@ -36,6 +38,7 @@ class InstitucionSeeder extends Seeder
             'email' => Str::random(10).'@gmail.com',
             'activo' => true,
             'id_municipio' => 2,
+            'fecha_creacion' => Carbon::parse("2021-03-01")->format('y-m-d'),
         ]);
     }
 }

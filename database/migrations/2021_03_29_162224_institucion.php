@@ -24,6 +24,8 @@ class Institucion extends Migration
             $table->string('tel', 20);
             $table->string('email', 100);
             $table->boolean('activo');
+            $table->date('fecha_creacion', 255);
+            $table->date('fecha_edicion', 255)->nullable();
             //$table->timestamps();
             $table->foreign('id_municipio')->references('id_municipio')->on('municipios');
         });

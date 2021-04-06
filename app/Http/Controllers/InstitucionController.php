@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Municipio;
 use Illuminate\Support\Facades\Hash;    
 use App\Models\Usuario;
+use Carbon\Carbon;
 
 class InstitucionController extends Controller
 {
@@ -64,6 +65,7 @@ class InstitucionController extends Controller
         $institucion->tel = $request->tel;
         $institucion->email = $request->email;
         $institucion->activo = true;
+        $institucion->fecha_creacion = Carbon::now();
         //$institucion->password = Hash::make($request->password);
         $save = $institucion->save();
         
@@ -78,12 +80,13 @@ class InstitucionController extends Controller
         $usuario->email = $request->email;
         $usuario->activo = true;
         $usuario->password = Hash::make($request->password);
+        $usuario->fecha_creacion = Carbon::now();
         $save1 = $usuario->save();
 
         if($save && $save1){
-            return back()->with('success', '¡La institución fue registrada correctamente!');
+            return back()->with('success', '¡La institución y el enlace fue registrados correctamente!');
         }else{
-            return back()->with('fail', 'Error al registrar la institución');
+            return back()->with('fail', 'Error al registrar la institución y/o al enlace');
         }
     }
 
@@ -150,6 +153,7 @@ class InstitucionController extends Controller
         $institucionEditado->email = $request->email;
         $institucionEditado->tel = $request->tel;
         $institucionEditado->activo = true;
+        $institucionEditado->fecha_edicion = Carbon::now();
         $save = $institucionEditado->save();
         if($save){
             return back()->with('success', '¡Los datos de la institución fueron actualizados correctamente!');

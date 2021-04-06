@@ -7,7 +7,7 @@ use App\Http\Controllers\VoluntarioController;
 use App\Http\Controllers\InstitucionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
-
+use App\Mail\SaveVoluntario;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +36,13 @@ Route::get('security/logout', [LoginController::class, "logout"])->name('logout'
 
 Route::post('security/authenticate', [LoginController::class, "authenticate"]);
 
+Route::get('emailVoluntario', function() {
+
+    $correo = new SaveVoluntario;
+    Mail::to('mayralizlop@gmail.com')->send($correo);
+
+    return "Mensaje Enviado";
+});
 
 Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('security/login', [LoginController::class, "login"])->name('login');

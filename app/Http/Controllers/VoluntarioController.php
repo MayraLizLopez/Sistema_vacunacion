@@ -9,6 +9,7 @@ use App\Models\Municipio;
 use App\Models\Institucion;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
+use Carbon\Carbon;
 
 class VoluntarioController extends Controller
 {
@@ -62,7 +63,7 @@ class VoluntarioController extends Controller
             'ape_pat' => 'required',
             'id_municipio' => 'required',
             'id_insti' => 'required', 
-            'email' => 'required|email|unique:voluntarios', 
+            'email' => 'required|email|unique:voluntarios|unique:usuarios', 
             'tel' => 'required',
         ]);
 
@@ -76,6 +77,7 @@ class VoluntarioController extends Controller
         $voluntario->email = $request->email;
         $voluntario->activo = false;
         $voluntario->eliminado = false;
+        $voluntario->fecha_creacion = Carbon::now();
         $save = $voluntario->save();
 
         if($save){
@@ -153,6 +155,7 @@ class VoluntarioController extends Controller
         $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
         $voluntarioEditado->eliminado = false;
+        $voluntario->fecha_edicion = Carbon::now();
         $save = $voluntarioEditado->save();
         if($save){
             return back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
