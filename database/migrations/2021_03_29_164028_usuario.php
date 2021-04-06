@@ -22,11 +22,11 @@ class Usuario extends Migration
             $table->string('cargo', 50);
             $table->string('rol', 50);
             $table->string('tel', 20);
-            $table->string('email', 100);
+            $table->string('email', 100)->unique();
             $table->string ('password', 100);
             $table->boolean('activo');
-            $table->date('fecha_creacion', 255);
-            $table->date('fecha_edicion', 255)->nullable();
+            $table->dateTime('fecha_creacion', $precision = 0);
+            $table->dateTime('fecha_edicion', $precision = 0)->nullable();
             //$table->timestamps();
             $table->foreign('id_insti')->references('id_insti')->on('instituciones');
         });

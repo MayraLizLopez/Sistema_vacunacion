@@ -10,6 +10,8 @@ use App\Models\Institucion;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SaveVoluntario;
 
 class VoluntarioController extends Controller
 {
@@ -79,11 +81,14 @@ class VoluntarioController extends Controller
         $voluntario->eliminado = false;
         $voluntario->fecha_creacion = Carbon::now();
         $save = $voluntario->save();
+        if($voluntario != null){
+            //email
+        }
 
         if($save){
-            return back()->with('success', '¡Tus datos fueron agregados correctamente!');
+            return redirect()->back()->with('success', '¡Tus datos fueron agregados correctamente!');
         }else{
-            return back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
+            return redirect()->back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
         }
     }
 
@@ -158,9 +163,9 @@ class VoluntarioController extends Controller
         $voluntarioEditado->fecha_edicion = Carbon::now();
         $save = $voluntarioEditado->save();
         if($save){
-            return back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
+            return redirect()->back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
         }else{
-            return back()->with('fail', 'Error al actualizar los datos del voluntario');
+            return redirect()->back()->with('fail', 'Error al actualizar los datos del voluntario');
         }
     }
 
@@ -258,4 +263,11 @@ class VoluntarioController extends Controller
         ]); 
     }
     #endregion
+
+    public static function enviarEmailConfirmacion(Voluntario $voluntario){
+        $data = [
+            'nombre' => 'Mayra Lopez',
+        ];
+        Mail::to('mayralizlop@gmail.com')->send(new SaveVoluntario($data));
+    }
 }

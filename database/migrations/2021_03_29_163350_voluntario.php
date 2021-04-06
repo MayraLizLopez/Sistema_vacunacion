@@ -21,11 +21,11 @@ class Voluntario extends Migration
             $table->unsignedBigInteger('id_insti');
             $table->unsignedBigInteger('id_municipio');
             $table->string('tel', 20);
-            $table->string('email', 100);
+            $table->string('email', 100)->unique();
             $table->boolean('activo');
             $table->boolean('eliminado');
-            $table->date('fecha_creacion', 255);
-            $table->date('fecha_edicion', 255)->nullable();
+            $table->dateTime('fecha_creacion', $precision = 0);
+            $table->dateTime('fecha_edicion', $precision = 0)->nullable();
             //$table->timestamps();
             $table->foreign('id_insti')->references('id_insti')->on('instituciones');
             $table->foreign('id_municipio')->references('id_municipio')->on('municipios');

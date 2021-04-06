@@ -11,12 +11,10 @@
         }
     </style>
     <body>
-        <h1>Confirma tu correo electrónico</h1>
-        <p>Para continuar el proceso por favor da click en el siguiente link: </p>
-        <a href=""></a>
-        <img src="../resources/image/isologo_jalisco_v.svg" 
-                     alt="jalisco"
-                     class="img-fluid">
+        <h1>¡Gracias por registrarte como Voluntario(a)!</h1>
+        <h5>Confirma tu correo electrónico</h5>
+        <p>Para continuar el proceso por favor da click en el botón para confirmar tu dirección de email. </p>
+        <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Confirmar</button>
     </body>
 </head>
 </html>

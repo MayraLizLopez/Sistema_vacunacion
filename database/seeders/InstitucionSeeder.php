@@ -26,7 +26,7 @@ class InstitucionSeeder extends Seeder
             'cargo_enlace' => 'director',
             'email' => Str::random(10).'@gmail.com',
             'activo' => true,
-            'fecha_creacion' => Carbon::parse("2021-02-01")->format('y-m-d'),
+            'fecha_creacion' => Carbon::now(),
         ]);
 
         DB::table('instituciones')->insert([
@@ -38,7 +38,7 @@ class InstitucionSeeder extends Seeder
             'email' => Str::random(10).'@gmail.com',
             'activo' => true,
             'id_municipio' => 2,
-            'fecha_creacion' => Carbon::parse("2021-03-01")->format('y-m-d'),
+            'fecha_creacion' => Carbon::now(),
         ]);
     }
 }
