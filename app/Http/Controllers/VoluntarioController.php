@@ -185,6 +185,7 @@ class VoluntarioController extends Controller
         }
     }
 
+    #region Filtros
     public function searchByVoluntaryName($name)
     {
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
@@ -216,17 +217,43 @@ class VoluntarioController extends Controller
         ])
         ->get();
         return response()->json([
-            'data' => $nameVoluntary,
-            'session' => $data          
+            'data' => $nameVoluntary         
         ]); 
     }
 
-    public function getAllTowns(){
+    public function searchByInstitution($id)
+    {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+        $nameVoluntary = DB::table('voluntarios')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->where([
+            ['eliminado', '=', 0],
+            ['voluntarios.id_insti', '=', $id]
+        ])
+        ->get();
+        return response()->json([
+            'data' => $nameVoluntary         
+        ]); 
+    }
+
+    public function getAllTowns()
+    {
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
         $towns = DB::table('municipios')->get();
         return response()->json([
-            'data' => $towns,
-            'session' => $data          
+            'data' => $towns          
         ]); 
     }
+
+    public function getAllInstitutions()
+    {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+        $institutions = DB::table('instituciones')->get();
+        return response()->json([
+            'data' => $institutions       
+        ]); 
+    }
+    #endregion
 }

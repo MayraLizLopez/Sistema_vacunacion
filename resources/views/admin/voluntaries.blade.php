@@ -15,9 +15,17 @@
         <div class="form-group ml-1">
             <select class="custom-select" id="inSearchByTown">
                 <option value="" selected disabled hidden>Eliga un municipio</option>
-            </select>
-            {{-- <input type="text" class="form-control ml-2" placeholder="Voluntario" id="inSearchByVoluntary"> --}}
+            </select>           
         </div>
+        <div class="form-group ml-1">
+            <select class="custom-select" id="inSearchByInstitution">
+                <option value="" selected disabled hidden>Eliga una institución</option>
+            </select>           
+        </div>
+        <button type="button" class="btn btn-info ml-1" id="cleanFilters">
+            <i class="fas fa-eraser"></i>
+            Limpiar Filtros
+        </button>
     </div>
 </div>
 
@@ -66,23 +74,8 @@
             getAllVolunataries();
             startEvents();
             getAllTowns();
+            getAllInstitutions()
         });
-
-        function getAllTowns(){
-            $.ajax({
-                url: "voluntario/getAllTowns",
-                type: "GET",
-                success: function (response) {
-                    for(let i in response.data){
-                        $('#inSearchByTown').append($('<option>').text(response.data[i].nombre).
-                                attr({ 'value': response.data[i].id_municipio, 'disabled': false, 'selected': false, 'hidden': false }));
-                    }
-                },
-                error: function (error, resp, text) {
-                    console.error(error);
-                }
-            });
-        }
 
         function startEvents(){
             //Evento de busqueda por nombre de voluntario.
@@ -102,18 +95,60 @@
                     searchByTown($('#inSearchByTown').children('option:selected').val());
                 }                               
             });
+
+            $('#inSearchByInstitution').on('change', (event) => {
+                if($('#inSearchByInstitution').children('option:selected').val().length <= 0){
+                } else {
+                    searchByInstitution($('#inSearchByInstitution').children('option:selected').val());
+                }                               
+            });
+
+            $('#cleanFilters').on('click', () => {
+                location.reload();
+            });
         }
 
-        //Start table actions & operations
+        function getAllTowns(){
+            $.ajax({
+                url: "voluntario/getAllTowns",
+                type: "GET",
+                success: function (response) {
+                    for(let i in response.data){
+                        $('#inSearchByTown').append($('<option>').text(response.data[i].nombre).
+                                attr({ 'value': response.data[i].id_municipio, 'disabled': false, 'selected': false, 'hidden': false }));
+                    }
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function getAllInstitutions(){
+            $.ajax({
+                url: "voluntario/getAllInstitutions",
+                type: "GET",
+                success: function (response) {
+                    for(let i in response.data){
+                        $('#inSearchByInstitution').append($('<option>').text(response.data[i].nombre).
+                                attr({ 'value': response.data[i].id_insti, 'disabled': false, 'selected': false, 'hidden': false }));
+                    }
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
         function getAllVolunataries(){      
             let voluntarios = @json($voluntarios);
             console.log(voluntarios);       
             $table.bootstrapTable({data: voluntarios});            
         }
 
-        function searchByVoluntaryName(name){
+        function searchByVoluntaryName(id){
             $.ajax({
-                url: "voluntario/searchByVoluntaryName/" + name,
+                url: "voluntario/searchByVoluntaryName/" + id,
                 type: "GET",
                 success: function (response) {
                     $table.bootstrapTable('destroy');
@@ -125,9 +160,23 @@
             });
         }
 
-        function searchByTown(name){
+        function searchByTown(id){
             $.ajax({
-                url: "voluntario/searchByTown/" + name,
+                url: "voluntario/searchByTown/" + id,
+                type: "GET",
+                success: function (response) {
+                    $table.bootstrapTable('destroy');
+                    $table.bootstrapTable({data: response.data});
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function searchByInstitution(id){
+            $.ajax({
+                url: "voluntario/searchByInstitution/" + id,
                 type: "GET",
                 success: function (response) {
                     $table.bootstrapTable('destroy');
@@ -202,6 +251,5 @@
                     });
             }
         }
-        //End table actions & operations
     </script>
 @endsection
