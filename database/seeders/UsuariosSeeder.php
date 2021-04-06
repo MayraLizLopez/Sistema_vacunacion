@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class UsuariosSeeder extends Seeder
 {
@@ -28,6 +29,7 @@ class UsuariosSeeder extends Seeder
             'email' => 'jaime@gmail.com',
             'password' => Hash::make('1234'),
             'activo' => true,
+            'fecha_creacion' => Carbon::parse("2021-02-01")->format('y-m-d'),
         ]);
 
         DB::table('usuarios')->insert([
@@ -41,6 +43,7 @@ class UsuariosSeeder extends Seeder
             'email' => 'mayra@gmail.com',
             'password' => Hash::make('1234'),
             'activo' => true,
+            'fecha_creacion' => Carbon::parse("2021-03-01")->format('y-m-d'),
         ]);
 
         DB::table('usuarios')->insert([
@@ -54,6 +57,7 @@ class UsuariosSeeder extends Seeder
             'email' => 'arturo@gmail.com',
             'password' => Hash::make('1234'),
             'activo' => true,
+            'fecha_creacion' => Carbon::parse("2021-04-01")->format('y-m-d'),
         ]);
     }
 }

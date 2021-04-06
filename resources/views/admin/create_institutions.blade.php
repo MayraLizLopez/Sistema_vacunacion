@@ -4,30 +4,28 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Registrar Institución</h1>
+<h1 class="h3 mb-2 text-gray-800">Registrar Institución y Enlace</h1>
 <p class="mb-4"> </p>
 
 <!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Ingrese los datos de la Institución y del enlace</h6>
-    </div>
-    <div class="card-body">
-        <form action= "{{route('storeInstitucion')}}"  method="POST">
-        {{ csrf_field() }}
+<form action= "{{route('storeInstitucion')}}"  method="POST">
+{{ csrf_field() }}
+@if(Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
 
-        @if(Session::get('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
-
-        @if(Session::get('fail'))
-            <div class="alert alert-danger">
-                {{ Session::get('fail') }}
-            </div>
-        @endif 
-        <h1 class="h3 mb-2 text-gray-800">Información de la institución</h1><hr/>
+            @if(Session::get('fail'))
+                <div class="alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif 
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos de la Institución</h5>
+        </div>
+        <div class="card-body">
             <div class="content">
                 <div class="row">
                     <div class="col-md-6">
@@ -58,7 +56,16 @@
                         </div>
                     </div>
                 </div>
-                <h1 class="h3 mb-2 text-gray-800">Información del enlace</h1><hr/>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos del Enlace</h5>
+        </div>
+        <div class="card-body">
+            <div class="content">
                 <div class="row">
                     <div class="col-md-6">
                     <div class="form-group">
@@ -117,9 +124,10 @@
             </div>
             <button class="btn btn-primary" type="submit">Guardar</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
-        </form>
+            
+        </div>
     </div>
-  </div>
+</form>
 @endsection
 @section('scripts')
 @endsection

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VaccinationDayController;
 
+use App\Mail\SaveVoluntario;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,14 @@ Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 Route::get('security/logout', [LoginController::class, "logout"])->name('logout');
 
 Route::post('security/authenticate', [LoginController::class, "authenticate"]);
+
+Route::get('emailVoluntario', function() {
+
+    $correo = new SaveVoluntario;
+    Mail::to('mayralizlop@gmail.com')->send($correo);
+
+    return "Mensaje Enviado";
+});
 
 Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('security/login', [LoginController::class, "login"])->name('login');

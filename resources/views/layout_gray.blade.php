@@ -11,10 +11,8 @@
         <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">    
         <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet">  
     </head>
-    <body>
-        <div class="container-fluid">                   
-            @yield('content')
-        </div>
+    <body style="background-color: gray;">
+        @yield('content')
         <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
         <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
 
