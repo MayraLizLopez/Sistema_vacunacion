@@ -54,7 +54,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url("/admin/panel/show")}}">
                         <i class="fas fa-users"></i>
-                        <span>Voluntarios</span></a>
+                        <span>Voluntariado</span></a>
                 </li>
 
                 <!-- Divider -->

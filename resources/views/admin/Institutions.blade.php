@@ -13,8 +13,10 @@
 </div>
 
 <div id="toolbar">
-            <button type="button" class="btn btn-primary "><a style="color:white;" href="{{route('createInstitucion')}}">Registrar Institución</a></button>
+    <div class="form-inline">
+        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}">Registrar Institución</a></button>
     </div>
+</div>
 </div>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -23,21 +25,24 @@
     </div>
     <div class="card-body">
     <table id="institutionsTable" class="table table-striped table-bordered"
+      data-locale="es-MX"
       data-pagination="true" 
       data-single-select="true" 
       data-click-to-select="true"
       data-search="true"
+      data-sort-name="nombre"
+      data-sort-order="desc"
       data-toolbar="#toolbar"> 
         <thead>
         <tr>
             <th class="d-none" data-radio="true"></th>
             <th class="d-none" data-field="id_insti">ID</th>
-            <th data-field="nombre" data-halign="center" data-align="center">Nombre</th>
-            <th data-field="domicilio" data-halign="center" data-align="center">Domicilio</th>
-            <th data-field="nombre_enlace" data-halign="center" data-align="center">Nombre Enlace</th>
-            <th data-field="nombre_municipio" data-halign="center" data-align="center">Municipio</th>
-            <th data-field="email" data-halign="center" data-align="center">Email</th>
-            <th data-field="tel" data-halign="center" data-align="center">Teléfono</th>
+            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+            <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
+            <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Nombre Enlace</th>
+            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+            <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
             <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
         </tr>
         </thead>
@@ -47,6 +52,7 @@
 @endsection
 @section('scripts')
 <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+<script src="{{ url("../resources/js/bootstrap-table-es-MX.js") }}"></script>
     <script>
         let $table = $('#institutionsTable');
 
@@ -88,7 +94,6 @@
                     });
             }
         }
-        //End table actions & operations
 
         function deleteInstitution(id){
             $.ajax({
@@ -124,5 +129,6 @@
                 }
             });
         }
+        //End table actions & operations
     </script>
 @endsection
