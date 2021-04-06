@@ -5,7 +5,7 @@
 @section('content')  
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Voluntarios</h1>
-<p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados</p>
+<p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos</p>
 
 <div id="toolbar">
     <div class="form-inline" role="form">

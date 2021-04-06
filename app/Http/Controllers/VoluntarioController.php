@@ -250,7 +250,7 @@ class VoluntarioController extends Controller
     public function getAllInstitutions()
     {
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
-        $institutions = DB::table('instituciones')->get();
+        $institutions = DB::table('instituciones')->where('activo', '=', 1)->get();
         return response()->json([
             'data' => $institutions       
         ]); 
