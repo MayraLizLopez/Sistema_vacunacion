@@ -12,7 +12,9 @@
         <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet">  
     </head>
     <body>
-        @yield('content')
+        <div class="container-fluid">                   
+            @yield('content')
+        </div>
         <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
         <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
 

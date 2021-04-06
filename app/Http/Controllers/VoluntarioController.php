@@ -207,8 +207,7 @@ class VoluntarioController extends Controller
         ])
         ->get();
         return response()->json([
-            'data' => $nameVoluntary,
-            'session' => $data          
+            'data' => $nameVoluntary        
         ]); 
     }
 

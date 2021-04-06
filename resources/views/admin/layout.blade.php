@@ -48,23 +48,48 @@
                         <span>Inicio</span></a>
                 </li>
 
-                <!-- Divider -->
-                {{-- <hr class="sidebar-divider my-0"> --}}
+                
+                @if ($LoggedUserInfo['rol'] == 'Administrador General')
+                    <!-- Divider -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url("/admin/panel/show")}}">                           
+                            <i class="fas fa-hands-helping"></i>
+                            <span>Voluntariado</span></a>
+                    </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{url("/admin/panel/show")}}">
-                        <i class="fas fa-users"></i>
-                        <span>Voluntariado</span></a>
-                </li>
+                    <!-- Divider -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url("/admin/panel/institutions")}}">
+                            <i class="fas fa-building"></i>
+                            <span>Instituciones</span></a>
+                    </li>
 
-                <!-- Divider -->
-                {{-- <hr class="sidebar-divider my-0"> --}}
+                    <!-- Divider -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url("/admin/panel/vaccinationDay")}}">
+                            <i class="fas fa-syringe"></i>
+                            <span>Jornadas de vacunación</span></a>
+                    </li>
 
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{url("/admin/panel/institutions")}}">
-                        <i class="fas fa-building"></i>
-                        <span>Instituciones</span></a>
-                </li>
+                    <!-- Divider -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-users"></i>
+                            <span>Usuarios</span></a>
+                    </li>
+                @else
+                    <!-- Divider -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{url("/admin/panel/show")}}">
+                            <i class="fas fa-users"></i>
+                            <span>Voluntariado</span></a>
+                    </li>                 
+                @endif
 
                 <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
