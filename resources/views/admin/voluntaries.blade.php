@@ -89,14 +89,14 @@
                 }               
             });
 
-            $('#inSearchByTown').on('change', (event) => {
+            $('#inSearchByTown').on('change', () => {
                 if($('#inSearchByTown').children('option:selected').val().length <= 0){
                 } else {
                     searchByTown($('#inSearchByTown').children('option:selected').val());
                 }                               
             });
 
-            $('#inSearchByInstitution').on('change', (event) => {
+            $('#inSearchByInstitution').on('change', () => {
                 if($('#inSearchByInstitution').children('option:selected').val().length <= 0){
                 } else {
                     searchByInstitution($('#inSearchByInstitution').children('option:selected').val());

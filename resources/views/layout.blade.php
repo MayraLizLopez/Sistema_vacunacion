@@ -9,7 +9,9 @@
         <link rel="stylesheet" href="{{ url("../resources/css/site.css") }}">
     </head>
     <body>
-        @yield('content')
+        <div class="container-fluid">                   
+            @yield('content')
+        </div>
         <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
         <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
         @yield('scripts')
