@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
+use App\Models\Usuario;
+use App\Models\Jornada;
+use App\Models\DetalleJornada;
 
 class VaccinationDayController extends Controller
 {
@@ -37,7 +41,30 @@ class VaccinationDayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'echa_inicio' => 'required', 
+            'fecha_fin' => 'required',
+            'mensaje' => 'required'
+        ]);
+
+        $voluntario = new Jornada();
+        $voluntario->nombre = $request->nombre;
+        $voluntario->ape_pat = $request->ape_pat;
+        $voluntario->ape_mat = $request->ape_mat;
+        $voluntario->id_municipio = (int)$request->id_municipio;
+        $voluntario->id_insti = (int)$request->id_insti;
+        $voluntario->tel = $request->tel;
+        $voluntario->email = $request->email;
+        $voluntario->activo = false;
+        $voluntario->eliminado = false;
+        $voluntario->fecha_creacion = Carbon::now();
+        $save = $voluntario->save();
+
+        if($save){
+            return back()->with('success', '¡Tus datos fueron agregados correctamente!');
+        }else{
+            return back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
+        }   
     }
 
     /**

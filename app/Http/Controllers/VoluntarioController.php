@@ -164,7 +164,7 @@ class VoluntarioController extends Controller
         $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
         $voluntarioEditado->eliminado = false;
-        $voluntario->fecha_edicion = Carbon::now();
+        $voluntarioEditado->fecha_edicion = Carbon::now();
         $save = $voluntarioEditado->save();
         if($save){
             return redirect()->back()->with('success', '¡Los datos del voluntarios fueron actualizados correctamente!');
