@@ -16,23 +16,10 @@
         }
         .accept-button {
             background-color: #5BC0DE;
-            font-family: 'Neo Sans Pro Bold', sans-serif;
-            margin-top: 25px;
-            font-size: 43px;
-            width: 450px;
-            height: 95px;
-            color: #F5F5F5;
-            border: 2px solid #5BC0DE;
-            border-radius: 18px; }
-            .accept-button:active {
-                background-color: #707070;
-                box-shadow: none; 
         }
 
         a{
-            font-family: 'Neo Sans Pro Bold', sans-serif;
             color: #F5F5F5;
-            font-size: 43px;
         }
 
     </style>
@@ -40,7 +27,7 @@
         <h1>¡{{ $nombre }} Gracias por registrarte como Voluntario(a)!</h1>
         <h2>¡Confirma tu correo electrónico!</h2>
         <h3>Para continuar el proceso por favor da click en el botón para confirmar tu dirección de email. </h3>
-        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://localhost:8080/sistema_vacunacion/public/emailVoluntario/{{$id}}">Confirmar email</a></button>
+        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://192.168.14.187:8080/sistema_vacunacion/public/emailVoluntario/{{$id}}">Confirmar email</a></button>
     </body>
     <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
     <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>

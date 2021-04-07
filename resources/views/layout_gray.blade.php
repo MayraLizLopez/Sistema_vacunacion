@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{ url("../resources/css/site.css") }}">
         <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
         <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">    
-        <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet">  
+        <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet"> 
     </head>
     <body style="background-color: gray;">
         @yield('content')
