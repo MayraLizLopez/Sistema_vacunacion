@@ -115,7 +115,6 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
     </form>
 </div>
 @endsection

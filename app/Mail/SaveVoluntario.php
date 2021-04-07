@@ -10,7 +10,6 @@ use Illuminate\Queue\SerializesModels;
 class SaveVoluntario extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
 
     public $subject = "Te has registrado al voluntariado Jalisco";
     /**
@@ -18,6 +17,7 @@ class SaveVoluntario extends Mailable
      *
      * @return void
      */
+    public $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -30,7 +30,7 @@ class SaveVoluntario extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+        return $this->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco')
                     ->view('email.confirm_voluntario')
                     ->subject('Te has registrado al voluntariado Jalisco')
                     ->with($this->data);

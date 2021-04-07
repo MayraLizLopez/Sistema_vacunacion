@@ -82,11 +82,15 @@ class VoluntarioController extends Controller
         $voluntario->fecha_creacion = Carbon::now();
         $save = $voluntario->save();
         if($voluntario != null){
-            //email
+            $data = [
+                'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
+                'id' => $voluntario->id_voluntario, 
+            ];
+            Mail::to($voluntario->email)->send(new SaveVoluntario($data));
         }
 
         if($save){
-            return redirect()->back()->with('success', '¡Tus datos fueron agregados correctamente!');
+            return redirect()->back()->with('success', '¡Tus datos fueron agregados correctamente, te enviamos un correo a tu email!');
         }else{
             return redirect()->back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
         }
@@ -264,10 +268,15 @@ class VoluntarioController extends Controller
     }
     #endregion
 
-    public static function enviarEmailConfirmacion(Voluntario $voluntario){
-        $data = [
-            'nombre' => 'Mayra Lopez',
-        ];
-        Mail::to('mayralizlop@gmail.com')->send(new SaveVoluntario($data));
+    public static function emailConfirmacion($id){
+        $voluntario = Voluntario::findOrFail($id);
+
+        $voluntario->activo = true;
+        $voluntario->fecha_edicion = Carbon::now();
+        $save = $voluntario->save();
+        if($save){
+            return view('volunteers.confirm');
+        }
+        
     }
 }
