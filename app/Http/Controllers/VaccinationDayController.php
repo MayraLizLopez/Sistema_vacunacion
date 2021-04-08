@@ -42,29 +42,34 @@ class VaccinationDayController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'echa_inicio' => 'required', 
+            'fecha_inicio' => 'required', 
             'fecha_fin' => 'required',
-            'mensaje' => 'required'
+            'id_insti' => 'required',
+            'mensaje' => 'required',
+            'detalleJornada' => 'required'
         ]);
+            $jornada = new Jornada;
+            $jornada->fecha_inicio = $request->fecha_inicio;
+            $jornada->fecha_fin = $request->fecha_fin;
+            $jornada->mensaje = $request->mensaje;
+            $jornada->activo = true;
+            $jornada->fecha_creacion = Carbon::now();
+            $save = $jornada->save();
+            
+            foreach($request->detalleJornada as $data){
+                $detalle_jornada = new DetalleJornada;
+                $detalle_jornada->id_jornada = $jornada->id_jornada;
+                $detalle_jornada->id_insti = $request->detalleJornada[$data]->id_insti;
+                $detalle_jornada->id_voluntario = $request->detalleJornada[$data]->id_voluntario;
+                $detalle_jornada->uuid = Uuid::generate()->string;   
+                $save1 = $detalle_jornada->save();
+            }
 
-        $voluntario = new Jornada();
-        $voluntario->nombre = $request->nombre;
-        $voluntario->ape_pat = $request->ape_pat;
-        $voluntario->ape_mat = $request->ape_mat;
-        $voluntario->id_municipio = (int)$request->id_municipio;
-        $voluntario->id_insti = (int)$request->id_insti;
-        $voluntario->tel = $request->tel;
-        $voluntario->email = $request->email;
-        $voluntario->activo = false;
-        $voluntario->eliminado = false;
-        $voluntario->fecha_creacion = Carbon::now();
-        $save = $voluntario->save();
-
-        if($save){
-            return back()->with('success', '¡Tus datos fueron agregados correctamente!');
-        }else{
-            return back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
-        }   
+            if($save && $save1){
+                return back()->with('success', '¡La institución y el enlace fue registrados correctamente!');
+            }else{
+                return back()->with('fail', 'Error al registrar la institución y/o al enlace');
+            }
     }
 
     /**

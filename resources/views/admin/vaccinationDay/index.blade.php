@@ -92,16 +92,13 @@
                 <div class="table-responsive">           
                     <table id="voluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
-                    data-single-select="true"
-                    data-click-to-select="true"
                     data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-multiple-select-row="true"
-                    data-click-to-select="true">
+                    data-sort-order="desc">
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_voluntario">ID</th>
+                            <th class="d-none" data-field="id_insti">ID Institución</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                             <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
@@ -117,7 +114,7 @@
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Crear jornada</button>
+            <button type="button" class="btn btn-primary" id="saveVaccinationDay">Crear jornada</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>        
         </div>
       </div>
@@ -136,11 +133,13 @@
         });
 
         function startEvents(){
-            $('#createVaccinationDay').on('click', () => {
+            //evento para invocar la modal de creación de jornadas
+            $('#createVaccinationDay').on('click', (e) => {
                 $('#modalCreateVaccinationDay').modal('show');
             });
 
-            //Modal events
+            //#region Modal events
+            //evento para la busqueda de voluntarios por institución
             $('#inInstitution').on('change', () => {
                 if($('#inInstitution').children('option:selected').val().length <= 0){
                 } else {
@@ -148,10 +147,31 @@
                 }                               
             });
 
+            //evento para obtener la lista de todos los voluntarios activos y no eliminados
             $('#modalCreateVaccinationDay').on('show.bs.modal', () => {
                 getAllInstitutions();
             });
-            //End Modal events
+
+
+            //evento para crear una nueva jornada
+            $('#saveVaccinationDay').on('click', () => {
+                let detalleJornada = [];
+                for(let data in $voluntariesTable.bootstrapTable('getSelections')){
+                    detalleJornada.push({
+                        id_insti: $voluntariesTable.bootstrapTable('getSelections')[data].id_insti,
+                        id_voluntario: $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
+                    });
+                }
+
+                let dataVaccinationDay = {
+                    fecha_inicio: $('#inStartDate').val(),
+                    fecha_fin: $('#inEndDate').val(),
+                    mensaje: $('#inMessage').val(),
+                    detalleJornada: detalleJornada
+                };
+                insVaccinationDay(dataVaccinationDay);                                    
+            });
+            //#endregion
         }
 
         function getAllInstitutions(){
@@ -175,8 +195,31 @@
                 url: "vaccinationDay/getAllVoluntantiesByActive/" + id_institution,
                 type: "GET",
                 success: function (response) {
+                    console.log(response);
                     $voluntariesTable.bootstrapTable('destroy');
                     $voluntariesTable.bootstrapTable({data: response.data});
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function insVaccinationDay(data){
+            console.log(data);
+            $.ajax({
+                url: "vaccinationDay/store",
+                type: "POST",
+                data: {
+                    fecha_inicio: data.fecha_inicio,
+                    fecha_fin: data.fecha_fin,
+                    id_insti: data.id_insti,
+                    mensaje: data.mensaje,
+                    detalleJornada: data.detalleJornada,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    console.log(response);
                 },
                 error: function (error, resp, text) {
                     console.error(error);
