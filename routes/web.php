@@ -82,5 +82,17 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/vaccinationDay/getAllVoluntantiesByActive/{id_institution}', [VaccinationDayController::class, "getAllVoluntantiesByActive"])->name('getAllVoluntantiesByActive');
 
+    Route::get('admin/panel/vaccinationDay/getJornadaDetail/{id_jornada}', [VaccinationDayController::class, "getJornadaDetail"])->name('getJornadaDetail');
+
     Route::get('admin/panel/vaccinationDay/getAllInstitutions/', [VaccinationDayController::class, "getAllInstitutions"])->name('getAllInstitutions');
+
+    Route::post('admin/panel/vaccinationDay/store/', [VaccinationDayController::class, "store"])->name('store');
+
+    Route::post('admin/panel/vaccinationDay/update/', [VaccinationDayController::class, "update"])->name('update');
+
+    Route::get('admin/panel/vaccinationDay/show/', [VaccinationDayController::class, "show"])->name('show');
+
+    Route::get('admin/panel/vaccinationDay/getLastJornada/', [VaccinationDayController::class, "getLastJornada"])->name('getLastJornada');
+
+    Route::get('admin/panel/vaccinationDay/getJornada/{id_jornada}', [VaccinationDayController::class, "getJornada"])->name('getJornada');
 });
