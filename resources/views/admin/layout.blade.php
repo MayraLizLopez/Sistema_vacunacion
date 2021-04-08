@@ -283,10 +283,10 @@
                                         Activity Log
                                     </a> -->
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <button type="button" class="dropdown-item" id="btnLogout">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Cerrar Sesión
-                                    </a>
+                                    </button>
                                 </div>
                             </li>
 
@@ -322,7 +322,7 @@
         </a>
 
         <!-- Logout Modal-->
-        <div class="modal fade" tabindex="-1" id="logoutModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{-- <div class="modal fade" tabindex="-1" id="logoutModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -340,7 +340,7 @@
                 </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Bootstrap core JavaScript-->
         <script src="{{ url("../resources/js/jquery.min.js") }}"></script>
         <script src=" {{ url("../resources/js/bootstrap.bundle.min.js") }}"></script>
@@ -362,6 +362,29 @@
         <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script>
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
         <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
+        <script>
+            $(document).ready(() => {
+                startEvents();
+            });
+
+            function startEvents(){
+                $('#btnLogout').on('click', () =>{
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Cerrar sesión',
+                        text: '¿Está seguro que desea cerrar su sesión?',
+                        confirmButtonColor: '#3085d6',
+                        showDenyButton: true,
+                        confirmButtonText: 'Aceptar',
+                        denyButtonText: 'Cancelar',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = "{{ route('logout')}}";
+                            }
+                        });
+                });
+            }
+        </script>
         @yield('scripts')
     </body>
 </html>
