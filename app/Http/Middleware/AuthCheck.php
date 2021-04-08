@@ -23,6 +23,15 @@ class AuthCheck
         if(session()->has('LoggedUser') && ($request->path() == 'security/login')){
             return back();
         }
+
+        if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/institutions'){
+            return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
+        }
+
+        if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/institutions/create'){
+            return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
+        }
+
         return $next($request)->header('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate')
                               ->header('Pragma', 'no-cache')
                               ->header('Expires', 'Sat 01 Jan 1990 00:00:00 GTM');

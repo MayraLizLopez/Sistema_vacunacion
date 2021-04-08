@@ -28,6 +28,7 @@ class LoginController extends Controller
             return back()->with('fail', 'Correo incorrecto');
         }else{
             if(Hash::check($request->password, $userInfo->password)){
+                $request->session()->put('LoggedUserNivel', $userInfo->rol);
                 $request->session()->put('LoggedUser', $userInfo->id_user);
                 return redirect('admin/panel/index');
             }else{
@@ -39,6 +40,7 @@ class LoginController extends Controller
     public function logout()
     {
         if(session()->has('LoggedUser')){
+            session()->pull('LoggedUserNivel'); 
            session()->pull('LoggedUser'); 
            return redirect('security/login');
         }

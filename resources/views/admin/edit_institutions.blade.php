@@ -4,7 +4,11 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Editar Institución</h1>
+<div class="row row justify-content-center">
+        <div class="col-sm-12">
+            <h1 style="margin-top: 30px;">Editar Institución</h1>
+        </div>
+    </div>
 <p class="mb-4"> </p>
 
 <!-- DataTales Example -->
@@ -18,15 +22,30 @@
         @csrf
 
         @if(Session::get('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
+        @section('scripts')
+            <script>    
+                Swal.fire({
+                    title: '¡Registro actualizado!',
+                    text: '¡La institución y el enlace fueron actualizados correctamente!',
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                    });
+            </script>
+        @endsection
         @endif
-
         @if(Session::get('fail'))
-            <div class="alert alert-danger">
-                {{ Session::get('fail') }}
-            </div>
+        @section('scripts')
+            <script>    
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'Al actualizar la institución y/o al enlace',
+                    icon: 'error',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                    });
+            </script>
+        @endsection
         @endif 
             <div class="content">
                 <div class="row">

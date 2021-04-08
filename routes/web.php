@@ -45,7 +45,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     //adminstrador
     Route::get('admin/panel', [AdminController::class, "panel"]);
 
-    Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
+    Route::get('admin/panel/show', [VoluntarioController::class, "show"])->name('tabla_volu');
 
     Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
@@ -83,4 +83,9 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/vaccinationDay/getAllVoluntantiesByActive/{id_institution}', [VaccinationDayController::class, "getAllVoluntantiesByActive"])->name('getAllVoluntantiesByActive');
 
     Route::get('admin/panel/vaccinationDay/getAllInstitutions/', [VaccinationDayController::class, "getAllInstitutions"])->name('getAllInstitutions');
+
+    //Perfil
+    Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
+
+    Route::post('admin/panel/profile/savePassword', [UsuarioController::class, "savePassword"])->name('savePassword');
 });

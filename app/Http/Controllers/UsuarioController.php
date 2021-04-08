@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Voluntario;
 use App\Models\Municipio;
 use App\Models\Institucion;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Usuario;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SaveVoluntario;
 
 class UsuarioController extends Controller
 {
@@ -64,9 +69,14 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show()
     {
-        //
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
+        $id =  session('LoggedUser');
+        $user = DB::table('usuarios')->where('id_user', $id)->first();
+        $institucion = DB::table('instituciones')->where('id_insti', $user->id_insti)->first();
+        
+        return view('admin.profile', compact('user', 'institucion'), $data);
     }
 
     /**
@@ -101,5 +111,29 @@ class UsuarioController extends Controller
     public function destroy(Usuario $usuario)
     {
         //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Usuario  $usuario
+     * @return \Illuminate\Http\Response
+     */
+    public function savePassword(Request $request)
+    {
+        $request->validate([
+            'password' => 'required', 
+        ]);
+        
+        $id =  session('LoggedUser');
+        $user = Usuario::findOrFail($id);
+        $user->password = Hash::make($request->password);
+        $save = $user->save();     
+        
+        if($save){
+            return redirect()->back()->with('success', '¡Tus datos fueron agregados correctamente, te enviamos un correo a tu email!');
+        }else{
+            return redirect()->back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
+        }
     }
 }

@@ -38,7 +38,7 @@ class UsuariosSeeder extends Seeder
             'ape_mat' => 'Barrios',
             'id_insti' => 2,
             'cargo' => 'Director',
-            'rol' => 'Administrador',
+            'rol' => 'Administrador General',
             'tel' => '123456788',
             'email' => 'mayra@gmail.com',
             'password' => Hash::make('1234'),

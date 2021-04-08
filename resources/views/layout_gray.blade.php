@@ -33,6 +33,7 @@
         <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script>
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
         <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
+        
         @yield('scripts')
     </body>
 </html>
