@@ -336,7 +336,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" href="{{ route('logout')}}">Aceptar</button>
+                    <button type="button" class="btn btn-primary" href="{{ route('logout')}}"> <a style="color:white;" href="{{ route('logout')}}">Aceptar</a></button>
                 </div>
                 </div>
             </div>
