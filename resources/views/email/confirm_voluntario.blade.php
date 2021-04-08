@@ -27,7 +27,7 @@
         <h1>¡{{ $nombre }} Gracias por registrarte como Voluntario(a)!</h1>
         <h2>¡Confirma tu correo electrónico!</h2>
         <h3>Para continuar el proceso por favor da click en el botón para confirmar tu dirección de email. </h3>
-        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://192.168.14.187:8080/sistema_vacunacion/public/emailVoluntario/{{$id}}">Confirmar email</a></button>
+        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://localhost/:8080/sistema_vacunacion/public/emailVoluntario/{{$id}}">Confirmar email</a></button>
     </body>
     <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
     <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>

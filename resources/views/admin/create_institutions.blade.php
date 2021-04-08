@@ -11,16 +11,31 @@
 <form action= "{{route('storeInstitucion')}}"  method="POST">
 {{ csrf_field() }}
 @if(Session::get('success'))
-                <div class="alert alert-success">
-                    {{ Session::get('success') }}
-                </div>
-            @endif
-
-            @if(Session::get('fail'))
-                <div class="alert alert-danger">
-                    {{ Session::get('fail') }}
-                </div>
-            @endif 
+@section('scripts')
+    <script>    
+        Swal.fire({
+            title: '¡Registro completado!',
+            text: '¡La institución y el enlace fueron registrados correctamente!',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Aceptar'
+            });
+    </script>
+@endsection
+@endif
+@if(Session::get('fail'))
+@section('scripts')
+    <script>    
+        Swal.fire({
+            title: '¡Error!',
+            text: 'Al registrar la institución y/o al enlace',
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Aceptar'
+            });
+    </script>
+@endsection
+@endif 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos de la Institución</h5>

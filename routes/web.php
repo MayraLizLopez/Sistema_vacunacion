@@ -45,7 +45,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     //adminstrador
     Route::get('admin/panel', [AdminController::class, "panel"]);
 
-    Route::get('admin/panel/show', [VoluntarioController::class, "show"]);
+    Route::get('admin/panel/show', [VoluntarioController::class, "show"])->name('tabla_volu');
 
     Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
@@ -95,4 +95,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/vaccinationDay/getLastJornada/', [VaccinationDayController::class, "getLastJornada"])->name('getLastJornada');
 
     Route::get('admin/panel/vaccinationDay/getJornada/{id_jornada}', [VaccinationDayController::class, "getJornada"])->name('getJornada');
+    //Perfil
+    Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
+
+    Route::post('admin/panel/profile/savePassword', [UsuarioController::class, "savePassword"])->name('savePassword');
 });

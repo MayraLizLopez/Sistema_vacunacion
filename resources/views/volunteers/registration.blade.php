@@ -1,6 +1,6 @@
 @extends('layout_gray')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 @endsection
 @section('title', 'Registro de Voluntarios')
 @section('content')
@@ -14,23 +14,39 @@
                             <h1 style="margin-top: 30px; margin-bottom: 30px;">Registro de voluntarios</h1>
                         </div>
                     </div>
+                    
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
                             <form method="POST" action="{{url("/voluntario/store")}}">
                                 @if(Session::get('success'))
-                                <div class="alert alert-success">
-                                        {{ Session::get('success') }}
-                                    </div>
+                                @section('scripts')
+                                    <script>    
+                                        Swal.fire({
+                                            title: '¡Registro completado!',
+                                            text: '¡Tus datos fueron agregados correctamente, te enviamos un correo a tu email!',
+                                            icon: 'success',
+                                            confirmButtonColor: '#3085d6',
+                                            confirmButtonText: 'Aceptar'
+                                            });
+                                    </script>
+                                @endsection
                                 @endif
-
                                 @if(Session::get('fail'))
-                                    <div class="alert alert-danger">
-                                        {{ Session::get('fail') }}
-                                    </div>
+                                @section('scripts')
+                                    <script>    
+                                        Swal.fire({
+                                            title: '¡Error!',
+                                            text: 'Tus datos no puedieron ser agregados correctamente, por favor intentalo más tarde',
+                                            icon: 'error',
+                                            confirmButtonColor: '#3085d6',
+                                            confirmButtonText: 'Aceptar'
+                                            });
+                                    </script>
+                                @endsection
                                 @endif 
 
-                                {{ csrf_field() }}
 
+                                {{ csrf_field() }}
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <h5 class="m-0 font-weight-bold text-primary">Ingrese sus datos personales</h5>
@@ -121,8 +137,9 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 @endsection
 @section('scripts')
+
 @endsection
