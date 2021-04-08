@@ -48,8 +48,11 @@ class LoginController extends Controller
     }
 
     public function dashboard(){
+        $voluntarios = DB::table('voluntarios')->count(); 
+        $instituciones = DB::table('instituciones')->where('activo', '=', true)->count();   
+        $jornadas = DB::table('jornadas')->where('activo', '=', true)->count();   
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        return view('admin.index', $data);     
+        return view('admin.index', compact('voluntarios', 'instituciones', 'jornadas'), $data);     
         //<span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span></span>
     
     }

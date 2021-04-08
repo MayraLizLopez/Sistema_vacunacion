@@ -19,9 +19,10 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         //$this->call('MunicipioSeeder');
         $this->call([
-        MunicipioSeeder::class,
-        InstitucionSeeder::class,
-        UsuariosSeeder::class,
+            MunicipioSeeder::class,
+            InstitucionSeeder::class,
+            UsuariosSeeder::class,
+            VoluntariosSeeder::class,
         ]);
     }
 }

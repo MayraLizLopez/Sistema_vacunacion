@@ -9,6 +9,7 @@ use App\Models\Municipio;
 use App\Models\Institucion;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
+use App\Models\DetalleJornada;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SaveVoluntario;
@@ -278,5 +279,24 @@ class VoluntarioController extends Controller
             return view('volunteers.confirm');
         }
         
+    }
+
+    public static function confirmarJornada($uuid){
+        $jornada = DetalleJornada::findOrFail($uuid);
+        $jornada->activo = true;
+        $save = $jornada->save();
+        if($save){
+            return view('volunteers.jornadaConfirmada');
+        }
+        
+    }
+
+    public static function cancelarJornada($uuid){
+        $jornada = DetalleJornada::findOrFail($uuid);
+        $jornada->activo = false;
+        $save = $jornada->save();
+        if($save){
+            return view('volunteers.jornadaConfirmada');
+        }
     }
 }
