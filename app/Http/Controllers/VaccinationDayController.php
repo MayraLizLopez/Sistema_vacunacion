@@ -151,7 +151,10 @@ class VaccinationDayController extends Controller
                 $detalle_jornada->eliminado = false;
                 $detalle_jornada->save();           
             }else{
-                DB::table('detalle_jornadas')->where('id_voluntario', '!=', (int)$request->idsVoluntarios[$i])->delete();
+                DB::table('detalle_jornadas')
+                ->where('id_voluntario', '!=', (int)$request->idsVoluntarios[$i])
+                ->where('id_jornada', '=', $request->id_jornada)
+                ->delete();
             }        
         }
 
