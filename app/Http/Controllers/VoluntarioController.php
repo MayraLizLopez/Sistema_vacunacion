@@ -286,17 +286,8 @@ class VoluntarioController extends Controller
         $jornada->activo = true;
         $save = $jornada->save();
         if($save){
-            return view('volunteers.jornadaConfirmada');
+            return view('email.confirmJornada');
         }
         
-    }
-
-    public static function cancelarJornada($uuid){
-        $jornada = DetalleJornada::findOrFail($uuid);
-        $jornada->activo = false;
-        $save = $jornada->save();
-        if($save){
-            return view('volunteers.jornadaConfirmada');
-        }
     }
 }
