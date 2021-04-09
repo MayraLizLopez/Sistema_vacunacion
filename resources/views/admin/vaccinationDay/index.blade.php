@@ -204,6 +204,10 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
+                <button type="button" class="btn btn-primary mb-2 float-right" id="sendEmails">
+                    <i class="far fa-envelope"></i>
+                    Enviar Correos
+                </button>
                 <div class="table-responsive">           
                     <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
@@ -211,6 +215,7 @@
                     data-sort-order="desc">
                         <thead>
                           <tr>
+                            <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_voluntario">ID</th>
                             <th class="d-none" data-field="id_insti">ID Institución</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
@@ -244,7 +249,6 @@
         $(document).ready(()=>{
             getAllJornadas();
             startEvents();
-            defaultValues();
         });
 
         function defaultValues(){
@@ -283,6 +287,7 @@
                 getAllInstitutions('create');
             });
 
+            //Envento que limpia la lista de instituciones
             $('#modalCreateVaccinationDay').on('hide.bs.modal', () => {
                 $('#inInstitution').empty();
             });
@@ -292,6 +297,7 @@
                 getAllInstitutions('edit');
             });
 
+            //evento que limpia la lista de intiituciones
             $('#modalEditJornada').on('hide.bs.modal', () => {
                 $('#editInInstitution').empty();
             });
@@ -346,6 +352,17 @@
                 updVaccinationDay(dataVaccinationDay, 'edit');            
             });
             //#endregion
+
+            $('#sendEmails').on('click', () => {
+                let emails = [];
+
+                for(let data in $viewDetailVoluntariesTable.bootstrapTable('getSelections')){
+                    emails.push(
+                        $viewDetailVoluntariesTable.bootstrapTable('getSelections')[data].email
+                    );
+                }
+                console.log(emails);
+            });
         }
 
         function getAllInstitutions(actionType){

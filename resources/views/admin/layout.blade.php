@@ -363,7 +363,7 @@
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
         <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
         <script>
-            $(document).ready(() => {
+            $(window).load(() => {
                 startEvents();
             });
 
