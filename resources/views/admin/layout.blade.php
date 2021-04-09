@@ -283,10 +283,10 @@
                                         Activity Log
                                     </a> -->
                                     <div class="dropdown-divider"></div>
-                                    <button type="button" class="dropdown-item" id="btnLogout">
+                                    <a href="{{ route('logout')}}" class="dropdown-item" id="btnLogout">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Cerrar Sesión
-                                    </button>
+                                    </a>
                                 </div>
                             </li>
 
@@ -362,29 +362,6 @@
         <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script>
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
         <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
-        <script>
-            $(window).load(() => {
-                startEvents();
-            });
-
-            function startEvents(){
-                $('#btnLogout').on('click', () =>{
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Cerrar sesión',
-                        text: '¿Está seguro que desea cerrar su sesión?',
-                        confirmButtonColor: '#3085d6',
-                        showDenyButton: true,
-                        confirmButtonText: 'Aceptar',
-                        denyButtonText: 'Cancelar',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.href = "{{ route('logout')}}";
-                            }
-                        });
-                });
-            }
-        </script>
         @yield('scripts')
     </body>
 </html>
