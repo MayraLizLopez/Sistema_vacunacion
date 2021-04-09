@@ -536,6 +536,34 @@
             });
         }
 
+        function deleteJornada(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/destroy",
+                type: "POST",
+                data: {
+                    id_jornada: id_jornada,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Hecho',
+                        text: response.message,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
         function operateFormatter(value, row, index) {
             return [
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
@@ -567,7 +595,7 @@
                     confirmButtonText: 'Aceptar'
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        deleteVoluntary(row.id_voluntario);
+                        deleteJornada(row.id_jornada);
                     }
                     });
             },
