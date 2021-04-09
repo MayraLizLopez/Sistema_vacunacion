@@ -340,20 +340,22 @@
             $('#saveEditedVaccinationDay').on('click', () => {
                 let idsVoluntarios = [];
 
-                for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
+                if(validateFields('edit') == false){
+                    for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
                         $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
                     );
-                }
+                    }
 
-                let dataVaccinationDay = {
-                    id_jornada: idJornada,
-                    fecha_inicio: $('#editInStartDate').val(),
-                    fecha_fin: $('#editInEndDate').val(),
-                    mensaje: $('#editInMessage').val(),
-                    idsVoluntarios: idsVoluntarios
-                };
-                updVaccinationDay(dataVaccinationDay, 'edit');            
+                    let dataVaccinationDay = {
+                        id_jornada: idJornada,
+                        fecha_inicio: $('#editInStartDate').val(),
+                        fecha_fin: $('#editInEndDate').val(),
+                        mensaje: $('#editInMessage').val(),
+                        idsVoluntarios: idsVoluntarios
+                    };
+                    updVaccinationDay(dataVaccinationDay, 'edit');  
+                }
             });
             //#endregion
 
@@ -678,7 +680,6 @@
                 if($('#inStartDate').val().length > 0 
                 && $('#inEndDate').val().length > 0 
                 && $('#inMessage').val().length > 0
-                && parseInt($('#inInstitution').children('option:selected').val()) > 0
                 && $voluntariesTable.bootstrapTable('getSelections').length > 0){
                     isEmpty = false;                
                 } else {
