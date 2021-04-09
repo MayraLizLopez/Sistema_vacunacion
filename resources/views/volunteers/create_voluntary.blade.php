@@ -97,12 +97,23 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="instututionVoluntary">Institución</label>
-                                        <select class="form-control" id="instututionVoluntary" name="id_insti">
-                                        @foreach ($instituciones as $institucion)
-                                            <option value="{{$institucion->id_insti}}">{{$institucion->nombre}} </option>
-                                        @endforeach
-                                        <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
-                                        </select>
+                                        @if ($LoggedUserInfo['rol'] == 'Administrador General')
+                                            <select class="form-control" id="instututionVoluntary" name="id_insti">
+                                                @foreach ($instituciones as $institucion)
+                                                    <option value="{{$institucion->id_insti}}">{{$institucion->nombre}} </option>
+                                                @endforeach
+                                                <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
+                                            </select>
+                                        @else
+                                            @foreach ($instituciones as $institucion)
+                                                @if( $LoggedUserInfo['id_insti'] == $institucion->id_insti)
+                                                    <select class="form-control" id="instututionVoluntary" name="id_insti" disabled>
+                                                        <option value="{{$institucion->id_insti}}"> {{$institucion->nombre}} </option>
+                                                        <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
+                                                    </select>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
