@@ -117,13 +117,26 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
+        $rol = session('LoggedUserNivel');
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        $voluntarios = DB::table('voluntarios')
-        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
-        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
-        ->where('eliminado', '=', 0)
-        ->get();
+        if($rol == 'Administrador General'){
+            $voluntarios = DB::table('voluntarios')
+            ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+            ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+            ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+            ->where('eliminado', '=', 0)
+            ->get();
+        }
+        else{
+            $id_user = session('LoggedUser');
+            $id = $id = DB::table('usuarios')->where('id_user', '=', $id_user)->value('id_insti'); 
+            $voluntarios = DB::table('voluntarios')
+            ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+            ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+            ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+            ->where([[ 'voluntarios.id_insti', '=', $id], ['eliminado', '=', 0]])
+            ->get();
+        }
         return view('admin.voluntaries', compact('voluntarios'), $data);
     }
 
