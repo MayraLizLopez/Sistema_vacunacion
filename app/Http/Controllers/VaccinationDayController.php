@@ -266,4 +266,17 @@ class VaccinationDayController extends Controller
             'data' => $institutions       
         ]); 
     }
+
+    public function enviarCorreoJornada(Request $request){
+        
+
+    }
+
+    public function rechazarJornada(Request $request){
+        
+    }
+
+    public function aceptarJornada(Request $request){
+        
+    }
 }

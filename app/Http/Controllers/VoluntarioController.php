@@ -94,13 +94,13 @@ class VoluntarioController extends Controller
         $voluntario->eliminado = false;
         $voluntario->fecha_creacion = Carbon::now();
         $save = $voluntario->save();
-        if($voluntario != null){
-            $data = [
-                'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
-                'id' => $voluntario->id_voluntario, 
-            ];
-            Mail::to($voluntario->email)->send(new SaveVoluntario($data));
-        }
+        // if($voluntario != null){
+        //     $data = [
+        //         'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
+        //         'id' => $voluntario->id_voluntario, 
+        //     ];
+        //     Mail::to($voluntario->email)->send(new SaveVoluntario($data));
+        // }
 
         if($save){
             return redirect()->back()->with('success', '¡Tus datos fueron agregados correctamente, te enviamos un correo a tu email!');
