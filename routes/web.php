@@ -37,6 +37,10 @@ Route::post('security/authenticate', [LoginController::class, "authenticate"]);
 
 Route::get('emailVoluntario/{id}', [VoluntarioController::class, "emailConfirmacion"]);
 
+Route::get('emailRechazar/{uuid}', [VaccinationDayController::class, "rechazarJornada"]);
+
+Route::get('emailAceptar/{uuid}', [VaccinationDayController::class, "aceptarJornada"]);
+
 Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('security/login', [LoginController::class, "login"])->name('login');
     //Index
@@ -102,10 +106,6 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/vaccinationDay/getJornada/{id_jornada}', [VaccinationDayController::class, "getJornada"])->name('getJornada');
 
     Route::post('admin/panel/vaccinationDay/sendemail/', [VaccinationDayController::class, "enviarCorreoJornada"])->name('enviarCorreo');
-
-    Route::post('admin/panel/vaccinationDay/email/rechazar', [VaccinationDayController::class, "rechazarJornada"])->name('rechazarJornada');
-
-    Route::post('admin/panel/vaccinationDay/email/aceptar', [VaccinationDayController::class, "aceptarJornada"])->name('aceptarJornada');
     
     //Perfil
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');

@@ -13,13 +13,13 @@
                 <div class="col-sm-12">
                     <div class="row row justify-content-center">
                         <div class="col-sm-12">
-                            <h1 style="margin-top: 30px; margin-bottom: 30px;">¡Gracias por confirmar tu correo!</h1>
+                            <h1 style="margin-top: 30px; margin-bottom: 30px;">¡Gracias por aceptar la jornada!</h1>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
                             <div class="alert alert-success">
-                                 '¡Tu correo a sido confirmado correctamente!'
+                                {{ $voluntario->nombre}} aceptaste trabajar en la jornada
                             </div>
 
                             <div class="card shadow mb-4">
@@ -29,7 +29,7 @@
                                 <div class="card-body">
                                     <div class="content">
                                         <div class="row">
-                                            <h4>El equipo de voluntariado te asignara a una jornada dentro de poco, por favor este al pendiente de su correo eléctronico</h4>
+                                            <h4>El equipo de voluntariado te contactara dentro de poco para dar más información sobre la jornada, por favor este al pendiente de su correo eléctronico y/o teléfono que fueron proporcionados en su registro</h4>
                                         </div>
                                     </div>
                                 </div>
