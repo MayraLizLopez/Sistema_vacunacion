@@ -237,7 +237,8 @@ class VaccinationDayController extends Controller
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.nombre AS nombre',
+        ->select('detalle_jornadas.id_detalle_jornada AS id_detalle_jornada',
+                'voluntarios.nombre AS nombre',
                 'voluntarios.ape_pat AS ape_pat',
                 'voluntarios.ape_mat AS ape_mat',
                 'voluntarios.tel AS tel',

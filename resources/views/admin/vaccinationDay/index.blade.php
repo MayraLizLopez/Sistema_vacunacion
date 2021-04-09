@@ -217,6 +217,7 @@
                           <tr>
                             <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_voluntario">ID</th>
+                            <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_insti">ID Institución</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
@@ -354,14 +355,14 @@
             //#endregion
 
             $('#sendEmails').on('click', () => {
-                let emails = [];
+                let idsDetalleJornadas = [];
 
                 for(let data in $viewDetailVoluntariesTable.bootstrapTable('getSelections')){
-                    emails.push(
-                        $viewDetailVoluntariesTable.bootstrapTable('getSelections')[data].email
+                    idsDetalleJornadas.push(
+                        $viewDetailVoluntariesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
                     );
                 }
-                console.log(emails);
+                enviarCorreoJornada(idsDetalleJornadas);
             });
         }
 
@@ -590,6 +591,34 @@
                                 location.reload();
                             }
                         });
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function enviarCorreoJornada(idsDetalleJornadas){
+            $.ajax({
+                url: "vaccinationDay/sendemail",
+                type: "POST",
+                data: {
+                    ids_detalle_jornadas: idsDetalleJornadas,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    // Swal.fire({
+                    //     icon: 'success',
+                    //     title: 'Hecho',
+                    //     text: response.message,
+                    //     confirmButtonColor: '#3085d6',
+                    //     confirmButtonText: 'Aceptar',
+                    //     }).then((result) => {
+                    //         if (result.isConfirmed) {
+                    //             location.reload();
+                    //         }
+                    //     });
                     console.log(response);
                 },
                 error: function (error, resp, text) {
