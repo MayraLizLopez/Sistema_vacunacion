@@ -47,10 +47,22 @@ class VoluntarioController extends Controller
      */
     public function create()
     {
+        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        return view('volunteers.registration', compact('municipios', 'instituciones'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createAdmin()
+    {
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
         $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-        return view('volunteers.registration', compact('municipios', 'instituciones'), $data);
+        return view('volunteers.create_voluntary', compact('municipios', 'instituciones'), $data);
     }
 
     /**

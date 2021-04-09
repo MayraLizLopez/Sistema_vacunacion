@@ -64,6 +64,10 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::patch('admin/panel/voluntario/update/{id_voluntario}', [VoluntarioController::class, "update"])->name('updateVoluntarios');
 
     Route::post('admin/panel/voluntario/destroy/{id_voluntario}', [VoluntarioController::class, "destroy"])->name('destroyVoluntarios');
+    
+    Route::get('admin/panel/voluntario/create', [VoluntarioController::class, "createAdmin"])->name('crearVoluntario');
+
+    Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
     Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 
@@ -75,7 +79,6 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');
 
-    Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
     //jornada de vacunacion
     Route::get('admin/panel/vaccinationDay', [VaccinationDayController::class, "index"])->name('index');
@@ -99,4 +102,5 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
 
     Route::post('admin/panel/profile/savePassword', [UsuarioController::class, "savePassword"])->name('savePassword');
+
 });

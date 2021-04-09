@@ -26,6 +26,9 @@
             <i class="fas fa-eraser"></i>
             Limpiar Filtros
         </button>
+        <div class="form-group ml-1">
+            <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('crearVoluntario')}}"><i class="fas fa-plus"></i> Registrar Voluntario</a></button>
+        </div>
     </div>
 </div>
 
