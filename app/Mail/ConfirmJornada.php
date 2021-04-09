@@ -30,7 +30,7 @@ class ConfirmJornada extends Mailable
     public function build()
     {
         return $this->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco')
-                    ->view('email.confirm_voluntario')
+                    ->view('email.confirmJornada')
                     ->subject('¡Felicidades has sido seleccionado como voluntario!')
                     ->with($this->data);
     }

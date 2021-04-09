@@ -29,8 +29,8 @@
         <h1>¡{{ $nombre }} Felicidades has sido seleccionado(a) como voluntario(a) para una jornada!</h1>
         <h2>Mensaje: {{ $mensaje }} </h2>
         <h2>Para continuar el proceso por favor da click en el botón "Aceptar" para confirmar tu participación. Si no puedes participar por favor da click "Rechazar". </h2>
-        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a id="accept-button" href="http://192.168.14.187:8080/sistema_vacunacion/public/confirmarJornada/{{$uuid}}">Aceptar</a></button>
-        <button id="cancel-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://192.168.14.187:8080/sistema_vacunacion/public/rechazarJornada/{{$uuid}}">Rechazar</a></button>
+        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a id="accept-button" href="http://localhost:8080/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a></button>
+        <button id="cancel-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://localhost:8080/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a></button>
     </body>
     <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
     <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
