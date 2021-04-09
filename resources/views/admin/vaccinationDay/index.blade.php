@@ -255,10 +255,10 @@
         function defaultValues(){
             $('#inInstitution').empty();
             $('#inInstitution').append($('<option>').text('Eliga una institución').
-                                attr({ 'value': '', 'disabled': true, 'selected': true, 'hidden': true }));
+                                attr({ 'value': 0, 'disabled': true, 'selected': true, 'hidden': true }));
             $('#editInInstitution').empty();
             $('#editInInstitution').append($('<option>').text('Eliga una institución').
-                                attr({ 'value': '', 'disabled': true, 'selected': true, 'hidden': true }));
+                                attr({ 'value': 0, 'disabled': true, 'selected': true, 'hidden': true }));
         }
 
         function startEvents(){
@@ -285,6 +285,7 @@
 
             //evento para obtener la lista de todos los voluntarios activos y no eliminados
             $('#modalCreateVaccinationDay').on('show.bs.modal', () => {
+                $voluntariesTable.bootstrapTable({data: []})
                 getAllInstitutions('create');
             });
 
@@ -307,29 +308,31 @@
             $('#saveVaccinationDay').on('click', () => {           
                 let idsVoluntarios = [];
 
-                for(let data in $voluntariesTable.bootstrapTable('getSelections')){
+                if(validateFields('create') == false){
+                    for(let data in $voluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
                         $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
-                    );
-                }
-                console.log(idJornada);
-                if(idJornada == 0){
-                    let dataVaccinationDay = {
-                        fecha_inicio: $('#inStartDate').val(),
-                        fecha_fin: $('#inEndDate').val(),
-                        mensaje: $('#inMessage').val(),
-                        idsVoluntarios: idsVoluntarios
-                    };
-                    insVaccinationDay(dataVaccinationDay);   
-                }else{
-                    let dataVaccinationDay = {
-                        id_jornada: idJornada,
-                        fecha_inicio: $('#inStartDate').val(),
-                        fecha_fin: $('#inEndDate').val(),
-                        mensaje: $('#inMessage').val(),
-                        idsVoluntarios: idsVoluntarios
-                    };
-                    updVaccinationDay(dataVaccinationDay, 'create');
+                        );
+                    }
+                    console.log(idJornada);
+                    if(idJornada == 0){
+                        let dataVaccinationDay = {
+                            fecha_inicio: $('#inStartDate').val(),
+                            fecha_fin: $('#inEndDate').val(),
+                            mensaje: $('#inMessage').val(),
+                            idsVoluntarios: idsVoluntarios
+                        };
+                        insVaccinationDay(dataVaccinationDay);   
+                    }else{
+                        let dataVaccinationDay = {
+                            id_jornada: idJornada,
+                            fecha_inicio: $('#inStartDate').val(),
+                            fecha_fin: $('#inEndDate').val(),
+                            mensaje: $('#inMessage').val(),
+                            idsVoluntarios: idsVoluntarios
+                        };
+                        updVaccinationDay(dataVaccinationDay, 'create');
+                    }
                 }                                 
             });
 
@@ -667,6 +670,46 @@
                 $('#modalViewJornadaDetail').modal('show');
                 getJornadaDetail(row.id_jornada);
             }
+        }
+
+        function validateFields(actionType){
+            let isEmpty;
+            if(actionType == 'create'){
+                if($('#inStartDate').val().length > 0 
+                && $('#inEndDate').val().length > 0 
+                && $('#inMessage').val().length > 0
+                && parseInt($('#inInstitution').children('option:selected').val()) > 0
+                && $voluntariesTable.bootstrapTable('getSelections').length > 0){
+                    isEmpty = false;                
+                } else {
+                    isEmpty = true;
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia',
+                        text: 'Debe llenar todos los campos, asi como elegir al menos un voluntario.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                    }); 
+                }
+            } 
+            else if(actionType == 'edit'){
+                if($('#editInStartDate').val().length > 0 
+                && $('#editInEndDate').val().length > 0 
+                && $('#editInMessage').text().length > 0
+                && $editVoluntariesTable.bootstrapTable('getSelections').length > 0){
+                    isEmpty = false;                 
+                } else {
+                    isEmpty = true;
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia',
+                        text: 'Debe llenar todos los campos, asi como elegir al menos un voluntario.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                    }); 
+                }             
+            }
+            return isEmpty;
         }
     </script>
 @endsection
