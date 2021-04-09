@@ -69,7 +69,6 @@
                 <div class="form-group">
                     <label for="inInstitution">Institución</label>
                     <select class="custom-select" id="inInstitution">
-                        <option value="" selected disabled hidden>Eliga una institución</option>
                     </select>           
                 </div>
             </div>
@@ -144,8 +143,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="editInInstitution">Institución</label>
-                    <select class="custom-select" id="editInInstitution">
-                        <option value="" selected disabled hidden>Eliga una institución</option>
+                    <select class="custom-select" id="editInInstitution">                      
                     </select>           
                 </div>
             </div>
@@ -246,11 +244,21 @@
         $(document).ready(()=>{
             getAllJornadas();
             startEvents();
+            defaultValues();
         });
+
+        function defaultValues(){
+            $('#inInstitution').empty();
+            $('#inInstitution').append($('<option>').text('Eliga una institución').
+                                attr({ 'value': '', 'disabled': true, 'selected': true, 'hidden': true }));
+            $('#editInInstitution').empty();
+            $('#editInInstitution').append($('<option>').text('Eliga una institución').
+                                attr({ 'value': '', 'disabled': true, 'selected': true, 'hidden': true }));
+        }
 
         function startEvents(){
             //evento para invocar la modal de creación de jornadas
-            $('#createVaccinationDay').on('click', (e) => {
+            $('#createVaccinationDay').on('click', () => {
                 $('#modalCreateVaccinationDay').modal('show');
             });
 
@@ -275,9 +283,17 @@
                 getAllInstitutions('create');
             });
 
+            $('#modalCreateVaccinationDay').on('hide.bs.modal', () => {
+                $('#inInstitution').empty();
+            });
+
             //evento para obtener la lista de todos los voluntarios activos y no eliminados
             $('#modalEditJornada').on('show.bs.modal', () => {
                 getAllInstitutions('edit');
+            });
+
+            $('#modalEditJornada').on('hide.bs.modal', () => {
+                $('#editInInstitution').empty();
             });
 
             //evento para crear una nueva jornada
@@ -337,6 +353,7 @@
                 url: "vaccinationDay/getAllInstitutions/",
                 type: "GET",
                 success: function (response) {
+                    defaultValues();
                     if(actionType == 'create'){
                         for(let i in response.data){
                         $('#inInstitution').append($('<option>').text(response.data[i].nombre).
