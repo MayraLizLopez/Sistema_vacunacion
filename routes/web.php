@@ -95,9 +95,12 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/vaccinationDay/show/', [VaccinationDayController::class, "show"])->name('show');
 
+    Route::post('admin/panel/vaccinationDay/destroy/', [VaccinationDayController::class, "destroy"])->name('destroy');
+
     Route::get('admin/panel/vaccinationDay/getLastJornada/', [VaccinationDayController::class, "getLastJornada"])->name('getLastJornada');
 
     Route::get('admin/panel/vaccinationDay/getJornada/{id_jornada}', [VaccinationDayController::class, "getJornada"])->name('getJornada');
+    
     //Perfil
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
 

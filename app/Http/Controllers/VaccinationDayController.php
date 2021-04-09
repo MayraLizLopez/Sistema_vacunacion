@@ -93,6 +93,7 @@ class VaccinationDayController extends Controller
             'jornadas.fecha_inicio',
             'jornadas.fecha_fin',
             DB::raw('COUNT(detalle_jornadas.id_detalle_jornada) as total_voluntarios'))
+        ->where('jornadas.activo', '=', true)
         ->groupBy('jornadas.id_jornada')
         ->get();
         return response()->json([
@@ -170,9 +171,18 @@ class VaccinationDayController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        DB::table('jornadas')
+        ->where('id_jornada', $request->id_jornada)
+        ->update([
+            'activo' => false
+        ]);
+
+        return response()->json([
+            'isOk' => true,
+            'message' => '¡La jornada fue eliminada exitosamente!'
+        ]);
     }
 
     public function getAllVoluntantiesByActive($id_institution){
