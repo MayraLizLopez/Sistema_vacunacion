@@ -14,7 +14,7 @@
 
 <div id="toolbar">
     <div class="form-inline">
-        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}">Registrar Institución</a></button>
+        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}"><i class="fas fa-plus"></i> Registrar Institución</a></button>
     </div>
 </div>
 </div>
