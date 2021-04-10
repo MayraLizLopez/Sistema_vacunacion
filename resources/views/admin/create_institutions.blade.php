@@ -123,14 +123,14 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="townVoluntary">Teléfono del enlace</label>
-                            <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono"/>
+                            <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono" data-mask="000 000 0000"/>
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Correo"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>

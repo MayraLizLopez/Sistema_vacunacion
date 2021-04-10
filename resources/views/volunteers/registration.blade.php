@@ -80,14 +80,14 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="nameVoluntary">Correo electrónico</label>
-                                                        <input type="text" class="form-control" id="nameVoluntary" name="email" placeholder="Correo"/>
+                                                        <input type="email" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" required/>
                                                         <span class="text-danger">@error('email'){{ 'Ingrese un email correcto o no registrado en la plataforma' }} @enderror </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="paternalSurnameVoluntary">Teléfono / Celular</label>
-                                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo">
+                                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" required>
                                                         <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                                                     </div>
                                                 </div>

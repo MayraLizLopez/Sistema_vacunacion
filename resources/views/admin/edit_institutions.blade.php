@@ -98,14 +98,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="townVoluntary">Teléfono</label>
-                            <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono" value="{{$institucion->tel}}">
+                            <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono" data-mask="000 000 0000" value="{{$institucion->tel}}">
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Correo" value="{{$institucion->email}}">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo" value="{{$institucion->email}}">
                             <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>

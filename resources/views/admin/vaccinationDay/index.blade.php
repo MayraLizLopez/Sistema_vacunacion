@@ -264,7 +264,10 @@
         function startEvents(){
             //evento para invocar la modal de creación de jornadas
             $('#createVaccinationDay').on('click', () => {
-                $('#modalCreateVaccinationDay').modal('show');
+                $('#modalCreateVaccinationDay').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
             });
 
             //#region Modal events
@@ -308,7 +311,7 @@
             $('#saveVaccinationDay').on('click', () => {           
                 let idsVoluntarios = [];
 
-                if(validateFields('create') == false){
+                if(validateFields('createJornada') == false){
                     for(let data in $voluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
                         $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
@@ -340,11 +343,11 @@
             $('#saveEditedVaccinationDay').on('click', () => {
                 let idsVoluntarios = [];
 
-                if(validateFields('edit') == false){
+                if(validateFields('editJornada') == false){
                     for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
                         $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
-                    );
+                        );
                     }
 
                     let dataVaccinationDay = {
@@ -362,12 +365,14 @@
             $('#sendEmails').on('click', () => {
                 let idsDetalleJornadas = [];
 
-                for(let data in $viewDetailVoluntariesTable.bootstrapTable('getSelections')){
+                if(validateFields('sendEmail') == false){
+                    for(let data in $viewDetailVoluntariesTable.bootstrapTable('getSelections')){
                     idsDetalleJornadas.push(
                         $viewDetailVoluntariesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
-                    );
+                        );
+                    }
+                    enviarCorreoJornada(idsDetalleJornadas); 
                 }
-                enviarCorreoJornada(idsDetalleJornadas);
             });
         }
 
@@ -612,18 +617,26 @@
                     ids_detalle_jornadas: idsDetalleJornadas,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
+                beforeSend: () => {
+                    Swal.fire({
+                        showConfirmButton: false,
+                        imageUrl: '{{ url("../resources/image/loading.png") }}',
+                        title: 'Por favor espere.',
+                        text: 'enviando correo(s)'
+                    });  
+                },
                 success: function (response) {
-                    // Swal.fire({
-                    //     icon: 'success',
-                    //     title: 'Hecho',
-                    //     text: response.message,
-                    //     confirmButtonColor: '#3085d6',
-                    //     confirmButtonText: 'Aceptar',
-                    //     }).then((result) => {
-                    //         if (result.isConfirmed) {
-                    //             location.reload();
-                    //         }
-                    //     });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Hecho',
+                        text: response.mensaje,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
                     console.log(response);
                 },
                 error: function (error, resp, text) {
@@ -648,7 +661,10 @@
 
         window.operateEvents = {
             'click .like': function (e, value, row, index) {
-                $('#modalEditJornada').modal('show');
+                $('#modalEditJornada').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
                 getJornada(row.id_jornada);
             },
 
@@ -669,14 +685,17 @@
             },
 
             'click .detail': function (e, value, row, index) {
-                $('#modalViewJornadaDetail').modal('show');
+                $('#modalViewJornadaDetail').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
                 getJornadaDetail(row.id_jornada);
             }
         }
 
         function validateFields(actionType){
             let isEmpty;
-            if(actionType == 'create'){
+            if(actionType == 'createJornada'){
                 if($('#inStartDate').val().length > 0 
                 && $('#inEndDate').val().length > 0 
                 && $('#inMessage').val().length > 0
@@ -693,10 +712,10 @@
                     }); 
                 }
             } 
-            else if(actionType == 'edit'){
+            else if(actionType == 'editJornada'){
                 if($('#editInStartDate').val().length > 0 
                 && $('#editInEndDate').val().length > 0 
-                && $('#editInMessage').text().length > 0
+                && $('#editInMessage').val().length > 0
                 && $editVoluntariesTable.bootstrapTable('getSelections').length > 0){
                     isEmpty = false;                 
                 } else {
@@ -709,6 +728,20 @@
                         confirmButtonText: 'Aceptar',
                     }); 
                 }             
+            } 
+            else if(actionType == 'sendEmail'){
+                if($viewDetailVoluntariesTable.bootstrapTable('getSelections').length > 0){
+                    isEmpty = false;                 
+                } else {
+                    isEmpty = true;
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia',
+                        text: 'Debe elegir al menos un voluntario.',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                    }); 
+                }  
             }
             return isEmpty;
         }

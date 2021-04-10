@@ -352,14 +352,14 @@
         <script src="{{ url("../resources/js/sb-admin-2.min.js") }}"></script>
 
         <!-- Page level plugins -->
-        <script src="{{ url("../resources/js/Chart.min.js") }}"></script>
+        {{-- <script src="{{ url("../resources/js/Chart.min.js") }}"></script> --}}
 
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
         <script src="{{ url("../resources/js/all.min.js") }}"></script>
 
         <!-- Page level custom scripts -->
-        <script src="{{ url("../resources/js/chart-area-demo.js") }}"></script>
-        <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script>
+        {{-- <script src="{{ url("../resources/js/chart-area-demo.js") }}"></script>
+        <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script> --}}
         <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
         <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
         <script src="{{ url("../resources/js/jquery.mask.min.js") }}"></script>     

@@ -23,6 +23,10 @@
                             icon: 'success',
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.href = '{{url("/admin/panel/show")}}';
+                                }
                             });
                     </script>
                 @endsection
@@ -83,7 +87,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="paternalSurnameVoluntary">Teléfono / Celular</label>
-                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" value="{{ $voluntarioEdit->tel }}">
+                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" value="{{ $voluntarioEdit->tel }}">
                                         <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                                     </div>
                                 </div>
