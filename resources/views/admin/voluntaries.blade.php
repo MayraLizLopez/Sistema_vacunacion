@@ -17,12 +17,14 @@
                 <option value="" selected disabled hidden>Eliga un municipio</option>
             </select>           
         </div>
+
         @if ($LoggedUserInfo['rol'] == 'Administrador General')
             <div class="form-group ml-1">
                 <select class="custom-select" id="inSearchByInstitution">
                     <option value="" selected disabled hidden>Eliga una institución</option>
                 </select>           
             </div>
+            
         @endif
         <button type="button" class="btn btn-info ml-1" id="cleanFilters">
             <i class="fas fa-eraser"></i>
