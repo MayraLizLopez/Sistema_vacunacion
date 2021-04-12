@@ -7,16 +7,21 @@
 <h1 class="h3 mb-2 text-gray-800">Jornada de vacunación</h1>
 <p class="mb-4">La siguiente vista muestra la tabla de todas las jornadas activas, así como la creación y edición de las mismas.</p>
 
+<div id="toolbar1">
+    <div class="form-inline" role="form">
+        <button type="button" class="btn btn-primary" id="createVaccinationDay">
+            <i class="fas fa-plus"></i>
+            Registrar jornada
+        </button>
+    </div>
+</div>
+
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold text-primary">Voluntarios</h6>
     </div>
     <div class="card-body">
-        <button type="button" class="btn btn-primary mb-2 float-right" id="createVaccinationDay">
-            <i class="fas fa-plus"></i>
-            Crear jornada
-        </button>
         <div class="table-responsive">           
             <table id="vaccinationDayTable" class="table table-striped table-bordered"
             data-pagination="true"
@@ -24,7 +29,8 @@
             data-click-to-select="true"
             data-search="true"
             data-sort-name="nombre"
-            data-sort-order="desc">
+            data-sort-order="desc"
+            data-toolbar="#toolbar1">
                 <thead>
                   <tr>
                     <th class="d-none" data-radio="true"></th>
@@ -202,17 +208,22 @@
           </button>
         </div>
         <div class="modal-body">
+            <div id="toolbar2">
+                <div class="form-inline" role="form">
+                    <button type="button" class="btn btn-primary" id="sendEmails">
+                        <i class="far fa-envelope"></i>
+                        Enviar Correo(s)
+                    </button>
+                </div>
+            </div>
           <div class="row">
             <div class="col-md-12">
-                <button type="button" class="btn btn-primary mb-2 float-right" id="sendEmails">
-                    <i class="far fa-envelope"></i>
-                    Enviar Correos
-                </button>
                 <div class="table-responsive">           
                     <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
-                    data-sort-order="desc">
+                    data-sort-order="desc"
+                    data-toolbar="#toolbar2">
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
