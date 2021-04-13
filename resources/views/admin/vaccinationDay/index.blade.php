@@ -526,6 +526,9 @@
                         text: response.message + '\n¿Desea agregar mas voluntarios?',
                         confirmButtonColor: '#3085d6',
                         showDenyButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
                         confirmButtonText: 'Aceptar',
                         denyButtonText: 'Cancelar',
                         }).then((result) => {
@@ -565,6 +568,9 @@
                         text: response.message + '\n¿Desea agregar mas voluntarios?',
                         confirmButtonColor: '#3085d6',
                         showDenyButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
                         confirmButtonText: 'Aceptar',
                         denyButtonText: 'Cancelar',
                         }).then((result) => {
@@ -607,6 +613,9 @@
                         text: response.message,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 location.reload();
@@ -633,7 +642,10 @@
                         showConfirmButton: false,
                         imageUrl: '{{ url("../resources/image/loading.png") }}',
                         title: 'Por favor espere.',
-                        text: 'enviando correo(s)'
+                        text: 'enviando correo(s)',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
                     });  
                 },
                 success: function (response) {
@@ -643,6 +655,9 @@
                         text: response.mensaje,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 location.reload();
@@ -687,7 +702,10 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteJornada(row.id_jornada);

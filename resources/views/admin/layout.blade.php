@@ -20,7 +20,7 @@
         <!-- Custom styles for this template-->
         <link rel="stylesheet" href="{{ url("../resources/css/bootstrap.min.css") }}">
         <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
-        <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">      
+        <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">
         @yield('css')    
     </head>
     <body id="page-top">
@@ -84,7 +84,7 @@
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{url("/admin/panel/show")}}">
                             <i class="fas fa-users"></i>
                             <span>Voluntariado</span></a>

@@ -42,6 +42,7 @@
     <div class="card-body">
         <div class="table-responsive">           
             <table id="voluntariesTable" class="table table-striped table-bordered"
+            data-locale="es-MX"
             data-pagination="true"
             data-single-select="true"
             data-click-to-select="true"
