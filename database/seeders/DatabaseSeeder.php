@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             MunicipioSeeder::class,
             InstitucionSeeder::class,
             UsuariosSeeder::class,
-            VoluntariosSeeder::class,
+            //VoluntariosSeeder::class,
         ]);
     }
 }

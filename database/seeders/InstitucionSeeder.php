@@ -17,29 +17,29 @@ class InstitucionSeeder extends Seeder
      */
     public function run()
     {
-      	DB::table('instituciones')->insert([
-            'nombre' => 'Auditorio Benito Juárez',
-            'domicilio' => 'Av. Mariano Barcena s/n, Auditorio, 45190.',
-            'id_municipio' => 119,
-            'tel' => '48454654654',
-            'nombre_enlace' => 'Juan Perez',
-            'cargo_enlace' => 'director',
-            'email' => 'juanperez@gmail.com',
-            'activo' => true,
-            'fecha_creacion' => Carbon::now(),
-        ]);
+      	// DB::table('instituciones')->insert([
+        //     'nombre' => 'Auditorio Benito Juárez',
+        //     'domicilio' => 'Av. Mariano Barcena s/n, Auditorio, 45190.',
+        //     'id_municipio' => 119,
+        //     'tel' => '48454654654',
+        //     'nombre_enlace' => 'Juan Perez',
+        //     'cargo_enlace' => 'director',
+        //     'email' => 'juanperez@gmail.com',
+        //     'activo' => true,
+        //     'fecha_creacion' => Carbon::now(),
+        // ]);
 
-        DB::table('instituciones')->insert([
-            'nombre' => 'Auditorio Telmex',
-            'domicilio' => 'Av. Obreros de Cananea 746, Industrial los Belenes, 45150',
-            'tel' => '486848468',
-            'nombre_enlace' => 'Mario López',
-            'cargo_enlace' => 'director',
-            'email' => 'mario@gmail.com',
-            'activo' => true,
-            'id_municipio' => 119,
-            'fecha_creacion' => Carbon::now(),
-        ]);
+        // DB::table('instituciones')->insert([
+        //     'nombre' => 'Auditorio Telmex',
+        //     'domicilio' => 'Av. Obreros de Cananea 746, Industrial los Belenes, 45150',
+        //     'tel' => '486848468',
+        //     'nombre_enlace' => 'Mario López',
+        //     'cargo_enlace' => 'director',
+        //     'email' => 'mario@gmail.com',
+        //     'activo' => true,
+        //     'id_municipio' => 119,
+        //     'fecha_creacion' => Carbon::now(),
+        // ]);
 
         DB::table('instituciones')->insert([
             'nombre' => 'Centro Universitario de Ciencias Exactas e Ingenierías',

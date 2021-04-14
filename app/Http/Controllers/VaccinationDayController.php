@@ -302,7 +302,7 @@ class VaccinationDayController extends Controller
         $save = $jornada->save();
         $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
         if($save){
-            return view('volunteers.rechazarjornada', compact('voluntario'));
+            return view('volunteers.rechazarJornada', compact('voluntario'));
         }
     }
 

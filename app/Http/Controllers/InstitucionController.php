@@ -146,6 +146,16 @@ class InstitucionController extends Controller
         ]);
 
         $institucionEditado = Institucion::findOrFail($id);
+        if(($institucionEditado->cargo_enlace != $request->cargo_enlace) && ($institucionEditado->email != $request->email) && ($institucionEditado->tel != $request->tel)){
+            $user = DB::table('instituciones')->where('email', $institucionEditado->email)->first();   
+            $usuario = Usuario::findOrFail($user->id_user);
+            $usuario->cargo = $request->cargo_enlace;
+            $usuario->rol = 'Enlace de institución';
+            $usuario->tel = $request->tel;
+            $usuario->email = $request->email;
+            $usuario->fecha_edicion = Carbon::now();
+            $save1 = $usuario->save();
+        }
         $institucionEditado->nombre = $request->nombre;
         $institucionEditado->domicilio = $request->domicilio;
         $institucionEditado->id_municipio = (int)$request->id_municipio;
@@ -156,6 +166,7 @@ class InstitucionController extends Controller
         $institucionEditado->activo = true;
         $institucionEditado->fecha_edicion = Carbon::now();
         $save = $institucionEditado->save();
+        
         if($save){
             return back()->with('success', '¡Los datos de la institución fueron actualizados correctamente!');
         }else{
