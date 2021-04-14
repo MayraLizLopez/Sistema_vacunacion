@@ -266,7 +266,9 @@ class VaccinationDayController extends Controller
 
     public function getAllInstitutions()
     {  
-        $institutions = DB::table('instituciones')->where('activo', '=', 1)->get();
+        $institutions = DB::table('instituciones')->where('activo', '=', 1)
+        ->orderBy('nombre', 'asc')
+        ->get();
         return response()->json([
             'data' => $institutions       
         ]); 

@@ -76,15 +76,15 @@
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
+                    {{-- <li class="nav-item active">
                         <a class="nav-link" href="#">
                             <i class="fas fa-users"></i>
                             <span>Usuarios</span></a>
-                    </li>
+                    </li> --}}
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="{{url("/admin/panel/show")}}">
                             <i class="fas fa-users"></i>
                             <span>Voluntariado</span></a>
@@ -301,13 +301,13 @@
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
-                <footer class="sticky-footer bg-white">
+                {{-- <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
                             <span>Copyright &copy; Your Website 2020</span>
                         </div>
                     </div>
-                </footer>
+                </footer> --}}
                 <!-- End of Footer -->
 
             </div>
