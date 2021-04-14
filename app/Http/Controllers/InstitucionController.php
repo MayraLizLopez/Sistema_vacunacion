@@ -105,7 +105,7 @@ class InstitucionController extends Controller
         ->select('instituciones.*', 'municipios.nombre AS nombre_municipio')
         ->where('instituciones.activo', '=', 1)
         ->get();
-        return view('admin.institutions', compact('instituciones'), $data);
+        return view('admin.Institutions', compact('instituciones'), $data);
     }
 
     /**
