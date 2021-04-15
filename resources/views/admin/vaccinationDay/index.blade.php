@@ -28,6 +28,8 @@
             data-single-select="true"
             data-click-to-select="true"
             data-search="true"
+            data-page-size="5"
+            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"
             data-toolbar="#toolbar1">
@@ -671,57 +673,6 @@
             });
         }
 
-        function operateFormatter(value, row, index) {
-            return [
-            '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
-            '<i class="fas fa-info-circle"></i>',
-            '</a>',
-            '<a class="like mr-2" href="javascript:void(0)" title="Editar">',
-            '<i class="fas fa-edit"></i>',
-            '</a>',
-            '<a class="remove mr-2" href="javascript:void(0)" title="Elimnar">',
-            '<i class="fa fa-trash"></i>',
-            '</a>'
-            ].join('')
-        }
-
-        window.operateEvents = {
-            'click .like': function (e, value, row, index) {
-                $('#modalEditJornada').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                getJornada(row.id_jornada);
-            },
-
-            'click .remove': function (e, value, row, index) {
-                Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea eliminar esta jornada?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    allowEnterKey: false
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        deleteJornada(row.id_jornada);
-                    }
-                    });
-            },
-
-            'click .detail': function (e, value, row, index) {
-                $('#modalViewJornadaDetail').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                getJornadaDetail(row.id_jornada);
-            }
-        }
-
         function validateFields(actionType){
             let isEmpty;
             if(actionType == 'createJornada'){
@@ -773,6 +724,57 @@
                 }  
             }
             return isEmpty;
+        }
+
+        function operateFormatter(value, row, index) {
+            return [
+            '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
+            '<i class="fas fa-info-circle"></i>',
+            '</a>',
+            '<a class="like mr-2" href="javascript:void(0)" title="Editar">',
+            '<i class="fas fa-edit"></i>',
+            '</a>',
+            '<a class="remove mr-2" href="javascript:void(0)" title="Elimnar">',
+            '<i class="fa fa-trash"></i>',
+            '</a>'
+            ].join('')
+        }
+
+        window.operateEvents = {
+            'click .like': function (e, value, row, index) {
+                $('#modalEditJornada').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                getJornada(row.id_jornada);
+            },
+
+            'click .remove': function (e, value, row, index) {
+                Swal.fire({
+                    title: 'Advertencia',
+                    text: "¿Está seguro que desea eliminar esta jornada?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Aceptar',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteJornada(row.id_jornada);
+                    }
+                    });
+            },
+
+            'click .detail': function (e, value, row, index) {
+                $('#modalViewJornadaDetail').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                getJornadaDetail(row.id_jornada);
+            }
         }
     </script>
 @endsection

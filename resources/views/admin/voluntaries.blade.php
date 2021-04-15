@@ -14,22 +14,29 @@
         </div>
         <div class="form-group ml-1">
             <select class="custom-select" id="inSearchByTown">
-                <option value="" selected disabled hidden>Eliga un municipio</option>
+                <option value="" selected disabled hidden>Elija un municipio</option>
             </select>           
         </div>
         @if ($LoggedUserInfo['rol'] == 'Administrador General')
             <div class="form-group ml-1">
                 <select class="custom-select" id="inSearchByInstitution">
-                    <option value="" selected disabled hidden>Eliga una institución</option>
+                    <option value="" selected disabled hidden>Elija una institución</option>
                 </select>           
             </div>
         @endif
-        <button type="button" class="btn btn-info ml-1" id="cleanFilters">
-            <i class="fas fa-eraser"></i>
-            Limpiar Filtros
-        </button>
+        <div class="form-group">
+            <button type="button" class="btn btn-info btn-table ml-1" id="cleanFilters">
+                <i class="fas fa-eraser"></i>
+                <span class="item-label">Limpiar Filtros</span>
+            </button>      
+        </div>
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('crearVoluntario')}}"><i class="fas fa-plus"></i> Registrar Voluntario</a></button>
+            <button type="button" class="btn btn-primary btn-table">
+                <a style="color:white;" href="{{route('crearVoluntario')}}">
+                    <i class="fas fa-plus"></i>
+                    <span class="item-label">Registrar Voluntario</span>                 
+                </a>
+            </button>
         </div>
     </div>
 </div>
@@ -48,6 +55,8 @@
             data-click-to-select="true"
             data-search="true"
             data-search="true"
+            data-page-size="5"
+            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"
             data-toolbar="#toolbar">
