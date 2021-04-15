@@ -288,11 +288,10 @@ class VaccinationDayController extends Controller
                     'mensaje' => $jornada->mensaje,
                 ];
                 Mail::to($voluntario->email)->send(new ConfirmJornada($data));
-
-                return response()->json([
-                    'mensaje' => 'Correos enviados'
-                ]); 
             }
+            return response()->json([
+                'mensaje' => 'Correos enviados',
+            ]); 
         }
 
     }

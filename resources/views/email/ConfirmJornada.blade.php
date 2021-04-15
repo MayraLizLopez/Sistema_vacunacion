@@ -28,9 +28,14 @@
     <body>
         <h1>¡{{ $nombre }} Felicidades has sido seleccionado(a) como voluntario(a) para una jornada!</h1>
         <h2>Mensaje: {{ $mensaje }} </h2>
-        <h2>Para continuar el proceso por favor da click en el botón "Aceptar" para confirmar tu participación. Si no puedes participar por favor da click "Rechazar". </h2>
-        <button id="accept-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a id="accept-button" href="http://localhost:8080/projects/Sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a></button>
-        <button id="cancel-button" type="button" class="btn btn-primary" data-dismiss="modal" ><a href="http://localhost:8080/projects/Sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a></button>
+        <h2>Para continuar el proceso por favor da click en el botón "Aceptar" para confirmar tu participación. Si no puedes participar por favor da click en "Rechazar". </h2>
+        <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #5BC0DE;"><a style="color: #F5F5F5;" href="http://192.168.0.20/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a></button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: gray;"><a style="color: #F5F5F5;" href="http://192.168.0.20/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a></button> -->
+
+        <a style="color: #F5F5F5; background-color: #5BC0DE; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 18px;" href="http://187.188.251.138/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a>
+
+        <a style="color: #F5F5F5; background-color: gray; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 18px;" href="http://187.188.251.138/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a>
+        
     </body>
     <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
     <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
