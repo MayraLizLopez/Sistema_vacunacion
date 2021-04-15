@@ -19,6 +19,10 @@
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    location.href = "{{route('tabla_insti')}}";
+                }
             });
     </script>
 @endsection
