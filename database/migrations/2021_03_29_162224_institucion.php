@@ -19,14 +19,11 @@ class Institucion extends Migration
             $table->string ('nombre', 100);
             $table->string ('domicilio', 200);
             $table->unsignedBigInteger('id_municipio');
-            $table->string('nombre_enlace', 100);
-            $table->string('cargo_enlace', 50);
-            $table->string('tel', 20);
-            $table->string('email', 100);
             $table->boolean('activo');
             $table->dateTime('fecha_creacion', $precision = 0);
             $table->dateTime('fecha_edicion', $precision = 0)->nullable();
-            //$table->timestamps();
+            $table->unsignedBigInteger('id_user')->nullable();
+
             $table->foreign('id_municipio')->references('id_municipio')->on('municipios');
         });
     }

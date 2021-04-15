@@ -76,7 +76,7 @@ class UsuarioController extends Controller
         $user = DB::table('usuarios')->where('id_user', $id)->first();
         $institucion = DB::table('instituciones')->where('id_insti', $user->id_insti)->first();
         
-        return view('admin.profile', compact('user', 'institucion'), $data);
+        return view('admin.Profile', compact('user', 'institucion'), $data);
     }
 
     /**

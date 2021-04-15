@@ -288,11 +288,10 @@ class VaccinationDayController extends Controller
                     'mensaje' => $jornada->mensaje,
                 ];
                 Mail::to($voluntario->email)->send(new ConfirmJornada($data));
-
-                return response()->json([
-                    'mensaje' => 'Correos enviados'
-                ]); 
             }
+            return response()->json([
+                'mensaje' => 'Correos enviados',
+            ]); 
         }
 
     }
@@ -304,7 +303,7 @@ class VaccinationDayController extends Controller
         $save = $jornada->save();
         $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
         if($save){
-            return view('volunteers.rechazarjornada', compact('voluntario'));
+            return view('volunteers.rechazarJornada', compact('voluntario'));
         }
     }
 

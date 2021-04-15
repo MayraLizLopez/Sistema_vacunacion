@@ -19,7 +19,7 @@ class DetalleJornada extends Migration
             $table->unsignedBigInteger('id_jornada');
             $table->unsignedBigInteger('id_voluntario');
             $table->uuid('uuid');
-            $table->boolean('activo');
+            $table->boolean('activo')->nullable();
             $table->boolean('eliminado');
             $table->foreign('id_jornada')->references('id_jornada')->on('jornadas');
             $table->foreign('id_voluntario')->references('id_voluntario')->on('voluntarios');
