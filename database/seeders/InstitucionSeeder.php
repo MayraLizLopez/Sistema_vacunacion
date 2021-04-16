@@ -42,12 +42,8 @@ class InstitucionSeeder extends Seeder
         // ]);
 
         DB::table('instituciones')->insert([
-            'nombre' => 'Centro Universitario de Ciencias Exactas e Ingenierías',
-            'domicilio' => 'Blvd. Gral. Marcelino García Barragán 1421, Olímpica, 44430',
-            'tel' => '4868687687',
-            'nombre_enlace' => 'Martha Murrieta Gonzalez',
-            'cargo_enlace' => 'director',
-            'email' => 'miguel2@gmail.com',
+            'nombre' => 'Ninguna',
+            'domicilio' => '',
             'activo' => true,
             'id_municipio' => 40,
             'fecha_creacion' => Carbon::now(),
