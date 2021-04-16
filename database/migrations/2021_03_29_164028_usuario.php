@@ -19,7 +19,7 @@ class Usuario extends Migration
             $table->string ('ape_pat', 100);
             $table->string ('ape_mat', 100)->nullable();
             $table->unsignedBigInteger('id_insti');
-            $table->string('cargo', 50);
+            $table->string('cargo', 150);
             $table->string('rol', 50);
             $table->string('tel', 20);
             $table->string('email', 100)->unique();

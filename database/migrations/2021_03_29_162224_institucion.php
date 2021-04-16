@@ -16,7 +16,7 @@ class Institucion extends Migration
         //
          Schema::create('instituciones', function (Blueprint $table) {
             $table->bigIncrements('id_insti');
-            $table->string ('nombre', 100);
+            $table->string ('nombre', 200);
             $table->string ('domicilio', 200);
             $table->unsignedBigInteger('id_municipio');
             $table->boolean('activo');

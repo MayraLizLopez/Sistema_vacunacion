@@ -77,18 +77,29 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="nameVoluntary">Correo electrónico</label>
                                                         <input type="email" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" required/>
                                                         <span class="text-danger">@error('email'){{ 'Ingrese un email correcto o no registrado en la plataforma' }} @enderror </span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="paternalSurnameVoluntary">Teléfono / Celular</label>
                                                         <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" required>
                                                         <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="townVoluntary">Municipio de residencia</label>
+                                                        <select class="form-control" id="townVoluntary" name="id_municipio">
+                                                        @foreach ($municipios as $municipio)
+                                                            <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
+                                                        @endforeach
+                                                        </select>
+                                                        <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -103,7 +114,7 @@
                                     <div class="card-body">
                                         <div class="content">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="instututionVoluntary">Institución</label>
                                                         <select class="form-control" id="instututionVoluntary" name="id_insti">
@@ -114,17 +125,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="townVoluntary">Municipio</label>
-                                                        <select class="form-control" id="townVoluntary" name="id_municipio">
-                                                        @foreach ($municipios as $municipio)
-                                                            <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
-                                                        @endforeach
-                                                        </select>
-                                                        <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
