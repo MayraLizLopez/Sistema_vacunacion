@@ -47,6 +47,7 @@ class InstitucionSeeder extends Seeder
             'activo' => true,
             'id_municipio' => 40,
             'fecha_creacion' => Carbon::now(),
+            'id_user' => 1
         ]);
 
     }
