@@ -89,9 +89,31 @@
                   </div>
             </div>
           </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <label for="sedesTable">Sedes</label>           
+                    <table id="sedesTable" class="table table-striped table-bordered"
+                    data-pagination="true"
+                    data-sort-name="nombre"
+                    data-sort-order="desc">
+                        <thead>
+                          <tr>
+                            <th data-checkbox="true"></th>
+                            <th class="d-none" data-field="id_sede">ID</th>
+                            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                            <th data-field="dirección" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
+                            <th data-field="cupo" data-sortable="true" data-halign="center" data-align="center">Cupo</th>
+                          </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">           
+                <div class="table-responsive">
+                    <label for="voluntariesTable">Voluntarios</label>         
                     <table id="voluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
@@ -258,6 +280,7 @@
         let $voluntariesTable = $('#voluntariesTable');
         let $viewDetailVoluntariesTable = $('#viewDetailVoluntariesTable');
         let $editVoluntariesTable = $('#editVoluntariesTable');
+        let $sedesTable = $('#sedesTable');
         let idJornada = 0;
 
         $(document).ready(()=>{
@@ -301,7 +324,8 @@
 
             //evento para obtener la lista de todos los voluntarios activos y no eliminados
             $('#modalCreateVaccinationDay').on('show.bs.modal', () => {
-                $voluntariesTable.bootstrapTable({data: []})
+                $voluntariesTable.bootstrapTable({data: []});
+                $sedesTable.bootstrapTable({data: []});
                 getAllInstitutions('create');
             });
 

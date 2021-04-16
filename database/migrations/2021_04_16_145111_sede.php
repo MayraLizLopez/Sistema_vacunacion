@@ -15,12 +15,14 @@ class Sede extends Migration
     {
         Schema::create('sedes', function (Blueprint $table) {
             $table->bigIncrements('id_sede');
+            $table->unsignedBigInteger('id_municipio');
             $table->string ('nombre', 255);
             $table->string ('direccion', 255);
             $table->integer ('cupo');
             $table->boolean('activo');
             $table->date('fecha_creacion', 255);
             $table->date('fecha_edicion', 255)->nullable();
+            $table->foreign('id_municipio')->references('id_municipio')->on('municipios');
             //$table->timestamps();            
         });
     }
