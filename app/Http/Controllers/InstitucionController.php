@@ -105,7 +105,8 @@ class InstitucionController extends Controller
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $instituciones = DB::table('instituciones')
         ->join('municipios', 'instituciones.id_municipio', '=', 'municipios.id_municipio')
-        ->select('instituciones.*', 'municipios.nombre AS nombre_municipio')
+        ->join('usuarios', 'instituciones.id_user', '=', 'usuarios.id_user')
+        ->select('instituciones.*', 'municipios.nombre AS nombre_municipio', 'usuarios.nombre AS nombre_enlace', 'usuarios.email AS email', 'usuarios.tel AS tel')
         ->where('instituciones.activo', '=', 1)
         ->get();
         return view('admin.Institutions', compact('instituciones'), $data);
