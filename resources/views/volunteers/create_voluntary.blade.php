@@ -3,7 +3,7 @@
     <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
-    <h1 class="h3 mb-2 text-gray-800">Registrar Voluntario</h1>
+    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registrar Voluntario</h1>
     <p class="mb-4"> </p>
     
     <div class="row justify-content-center">
@@ -133,8 +133,10 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a></button>
+
+                            <button type="submit" class="btn btn-success" id="sendFormVoluntaries">Enviar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a></button>
+                        </div>
                     </div>
                 </div>
             </form>

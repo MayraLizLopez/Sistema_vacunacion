@@ -4,7 +4,7 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Voluntarios</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
 <p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos</p>
 
 <div id="toolbar">
@@ -25,7 +25,7 @@
             </div>
         @endif
         <div class="form-group">
-            <button type="button" class="btn btn-info btn-table ml-1" id="cleanFilters">
+            <button type="button" class="btn btn-success btn-table ml-1" id="cleanFilters">
                 <i class="fas fa-eraser"></i>
                 <span class="item-label">Limpiar Filtros</span>
             </button>      
@@ -43,9 +43,6 @@
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Voluntarios</h6>
-    </div>
     <div class="card-body">
         <div class="table-responsive">           
             <table id="voluntariesTable" class="table table-striped table-bordered"

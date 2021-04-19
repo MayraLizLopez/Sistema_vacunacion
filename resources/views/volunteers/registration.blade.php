@@ -132,7 +132,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="myCheck" onclick="myFunction()">
                                                             <label class="form-check-label" for="flexCheckChecked">
-                                                               <b> Acepto <a style="color:#b9134b;">términos y condiciones</a>, así como el <a style="color:#b9134b;">aviso de privacidad</a></b>
+                                                               <b> Acepto <a style="color:#b9134b;">términos y condiciones</a>, así como el <a style="color:#b9134b;"  href="{{route('aviso')}}" target="_blank" rel="noopener noreferrer">aviso de privacidad</a></b>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -144,7 +144,7 @@
                                 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <button id="botonEnviar" type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
+                                        <button id="botonEnviar" type="submit" class="btn btn-success" id="sendFormVoluntaries">Enviar</button>
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('home')}}">Cancelar</a></button>
                                     </div>
                                 </div>

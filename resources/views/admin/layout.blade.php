@@ -22,6 +22,24 @@
         <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
         <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">
         <link rel="stylesheet" href="{{ url("../resources/css/site.css") }}">
+        <style type="text/css">
+            @font-face {
+                font-family: nutmeg-bold;
+                src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+                font-weight: bold;
+            }
+
+            @font-face {
+                font-family: montserrat;
+                src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+            }
+
+            @font-face {
+                font-family: montserrat-bold;
+                src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+                font-weight: bold;
+            }
+        </style>
         @yield('css')    
     </head>
     <body id="page-top">
@@ -33,10 +51,10 @@
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url("/admin/panel/index")}}">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-syringe"></i>
+                    <div class="col-auto">
+                        <img src="{{ asset('assets/images/jeringa.svg')}}" style="width: 35px;"/>
                     </div>
-                    <div class="sidebar-brand-text mx-3">SGV</div>
+                    <div class="sidebar-brand-text font-weight-bold" style="color:#54A583; font-size: 40px;" >SGV</div>
                 </a>
 
                 <!-- Divider -->
@@ -45,8 +63,9 @@
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
                     <a class="nav-link" href="{{url("/admin/panel/index")}}">
-                        <i class="fas fa-home"></i>
-                        <span>Inicio</span></a>
+                        <img class="mx-2" src="{{ asset('assets/images/index.svg')}}" style="width: 25px;"/>
+                        <span style="font-family: nutmeg-bold; font-size:18px;">Inicio</span></a>
+                        
                 </li>
 
                 
@@ -55,40 +74,40 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a class="nav-link" href="{{url("/admin/panel/show")}}">                           
-                            <i class="fas fa-hands-helping"></i>
-                            <span>Voluntariado</span></a>
+                        <img class="mx-2" src="{{ asset('assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
+                        <span  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a class="nav-link" href="{{url("/admin/panel/institutions")}}">
-                            <i class="fas fa-building"></i>
-                            <span>Instituciones</span></a>
+                        <img class="mx-2" src="{{ asset('assets/images/menu_instituciones.svg')}}" style="width: 20px;"/>
+                        <span  style="font-family: nutmeg-bold; font-size:18px;">Instituciones</span></a>
                     </li>
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a class="nav-link" href="{{url("/admin/panel/vaccinationDay")}}">
-                            <i class="fas fa-syringe"></i>
-                            <span>Jornadas de vacunación</span></a>
+                        <img class="mx-2" src="{{ asset('assets/images/menu_jornadas.svg')}}" style="width: 20px;"/>
+                        <span  style="font-family: nutmeg-bold; font-size:18px;">Jornadas</span></a>
                     </li>
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     {{-- <li class="nav-item active">
                         <a class="nav-link" href="#">
-                            <i class="fas fa-users"></i>
-                            <span>Usuarios</span></a>
+                        <i class="fas fa-users"></i>
+                        <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
                     </li> --}}
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a class="nav-link" href="{{url("/admin/panel/show")}}">
-                            <i class="fas fa-users"></i>
-                            <span>Voluntariado</span></a>
+                        <img class="mx-2" src="{{ asset('assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
+                        <span   style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>                 
                 @endif
 
@@ -263,7 +282,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
+                                    <span class="mr-2 d-none d-lg-inline small" style="color:#707070: font-family:montserrat">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
                                     <div class="col-auto">
                                         <i class="fas fa-user fa-2x" style="color: #F5F5F5; background-color: #6a7379; border: 2px solid #6a7379; border-radius: 5px; padding: 3px;"></i>
                                     </div>
