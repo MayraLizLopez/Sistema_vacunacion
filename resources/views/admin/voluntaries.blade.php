@@ -26,14 +26,14 @@
         @endif
         <div class="form-group">
             <button type="button" class="btn btn-success btn-table ml-1" id="cleanFilters">
-                <i class="fas fa-eraser"></i>
+            <img class="mx-2" src="{{ asset('assets/images/borrador.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Limpiar Filtros</span>
             </button>      
         </div>
         <div class="form-group ml-1">
             <button type="button" class="btn btn-primary btn-table">
                 <a style="color:white;" href="{{route('crearVoluntario')}}">
-                    <i class="fas fa-plus"></i>
+                    <img class="mx-2" src="{{ asset('assets/images/agregar.svg')}}" style="width: 20px;"/>
                     <span class="item-label">Registrar Voluntario</span>                 
                 </a>
             </button>
