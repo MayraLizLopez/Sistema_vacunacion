@@ -282,7 +282,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline small" style="color:#707070: font-family:montserrat">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
+                                    <span class="mr-2 d-none d-lg-inline small" style="color:#707070; font-family:montserrat">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
                                     <div class="col-auto">
                                         <i class="fas fa-user fa-2x" style="color: #F5F5F5; background-color: #6a7379; border: 2px solid #6a7379; border-radius: 5px; padding: 3px;"></i>
                                     </div>
