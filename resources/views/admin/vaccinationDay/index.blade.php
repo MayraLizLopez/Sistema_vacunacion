@@ -68,7 +68,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="inEndDate">Fecha fin</label>
-                    <input type="date" class="form-control" id="inEndDate" placeholder="Ingrese la fecha ">
+                    <input type="date" class="form-control" id="inEndDate" placeholder="Ingrese la fecha final">
                 </div>
             </div>
           </div>
@@ -80,6 +80,12 @@
                     </select>           
                 </div>
             </div>
+            {{-- <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inHoras">Horas</label>
+                    <input type="number" class="form-control" id="inHoras" placeholder="Ingrese el número de horas">
+                </div>
+            </div> --}}
           </div>
           <div class="row">
             <div class="col-md-12">
@@ -102,7 +108,7 @@
                             <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_sede">ID</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                            <th data-field="dirección" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
+                            <th data-field="direccion" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
                             <th data-field="cupo" data-sortable="true" data-halign="center" data-align="center">Cupo</th>
                           </tr>
                         </thead>
@@ -113,7 +119,7 @@
           <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="voluntariesTable">Voluntarios</label>         
+                    <label for="voluntariesTable">Voluntarios</label>     
                     <table id="voluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
@@ -177,6 +183,12 @@
                     </select>           
                 </div>
             </div>
+            {{-- <div class="col-md-6">
+                <div class="form-group">
+                    <label for="editInHoras">Horas</label>
+                    <input type="number" class="form-control" id="editInHoras" placeholder="Ingrese el número de horas">
+                </div>
+            </div> --}}
           </div>
           <div class="row">
             <div class="col-md-12">
@@ -184,6 +196,27 @@
                     <label for="editInMessage">Mensaje para el voluntario</label>
                     <textarea class="form-control" id="editInMessage" rows="3"></textarea>
                   </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <label for="sedesTable">Sedes</label>           
+                    <table id="editSedesTable" class="table table-striped table-bordered"
+                    data-pagination="true"
+                    data-sort-name="nombre"
+                    data-sort-order="desc">
+                        <thead>
+                          <tr>
+                            <th data-checkbox="true"></th>
+                            <th data-field="id_sede">ID Sede</th>
+                            <th data-field="nombre_sede" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                            <th data-field="direccion_sede" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
+                            <th data-field="cupo_sede" data-sortable="true" data-halign="center" data-align="center">Cupo</th>
+                          </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
           </div>
           <div class="row">
@@ -196,9 +229,6 @@
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
-                            <th class="d-none" data-field="id_insti">ID Institución</th>
-                            <th class="d-none" data-field="id_jornada">ID Jornada</th>
-                            <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
@@ -281,6 +311,7 @@
         let $viewDetailVoluntariesTable = $('#viewDetailVoluntariesTable');
         let $editVoluntariesTable = $('#editVoluntariesTable');
         let $sedesTable = $('#sedesTable');
+        let $editSedesTable = $('#editSedesTable');
         let idJornada = 0;
 
         $(document).ready(()=>{
@@ -309,17 +340,15 @@
             //#region Modal events
             //evento para la busqueda de voluntarios por institución
             $('#inInstitution').on('change', () => {
-                if($('#inInstitution').children('option:selected').val().length <= 0){
-                } else {
+                if($('#inInstitution').children('option:selected').val().length > 0){
                     getAllVoluntantiesByActive($('#inInstitution').children('option:selected').val(), 'create');
-                }                               
+                }                            
             });
 
             $('#editInInstitution').on('change', () => {
-                if($('#editInInstitution').children('option:selected').val().length <= 0){
-                } else {
+                if($('#editInInstitution').children('option:selected').val().length > 0){
                     getAllVoluntantiesByActive($('#editInInstitution').children('option:selected').val(), 'edit');
-                }                               
+                }                             
             });
 
             //evento para obtener la lista de todos los voluntarios activos y no eliminados
@@ -347,20 +376,29 @@
             //evento para crear una nueva jornada
             $('#saveVaccinationDay').on('click', () => {           
                 let idsVoluntarios = [];
+                let idSedes = [];
 
-                if(validateFields('createJornada') == false){
+                if(!validateFields('createJornada')){
                     for(let data in $voluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
                         $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
                         );
                     }
+
+                    for(let data in $sedesTable.bootstrapTable('getSelections')){
+                        idSedes.push(
+                        $sedesTable.bootstrapTable('getSelections')[data].id_sede
+                        );
+                    }
+
                     console.log(idJornada);
                     if(idJornada == 0){
                         let dataVaccinationDay = {
                             fecha_inicio: $('#inStartDate').val(),
                             fecha_fin: $('#inEndDate').val(),
                             mensaje: $('#inMessage').val(),
-                            idsVoluntarios: idsVoluntarios
+                            idsVoluntarios: idsVoluntarios,
+                            idsSedes: idSedes
                         };
                         insVaccinationDay(dataVaccinationDay);   
                     }else{
@@ -369,7 +407,8 @@
                             fecha_inicio: $('#inStartDate').val(),
                             fecha_fin: $('#inEndDate').val(),
                             mensaje: $('#inMessage').val(),
-                            idsVoluntarios: idsVoluntarios
+                            idsVoluntarios: idsVoluntarios,
+                            idsSedes: idSedes
                         };
                         updVaccinationDay(dataVaccinationDay, 'create');
                     }
@@ -379,11 +418,18 @@
             //evento para editar una jornada
             $('#saveEditedVaccinationDay').on('click', () => {
                 let idsVoluntarios = [];
+                let idsSedes = [];
 
-                if(validateFields('editJornada') == false){
+                if(!validateFields('editJornada')){
                     for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
-                        $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
+                            $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
+                        );
+                    }
+
+                    for(let data in $editSedesTable.bootstrapTable('getSelections')){
+                        idsSedes.push(
+                            $editSedesTable.bootstrapTable('getSelections')[data].id_sede
                         );
                     }
 
@@ -392,7 +438,8 @@
                         fecha_inicio: $('#editInStartDate').val(),
                         fecha_fin: $('#editInEndDate').val(),
                         mensaje: $('#editInMessage').val(),
-                        idsVoluntarios: idsVoluntarios
+                        idsVoluntarios: idsVoluntarios,
+                        idsSedes: idsSedes
                     };
                     updVaccinationDay(dataVaccinationDay, 'edit');  
                 }
@@ -442,6 +489,7 @@
                 url: "vaccinationDay/show/",
                 type: "GET",
                 success: function (response) {
+                    //console.log(response.data);
                     $vaccinationDayTable.bootstrapTable('destroy');
                     $vaccinationDayTable.bootstrapTable({data: response.data});
                 },
@@ -471,12 +519,16 @@
                 type: "GET",
                 success: function (response) {
                     console.log(response);
-                    if(actionType == 'create'){
+                    if(response.data.length > 0){
+                        if(actionType == 'create'){
+                        getAllSedesByIdTown(response.data[0].id_instituciones_municipio, 'create');
                         $voluntariesTable.bootstrapTable('destroy');
                         $voluntariesTable.bootstrapTable({data: response.data});
-                    } else if(actionType == 'edit'){
-                        $editVoluntariesTable.bootstrapTable('destroy');
-                        $editVoluntariesTable.bootstrapTable({data: response.data});
+                        } else if(actionType == 'edit'){
+                            getAllSedesByIdTown(response.data[0].id_instituciones_municipio, 'edit');
+                            $editVoluntariesTable.bootstrapTable('destroy');
+                            $editVoluntariesTable.bootstrapTable({data: response.data});
+                        }
                     }
                 },
                 error: function (error, resp, text) {
@@ -485,16 +537,53 @@
             });
         }
 
+        function getAllSedesByIdTown(id_town, actionType){
+            console.log(id_town);
+            $.ajax({
+                url: "vaccinationDay/getAllSedesByIdTown/" + id_town,
+                type: "GET",
+                success: function (response) {
+                    console.log(response);
+                    if(actionType == 'create'){
+                        $sedesTable.bootstrapTable('destroy');
+                        $sedesTable.bootstrapTable({data: response.data});
+                    } else if(actionType == 'edit'){
+                        $editSedesTable.bootstrapTable('destroy');
+                        $editSedesTable.bootstrapTable({data: response.data});
+                    }
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        //#region Grupo de funciones para obtener la información de las jornadas a editar.
         function getJornada(id_jornada){
             $.ajax({
                 url: "vaccinationDay/getJornada/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    console.log(response);
-                    idJornada = response.data[0].id_jornada;
-                    $('#editInStartDate').val(response.data[0].fecha_inicio);
-                    $('#editInEndDate').val(response.data[0].fecha_fin);
-                    $('#editInMessage').text(response.data[0].mensaje);
+                    id_jornada = response.data.id_jornada;
+                    $('#editInStartDate').val(response.data.fecha_inicio);
+                    $('#editInEndDate').val(response.data.fecha_fin);
+                    $('#editInMessage').text(response.data.mensaje);
+
+                    getJornadaForVoluntaries(id_jornada);
+                    getJornadaForSedes(id_jornada);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function getJornadaForVoluntaries(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/getJornadaForVoluntaries/" + id_jornada,
+                type: "GET",
+                success: function (response) {
+                    console.log(response.data);
                     $editVoluntariesTable.bootstrapTable('destroy');
                     $editVoluntariesTable.bootstrapTable({data: response.data});
                     $editVoluntariesTable.bootstrapTable('checkAll');
@@ -505,17 +594,51 @@
             });
         }
 
+        function getJornadaForSedes(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/getJornadaForSedes/" + id_jornada,
+                type: "GET",
+                success: function (response) {
+                    console.log(response.data);
+                    $editSedesTable.bootstrapTable('destroy');
+                    $editSedesTable.bootstrapTable({data: response.data});
+                    $editSedesTable.bootstrapTable('checkAll');
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+        //#endregion
+
         function getJornadaDetail(id_jornada){
             $.ajax({
                 url: "vaccinationDay/getJornadaDetail/" + id_jornada,
                 type: "GET",
                 success: function (response) {
                     console.log(response);
+                    let voluntaryData = Array.from(new Set(response.data.map(x => x.id_voluntario))).
+                    map(id_voluntario => {
+                        return {
+                            id_voluntario: id_voluntario,
+                            id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada,
+                            id_insti: response.data.find(s => s.id_voluntario === id_voluntario).id_insti,
+                            nombre: response.data.find(s => s.id_voluntario === id_voluntario).nombre,
+                            ape_pat: response.data.find(s => s.id_voluntario === id_voluntario).ape_pat,
+                            ape_mat: response.data.find(s => s.id_voluntario === id_voluntario).ape_mat,
+                            email: response.data.find(s => s.id_voluntario === id_voluntario).email,
+                            tel: response.data.find(s => s.id_voluntario === id_voluntario).tel,
+                            nombre_municipio: response.data.find(s => s.id_voluntario === id_voluntario).nombre_municipio,
+                            nombre_institucion: response.data.find(s => s.id_voluntario === id_voluntario).nombre_institucion
+                        };
+                    });
+
+                    console.log(voluntaryData);
                     $viewDetailVoluntariesTable.bootstrapTable('destroy');
-                    $viewDetailVoluntariesTable.bootstrapTable({data: response.data});
+                    $viewDetailVoluntariesTable.bootstrapTable({data: voluntaryData});
                 },
                 error: function (error, resp, text) {
-                    console.error(error);
+                    console.error(error.responseJSON.message);
                 }
             });
         }
@@ -543,6 +666,7 @@
                     id_insti: data.id_insti,
                     mensaje: data.mensaje,
                     idsVoluntarios: data.idsVoluntarios,
+                    idsSedes: data.idsSedes,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
@@ -585,6 +709,7 @@
                     id_insti: data.id_insti,
                     mensaje: data.mensaje,
                     idsVoluntarios: data.idsVoluntarios,
+                    idsSedes: data.idsSedes,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
@@ -703,6 +828,7 @@
                 if($('#inStartDate').val().length > 0 
                 && $('#inEndDate').val().length > 0 
                 && $('#inMessage').val().length > 0
+                && $sedesTable.bootstrapTable('getSelections').length > 0
                 && $voluntariesTable.bootstrapTable('getSelections').length > 0){
                     isEmpty = false;                
                 } else {
@@ -710,7 +836,7 @@
                     Swal.fire({
                         icon: 'warning',
                         title: 'Advertencia',
-                        text: 'Debe llenar todos los campos, asi como elegir al menos un voluntario.',
+                        text: 'Debe llenar todos los campos, asi como elegir al menos un voluntario y una sede.',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar',
                     }); 
@@ -720,6 +846,7 @@
                 if($('#editInStartDate').val().length > 0 
                 && $('#editInEndDate').val().length > 0 
                 && $('#editInMessage').val().length > 0
+                && $editSedesTable.bootstrapTable('getSelections').length > 0
                 && $editVoluntariesTable.bootstrapTable('getSelections').length > 0){
                     isEmpty = false;                 
                 } else {
@@ -727,7 +854,7 @@
                     Swal.fire({
                         icon: 'warning',
                         title: 'Advertencia',
-                        text: 'Debe llenar todos los campos, asi como elegir al menos un voluntario.',
+                        text: 'Debe llenar todos los campos, asi como elegir al menos un voluntario y una sede.',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar',
                     }); 
@@ -755,7 +882,7 @@
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
             '<i class="fas fa-info-circle"></i>',
             '</a>',
-            '<a class="like mr-2" href="javascript:void(0)" title="Editar">',
+            '<a class="edit mr-2" href="javascript:void(0)" title="Editar">',
             '<i class="fas fa-edit"></i>',
             '</a>',
             '<a class="remove mr-2" href="javascript:void(0)" title="Elimnar">',
@@ -765,7 +892,7 @@
         }
 
         window.operateEvents = {
-            'click .like': function (e, value, row, index) {
+            'click .edit': function (e, value, row, index) {
                 $('#modalEditJornada').modal({
                     backdrop: 'static',
                     keyboard: false
