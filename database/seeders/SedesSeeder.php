@@ -17,7 +17,7 @@ class SedesSeeder extends Seeder
     public function run()
     {
         DB::table('sedes')->insert([
-            'id_municipio' => 119,
+            'id_municipio' => 40,
             'nombre' => 'ITVER',
             'direccion' => 'Calzada Independencia Norte #393 Guadalajara, Jalisco, México',
             'cupo' => 30,
@@ -26,7 +26,7 @@ class SedesSeeder extends Seeder
         ]);
 
         DB::table('sedes')->insert([
-            'id_municipio' => 40,
+            'id_municipio' => 119,
             'nombre' => 'UV',
             'direccion' => 'Camino Arenero 1101, 45019 Zapopan, Jal.',
             'cupo' => 28,
