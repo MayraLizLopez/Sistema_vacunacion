@@ -125,13 +125,30 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="" id="myCheck" onclick="myFunction()">
+                                                            <label class="form-check-label" for="flexCheckChecked">
+                                                               <b> Acepto <a style="color:#b9134b;">términos y condiciones</a>, así como el <a style="color:#b9134b;">aviso de privacidad</a></b>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('home')}}">Cancelar</a></button>
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button id="botonEnviar" type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('home')}}">Cancelar</a></button>
+                                    </div>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -141,6 +158,20 @@
     </div>
 </div>
 @endsection
-@section('scripts')
 
+@section('scripts')
+    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    <script>
+    document.getElementById("botonEnviar").disabled = true;
+    document.getElementById("myCheck").checked = false;
+        function myFunction() {
+            var checkBox = document.getElementById("myCheck");
+            
+            if (checkBox.checked == true){
+                document.getElementById("botonEnviar").disabled = false;
+            } else {
+                document.getElementById("botonEnviar").disabled = true;
+            }
+        }
+    </script>
 @endsection
