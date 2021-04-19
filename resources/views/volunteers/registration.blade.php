@@ -23,7 +23,7 @@
                                     <script>    
                                         Swal.fire({
                                             title: '¡Registro completado!',
-                                            text: '¡Tus datos fueron agregados correctamente, te enviamos un correo a tu email!',
+                                            text: '¡Tus datos fueron agregados correctamente, te enviaremos un correo a tu email cuando seas elegido para una jornada!',
                                             icon: 'success',
                                             confirmButtonColor: '#3085d6',
                                             confirmButtonText: 'Aceptar'

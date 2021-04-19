@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">    
         <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet"> 
     </head>
-    <body style="background-color: gray;">
+    <body style="background-image: url('{{ asset('assets/images/FondoRegistro.png')}}'); height:100%;">
         @yield('content')
         <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
         <script src="{{ url("../resources/js/bootstrap.min.js") }}"></script>
