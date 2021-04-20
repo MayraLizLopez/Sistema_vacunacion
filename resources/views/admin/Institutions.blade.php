@@ -28,17 +28,17 @@
             data-sort-order="desc"
             data-toolbar="#toolbar"> 
                 <thead>
-                <tr>
-                    <th class="d-none" data-radio="true"></th>
-                    <th class="d-none" data-field="id_insti">ID</th>
-                    <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                    <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
-                    <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Nombre Enlace</th>
-                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                    <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
-                </tr>
+                    <tr>
+                        <th class="d-none" data-radio="true"></th>
+                        <th class="d-none" data-field="id_insti">ID</th>
+                        <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                        <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
+                        <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Nombre Enlace</th>
+                        <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                        <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                        <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                        <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    </tr>
                 </thead>
             </table>
         </div>

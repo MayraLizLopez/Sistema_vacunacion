@@ -4,6 +4,51 @@
 @endsection
 @section('title', 'Registro de Voluntarios')
 @section('content')
+
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #botonEnviar{
+            margin-right: 16px;
+        }
+
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
+
+
 <div class="container" style="width: 100%;">
     <div class="card shadow mb-4"  style="margin-top: 30px;">
         <div class="card-body">
@@ -11,7 +56,7 @@
                 <div class="col-sm-12">
                     <div class="row row justify-content-center">
                         <div class="col-sm-12">
-                            <h1 style="margin-top: 30px; margin-bottom: 30px;">Registro de voluntarios</h1>
+                            <h1 style="margin-top: 30px; margin-bottom: 30px;">Registro</h1>
                         </div>
                     </div>
                     
@@ -49,7 +94,7 @@
                                 {{ csrf_field() }}
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
-                                        <h5 class="m-0 font-weight-bold text-primary">Ingrese sus datos personales</h5>
+                                        <h5 class="m-0 text-primary">Ingrese sus datos personales</h5>
                                     </div>
                                     <div class="card-body">
                                         <div class="content">
@@ -145,7 +190,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button id="botonEnviar" type="submit" class="btn btn-success" id="sendFormVoluntaries">Enviar</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('home')}}">Cancelar</a></button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white; width: 184px;" href="{{route('home')}}">Cancelar</a></button>
                                     </div>
                                 </div>
 

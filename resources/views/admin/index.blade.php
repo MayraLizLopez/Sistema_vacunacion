@@ -16,6 +16,8 @@
             font-family: montserrat;
             src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
         }
+
+        
     </style>
 
     @if ($LoggedUserInfo['rol'] == 'Administrador General')

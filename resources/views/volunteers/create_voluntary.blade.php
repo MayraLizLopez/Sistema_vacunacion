@@ -3,7 +3,47 @@
     <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
-    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registrar Voluntario</h1>
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #botonEnviar{
+            margin-right: 16px;
+        }
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
+    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registo Voluntario</h1>
     <p class="mb-4"> </p>
     
     <div class="row justify-content-center">
@@ -134,7 +174,7 @@
                             </div>
                         </div>
 
-                            <button type="submit" class="btn btn-success" id="sendFormVoluntaries">Enviar</button>
+                            <button type="submit" class="btn btn-success" id="botonEnviar">Enviar</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a></button>
                         </div>
                     </div>

@@ -54,7 +54,7 @@
                     <div class="col-auto">
                         <img src="{{ asset('assets/images/jeringa.svg')}}" style="width: 35px;"/>
                     </div>
-                    <div class="sidebar-brand-text font-weight-bold" style="color:#54A583; font-size: 40px;" >SGV</div>
+                    <div class="sidebar-brand-text font-weight-bold" style="color:#54A583; font-size: 45px; font-family:nutmeg-bold; " >SVG</div>
                 </a>
 
                 <!-- Divider -->
