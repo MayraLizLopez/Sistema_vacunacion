@@ -542,7 +542,7 @@ class UsuariosSeeder extends Seeder
             'ape_mat' => '',
             'id_insti' => 1,
             'cargo' => 'Encargado',
-            'rol' => 'Enlace de institución',
+            'rol' => 'Administrador General',
             'tel' => '123456888',
             'email' => 'marco@gmail.com',
             'password' => Hash::make('1234'),

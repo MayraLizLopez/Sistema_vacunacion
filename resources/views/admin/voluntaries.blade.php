@@ -4,7 +4,7 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Voluntarios</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
 <p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos</p>
 
 <div id="toolbar">
@@ -25,15 +25,15 @@
             </div>
         @endif
         <div class="form-group">
-            <button type="button" class="btn btn-info btn-table ml-1" id="cleanFilters">
-                <i class="fas fa-eraser"></i>
+            <button type="button" class="btn btn-success btn-table ml-1" id="cleanFilters">
+            <img class="mx-2" src="{{ asset('assets/images/borrador.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Limpiar Filtros</span>
             </button>      
         </div>
         <div class="form-group ml-1">
             <button type="button" class="btn btn-primary btn-table">
                 <a style="color:white;" href="{{route('crearVoluntario')}}">
-                    <i class="fas fa-plus"></i>
+                    <img class="mx-2" src="{{ asset('assets/images/agregar.svg')}}" style="width: 20px;"/>
                     <span class="item-label">Registrar Voluntario</span>                 
                 </a>
             </button>
@@ -43,9 +43,6 @@
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Voluntarios</h6>
-    </div>
     <div class="card-body">
         <div class="table-responsive">           
             <table id="voluntariesTable" class="table table-striped table-bordered"

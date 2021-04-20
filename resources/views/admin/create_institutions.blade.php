@@ -3,8 +3,51 @@
     <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
+
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #botonEnviar{
+            margin-right: 16px;
+        }
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
+
+
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Registrar Institución y Enlace</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Registrar institución y enlace</h1>
 <p class="mb-4"> </p>
 
 <!-- DataTales Example -->
@@ -141,7 +184,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button id="botonEnviar" class="btn btn-success" type="submit">Guardar</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
             
         </div>

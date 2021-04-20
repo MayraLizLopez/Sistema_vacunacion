@@ -4,19 +4,16 @@
 @endsection
 @section('content')  
 <!-- Page Heading --> 
-<h1 class="h3 mb-2 text-gray-800">Instituciones</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Instituciones</h1>
 <p class="mb-4">La siguiente tabla contiene todas las instituciones registradas.</p>
 
 <div id="toolbar">
     <div class="form-inline">
-        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}"><i class="fas fa-plus"></i> Registrar Institución</a></button>
+        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a></button>
     </div>
 </div>
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Instituciones</h6>
-    </div>
     <div class="card-body">
         <div class="table-responsive"> 
             <table id="institutionsTable" class="table table-striped table-bordered"
@@ -31,17 +28,17 @@
             data-sort-order="desc"
             data-toolbar="#toolbar"> 
                 <thead>
-                <tr>
-                    <th class="d-none" data-radio="true"></th>
-                    <th class="d-none" data-field="id_insti">ID</th>
-                    <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                    <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
-                    <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Nombre Enlace</th>
-                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                    <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
-                </tr>
+                    <tr>
+                        <th class="d-none" data-radio="true"></th>
+                        <th class="d-none" data-field="id_insti">ID</th>
+                        <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                        <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
+                        <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Nombre Enlace</th>
+                        <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                        <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                        <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                        <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    </tr>
                 </thead>
             </table>
         </div>

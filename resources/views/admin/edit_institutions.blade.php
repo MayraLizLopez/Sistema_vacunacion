@@ -4,7 +4,7 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Editar Institución</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Editar Institución</h1>
 <p class="mb-4"> </p>
 
 
@@ -139,7 +139,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Guardar</button>
+            <button class="btn btn-success" type="submit">Guardar</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
             
         </div>

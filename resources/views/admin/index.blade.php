@@ -2,23 +2,38 @@
     @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Inicio</h1>
+        <h1 class="h3 mb-0 font-weight-bold text-gray-800">Inicio</h1>
     </div>
+
+    <style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+
+        
+    </style>
 
     @if ($LoggedUserInfo['rol'] == 'Administrador General')
     <div class="row">
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #6EDE9E;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-mb font-weight-bold text-primary text-uppercase mb-1">
+                            <div class="text-mb font-weight-bold" style="color:#6EDE9E; font-family: nutmeg-bold; font-size: 18px;" >
                                 Voluntarios</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $voluntarios }}</div>
+                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $voluntarios }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-hands-helping fa-3x text-gray-300"></i>
+                            <img src="{{ asset('assets/images/voluntarios.svg')}}" style="width: 75px;"/>
                         </div>
                     </div>
                 </div>
@@ -27,16 +42,16 @@
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-mb font-weight-bold text-success text-uppercase mb-1">
+                            <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;">
                                 Instituciones</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $instituciones }}</div>
+                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $instituciones }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-building fa-3x text-gray-300"></i>
+                        <img src="{{ asset('assets/images/instituciones.svg')}}" style="width: 75px;"/>
                         </div>
                     </div>
                 </div>
@@ -45,16 +60,16 @@
 
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
+            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-mb font-weight-bold text-info text-uppercase mb-1">Jornadas
+                            <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;"> Jornadas
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jornadas }}</div>
+                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $jornadas }}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-calendar-minus fa-3x text-gray-300"></i>
+                            <img src="{{ asset('assets/images/jornada.svg')}}" style="width: 75px;"/>
                         </div>
                     </div>
                 </div>
@@ -82,16 +97,16 @@
         <div class="row">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-6 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card shadow h-100 py-2" style=" border-left: 8px solid #6EDE9E;">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-mb font-weight-bold text-primary text-uppercase mb-1">
+                                <div class="text-mb font-weight-bold" style="color:#6EDE9E; font-family: nutmeg-bold; font-size: 18px;" >
                                     Voluntarios</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $voluntarios }}</div>
+                                <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $voluntarios }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-hands-helping fa-3x text-gray-300"></i>
+                                <img src="{{ asset('assets/images/voluntarios.svg')}}" style="width: 75px;"/>
                             </div>
                         </div>
                     </div>
@@ -100,16 +115,16 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-6 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
+                <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-mb font-weight-bold text-info text-uppercase mb-1">Jornadas
+                                <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;"> Jornadas
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $jornadas }}</div>
+                                <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $jornadas }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-calendar-minus fa-3x text-gray-300"></i>
+                                <img src="{{ asset('assets/images/jornada.svg')}}" style="width: 75px;"/>
                             </div>
                         </div>
                     </div>

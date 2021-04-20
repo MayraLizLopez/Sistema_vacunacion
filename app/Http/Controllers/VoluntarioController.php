@@ -315,4 +315,9 @@ class VoluntarioController extends Controller
         }
         
     }
+
+    public function aviso()
+    {
+        return view('volunteers.aviso');
+    }
 }
