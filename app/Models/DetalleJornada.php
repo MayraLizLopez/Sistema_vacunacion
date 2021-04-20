@@ -12,5 +12,5 @@ class DetalleJornada extends Model
     protected $primaryKey = 'id_detalle_jornada';
     protected $table = "detalle_jornadas";
     public $timestamps = false;
-    protected $fillable = ['id_jornada', 'id_voluntario', 'id_sede', 'uuid', 'horas', 'activo', 'eliminado'];
+    protected $fillable = ['id_jornada', 'id_voluntario', 'id_sede', 'uuid', 'horas', 'correo_enviado', 'activo', 'eliminado'];
 }
