@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ url('../resources/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 
@@ -255,10 +255,11 @@
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
-                            <th data-field="id_sede">ID Sede</th>
-                            <th data-field="nombre_sede" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                            <th data-field="direccion_sede" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
-                            <th data-field="cupo_sede" data-sortable="true" data-halign="center" data-align="center">Cupo</th>
+                            <th data-field="id_detalle_jornada">ID Detalle Jornada</th>
+                            <th class="d-none" data-field="id_sede">ID Sede</th>
+                            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                            <th data-field="direccion" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
+                            <th data-field="cupo" data-sortable="true" data-halign="center" data-align="center">Cupo</th>
                           </tr>
                         </thead>
                     </table>
@@ -267,7 +268,8 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">           
+                <div class="table-responsive">
+                    <label for="editVoluntariesTable">Voluntarios</label>          
                     <table id="editVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
@@ -275,6 +277,7 @@
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
+                            <th data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
@@ -406,6 +409,7 @@
 
             //Envento que limpia la lista de instituciones
             $('#modalCreateVaccinationDay').on('hide.bs.modal', () => {
+                idJornada = 0;
                 $('#inInstitution').empty();
             });
 
@@ -416,6 +420,7 @@
 
             //evento que limpia la lista de intiituciones
             $('#modalEditJornada').on('hide.bs.modal', () => {
+                idJornada = 0;
                 $('#editInInstitution').empty();
             });
 
@@ -423,17 +428,24 @@
             $('#saveVaccinationDay').on('click', () => {           
                 let idsVoluntarios = [];
                 let idSedes = [];
+                let idsDetalleJornada = [];
 
-                if(!validateFields('createJornada')){
+                if(validateFields('createJornada') == false){
                     for(let data in $voluntariesTable.bootstrapTable('getSelections')){
-                    idsVoluntarios.push(
-                        $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
+                        idsVoluntarios.push(
+                            $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
                         );
                     }
 
                     for(let data in $sedesTable.bootstrapTable('getSelections')){
                         idSedes.push(
-                        $sedesTable.bootstrapTable('getSelections')[data].id_sede
+                            $sedesTable.bootstrapTable('getSelections')[data].id_sede
+                        );
+                    }
+
+                    for(let data in $editSedesTable.bootstrapTable('getSelections')){
+                        idsDetalleJornada.push(
+                            $editSedesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
                         );
                     }
 
@@ -454,22 +466,24 @@
                             fecha_fin: $('#inEndDate').val(),
                             mensaje: $('#inMessage').val(),
                             idsVoluntarios: idsVoluntarios,
-                            idSedes: idSedes
+                            idSedes: idSedes,
+                            idsDetalleJornada: idsDetalleJornada
                         };
                         updVaccinationDay(dataVaccinationDay, 'create');
                     }
-                }                                 
+                }                                
             });
 
             //evento para editar una jornada
             $('#saveEditedVaccinationDay').on('click', () => {
                 let idsVoluntarios = [];
                 let idSedes = [];
+                let idsDetalleJornada = [];
 
-                if(!validateFields('editJornada')){
+                if(validateFields('editJornada') == false){
                     for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
                     idsVoluntarios.push(
-                            $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
+                        $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
                         );
                     }
 
@@ -479,13 +493,20 @@
                         );
                     }
 
+                    for(let data in $editSedesTable.bootstrapTable('getSelections')){
+                        idsDetalleJornada.push(
+                            $editSedesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
+                        );
+                    }
+
                     let dataVaccinationDay = {
                         id_jornada: idJornada,
                         fecha_inicio: $('#editInStartDate').val(),
                         fecha_fin: $('#editInEndDate').val(),
                         mensaje: $('#editInMessage').val(),
                         idsVoluntarios: idsVoluntarios,
-                        idSedes: idSedes
+                        idSedes: idSedes,
+                        idsDetalleJornada: idsDetalleJornada
                     };
                     updVaccinationDay(dataVaccinationDay, 'edit');  
                 }
@@ -610,7 +631,7 @@
                 url: "vaccinationDay/getJornada/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    id_jornada = response.data.id_jornada;
+                    idJornada = response.data.id_jornada;
                     $('#editInStartDate').val(response.data.fecha_inicio);
                     $('#editInEndDate').val(response.data.fecha_fin);
                     $('#editInMessage').text(response.data.mensaje);
@@ -630,8 +651,24 @@
                 type: "GET",
                 success: function (response) {
                     console.log(response.data);
+
+                    let voluntaryData = Array.from(new Set(response.data.map(x => x.id_voluntario))).
+                    map(id_voluntario => {
+                        return {
+                            id_voluntario: id_voluntario,
+                            id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada,
+                            nombre: response.data.find(s => s.id_voluntario === id_voluntario).nombre,
+                            ape_pat: response.data.find(s => s.id_voluntario === id_voluntario).ape_pat,
+                            ape_mat: response.data.find(s => s.id_voluntario === id_voluntario).ape_mat,
+                            email: response.data.find(s => s.id_voluntario === id_voluntario).email,
+                            tel: response.data.find(s => s.id_voluntario === id_voluntario).tel,
+                            nombre_municipio: response.data.find(s => s.id_voluntario === id_voluntario).nombre_municipio,
+                            nombre_institucion: response.data.find(s => s.id_voluntario === id_voluntario).nombre_institucion
+                        };
+                    });
+
                     $editVoluntariesTable.bootstrapTable('destroy');
-                    $editVoluntariesTable.bootstrapTable({data: response.data});
+                    $editVoluntariesTable.bootstrapTable({data: voluntaryData});
                     $editVoluntariesTable.bootstrapTable('checkAll');
                 },
                 error: function (error, resp, text) {
@@ -646,8 +683,20 @@
                 type: "GET",
                 success: function (response) {
                     console.log(response.data);
+
+                    let sedeData = Array.from(new Set(response.data.map(x => x.id_sede))).
+                    map(id_sede => {
+                        return {
+                            id_sede: id_sede,
+                            id_detalle_jornada: response.data.find(s => s.id_sede === id_sede).id_detalle_jornada,
+                            nombre: response.data.find(s => s.id_sede === id_sede).nombre,
+                            direccion: response.data.find(s => s.id_sede === id_sede).direccion,
+                            cupo: response.data.find(s => s.id_sede === id_sede).cupo
+                        };
+                    });
+
                     $editSedesTable.bootstrapTable('destroy');
-                    $editSedesTable.bootstrapTable({data: response.data});
+                    $editSedesTable.bootstrapTable({data: sedeData});
                     $editSedesTable.bootstrapTable('checkAll');
                 },
                 error: function (error, resp, text) {
@@ -756,6 +805,7 @@
                     mensaje: data.mensaje,
                     idsVoluntarios: data.idsVoluntarios,
                     idSedes: data.idSedes,
+                    idsDetalleJornada: data.idsDetalleJornada,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {

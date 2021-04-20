@@ -21,11 +21,12 @@ class DetalleJornada extends Migration
             $table->unsignedBigInteger('id_sede')->nullable();
             $table->uuid('uuid');
             $table->integer('horas');
+            $table->boolean('correo_enviado');
             $table->boolean('activo')->nullable();
             $table->boolean('eliminado');
             $table->foreign('id_jornada')->references('id_jornada')->on('jornadas');
             $table->foreign('id_voluntario')->references('id_voluntario')->on('voluntarios');
-            //$table->foreign('id_sede')->references('id_sede')->on('sedes');
+            $table->foreign('id_sede')->references('id_sede')->on('sedes');
         });
     }
 
