@@ -66,9 +66,6 @@
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Voluntarios</h6>
-    </div>
     <div class="card-body">
         <div class="table-responsive">           
             <table id="vaccinationDayTable" class="table table-striped table-bordered"
@@ -447,7 +444,7 @@
                             fecha_fin: $('#inEndDate').val(),
                             mensaje: $('#inMessage').val(),
                             idsVoluntarios: idsVoluntarios,
-                            idsSedes: idSedes
+                            idSedes: idSedes
                         };
                         insVaccinationDay(dataVaccinationDay);   
                     }else{
@@ -457,7 +454,7 @@
                             fecha_fin: $('#inEndDate').val(),
                             mensaje: $('#inMessage').val(),
                             idsVoluntarios: idsVoluntarios,
-                            idsSedes: idSedes
+                            idSedes: idSedes
                         };
                         updVaccinationDay(dataVaccinationDay, 'create');
                     }
@@ -467,7 +464,7 @@
             //evento para editar una jornada
             $('#saveEditedVaccinationDay').on('click', () => {
                 let idsVoluntarios = [];
-                let idsSedes = [];
+                let idSedes = [];
 
                 if(!validateFields('editJornada')){
                     for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
@@ -477,7 +474,7 @@
                     }
 
                     for(let data in $editSedesTable.bootstrapTable('getSelections')){
-                        idsSedes.push(
+                        idSedes.push(
                             $editSedesTable.bootstrapTable('getSelections')[data].id_sede
                         );
                     }
@@ -488,7 +485,7 @@
                         fecha_fin: $('#editInEndDate').val(),
                         mensaje: $('#editInMessage').val(),
                         idsVoluntarios: idsVoluntarios,
-                        idsSedes: idsSedes
+                        idSedes: idSedes
                     };
                     updVaccinationDay(dataVaccinationDay, 'edit');  
                 }
@@ -715,7 +712,7 @@
                     id_insti: data.id_insti,
                     mensaje: data.mensaje,
                     idsVoluntarios: data.idsVoluntarios,
-                    idsSedes: data.idsSedes,
+                    idSedes: data.idSedes,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
@@ -758,7 +755,7 @@
                     id_insti: data.id_insti,
                     mensaje: data.mensaje,
                     idsVoluntarios: data.idsVoluntarios,
-                    idsSedes: data.idsSedes,
+                    idSedes: data.idSedes,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
