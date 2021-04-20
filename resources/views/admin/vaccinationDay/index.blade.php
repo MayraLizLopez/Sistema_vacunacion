@@ -293,9 +293,9 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="saveEditedVaccinationDay">Editar jornada</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>        
+        <div class="modal-footer mr-auto">
+            <button type="button" class="btn btn-success botonEnviar" id="saveEditedVaccinationDay">Editar jornada</button>
+          <button type="button" class="btn btn-secondary" id="button-largo" data-dismiss="modal">Cancelar</button>        
         </div>
       </div>
     </div>

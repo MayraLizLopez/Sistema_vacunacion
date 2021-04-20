@@ -32,9 +32,9 @@
         <!-- <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #5BC0DE;"><a style="color: #F5F5F5;" href="http://192.168.0.20/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a></button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: gray;"><a style="color: #F5F5F5;" href="http://192.168.0.20/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a></button> -->
 
-        <a style="color: #F5F5F5; background-color: #5BC0DE; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 18px;" href="http://187.188.251.138/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a>
+        <a style="color: #F5F5F5; background-color: #5BC0DE; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 18px;" href="http://localhost:8080/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a>
 
-        <a style="color: #F5F5F5; background-color: gray; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 18px;" href="http://187.188.251.138/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a>
+        <a style="color: #F5F5F5; background-color: gray; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 18px;" href="http://localhost:8080/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a>
         
     </body>
     <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>

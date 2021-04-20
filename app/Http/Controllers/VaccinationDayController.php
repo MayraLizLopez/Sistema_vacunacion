@@ -344,6 +344,7 @@ class VaccinationDayController extends Controller
             $jornada = DB::table('jornadas')->where('id_jornada', '=', $detalle_jornada->id_jornada)->first();
             for ($j = 0; $j < count($request->ids_detalle_jornadas); $j++) {
                 $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[$j])->first();
+                $editarJornada = DetalleJornada::findOrFail($detalle_jornadas->id_detalle_jornada);
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detalle_jornadas->id_voluntario)->first();
                 $data = [
                     'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
@@ -352,6 +353,8 @@ class VaccinationDayController extends Controller
                     'mensaje' => $jornada->mensaje,
                 ];
                 Mail::to($voluntario->email)->send(new ConfirmJornada($data));
+                $editarJornada->correo_enviado = true;
+                $editarJornada->save();
             }
             return response()->json([
                 'mensaje' => 'Correos enviados',
