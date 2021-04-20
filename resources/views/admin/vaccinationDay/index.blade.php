@@ -3,14 +3,62 @@
     <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
+
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+
+        #button-largo{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        .botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            
+        }
+
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
+
+
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Jornada de vacunación</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Jornada de vacunación</h1>
 <p class="mb-4">La siguiente vista muestra la tabla de todas las jornadas activas, así como la creación y edición de las mismas.</p>
 
 <div id="toolbar1">
     <div class="form-inline" role="form">
         <button type="button" class="btn btn-primary" id="createVaccinationDay">
-            <i class="fas fa-plus"></i>
+        <img class="mx-2" src="{{ asset('assets/images/agregar.svg')}}" style="width: 20px;"/>
             Registrar jornada
         </button>
     </div>
@@ -143,9 +191,10 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="saveVaccinationDay">Crear jornada</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>        
+        <div class="modal-footer mr-auto">
+            <button type="button" class="btn btn-success botonEnviar" id="saveVaccinationDay">Crear jornada</button>
+            <button id="button-largo" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>        
+
         </div>
       </div>
     </div>
