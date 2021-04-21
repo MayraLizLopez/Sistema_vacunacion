@@ -59,6 +59,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/voluntario/searchByTown/{id}', [VoluntarioController::class, "searchByTown"])->name('searchByTown');
 
+    Route::get('admin/panel/voluntario/searchByCURP/{id}', [VoluntarioController::class, "searchByCURP"])->name('searchByCURP');
+
     Route::get('admin/panel/voluntario/searchByInstitution/{id}', [VoluntarioController::class, "searchByInstitution"])->name('searchByInstitution');
 
     Route::get('admin/panel/voluntario/getAllTowns', [VoluntarioController::class, "getAllTowns"])->name('getAllTowns');

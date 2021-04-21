@@ -128,6 +128,15 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label for="curpVoluntary">CURP</label>
+                                        <input type="text" class="form-control" id="curpVoluntary" name="curp" placeholder="CURP" data-mask="SSSS000000SSSSSSA0"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
                                         <label for="townVoluntary">Municipio de residencia</label>
                                         <select class="form-control" id="townVoluntary" name="id_municipio">
                                         @foreach ($municipios as $municipio)

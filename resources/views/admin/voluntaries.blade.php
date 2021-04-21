@@ -13,6 +13,9 @@
             <input type="text" class="form-control" placeholder="Voluntario" id="inSearchByVoluntary">
         </div>
         <div class="form-group ml-1">
+            <input type="text" class="form-control" placeholder="CURP" id="inSearchByCURP">
+        </div>
+        <div class="form-group ml-1">
             <select class="custom-select" id="inSearchByTown">
                 <option value="" selected disabled hidden>Elija un municipio</option>
             </select>           
@@ -24,6 +27,9 @@
                 </select>           
             </div>
         @endif
+        <div class="form-group ml-1">
+            <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
+        </div>
         <div class="form-group">
             <button type="button" class="btn btn-success btn-table ml-1" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
             <img class="mx-2" src="{{ asset('assets/images/borrador.svg')}}" style="width: 20px;"/>
@@ -50,8 +56,7 @@
             data-pagination="true"
             data-single-select="true"
             data-click-to-select="true"
-            data-search="true"
-            data-search="true"
+            data-search-selector="#inSearchCustom"
             data-page-size="5"
             data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
@@ -66,6 +71,7 @@
                     <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
                     <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
                     <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                    <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
                     <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
@@ -97,6 +103,16 @@
                     if($('#inSearchByVoluntary').val().length <= 0){
                     } else {
                         searchByVoluntaryName($('#inSearchByVoluntary').val());
+                    }                   
+                }               
+            });
+
+            $('#inSearchByCURP').on('keypress', (event) => {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    if($('#inSearchByCURP').val().length <= 0){
+                    } else {
+                        searchByCURP($('#inSearchByCURP').val());
                     }                   
                 }               
             });
@@ -175,6 +191,20 @@
         function searchByTown(id){
             $.ajax({
                 url: "voluntario/searchByTown/" + id,
+                type: "GET",
+                success: function (response) {
+                    $table.bootstrapTable('destroy');
+                    $table.bootstrapTable({data: response.data});
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function searchByCURP(id){
+            $.ajax({
+                url: "voluntario/searchByCURP/" + id,
                 type: "GET",
                 success: function (response) {
                     $table.bootstrapTable('destroy');

@@ -15,11 +15,12 @@ class Voluntario extends Migration
     {
         Schema::create('voluntarios', function (Blueprint $table) {
             $table->bigIncrements('id_voluntario');
+            $table->unsignedBigInteger('id_insti');
+            $table->unsignedBigInteger('id_municipio');
             $table->string ('nombre', 100);
             $table->string ('ape_pat', 100);
             $table->string ('ape_mat', 100)->nullable();
-            $table->unsignedBigInteger('id_insti');
-            $table->unsignedBigInteger('id_municipio');
+            $table->string ('curp', 18)->nullable();
             $table->string('tel', 20);
             $table->string('email', 100)->unique();
             $table->boolean('activo');

@@ -83,11 +83,12 @@ class VoluntarioController extends Controller
         ]);
 
         $voluntario = new Voluntario;
+        $voluntario->id_municipio = (int)$request->id_municipio;
+        $voluntario->id_insti = (int)$request->id_insti;
         $voluntario->nombre = $request->nombre;
         $voluntario->ape_pat = $request->ape_pat;
         $voluntario->ape_mat = $request->ape_mat;
-        $voluntario->id_municipio = (int)$request->id_municipio;
-        $voluntario->id_insti = (int)$request->id_insti;
+        $voluntario->curp = $request->curp;
         $voluntario->tel = $request->tel;
         $voluntario->email = $request->email;
         $voluntario->activo = false;
@@ -181,11 +182,12 @@ class VoluntarioController extends Controller
             'email' => 'required',
         ]);
         $voluntarioEditado = Voluntario::findOrFail($id);
+        $voluntarioEditado->id_municipio = (int)$request->id_municipio;
+        $voluntarioEditado->id_insti = (int)$request->id_insti;
         $voluntarioEditado->nombre = $request->nombre;
         $voluntarioEditado->ape_pat = $request->ape_pat;
         $voluntarioEditado->ape_mat = $request->ape_mat;
-        $voluntarioEditado->id_municipio = (int)$request->id_municipio;
-        $voluntarioEditado->id_insti = (int)$request->id_insti;
+        $voluntarioEditado->curp = $request->curp;
         $voluntarioEditado->tel = $request->tel;
         $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
@@ -225,8 +227,7 @@ class VoluntarioController extends Controller
 
     #region Filtros
     public function searchByVoluntaryName($name)
-    {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+    {   
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -243,7 +244,6 @@ class VoluntarioController extends Controller
 
     public function searchByTown($id)
     {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -258,9 +258,23 @@ class VoluntarioController extends Controller
         ]); 
     }
 
+    public function searchByCURP($id){    
+        $nameVoluntary = DB::table('voluntarios')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->where([
+            ['eliminado', '=', 0],
+            ['voluntarios.curp', '=', $id]
+        ])
+        ->get();
+        return response()->json([
+            'data' => $nameVoluntary         
+        ]); 
+    }
+
     public function searchByInstitution($id)
-    {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+    {    
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
