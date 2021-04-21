@@ -145,7 +145,8 @@
                 <div class="table-responsive">
                     <label for="sedesTable">Sedes</label>           
                     <table id="sedesTable" class="table table-striped table-bordered"
-                    data-pagination="true"
+                    data-pagination="false"
+                    data-height="200"
                     data-sort-name="nombre"
                     data-sort-order="desc">
                         <thead>
@@ -166,7 +167,8 @@
                 <div class="table-responsive">
                     <label for="voluntariesTable">Voluntarios</label>     
                     <table id="voluntariesTable" class="table table-striped table-bordered"
-                    data-pagination="true"
+                    data-pagination="false"
+                    data-height="200"
                     data-sort-name="nombre"
                     data-sort-order="desc">
                         <thead>
@@ -249,7 +251,8 @@
                 <div class="table-responsive">
                     <label for="sedesTable">Sedes</label>           
                     <table id="editSedesTable" class="table table-striped table-bordered"
-                    data-pagination="true"
+                    data-pagination="false"
+                    data-height="200"
                     data-sort-name="nombre"
                     data-sort-order="desc">
                         <thead>
@@ -271,7 +274,8 @@
                 <div class="table-responsive">
                     <label for="editVoluntariesTable">Voluntarios</label>          
                     <table id="editVoluntariesTable" class="table table-striped table-bordered"
-                    data-pagination="true"
+                    data-pagination="false"
+                    data-height="200"
                     data-sort-name="nombre"
                     data-sort-order="desc">
                         <thead>
