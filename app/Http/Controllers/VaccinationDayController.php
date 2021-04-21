@@ -70,7 +70,6 @@ class VaccinationDayController extends Controller
                 $detalle_jornada->id_sede = (int)$id_sede;
                 $detalle_jornada->horas = 0;
                 $detalle_jornada->correo_enviado = false;
-                $detalle_jornada->activo = false;
                 $detalle_jornada->eliminado = false;
                 $save1 = $detalle_jornada->save();
             }
@@ -166,7 +165,6 @@ class VaccinationDayController extends Controller
                 $detalle_jornada->id_sede = (int)$id_sede;
                 $detalle_jornada->horas = 0;
                 $detalle_jornada->correo_enviado = false;
-                $detalle_jornada->activo = false;
                 $detalle_jornada->eliminado = false;
                 $save1 = $detalle_jornada->save();
             }
