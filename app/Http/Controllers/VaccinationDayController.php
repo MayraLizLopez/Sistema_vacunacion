@@ -102,14 +102,21 @@ class VaccinationDayController extends Controller
     {
         $jornadas = DB::table('detalle_jornadas')
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('sedes', 'detalle_jornadas.id_sede', '=', 'sedes.id_sede')
+        ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
         ->select(
-            'jornadas.id_jornada',
-            'jornadas.fecha_inicio',
-            'jornadas.fecha_fin',
-            DB::raw('COUNT(DISTINCT detalle_jornadas.id_voluntario) as total_voluntarios'))
+            'jornadas.id_jornada AS id_jornada',
+            'jornadas.fecha_inicio AS fecha_inicio',
+            'jornadas.fecha_fin AS fecha_fin' ,
+            'municipios.id_municipio AS id_municipio',
+            'municipios.nombre AS nombre_municipio',    
+            DB::raw('COUNT(DISTINCT detalle_jornadas.id_voluntario) as total_voluntarios'),
+            DB::raw("group_concat(sedes.nombre SEPARATOR ', ') as nombres_sedes"))
         ->where('jornadas.activo', '=', true)
-        ->groupBy('jornadas.id_jornada')
+        ->groupBy('jornadas.id_jornada', 'id_municipio')
         ->get();
+
+
         return response()->json([
             'data' => $jornadas        
         ]); 

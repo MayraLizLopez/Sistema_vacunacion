@@ -85,6 +85,8 @@
                     <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
                     <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
+                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                    <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
                     <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
                   </tr>
                 </thead>
@@ -562,6 +564,7 @@
                 success: function (response) {
                     //console.log(response.data);
                     $vaccinationDayTable.bootstrapTable('destroy');
+                    console.log(response)
                     $vaccinationDayTable.bootstrapTable({data: response.data});
                 },
                 error: function (error, resp, text) {
