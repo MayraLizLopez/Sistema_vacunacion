@@ -8,13 +8,13 @@
 <style type="text/css">
         @font-face {
             font-family: nutmeg-bold;
-            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
             font-weight: bold;
         }
 
         @font-face {
             font-family: montserrat;
-            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
         }
 
         button{
@@ -214,7 +214,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
     <script>
     document.getElementById("botonEnviar").disabled = true;
     document.getElementById("myCheck").checked = false;

@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mt-3 justify-content-center">
         <div class="col-sm-5">
-            <img src="../resources/image/isologo_jalisco_v.svg" 
+        <img src="{{ asset('public/assets/images/isologo_jalisco_v.svg')}}"
                      alt="jalisco"
                      class="img-fluid">
           </div>

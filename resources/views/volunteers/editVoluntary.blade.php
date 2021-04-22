@@ -147,7 +147,7 @@
     <p class="mb-4"> </p>
 @endsection
 @section('scripts')
-    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
     <script>
         $(document).ready(()=>{
             let voluntarios = @json($voluntarioEdit);

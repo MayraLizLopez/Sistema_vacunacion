@@ -1,0 +1,24 @@
+h1 {
+    font-family: "Montserrat",Helvetica,Arial,sans-serif; 
+}
+
+@media only screen and (max-width: 2288.75px) {
+    .btn-table .item-label {
+      font-size: 0;
+    }
+    .btn-table {
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 2208px) {
+    .btn-table .item-label {
+      font-size: 1rem;
+    }
+    .btn-table {
+      margin-top: 10px;
+      margin-left: 0;
+      font-size: 1rem;
+    }
+  }
