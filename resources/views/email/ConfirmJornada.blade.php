@@ -37,7 +37,7 @@
                 <!-- <h5 class="card-title">Secondary card title</h5> -->
                 <p class="card-text">{{ $sede->direccion }}</p>
                 <div class="mb-3">
-                    <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 20px; border: 2px solid #54A583; border-radius: 5px;" href="http://localhost:8080/sistema_vacunacion/public/emailAceptar/{{$sede->uuid}}">Aceptar</a>        
+                    <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 20px; border: 2px solid #54A583; border-radius: 5px;" href="http://187.188.251.138/sistema_vacunacion/public/emailAceptar/{{$sede->uuid}}">Aceptar</a>        
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
         <!-- <a style="color: #F5F5F5; background-color: #5BC0DE; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 5px;" href="http://localhost:8080/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a> -->
         <div class="mb-3" style="margin-top: 35px;"></div>
         <p></p>
-        <a style="color: #ffffff; background-color: gray; margin-top: 25px; font-size: 20px; border: 2px solid #6A7379; border-radius: 5px;" href="http://localhost:8080ñ/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a>
+        <a style="color: #ffffff; background-color: gray; margin-top: 25px; font-size: 20px; border: 2px solid #6A7379; border-radius: 5px;" href="http://187.188.251.138/sistema_vacunacion/public/emailRechazar/{{$uuid}}">Rechazar</a>
         
     </body>
     <script src="{{ url("../resources/js/jquery.slim.min.js") }}"></script>
