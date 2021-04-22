@@ -260,7 +260,7 @@
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
-                            <th data-field="id_detalle_jornada">ID Detalle Jornada</th>
+                            <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_sede">ID Sede</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="direccion" data-sortable="true" data-halign="center" data-align="center">Dirección</th>
@@ -283,7 +283,7 @@
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
-                            <th data-field="id_detalle_jornada">ID Detalle Jornada</th>
+                            <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>

@@ -289,24 +289,108 @@ class VoluntarioController extends Controller
         ]); 
     }
 
+    public function searchByDates($fecha_inicio, $fecha_fin){
+        $nameVoluntary = DB::table('detalle_jornadas')
+        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio'
+        )
+        ->where('jornadas.fecha_inicio', '=', $fecha_inicio)
+        ->where('jornadas.fecha_fin', '=', $fecha_fin)
+        ->distinct()
+        ->get();
+
+        return response()->json([
+            'data' => $nameVoluntary         
+        ]); 
+    }
+
+    public function searchBySedes($id){
+        $nameVoluntary = DB::table('detalle_jornadas')
+        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio'
+        )
+        ->where('detalle_jornadas.id_sede', '=', $id)
+        ->distinct()
+        ->get();
+
+        return response()->json([
+            'data' => $nameVoluntary         
+        ]); 
+    }
+    
+    public function searchByHours($hours){
+        $nameVoluntary = DB::table('detalle_jornadas')
+        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio'
+        )
+        ->where('detalle_jornadas.horas', '=', $hours)
+        ->distinct()
+        ->get();
+
+        return response()->json([
+            'data' => $nameVoluntary         
+        ]);
+    } 
+    #endreion 
+
     public function getAllTowns()
-    {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+    {  
         $towns = DB::table('municipios')->get();
         return response()->json([
             'data' => $towns          
         ]); 
     }
 
+    public function getAllSedes(){
+        $sedes = DB::table('sedes')->where('activo', '=', 1)->get();
+        return response()->json([
+            'data' => $sedes          
+        ]); 
+    }
+
     public function getAllInstitutions()
-    {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+    {   
         $institutions = DB::table('instituciones')->where('activo', '=', 1)->get();
         return response()->json([
             'data' => $institutions       
         ]); 
     }
-    #endregion
 
     public static function emailConfirmacion($id){
         $voluntario = Voluntario::findOrFail($id);
