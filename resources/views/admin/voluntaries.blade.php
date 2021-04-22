@@ -63,25 +63,25 @@
         @endif
 
         <div class="form-group second-form">
-            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Fecha Inicio" id="inStartDate">
+            <input type="date" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate">
         </div>
 
         <div class="form-group second-form ml-1">
-            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Fecha Fin" id="inEndDate">
+            <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate">
         </div>
 
-        <div class="form-group second-form ml-1">
+        {{-- <div class="form-group second-form ml-1">
             <input type="text" class="form-control" placeholder="Nombre del Enlace" id="inLinkName">
-        </div>
+        </div> --}}
 
         <div class="form-group second-form ml-1">
-            <select class="custom-select" id="inSedeName">
+            <select class="custom-select" id="inSearchBySede">
                 <option value="" selected disabled hidden>Nombre de la Sede</option>
             </select>  
         </div>
 
         <div class="form-group second-form ml-1">
-            <input type="number" class="form-control" placeholder="Horas del voluntario" id="inVoluntaryHours">
+            <input type="number" class="form-control" placeholder="Horas del voluntario" id="inSearchByHours">
         </div>
 
         <div class="form-group ml-1">
@@ -163,6 +163,7 @@
             getAllVolunataries();
             startEvents();
             getAllTowns();
+            getAllSedes();
             getAllInstitutions();
             defaultValues();
         });
@@ -185,13 +186,31 @@
             });
 
             $('#inSearchByCURP').on('keypress', (event) => {
-                var keycode = (event.keyCode ? event.keyCode : event.which);
+                let keycode = (event.keyCode ? event.keyCode : event.which);
                 if(keycode == '13'){
                     if($('#inSearchByCURP').val().length <= 0){
                     } else {
                         searchByCURP($('#inSearchByCURP').val());
                     }                   
                 }               
+            });
+
+            $('#inSearchByHours').on('keypress', (event) => {
+                let keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    if($('#inSearchByHours').val().length <= 0){
+                    } else {
+                        searchByHours($('#inSearchByHours').val());
+                    }                   
+                }               
+            });
+
+            $('#inSearchByEndDate').on('change', () => {
+                if($('#inSearchByBeginDate').val().length > 0 &&
+                    $('#inSearchByEndDate').val().length > 0)
+                {
+                    searchByDates($('#inSearchByBeginDate').val(), $('#inSearchByEndDate').val());
+                }                                             
             });
 
             $('#inSearchByTown').on('change', () => {
@@ -205,6 +224,13 @@
                 if($('#inSearchByInstitution').children('option:selected').val().length <= 0){
                 } else {
                     searchByInstitution($('#inSearchByInstitution').children('option:selected').val());
+                }                               
+            });
+
+            $('#inSearchBySede').on('change', () => {
+                if($('#inSearchBySede').children('option:selected').val().length <= 0){
+                } else {
+                    searchBySedes($('#inSearchBySede').children('option:selected').val());
                 }                               
             });
 
@@ -225,7 +251,7 @@
                 }
             });
 
-            $('#btnExportToExcel').click(function() {
+            $('#btnExportToExcel').on('click', () => {
                 let today = new Date();
                 $table.tableExport({
                     fileName: 'reporte voluntarios_' 
@@ -261,6 +287,22 @@
             });
         }
 
+        function getAllSedes(){
+            $.ajax({
+                url: "voluntario/getAllSedes",
+                type: "GET",
+                success: function (response) {
+                    for(let i in response.data){
+                        $('#inSearchBySede').append($('<option>').text(response.data[i].nombre).
+                                attr({ 'value': response.data[i].id_sede, 'disabled': false, 'selected': false, 'hidden': false }));
+                    }
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
         function getAllInstitutions(){
             $.ajax({
                 url: "voluntario/getAllInstitutions",
@@ -278,11 +320,11 @@
         }
 
         function getAllVolunataries(){      
-            let voluntarios = @json($voluntarios);
-            console.log(voluntarios);       
+            let voluntarios = @json($voluntarios);  
             $table.bootstrapTable({data: voluntarios});            
         }
 
+        //#region Seach
         function searchByVoluntaryName(id){
             $.ajax({
                 url: "voluntario/searchByVoluntaryName/" + id,
@@ -338,6 +380,49 @@
                 }
             });
         }
+
+        function searchByDates(fecha_inicio, fecha_fin){
+            $.ajax({
+                url: "voluntario/searchByDates/" + fecha_inicio + "/" + fecha_fin,
+                type: "GET",
+                success: function (response) {
+                    $table.bootstrapTable('destroy');
+                    $table.bootstrapTable({data: response.data});
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function searchBySedes(id){
+            $.ajax({
+                url: "voluntario/searchBySedes/" + id,
+                type: "GET",
+                success: function (response) {
+                    $table.bootstrapTable('destroy');
+                    $table.bootstrapTable({data: response.data});
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function searchByHours(horas){
+            $.ajax({
+                url: "voluntario/searchByHours/" + horas,
+                type: "GET",
+                success: function (response) {
+                    $table.bootstrapTable('destroy');
+                    $table.bootstrapTable({data: response.data});
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+        //#endregion
 
         function deleteVoluntary(id){
             $.ajax({

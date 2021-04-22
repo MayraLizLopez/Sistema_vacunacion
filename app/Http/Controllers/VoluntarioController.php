@@ -359,7 +359,7 @@ class VoluntarioController extends Controller
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio'
         )
-        ->where('jornadas.horas', '=', $hours)
+        ->where('detalle_jornadas.horas', '=', $hours)
         ->distinct()
         ->get();
 
@@ -377,9 +377,15 @@ class VoluntarioController extends Controller
         ]); 
     }
 
+    public function getAllSedes(){
+        $sedes = DB::table('sedes')->where('activo', '=', 1)->get();
+        return response()->json([
+            'data' => $sedes          
+        ]); 
+    }
+
     public function getAllInstitutions()
-    {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+    {   
         $institutions = DB::table('instituciones')->where('activo', '=', 1)->get();
         return response()->json([
             'data' => $institutions       
