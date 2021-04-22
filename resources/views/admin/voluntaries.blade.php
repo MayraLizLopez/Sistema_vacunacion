@@ -2,40 +2,107 @@
 @section('css')
     <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
 @endsection
-@section('content')  
+@section('content')
+<style type="text/css">
+    @font-face {
+        font-family: nutmeg-bold;
+        src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+        font-weight: bold;
+    }
+
+    @font-face {
+        font-family: montserrat;
+        src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+    }
+</style>  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
-<p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos</p>
+<div class="row">
+    <div class="col-md-6">
+        <h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
+        <p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos</p>
+    </div>
+    <div class="col-md-6">
+        <button id="btnExportToExcel" 
+        class="btn btn-success float-right" 
+        style="background-color: #6EDE9E; 
+              border: #6EDE9E; 
+              font-family: 
+              nutmeg-bold; 
+              src: url('{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}');
+              font-weight: bold;
+              ">
+                <img class="mx-1" src="{{ asset('assets/images/borrador.svg')}}" style="width: 40px;"/>
+                <span class="h2">Generar reporte</span>
+        </button>
+    </div>
+</div>
 
 <div id="toolbar">
     <div class="form-inline" role="form">
-        <div class="form-group">
+
+        <div class="form-group main-form">
             <input type="text" class="form-control" placeholder="Voluntario" id="inSearchByVoluntary">
         </div>
-        <div class="form-group ml-1">
+
+        <div class="form-group main-form ml-1">
             <input type="text" class="form-control" placeholder="CURP" id="inSearchByCURP">
         </div>
-        <div class="form-group ml-1">
+
+        <div class="form-group main-form ml-1">
             <select class="custom-select" id="inSearchByTown">
                 <option value="" selected disabled hidden>Elija un municipio</option>
             </select>           
         </div>
+
         @if ($LoggedUserInfo['rol'] == 'Administrador General')
-            <div class="form-group ml-1">
+            <div class="form-group main-form ml-1">
                 <select class="custom-select" id="inSearchByInstitution">
                     <option value="" selected disabled hidden>Elija una institución</option>
                 </select>           
             </div>
         @endif
+
+        <div class="form-group second-form">
+            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Fecha Inicio" id="inStartDate">
+        </div>
+
+        <div class="form-group second-form ml-1">
+            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Fecha Fin" id="inEndDate">
+        </div>
+
+        <div class="form-group second-form ml-1">
+            <input type="text" class="form-control" placeholder="Nombre del Enlace" id="inLinkName">
+        </div>
+
+        <div class="form-group second-form ml-1">
+            <select class="custom-select" id="inSedeName">
+                <option value="" selected disabled hidden>Nombre de la Sede</option>
+            </select>  
+        </div>
+
+        <div class="form-group second-form ml-1">
+            <input type="number" class="form-control" placeholder="Horas del voluntario" id="inVoluntaryHours">
+        </div>
+
         <div class="form-group ml-1">
             <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
         </div>
-        <div class="form-group">
+
+        <div class="form-group ml-1">
+            <button type="button" class="btn btn-info btn-table ml-1" id="showMoreFilters" 
+            data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters"
+            data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros">
+                <i class="fas fa-chevron-circle-down"></i>
+            </button>      
+        </div>
+
+        <div class="form-group ml-1">
             <button type="button" class="btn btn-success btn-table ml-1" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
             <img class="mx-2" src="{{ asset('assets/images/borrador.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Limpiar Filtros</span>
             </button>      
         </div>
+
         <div class="form-group ml-1">
             <button type="button" class="btn btn-primary btn-table" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntario">
                 <a style="color:white;" href="{{route('crearVoluntario')}}">
@@ -44,8 +111,11 @@
                 </a>
             </button>
         </div>
+
     </div>
 </div>
+
+
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -74,7 +144,7 @@
                     <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents"></th>
                   </tr>
                 </thead>
             </table>
@@ -85,6 +155,7 @@
 @section('scripts')
     <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
     <script src="{{ url("../resources/js/bootstrap-table-es-MX.js") }}"></script>
+    <script src="{{ url("../resources/js/tableExport.min.js") }}"></script>
     <script>
         let $table = $('#voluntariesTable');
 
@@ -92,8 +163,14 @@
             getAllVolunataries();
             startEvents();
             getAllTowns();
-            getAllInstitutions()
+            getAllInstitutions();
+            defaultValues();
         });
+
+        function defaultValues(){
+            $('.main-form').attr('hidden', false);
+            $('.second-form').attr('hidden', true);
+        }
 
         function startEvents(){
             //Evento de busqueda por nombre de voluntario.
@@ -133,6 +210,38 @@
 
             $('#cleanFilters').on('click', () => {
                 location.reload();
+            });
+
+            $('#showMoreFilters').on('click', () => {
+                console.log( $('.main-form').is(':hidden') + ' - ' + $('.second-form').is(':hidden'));
+
+                if(!$('.main-form').is(':hidden') && $('.second-form').is(':hidden')){
+                    $('.main-form').attr('hidden', true);
+                    $('.second-form').attr('hidden', false);
+                }
+                else if($('.main-form').is(':hidden') && !$('.second-form').is(':hidden')){
+                    $('.main-form').attr('hidden', false);
+                    $('.second-form').attr('hidden', true);
+                }
+            });
+
+            $('#btnExportToExcel').click(function() {
+                let today = new Date();
+                $table.tableExport({
+                    fileName: 'reporte voluntarios_' 
+                    + today.getDay() 
+                    + '-' + (today.getMonth() + 1) 
+                    + '-' +today.getFullYear()
+                    + ' ' +today.getHours()
+                    + '.' +today.getMinutes()
+                    + '.' +today.getSeconds(),
+                    type: 'excel',
+                    escape: false,
+                    exportDataType: 'all',
+                    refreshOptions: {
+                        exportDataType: 'all'
+                    }
+                });
             });
         }
 
