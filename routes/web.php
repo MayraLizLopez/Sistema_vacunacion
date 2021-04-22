@@ -8,6 +8,7 @@ use App\Http\Controllers\InstitucionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VaccinationDayController;
+use App\Http\Controllers\SedeController;
 
 use App\Mail\SaveVoluntario;
 /*
@@ -23,7 +24,7 @@ use App\Mail\SaveVoluntario;
 
 Route::get('/', HomeController::class)->name('home');
 
-//voluntarios
+//voluntarios puúlico
 Route::get('voluntario/index', [VoluntarioController::class, "index"]);
 
 Route::get('voluntario/create', [VoluntarioController::class, "create"]);
@@ -37,13 +38,16 @@ Route::get('security/logout', [LoginController::class, "logout"])->name('logout'
 
 Route::post('security/authenticate', [LoginController::class, "authenticate"]);
 
+//Respuesta emails
 Route::get('emailVoluntario/{id}', [VoluntarioController::class, "emailConfirmacion"]);
 
 Route::get('emailRechazar/{uuid}', [VaccinationDayController::class, "rechazarJornada"]);
 
 Route::get('emailAceptar/{uuid}', [VaccinationDayController::class, "aceptarJornada"]);
 
+//seguridad
 Route::group(['middleware' =>['AuthCheck']], function(){
+    //login
     Route::get('security/login', [LoginController::class, "login"])->name('login');
     //Index
     Route::get('admin/panel/index', [LoginController::class, "dashboard"]);
@@ -51,9 +55,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     //adminstrador
     Route::get('admin/panel', [AdminController::class, "panel"]);
 
+    //Voluntarios
     Route::get('admin/panel/show', [VoluntarioController::class, "show"])->name('tabla_volu');
-
-    Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
     Route::get('admin/panel/voluntario/searchByVoluntaryName/{name}', [VoluntarioController::class, "searchByVoluntaryName"])->name('searchByVoluntaryName');
 
@@ -76,6 +79,9 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/voluntario/create', [VoluntarioController::class, "createAdmin"])->name('crearVoluntario');
 
     Route::post('voluntario/update', [VoluntarioController::class, "update"]);
+
+    //Instituciones
+    Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
     Route::get('admin/panel/institutions/edit/{id}', [InstitucionController::class, "edit"])->name('editarInstituciones');
 
@@ -121,5 +127,18 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
 
     Route::post('admin/panel/profile/savePassword', [UsuarioController::class, "savePassword"])->name('savePassword');
+
+    //Sedes
+    Route::get('admin/panel/sedes/index', [SedeController::class, "show"])->name('tabla_sedes');
+
+    Route::get('admin/panel/sedes/crear', [SedeController::class, "create"])->name('createSede');
+
+    Route::post('admin/panel/sedes/', [SedeController::class, "store"])->name('storeSede');
+
+    Route::get('admin/panel/sedes/editar/{id_sede}', [SedeController::class, "edit"])->name('editarSedes');
+
+    Route::patch('admin/panel/sedes/actualizar/{id_sede}', [SedeController::class, "update"])->name('updateSede');
+
+    Route::post('admin/panel/sedes/eliminar/{id}', [SedeController::class, "destroy"])->name('destroySede');
 
 });

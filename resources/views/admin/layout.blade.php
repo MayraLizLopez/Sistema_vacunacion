@@ -84,7 +84,7 @@
 
                 
                 @if ($LoggedUserInfo['rol'] == 'Administrador General')
-                    <!-- Divider -->
+                    <!-- Voluntarios -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url("/admin/panel/show")}}">                           
@@ -92,7 +92,7 @@
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>
 
-                    <!-- Divider -->
+                    <!-- Instituciones -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url("/admin/panel/institutions")}}">
@@ -100,10 +100,10 @@
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Instituciones</span></a>
                     </li>
 
-                    <!-- Divider -->
+                    <!-- Jornadas -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="{{url("/admin/panel/vaccinationDay")}}">
+                        <a id="menu" class="nav-link" href="{{url('/admin/panel/vaccinationDay')}}">
                         <img class="mx-2" src="{{ asset('assets/images/menu_jornadas.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Jornadas</span></a>
                     </li>
@@ -115,11 +115,19 @@
                         <i class="fas fa-users"></i>
                         <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
                     </li> --}}
+
+                    <!-- Sedes -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
+                        <img class="mx-2" src="{{ asset('assets/images/jeringa.svg')}}" style="width: 20px;"/>
+                        <span  style="font-family: nutmeg-bold; font-size:18px;">Centros</span></a>
+                    </li>
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="{{url("/admin/panel/show")}}">
+                        <a id="menu" class="nav-link" href="{{url('/admin/panel/show')}}">
                         <img class="mx-2" src="{{ asset('assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
                         <span   style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>                 

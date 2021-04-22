@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="emailVoluntary">Municipio</label>
                             <select class="form-control" id="townVoluntary" name="id_municipio">

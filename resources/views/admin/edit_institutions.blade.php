@@ -65,16 +65,16 @@
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
-                        <label for="emailVoluntary">Municipio</label>
+                            <label for="emailVoluntary">Municipio</label>
                             <select class="form-control" id="townVoluntary" name="id_municipio">
                             <option value="{{$institucion->id_municipio}}">{{$municipio_select}}</option>
-                             @foreach ($municipios as $municipio)
-                              @if ($municipio_select != $municipio->nombre)
-                             <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
-                             @endif
-                             @endforeach
+                            @foreach ($municipios as $municipio)
+                            @if ($municipio_select != $municipio->nombre)
+                            <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
+                            @endif
+                            @endforeach
                             </select>
                             <span class="text-danger">@error('id_municipio'){{ 'Seleccione un municipio' }} @enderror </span>
                         </div>
