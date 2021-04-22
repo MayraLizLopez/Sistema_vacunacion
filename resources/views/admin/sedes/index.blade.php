@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 <!-- Page Heading -->
@@ -43,8 +43,8 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
-    <script src="{{ url("../resources/js/bootstrap-table-es-MX.js") }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
     <script>
         let $table = $('#sedesTable');
 

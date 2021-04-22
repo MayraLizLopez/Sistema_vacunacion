@@ -11,32 +11,32 @@
         <title>Panel de control - Vacunación</title>
 
         <!-- Custom fonts for this template-->
-        <link href="{{ url("../resources/css/fontawesome.min.css") }}" rel="stylesheet">
-        <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet">
+        <link href="{{ asset('public/assets/css/fontawesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('public/assets/css/all.min.css') }}" rel="stylesheet">
         <link
             href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
         <!-- Custom styles for this template-->
-        <link rel="stylesheet" href="{{ url("../resources/css/bootstrap.min.css") }}">
-        <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
-        <link rel="stylesheet" href="{{ url("../resources/css/sweetalert2.min.css") }}">
-        <link rel="stylesheet" href="{{ url("../resources/css/site.css") }}">
+        <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/assets/css/sb-admin-2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/assets/css/sweetalert2.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/assets/css/site.css') }}">
         <style type="text/css">
             @font-face {
                 font-family: nutmeg-bold;
-                src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+                src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
                 font-weight: bold;
             }
 
             @font-face {
                 font-family: montserrat;
-                src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+                src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
             }
 
             @font-face {
                 font-family: montserrat-bold;
-                src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+                src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
                 font-weight: bold;
             }
 
@@ -384,27 +384,27 @@
             </div>
         </div> --}}
         <!-- Bootstrap core JavaScript-->
-        <script src="{{ url("../resources/js/jquery.min.js") }}"></script>
-        <script src=" {{ url("../resources/js/bootstrap.bundle.min.js") }}"></script>
+        <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="{{ url("../resources/js/jquery.easing.min.js") }}"></script>
+        <script src="{{ asset('public/assets/js/jquery.easing.min.js') }}"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="{{ url("../resources/js/sb-admin-2.min.js") }}"></script>
+        <script src="{{ asset('public/assets/js/sb-admin-2.min.js') }}"></script>
 
         <!-- Page level plugins -->
-        {{-- <script src="{{ url("../resources/js/Chart.min.js") }}"></script> --}}
+        {{-- <script src="{{ asset('public/assets/js/Chart.min.js') }}"></script> --}}
 
-        <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
-        <script src="{{ url("../resources/js/all.min.js") }}"></script>
+        <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/all.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
-        {{-- <script src="{{ url("../resources/js/chart-area-demo.js") }}"></script>
-        <script src="{{ url("../resources/js/chart-pie-demo.js") }}"></script> --}}
-        <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
-        <script src="{{ url("../resources/js/sweetalert2.min.js") }}"></script>
-        <script src="{{ url("../resources/js/jquery.mask.min.js") }}"></script>     
+        {{-- <script src="{{ asset('public/assets/js/chart-area-demo.js") }}"></script>
+        <script src="{{ asset('public/assets/js/chart-pie-demo.js') }}"></script> --}}
+        <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/jquery.mask.min.js') }}"></script>     
         @yield('scripts')
     </body>
 </html>

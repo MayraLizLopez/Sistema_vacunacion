@@ -1,18 +1,18 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
 <style type="text/css">
         @font-face {
             font-family: nutmeg-bold;
-            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
             font-weight: bold;
         }
 
         @font-face {
             font-family: montserrat;
-            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
         }
         button{
             width: 184px;

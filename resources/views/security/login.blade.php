@@ -10,16 +10,16 @@
     <title>Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="{{ url("../resources/css/all.min.css") }}" rel="stylesheet" type="text/css">
-    <link href="{{ url("../resources/css/fontawesome.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link rel="stylesheet" href="{{ url("../resources/css/bootstrap.min.css") }}">
-    <link rel="stylesheet" href="{{ url("../resources/css/sb-admin-2.min.css") }}">
-    <link rel="stylesheet" href="{{ url("../resources/css/login.css") }}">
+    <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/sb-admin-2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/css/login.css') }}">
 </head>
 
 <body class="background-login">
@@ -35,7 +35,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="../../resources/image/isologo_jalisco_v.svg" 
+                                <img src="{{ asset('public/assets/images/isologo_jalisco_v.svg')}}"
                                 alt="jalisco"
                                 class="img-fluid mt-1 mb-3 ml-5">
                             </div>
@@ -85,17 +85,17 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ url("../resources/js/jquery.min.js") }}"></script>
-    <script src=" {{ url("../resources/js/bootstrap.bundle.min.js") }}"></script>
+    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/js/bootstrap.bundle.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="{{ url("../resources/js/jquery.easing.min.js") }}"></script>
+        <script src="{{ asset('public/js/jquery.easing.min.js') }}"></script>
 
         <!-- Custom scripts for all pages-->
-        <script src="{{ url("../resources/js/sb-admin-2.min.js") }}"></script>
+        <script src="{{ asset('public/js/sb-admin-2.min.js') }}"></script>
 
-        <script src="{{ url("../resources/js/all.min.js") }}"></script>
-        <script src="{{ url("../resources/js/fontawesome.min.js") }}"></script>
+        <script src="{{ asset('public/js/all.min.js') }}"></script>
+        <script src="{{ asset('public/js/fontawesome.min.js') }}"></script>
 </body>
 
 </html>

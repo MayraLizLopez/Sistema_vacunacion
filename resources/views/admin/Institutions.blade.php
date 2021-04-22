@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 <!-- Page Heading --> 
@@ -9,7 +9,7 @@
 
 <div id="toolbar">
     <div class="form-inline">
-        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a></button>
+        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a></button>
     </div>
 </div>
 <!-- DataTales Example -->
@@ -46,8 +46,8 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
-<script src="{{ url("../resources/js/bootstrap-table-es-MX.js") }}"></script>
+<script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
+<script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
     <script>
         let $table = $('#institutionsTable');
 

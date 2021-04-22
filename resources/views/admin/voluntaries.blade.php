@@ -1,18 +1,18 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
 <style type="text/css">
     @font-face {
         font-family: nutmeg-bold;
-        src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+        src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
         font-weight: bold;
     }
 
     @font-face {
         font-family: montserrat;
-        src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+        src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
     }
 </style>  
 <!-- Page Heading -->
@@ -28,10 +28,10 @@
               border: #6EDE9E; 
               font-family: 
               nutmeg-bold; 
-              src: url('{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}');
+              src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
               ">
-                <img class="mx-1" src="{{ asset('assets/images/borrador.svg')}}" style="width: 40px;"/>
+                <img class="mx-1" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 40px;"/>
                 <span class="h2">Generar reporte</span>
         </button>
     </div>
@@ -153,9 +153,9 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
-    <script src="{{ url("../resources/js/bootstrap-table-es-MX.js") }}"></script>
-    <script src="{{ url("../resources/js/tableExport.min.js") }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
+    <script src="{{ asset('public/assets/js/tableExport.min.js') }}"></script>
     <script>
         let $table = $('#voluntariesTable');
 

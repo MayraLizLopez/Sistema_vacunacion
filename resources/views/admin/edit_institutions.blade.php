@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 <!-- Page Heading -->

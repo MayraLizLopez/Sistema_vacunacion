@@ -1,19 +1,19 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url('../resources/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 
 <style type="text/css">
         @font-face {
             font-family: nutmeg-bold;
-            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
             font-weight: bold;
         }
 
         @font-face {
             font-family: montserrat;
-            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
         }
 
         #button-largo{
@@ -58,7 +58,7 @@
 <div id="toolbar1">
     <div class="form-inline" role="form">
         <button type="button" class="btn btn-primary" id="createVaccinationDay">
-        <img class="mx-2" src="{{ asset('assets/images/agregar.svg')}}" style="width: 20px;"/>
+        <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
             Registrar jornada
         </button>
     </div>

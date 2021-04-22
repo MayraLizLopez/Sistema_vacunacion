@@ -8,13 +8,13 @@
     <style type="text/css">
         @font-face {
             font-family: nutmeg-bold;
-            src: url("{{ asset('assets/fonts/Nutmeg-Bold.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
             font-weight: bold;
         }
 
         @font-face {
             font-family: montserrat;
-            src: url("{{ asset('assets/fonts/Montserrat-Regular.ttf')}}");
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
         }
 
         
@@ -33,7 +33,7 @@
                             <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $voluntarios }}</div>
                         </div>
                         <div class="col-auto">
-                            <img src="{{ asset('assets/images/voluntarios.svg')}}" style="width: 75px;"/>
+                            <img src="{{ asset('public/assets/images/voluntarios.svg')}}" style="width: 75px;"/>
                         </div>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                             <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $instituciones }}</div>
                         </div>
                         <div class="col-auto">
-                        <img src="{{ asset('assets/images/instituciones.svg')}}" style="width: 75px;"/>
+                        <img src="{{ asset('public/assets/images/instituciones.svg')}}" style="width: 75px;"/>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $jornadas }}</div>
                         </div>
                         <div class="col-auto">
-                            <img src="{{ asset('assets/images/jornada.svg')}}" style="width: 75px;"/>
+                            <img src="{{ asset('public/assets/images/jornada.svg')}}" style="width: 75px;"/>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                                 <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $voluntarios }}</div>
                             </div>
                             <div class="col-auto">
-                                <img src="{{ asset('assets/images/voluntarios.svg')}}" style="width: 75px;"/>
+                                <img src="{{ asset('public/assets/images/voluntarios.svg')}}" style="width: 75px;"/>
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                                 <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $jornadas }}</div>
                             </div>
                             <div class="col-auto">
-                                <img src="{{ asset('assets/images/jornada.svg')}}" style="width: 75px;"/>
+                                <img src="{{ asset('public/assets/images/jornada.svg')}}" style="width: 75px;"/>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
         <div class="col-xl-4 col-md-4 mb-4">
         </div>
         <div class="col-xl-4 col-md-4 mb-4">
-            <img src="{{ asset('assets/images/isologo_jalisco_v.svg')}}"
+            <img src="{{ asset('public/assets/images/isologo_jalisco_v.svg')}}"
                     alt="jalisco"
                     class="img-fluid">
         </div>

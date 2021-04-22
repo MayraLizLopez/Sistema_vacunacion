@@ -35,7 +35,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ url("../resources/js/bootstrap-table.min.js") }}"></script>
+    <script src="{{ asset('public/js/bootstrap-table.min.js') }}"></script>
     <script>
     document.getElementById("botonEnviar").disabled = true;
     document.getElementById("myCheck").checked = false;
