@@ -66,7 +66,7 @@
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url("/admin/panel/index")}}">
                     <div class="col-auto">
-                        <img src="{{ asset('assets/images/jeringa.svg')}}" style="width: 35px;"/>
+                        <img src="{{ asset('public/assets/images/jeringa.svg')}}" style="width: 35px;"/>
                     </div>
                     <div class="sidebar-brand-text font-weight-bold" style="color:#54A583; font-size: 45px; font-family:nutmeg-bold; " >SVG</div>
                 </a>
@@ -77,7 +77,7 @@
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
                     <a id="menu" class="nav-link" id="inicio" href="{{url("/admin/panel/index")}}">
-                        <img class="mx-2" src="{{ asset('assets/images/index.svg')}}" style="width: 25px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/index.svg')}}" style="width: 25px;"/>
                         <span style="font-family: nutmeg-bold; font-size:18px;">Inicio</span></a>
                         
                 </li>
@@ -88,7 +88,7 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url("/admin/panel/show")}}">                           
-                        <img class="mx-2" src="{{ asset('assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>
 
@@ -96,7 +96,7 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url("/admin/panel/institutions")}}">
-                        <img class="mx-2" src="{{ asset('assets/images/menu_instituciones.svg')}}" style="width: 20px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_instituciones.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Instituciones</span></a>
                     </li>
 
@@ -104,7 +104,7 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('/admin/panel/vaccinationDay')}}">
-                        <img class="mx-2" src="{{ asset('assets/images/menu_jornadas.svg')}}" style="width: 20px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_jornadas.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Jornadas</span></a>
                     </li>
 
@@ -120,7 +120,7 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
-                        <img class="mx-2" src="{{ asset('assets/images/jeringa.svg')}}" style="width: 20px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/jeringa.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Centros</span></a>
                     </li>
                 @else
@@ -128,7 +128,7 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('/admin/panel/show')}}">
-                        <img class="mx-2" src="{{ asset('assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
                         <span   style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>                 
                 @endif
