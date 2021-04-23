@@ -118,11 +118,11 @@
 
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
+                    {{--<li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/jeringa.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Centros</span></a>
-                    </li>
+                    </li>--}}
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
