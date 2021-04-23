@@ -358,8 +358,8 @@
   </div>
 @endsection
 @section('scripts')
-    <script src="{{ url('../resources/js/bootstrap-table.min.js') }}"></script>
-    <script src="{{ url('../resources/js/bootstrap-table-es-MX.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
     <script>
         let $vaccinationDayTable = $('#vaccinationDayTable');
         let $voluntariesTable = $('#voluntariesTable');
