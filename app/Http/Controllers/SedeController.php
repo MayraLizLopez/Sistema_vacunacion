@@ -44,12 +44,24 @@ class SedeController extends Controller
             'direccion' => 'required',
             'id_municipio' => 'required',
             'cupo' => 'required',
+            'colonia' => 'required',
+            'cp' => 'required',
+            'cruce_calles' => 'required',
+            'nombre_encargado' => 'required',
+            'georeferencia' => 'required',
         ]);
 
         $sede = new Sede;
         $sede ->nombre = $request->nombre;
         $sede ->direccion = $request->direccion;
         $sede->id_municipio = (int)$request->id_municipio;
+        $sede->colonia = $request->colonia;
+        $sede->cp = $request->cp;
+        $sede->cruce_calles = $request->cruce_calles;
+        $sede->georeferencia = $request->georeferencia;
+        $sede->nombre_encargado = $request->nombre_encargado;
+        $sede->tel_encargado = $request->tel_encargado;
+        $sede->email_encargado = $request->email_encargado;
         $sede->cupo = (int)$request->cupo;
         $sede->activo = true;
         $sede->fecha_creacion = Carbon::now();
@@ -113,12 +125,24 @@ class SedeController extends Controller
             'direccion' => 'required',
             'id_municipio' => 'required',
             'cupo' => 'required',
+            'colonia' => 'required',
+            'cp' => 'required',
+            'cruce_calles' => 'required',
+            'nombre_encargado' => 'required',
+            'georeferencia' => 'required',
         ]);
 
         $sedeEditado = Sede::findOrFail($id);
         $sedeEditado->nombre = $request->nombre;
         $sedeEditado->direccion = $request->direccion;
         $sedeEditado->id_municipio = (int)$request->id_municipio;
+        $sedeEditado->colonia = $request->colonia;
+        $sedeEditado->cp = $request->cp;
+        $sedeEditado->cruce_calles = $request->cruce_calles;
+        $sedeEditado->georeferencia = $request->georeferencia;
+        $sedeEditado->nombre_encargado = $request->nombre_encargado;
+        $sedeEditado->tel_encargado = $request->tel_encargado;
+        $sedeEditado->email_encargado = $request->email_encargado;
         $sedeEditado->activo = true;
         $sedeEditado->fecha_edicion = Carbon::now();
         $save = $sedeEditado->save();

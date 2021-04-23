@@ -26,6 +26,7 @@
             margin-right: 16px;
             width: 184px;
             font-family: montserrat;
+            font-weight: bold;
             
         }
 

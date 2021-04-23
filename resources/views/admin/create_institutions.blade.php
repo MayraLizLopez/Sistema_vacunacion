@@ -21,8 +21,17 @@
             font-weight: bold;
         }
 
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
         #botonEnviar{
             margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
         }
         h1{
             font-family: nutmeg-bold;
@@ -185,7 +194,7 @@
                 </div>
             </div>
             <button id="botonEnviar" class="btn btn-success" type="submit">Guardar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
+            <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
             
         </div>
     </div>

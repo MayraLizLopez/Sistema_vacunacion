@@ -21,9 +21,19 @@
             font-weight: bold;
         }
 
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
         #botonEnviar{
             margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
         }
+        
         h1{
             font-family: nutmeg-bold;
         }
@@ -105,6 +115,41 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nameVoluntary">Colonia</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="colonia" placeholder="colonia"/>
+                            <span class="text-danger">@error('colonia'){{ 'Ingrese la colonia' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="paternalSurnameVoluntary">Código postal</label>
+                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cp" placeholder="código postal" min="11111" max="99999"/>
+                            <span class="text-danger">@error('cp'){{ 'Ingrese el código postal' }} @enderror </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nameVoluntary">Cruce de calles</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="cruce_calles" placeholder="Entre A y B"/>
+                            <span class="text-danger">@error('cruce_calles'){{ 'Ingrese el cruce de calles' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nameVoluntary">Georeferencia</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="georeferencia" placeholder="georefernecia"/>
+                            <span class="text-danger">@error('georeferencia'){{ 'Ingrese la georeferencia' }} @enderror </span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -126,9 +171,32 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="nameVoluntary">Nombre del encargado</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="nombre_encargado" placeholder="Nombre"/>
+                            <span class="text-danger">@error('nombre_encargado'){{ 'Ingrese el nombre del encargado' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="nameVoluntary">Telefóno del encargado</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="tel_encargado" placeholder="Teléfono"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="nameVoluntary">Correo del encargado</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="email_encargado" placeholder="Correo"/>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <button id="botonEnviar" class="btn btn-success" type="submit">Guardar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_sedes')}}">Cancelar</a></button>
+            <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_sedes')}}">Cancelar</a>
             
         </div>
     </div>

@@ -7,6 +7,55 @@
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Editar Institución</h1>
 <p class="mb-4"> </p>
 
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
 
 <form action= "{{route('updateInstitucion', $institucion->id_insti)}}"  method="POST">
     @method('PATCH')
@@ -139,8 +188,8 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success" type="submit">Guardar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
+            <button class="btn btn-success" id="botonEnviar" type="submit">Guardar</button>
+            <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
             
         </div>
     </div>

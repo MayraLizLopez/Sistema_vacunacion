@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('public/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
     <div class="row row justify-content-center">
@@ -8,6 +8,58 @@
             <h1 style="margin-top: 30px;">Editar voluntario</h1>
         </div>
     </div>
+
+    <style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        .botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
+
     <p class="mb-4"> </p>
     <div class="row justify-content-center">
         <div class="col-sm-12">
@@ -137,10 +189,13 @@
                                 </div>
                             </div>
                         </div>
+
+                        <button type="submit" class="btn btn-success botonEnviar" id="sendFormVoluntaries">Enviar</button>
+                        <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a>
+                        
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a></button>
+                
             </form>
         </div>
     </div>
