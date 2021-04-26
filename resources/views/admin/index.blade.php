@@ -96,7 +96,7 @@
 
     <div class="row">
         <!-- Centros -->
-        <div class="col-xl-4 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-12 mb-6">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -114,7 +114,7 @@
         </div>
 
         <!-- Usuarios -->
-        <div class="col-xl-4 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-12 mb-6">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
