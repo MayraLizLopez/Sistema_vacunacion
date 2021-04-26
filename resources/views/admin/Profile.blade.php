@@ -6,6 +6,59 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Mi Perfil</h1>
 <p class="mb-4"> </p>
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+
+        #button-largo{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        .botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+            
+        }
+
+        .botonEnviar2{
+            margin-right: 16px;
+            font-family: montserrat;
+            font-weight: bold;
+            
+        }
+
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
 
 <!-- DataTales Example -->
 <form>
@@ -95,9 +148,9 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" class="btn btn-success botonEnviar2" data-toggle="modal" data-target="#passwordModal" >Cambiar contraseña</button>
             </div>
         </div>
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#passwordModal" ><a style="color:white;">Cambiar contraseña</a></button>
     </div>
 
 </form>
@@ -119,15 +172,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="paternalSurnameVoluntary">Nueva Contraseña</label>
-                                <input type="password" class="form-control" id="paternalSurnameVoluntary" name="password" placeholder="Ingrese la nueva contraseña" />
+                                <input type="password" class="form-control" id="paternalSurnameVoluntary" name="password" placeholder="Ingrese la nueva contraseña" required="required"/>
                                 <span class="text-danger">@error('password'){{ 'Ingrese una contraseña' }} @enderror </span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button  type="submit" class="btn btn-success">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <div class="modal-footer mr-auto">
+                    <button  type="submit" class="btn btn-success botonEnviar">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="button-largo">Cancelar</button>
                 </div>
             </form>
         </div>

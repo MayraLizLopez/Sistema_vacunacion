@@ -530,7 +530,7 @@ class UsuariosSeeder extends Seeder
             'cargo' => 'Director',
             'rol' => 'Administrador General',
             'tel' => '123456788',
-            'email' => 'marcela@gmail.com',
+            'email' => 'marcela.aguilar@jalisco.gob.mx',
             'password' => Hash::make('1234'),
             'activo' => true,
             'fecha_creacion' => Carbon::now(),

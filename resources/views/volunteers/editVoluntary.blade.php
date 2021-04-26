@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ url("../resources/css/bootstrap-table.min.css") }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('public/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')
     <div class="row row justify-content-center">
@@ -8,6 +8,58 @@
             <h1 style="margin-top: 30px;">Editar voluntario</h1>
         </div>
     </div>
+
+    <style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        .botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
+
     <p class="mb-4"> </p>
     <div class="row justify-content-center">
         <div class="col-sm-12">
@@ -57,14 +109,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="nameVoluntary">Nombre(s)</label>
-                                        <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" value="{{ $voluntarioEdit->nombre }}"/>
+                                        <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" value="{{ $voluntarioEdit->nombre }}" required="required"/>
                                         <span class="text-danger">@error('nombre'){{ 'Ingrese su nombre o nombres' }} @enderror </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="paternalSurnameVoluntary">Apellido Paterno</label>
-                                        <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_pat" placeholder="Apellido Paterno" value="{{ $voluntarioEdit->ape_pat }}"/>
+                                        <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_pat" placeholder="Apellido Paterno" value="{{ $voluntarioEdit->ape_pat }}" required="required"/>
                                         <span class="text-danger">@error('ape_pat'){{ 'Ingrese su apellido paterno' }} @enderror </span>
                                     </div>
                                 </div>
@@ -80,14 +132,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="nameVoluntary">Correo electrónico</label>
-                                        <input type="text" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" value="{{ $voluntarioEdit->email }}"/>
+                                        <input type="text" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" value="{{ $voluntarioEdit->email }}" required="required"/>
                                         <span class="text-danger">@error('email'){{ 'Ingrese un email correcto o no registrado en la plataforma' }} @enderror </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="paternalSurnameVoluntary">Teléfono / Celular</label>
-                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" value="{{ $voluntarioEdit->tel }}">
+                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" value="{{ $voluntarioEdit->tel }}" required="required">
                                         <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                                     </div>
                                 </div>
@@ -137,10 +189,13 @@
                                 </div>
                             </div>
                         </div>
+
+                        <button type="submit" class="btn btn-success botonEnviar" id="sendFormVoluntaries">Enviar</button>
+                        <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a>
+                        
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="sendFormVoluntaries">Enviar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a></button>
+                
             </form>
         </div>
     </div>

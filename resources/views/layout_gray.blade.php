@@ -13,27 +13,31 @@
     </head>
     <body style="background-image: url('{{ asset('public/assets/images/FondoRegistro.png')}}'); height:100%;">
         @yield('content')
+        <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/jquery.slim.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
-        <script src="{{ asset('public/assets/js/jquery.easing.min.js') }}"></script>
+        {{--<script src="{{ asset('public/assets/js/jquery.easing.min.js') }}"></script>--}}
 
         <!-- Custom scripts for all pages-->
-        <script src="{{ asset('public/assets/js/sb-admin-2.min.js') }}"></script>
+        {{--<script src="{{ asset('public/assets/js/sb-admin-2.min.js') }}"></script>--}}
 
         <!-- Page level plugins -->
-        <script src="{{ asset('public/assets/js/Chart.min.js') }}"></script>
+        {{--<script src="{{ asset('public/assets/js/Chart.min.js') }}"></script>--}}
 
         <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/all.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
-        <script src="{{ asset('public/assets/js/chart-area-demo.js') }}"></script>
-        <script src="{{ asset('public/assets/js/chart-pie-demo.js') }}"></script>
+        {{--<script src="{{ asset('public/assets/js/chart-area-demo.js') }}"></script>--}}
+        {{--<script src="{{ asset('public/assets/js/chart-pie-demo.js') }}"></script>--}}
         <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/jquery.mask.min.js') }}"></script>   
+
+        <!-- validator -->
+        <script src="{{ asset('public/assets/vendors/validator/validator.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

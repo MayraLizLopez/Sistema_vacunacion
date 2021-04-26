@@ -64,7 +64,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion shadow" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url("/admin/panel/index")}}">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('/admin/panel/index')}}">
                     <div class="col-auto">
                         <img src="{{ asset('public/assets/images/jeringa.svg')}}" style="width: 35px;"/>
                     </div>
@@ -76,8 +76,8 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a id="menu" class="nav-link" id="inicio" href="{{url("/admin/panel/index")}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/index.svg')}}" style="width: 25px;"/>
+                    <a id="menu" class="nav-link" id="inicio" href="{{url('/admin/panel/index')}}">
+                        <img class="mx-2" src="{{ asset('public/assets/images/index.svg')}}" style="width: 23px;"/>
                         <span style="font-family: nutmeg-bold; font-size:18px;">Inicio</span></a>
                         
                 </li>
@@ -87,7 +87,7 @@
                     <!-- Voluntarios -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="{{url("/admin/panel/show")}}">                           
+                        <a id="menu" class="nav-link" href="{{url('/admin/panel/show')}}">                           
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>
@@ -95,7 +95,7 @@
                     <!-- Instituciones -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="{{url("/admin/panel/institutions")}}">
+                        <a id="menu" class="nav-link" href="{{url('/admin/panel/institutions')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_instituciones.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Instituciones</span></a>
                     </li>
@@ -110,19 +110,19 @@
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
-                            <img class="mx-2" src="{{ asset('public/assets/images/user3.svg')}}" style="width: 20px;"/>
+                    {{-- <li class="nav-item active">
+                        <a id="menu" class="nav-link" href="#">
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
                         <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
                     </li>
 
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    {{--<li class="nav-item active">
+                    <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/jeringa.svg')}}" style="width: 20px;"/>
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_centros.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Centros</span></a>
-                    </li>--}}
+                    </li>
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
@@ -386,6 +386,7 @@
         <!-- Bootstrap core JavaScript-->
         <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/custom.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="{{ asset('public/assets/js/jquery.easing.min.js') }}"></script>
@@ -400,11 +401,14 @@
         <script src="{{ asset('public/assets/js/all.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
-        {{-- <script src="{{ asset('public/assets/js/chart-area-demo.js") }}"></script>
+        {{-- <script src="{{ asset('public/assets/js/chart-area-demo.js') }}"></script>
         <script src="{{ asset('public/assets/js/chart-pie-demo.js') }}"></script> --}}
         <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/jquery.mask.min.js') }}"></script>     
+
+        <!-- validator -->
+        <script src="{{ asset('public/assets/vendors/validator/validator.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

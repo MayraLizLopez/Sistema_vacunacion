@@ -104,12 +104,10 @@
         </div>
 
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-primary btn-table" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntario">
-                <a style="color:white;" href="{{route('crearVoluntario')}}">
-                    <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
-                    <span class="item-label">Registrar Voluntario</span>                 
-                </a>
-            </button>
+            <a class="btn btn-primary btn-table" style="color:white;" href="{{route('crearVoluntario')}}">
+                <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
+                <span class="item-label">Registrar Voluntario</span>                 
+            </a>
         </div>
 
     </div>

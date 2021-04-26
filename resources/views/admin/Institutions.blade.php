@@ -9,7 +9,7 @@
 
 <div id="toolbar">
     <div class="form-inline">
-        <button type="button" class="btn btn-primary"><a style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a></button>
+        <a class="btn btn-primary" style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a>
     </div>
 </div>
 <!-- DataTales Example -->
@@ -22,7 +22,7 @@
             data-single-select="true" 
             data-click-to-select="true"
             data-search="true"
-            data-page-size="5"
+            data-page-size="10"
             data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"

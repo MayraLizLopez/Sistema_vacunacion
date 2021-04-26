@@ -18,6 +18,13 @@ class Sede extends Migration
             $table->unsignedBigInteger('id_municipio');
             $table->string ('nombre', 255);
             $table->string ('direccion', 255);
+            $table->string ('cruce_calles', 255)->nullable();
+            $table->string ('colonia', 255)->nullable();
+            $table->string ('cp', 255)->nullable();
+            $table->string ('georeferencia', 255)->nullable();
+            $table->string ('nombre_encargado', 255)->nullable();
+            $table->string ('tel_encargado', 255)->nullable();
+            $table->string ('email_encargado', 255)->nullable();
             $table->integer ('cupo');
             $table->boolean('activo');
             $table->date('fecha_creacion', 255);

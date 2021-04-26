@@ -23,12 +23,24 @@ class AuthCheck
         if(session()->has('LoggedUser') && ($request->path() == 'security/login')){
             return back();
         }
-
+        //acceso a instituciones
         if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/institutions'){
             return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
         }
 
         if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/institutions/create'){
+            return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
+        }
+         //acceso a jornadas
+        if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/vaccinationDay'){
+            return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
+        }
+        //acceso a sedes
+        if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/sedes/index'){
+            return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
+        }
+
+        if(session('LoggedUserNivel') == 'Enlace de institución' && $request->path() == 'admin/panel/sedes/crear'){
             return redirect('admin/panel/index')->with('fail', 'Necestitas iniciar sesión');
         }
 

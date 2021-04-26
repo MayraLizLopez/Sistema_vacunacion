@@ -7,6 +7,55 @@
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Editar Institución</h1>
 <p class="mb-4"> </p>
 
+<style type="text/css">
+        @font-face {
+            font-family: nutmeg-bold;
+            src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: montserrat;
+            src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
+        }
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        #botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
+</style>
 
 <form action= "{{route('updateInstitucion', $institucion->id_insti)}}"  method="POST">
     @method('PATCH')
@@ -52,14 +101,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Nombre de la institución</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" value="{{ $institucion->nombre}}"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" value="{{ $institucion->nombre}}" required="required"/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre de la institución' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Domicilio de la institución</label>
-                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" value="{{ $institucion->domicilio}}"/>
+                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" value="{{ $institucion->domicilio}}" required="required"/>
                             <span class="text-danger">@error('domicilio'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
                     </div>
@@ -94,14 +143,14 @@
                     <div class="col-md-6">
                     <div class="form-group">
                             <label for="maternalSurnameVoluntary">Nombre del enlace</label>
-                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" value="{{ $usuario->nombre }}"/>
+                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" value="{{ $usuario->nombre }}" required="required"/>
                             <span class="text-danger">@error('nombre_enlace'){{ 'Ingrese el nombre del enlace' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phoneVoluntary">Apellido paterno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" value="{{ $usuario->ape_pat }}"/>
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" value="{{ $usuario->ape_pat }}" required="required"/>
                             <span class="text-danger">@error('ape_pat'){{ 'Ingrese apellido paterno' }} @enderror </span>
                         </div>
                     </div>
@@ -118,29 +167,29 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="phoneVoluntary">Cargo del enlace</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" value="{{ $usuario->cargo }}" />
+                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" value="{{ $usuario->cargo }}" required="required"/>
                             <span class="text-danger">@error('cargo_enlace'){{ 'Ingrese el cargo del enlace' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="townVoluntary">Teléfono del enlace</label>
-                            <input type="text" class="form-control" id="tel" name="tel" value="{{ $usuario->tel}}" data-mask="000 000 0000"/>
+                            <input type="text" class="form-control" id="tel" name="tel" value="{{ $usuario->tel}}" data-mask="000 000 0000" required="required"/>
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}"/>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}" required="required"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success" type="submit">Guardar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
+            <button class="btn btn-success" id="botonEnviar" type="submit">Guardar</button>
+            <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_insti')}}">Cancelar</a></button>
             
         </div>
     </div>
