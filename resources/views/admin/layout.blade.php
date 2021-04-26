@@ -114,7 +114,7 @@
                         <a id="menu" class="nav-link" href="#">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
                         <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
-                    </li> --}}
+                    </li>
 
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}

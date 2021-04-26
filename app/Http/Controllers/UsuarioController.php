@@ -22,9 +22,14 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios =  DB::select('SELECT * FROM usuarios ORDER BY nombre ASC');
-        return view('users.index', compact('usuarios'));
-
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];
+        $usuarios =  DB::table('usuarios')
+        ->join('instituciones', 'usuarios.id_insti', '=', 'instituciones.id_insti')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre_institucion')
+        ->where('usuarios.activo', true)
+        ->orderBy('usuarios.nombre')
+        ->get();
+        return view('admin.users.index', compact('usuarios'), $data);
     }
 
     /**
@@ -47,19 +52,26 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         //dd($request)
-        $this->validate($request, ['nombre' => 'required', 'ape_pat' => 'required', 'email' => 'required', 'tel' => 'required', 'password' => 'requered']);
+        $this->validate($request, 
+        ['nombre' => 'required', 
+        'ape_pat' => 'required', 
+        'email' => 'required', 
+        'tel' => 'required',
+        'id_insti' => 'required', 
+        'password' => 'requered']);
+
         $emailUnico = DB::select('SELECT COUNT(*) FROM usuarios WHERE email = '.$request->input('email'));
         if($emailUnico == 0){
-            DB::insert('insert into usuarios (nombre, ape_pat, ape_mat, id_insti, cargo, rol, tel, email, password, activo) values(?,?,?,?,?,?,?,?,?,?)', [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), $request->input('cargo'), $request->input('rol'), $request->input('tel'), $request->input('email'),  $request->input('password'), true]);
+            DB::insert('insert into usuarios (nombre, ape_pat, ape_mat, id_insti, cargo, rol, tel, email, password, activo) values(?,?,?,?,?,?,?,?,?,?)', 
+            [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), $request->input('cargo'), $request->input('rol'), $request->input('tel'), $request->input('email'),  $request->input('password'), true]);
             $mensaje = "success";
 
             return redirect()->route('/');
         }else{
             $mensaje = "El email ya fue registrado";
-            $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
             $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
             
-            return view('voluntarios', compact('municipios', 'instituciones', 'mensaje'));
+            return view('voluntarios', compact('instituciones', 'mensaje'));
         }
     }
 
@@ -108,9 +120,107 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id_user)
     {
-        //
+        DB::table('usuarios')
+        ->where('id_user', $id_user)
+        ->update([
+            'activo' => false
+        ]);
+
+        return response()->json([
+            'isOk' => true,
+            'message' => '¡El usuario fue deshabilitado correctamente!'
+        ]);          
+    }
+
+    public function build($id_user)
+    {
+        DB::table('usuarios')
+        ->where('id_user', $id_user)
+        ->update([
+            'activo' => true
+        ]);
+
+        return response()->json([
+            'isOk' => true,
+            'message' => '¡El usuario fue habilitado correctamente!'
+        ]);          
+    }
+
+    public function getAllActiveUsers(){
+        $usuarios =  DB::table('usuarios')
+        ->join('instituciones', 'usuarios.id_insti', '=', 'instituciones.id_insti')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre_institucion')
+        ->where('usuarios.activo', 1)
+        ->orderBy('usuarios.nombre')
+        ->get();
+
+        return response()->json([
+            'data' => $usuarios       
+        ]); 
+    }
+
+    public function getAllInactiveUsers(){
+        $usuarios =  DB::table('usuarios')
+        ->join('instituciones', 'usuarios.id_insti', '=', 'instituciones.id_insti')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre_institucion')
+        ->where('usuarios.activo', 0)
+        ->orderBy('usuarios.nombre')
+        ->get();
+
+        return response()->json([
+            'data' => $usuarios       
+        ]); 
+    }
+
+    public function getAllInstitutions()
+    {   
+        $institutions = DB::table('instituciones')->where('activo', '=', 1)
+        ->orderBy('nombre')
+        ->get();
+        return response()->json([
+            'data' => $institutions       
+        ]); 
+    }
+
+    public function searchByUser($name){
+        $users =  DB::table('usuarios')
+        ->join('instituciones', 'usuarios.id_insti', '=', 'instituciones.id_insti')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre_institucion')
+        ->where('usuarios.nombre', $name)
+        ->orderBy('usuarios.nombre')
+        ->get();
+        
+        return response()->json([
+            'data' => $users         
+        ]); 
+    }
+
+    public function searchByRol($name){
+        $users =  DB::table('usuarios')
+        ->join('instituciones', 'usuarios.id_insti', '=', 'instituciones.id_insti')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre_institucion')
+        ->where('usuarios.rol', $name)
+        ->orderBy('usuarios.nombre')
+        ->get();
+        
+        return response()->json([
+            'data' => $users         
+        ]); 
+    }
+
+    public function searchByInstitution($id_institution){
+        $users =  DB::table('usuarios')
+        ->join('instituciones', 'usuarios.id_insti', '=', 'instituciones.id_insti')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre_institucion')
+        ->where('usuarios.id_insti', $id_institution)
+        ->orderBy('usuarios.nombre')
+        ->get();
+        
+        return response()->json([
+            'data' => $users         
+        ]); 
     }
 
     /**
