@@ -110,11 +110,11 @@
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    {{-- <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="#">
-                        <i class="fas fa-users"></i>
+                    <li class="nav-item active">
+                        <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
+                            <img class="mx-2" src="{{ asset('public/assets/images/user3.svg')}}" style="width: 20px;"/>
                         <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
-                    </li> --}}
+                    </li>
 
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
