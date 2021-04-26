@@ -150,7 +150,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::post('admin/panel/sedes/eliminar/{id}', [SedeController::class, "destroy"])->name('destroySede');
 
     //Usuarios
-    Route::get('admin/panel/users/index', [UsuarioController::class, "index"])->name('index');
+    Route::get('admin/panel/users/index', [UsuarioController::class, "index"])->name('indexUsers');
 
     Route::get('admin/panel/users/getAllActiveUsers', [UsuarioController::class, "getAllActiveUsers"])->name('getAllActiveUsers');
 
@@ -168,7 +168,11 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/users/build/{id_user}', [UsuarioController::class, "build"])->name('build');
 
-    Route::post('admin/panel/users/store/', [UsuarioController::class, "store"])->name('storeUsers');
+    Route::post('admin/panel/users/store/', [UsuarioController::class, "store"])->name('storeUser');
 
-    Route::post('admin/panel/users/update/', [UsuarioController::class, "update"])->name('updateUsers');
+    Route::post('admin/panel/users/update/', [UsuarioController::class, "update"])->name('updateUser');
+
+    Route::get('admin/panel/users/create', [UsuarioController::class, "createAdmin"])->name('createUser');
+
+    Route::get('admin/panel/users/edit/{id_user}', [UsuarioController::class, "edit"])->name('editarUser');
 });

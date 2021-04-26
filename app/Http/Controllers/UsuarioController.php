@@ -43,6 +43,13 @@ class UsuarioController extends Controller
         return view('users.registration', compact('instituciones'));
     }
 
+    public function createAdmin()
+    {
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        return view('admin.users.create', compact('instituciones'), $data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -51,27 +58,35 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request)
-        $this->validate($request, 
-        ['nombre' => 'required', 
+        $request->validate([
+        'nombre' => 'required', 
         'ape_pat' => 'required', 
-        'email' => 'required', 
+        'email' => 'required|email|unique:usuarios', 
         'tel' => 'required',
+        'cargo' => 'required',
+        'rol' => 'required',
         'id_insti' => 'required', 
-        'password' => 'requered']);
+        'password' => 'required' 
+        ]);
 
-        $emailUnico = DB::select('SELECT COUNT(*) FROM usuarios WHERE email = '.$request->input('email'));
-        if($emailUnico == 0){
-            DB::insert('insert into usuarios (nombre, ape_pat, ape_mat, id_insti, cargo, rol, tel, email, password, activo) values(?,?,?,?,?,?,?,?,?,?)', 
-            [$request->input('nombre'), $request->input('ape_pat'), $request->input('ape_mat'), (int)$request->input('id_insti'), $request->input('cargo'), $request->input('rol'), $request->input('tel'), $request->input('email'),  $request->input('password'), true]);
-            $mensaje = "success";
+        $usuario = new Usuario;
+        $usuario->nombre = $request->nombre;
+        $usuario->ape_pat = $request->ape_pat;
+        $usuario->ape_mat = $request->ape_mat;
+        $usuario->id_insti = $request->id_insti;
+        $usuario->cargo = $request->cargo;
+        $usuario->rol = $request->rol;
+        $usuario->tel = $request->tel;
+        $usuario->email = $request->email;
+        $usuario->activo = true;
+        $usuario->password = Hash::make($request->password);
+        $usuario->fecha_creacion = Carbon::now();
+        $save = $usuario->save();
 
-            return redirect()->route('/');
+        if($save){
+            return redirect()->back()->with('success', '¡Usuario registrado correctamente!');
         }else{
-            $mensaje = "El email ya fue registrado";
-            $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
-            
-            return view('voluntarios', compact('instituciones', 'mensaje'));
+            return redirect()->back()->with('fail', 'No se pudo crear el usuario');
         }
     }
 
@@ -97,9 +112,17 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuario $usuario)
+    public function edit($id)
     {
-        //
+        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
+        $userEdit = DB::table('usuarios')->where('id_user', $id)->first();
+
+        $instituciones = DB::table('instituciones')->get();   
+        $insti = DB::table('instituciones')->where('id_insti', $userEdit->id_insti)->first();
+        $institucion_select = $insti->nombre;
+
+        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        return view('admin.users.edit', compact('userEdit', 'instituciones', 'institucion_select'), $data);
     }
 
     /**
