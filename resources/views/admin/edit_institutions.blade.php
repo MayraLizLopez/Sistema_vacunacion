@@ -101,14 +101,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Nombre de la institución</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" value="{{ $institucion->nombre}}"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" value="{{ $institucion->nombre}}" required="required"/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre de la institución' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Domicilio de la institución</label>
-                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" value="{{ $institucion->domicilio}}"/>
+                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" value="{{ $institucion->domicilio}}" required="required"/>
                             <span class="text-danger">@error('domicilio'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
                     </div>
@@ -143,14 +143,14 @@
                     <div class="col-md-6">
                     <div class="form-group">
                             <label for="maternalSurnameVoluntary">Nombre del enlace</label>
-                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" value="{{ $usuario->nombre }}"/>
+                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" value="{{ $usuario->nombre }}" required="required"/>
                             <span class="text-danger">@error('nombre_enlace'){{ 'Ingrese el nombre del enlace' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phoneVoluntary">Apellido paterno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" value="{{ $usuario->ape_pat }}"/>
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" value="{{ $usuario->ape_pat }}" required="required"/>
                             <span class="text-danger">@error('ape_pat'){{ 'Ingrese apellido paterno' }} @enderror </span>
                         </div>
                     </div>
@@ -167,21 +167,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="phoneVoluntary">Cargo del enlace</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" value="{{ $usuario->cargo }}" />
+                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" value="{{ $usuario->cargo }}" required="required"/>
                             <span class="text-danger">@error('cargo_enlace'){{ 'Ingrese el cargo del enlace' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="townVoluntary">Teléfono del enlace</label>
-                            <input type="text" class="form-control" id="tel" name="tel" value="{{ $usuario->tel}}" data-mask="000 000 0000"/>
+                            <input type="text" class="form-control" id="tel" name="tel" value="{{ $usuario->tel}}" data-mask="000 000 0000" required="required"/>
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}"/>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}" required="required"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>

@@ -102,14 +102,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Nombre de la institución</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" required="required"/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre de la institución' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Domicilio de la institución</label>
-                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" placeholder="Domicilio"/>
+                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="domicilio" placeholder="Domicilio" required="required"/>
                             <span class="text-danger">@error('domicilio'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
                     </div>
@@ -141,14 +141,14 @@
                     <div class="col-md-6">
                     <div class="form-group">
                             <label for="maternalSurnameVoluntary">Nombre del enlace</label>
-                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" placeholder="Nombre Enlace"/>
+                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" placeholder="Nombre Enlace" required="required"/>
                             <span class="text-danger">@error('nombre_enlace'){{ 'Ingrese el nombre del enlace' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phoneVoluntary">Apellido paterno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" placeholder="apellido paterno" />
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" placeholder="apellido paterno" required="required"/>
                             <span class="text-danger">@error('ape_pat'){{ 'Ingrese apellido paterno' }} @enderror </span>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phoneVoluntary">Contraseña</label>
-                            <input type="password" class="form-control" id="phoneVoluntary" name="password" placeholder="Contraseña" />
+                            <input type="password" class="form-control" id="phoneVoluntary" name="password" placeholder="Contraseña" required="required"/>
                             <span class="text-danger">@error('password'){{ 'Ingrese una contraseña' }} @enderror </span>
                         </div>
                     </div>
@@ -172,21 +172,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="phoneVoluntary">Cargo del enlace</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" placeholder="Cargo" />
+                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" placeholder="Cargo" required="required"/>
                             <span class="text-danger">@error('cargo_enlace'){{ 'Ingrese el cargo del enlace' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="townVoluntary">Teléfono del enlace</label>
-                            <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono" data-mask="000 000 0000"/>
+                            <input type="text" class="form-control" id="tel" name="tel" placeholder="Teléfono" data-mask="000 000 0000" required="required"/>
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required="required"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>

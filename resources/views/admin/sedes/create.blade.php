@@ -103,14 +103,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Nombre del centro</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" required="required"/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Domicilio del centro</label>
-                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="direccion" placeholder="Domicilio"/>
+                            <input type="text" class="form-control" id="paternalSurnameVoluntary" name="direccion" placeholder="Domicilio" required="required"/>
                             <span class="text-danger">@error('direccion'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
                     </div>
@@ -120,14 +120,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Colonia</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="colonia" placeholder="colonia"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="colonia" placeholder="colonia" required="required"/>
                             <span class="text-danger">@error('colonia'){{ 'Ingrese la colonia' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Código postal</label>
-                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cp" placeholder="código postal" min="11111" max="99999"/>
+                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cp" placeholder="código postal" min="11111" max="99999" required="required"/>
                             <span class="text-danger">@error('cp'){{ 'Ingrese el código postal' }} @enderror </span>
                         </div>
                     </div>
@@ -137,14 +137,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Cruce de calles</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="cruce_calles" placeholder="Entre A y B"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="cruce_calles" placeholder="Entre A y B" required="required"/>
                             <span class="text-danger">@error('cruce_calles'){{ 'Ingrese el cruce de calles' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Georeferencia</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="georeferencia" placeholder="georefernecia"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="georeferencia" placeholder="georefernecia" required="required"/>
                             <span class="text-danger">@error('georeferencia'){{ 'Ingrese la georeferencia' }} @enderror </span>
                         </div>
                     </div>
@@ -166,7 +166,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Número de voluntarios necesarios</label>
-                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 30" min="1" max="30"/>
+                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 30" min="1" max="30" required="required"/>
                             <span class="text-danger">@error('cupo'){{ 'Ingrese el número de voluntarios' }} @enderror </span>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="nameVoluntary">Nombre del encargado</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="nombre_encargado" placeholder="Nombre"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="nombre_encargado" placeholder="Nombre" required="required"/>
                             <span class="text-danger">@error('nombre_encargado'){{ 'Ingrese el nombre del encargado' }} @enderror </span>
                         </div>
                     </div>

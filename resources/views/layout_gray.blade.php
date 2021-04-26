@@ -13,6 +13,7 @@
     </head>
     <body style="background-image: url('{{ asset('public/assets/images/FondoRegistro.png')}}'); height:100%;">
         @yield('content')
+        <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/jquery.slim.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
 
@@ -34,6 +35,9 @@
         <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/jquery.mask.min.js') }}"></script>   
+
+        <!-- validator -->
+        <script src="{{ asset('public/assets/vendors/validator/validator.js') }}"></script>
         @yield('scripts')
     </body>
 </html>

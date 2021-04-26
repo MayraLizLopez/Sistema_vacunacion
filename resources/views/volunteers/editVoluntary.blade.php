@@ -109,14 +109,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="nameVoluntary">Nombre(s)</label>
-                                        <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" value="{{ $voluntarioEdit->nombre }}"/>
+                                        <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" value="{{ $voluntarioEdit->nombre }}" required="required"/>
                                         <span class="text-danger">@error('nombre'){{ 'Ingrese su nombre o nombres' }} @enderror </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="paternalSurnameVoluntary">Apellido Paterno</label>
-                                        <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_pat" placeholder="Apellido Paterno" value="{{ $voluntarioEdit->ape_pat }}"/>
+                                        <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_pat" placeholder="Apellido Paterno" value="{{ $voluntarioEdit->ape_pat }}" required="required"/>
                                         <span class="text-danger">@error('ape_pat'){{ 'Ingrese su apellido paterno' }} @enderror </span>
                                     </div>
                                 </div>
@@ -132,14 +132,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="nameVoluntary">Correo electrónico</label>
-                                        <input type="text" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" value="{{ $voluntarioEdit->email }}"/>
+                                        <input type="text" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" value="{{ $voluntarioEdit->email }}" required="required"/>
                                         <span class="text-danger">@error('email'){{ 'Ingrese un email correcto o no registrado en la plataforma' }} @enderror </span>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="paternalSurnameVoluntary">Teléfono / Celular</label>
-                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" value="{{ $voluntarioEdit->tel }}">
+                                        <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" value="{{ $voluntarioEdit->tel }}" required="required">
                                         <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                                     </div>
                                 </div>

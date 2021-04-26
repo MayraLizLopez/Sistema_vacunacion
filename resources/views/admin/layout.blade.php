@@ -386,6 +386,7 @@
         <!-- Bootstrap core JavaScript-->
         <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('public/assets/js/custom.min.js') }}"></script>
 
         <!-- Core plugin JavaScript-->
         <script src="{{ asset('public/assets/js/jquery.easing.min.js') }}"></script>
@@ -400,11 +401,14 @@
         <script src="{{ asset('public/assets/js/all.min.js') }}"></script>
 
         <!-- Page level custom scripts -->
-        {{-- <script src="{{ asset('public/assets/js/chart-area-demo.js") }}"></script>
+        {{-- <script src="{{ asset('public/assets/js/chart-area-demo.js') }}"></script>
         <script src="{{ asset('public/assets/js/chart-pie-demo.js') }}"></script> --}}
         <script src="{{ asset('public/assets/js/fontawesome.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/jquery.mask.min.js') }}"></script>     
+
+        <!-- validator -->
+        <script src="{{ asset('public/assets/vendors/validator/validator.js') }}"></script>
         @yield('scripts')
     </body>
 </html>
