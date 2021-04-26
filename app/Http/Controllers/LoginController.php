@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Voluntario;
 use App\Models\Usuario;
+use App\Models\Sede;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 
@@ -55,8 +56,10 @@ class LoginController extends Controller
             $voluntarios = DB::table('voluntarios')->count(); 
             $instituciones = DB::table('instituciones')->where('activo', '=', true)->count();   
             $jornadas = DB::table('jornadas')->where('activo', '=', true)->count();   
+            $centros = DB::table('sedes')->where('activo', '=', true)->count();   
+            $usuarios = DB::table('usuarios')->where('activo', '=', true)->count();   
 
-            return view('admin.index', compact('voluntarios', 'instituciones', 'jornadas'), $data);
+            return view('admin.index', compact('voluntarios', 'instituciones', 'jornadas', 'centros', 'usuarios'), $data);
 
         }else{
             $id_user = session('LoggedUser');

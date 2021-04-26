@@ -22,7 +22,7 @@
 
     @if ($LoggedUserInfo['rol'] == 'Administrador General')
     <div class="row">
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Voluntarios -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #6EDE9E;">
                 <div class="card-body">
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Instituciones -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
+        <!-- Jornadas -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
@@ -75,6 +75,79 @@
                 </div>
             </div>
         </div>
+        <!-- Pending Requests Card Example
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Pending Requests</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="row">
+        <!-- Centros -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;" >
+                                Centros</div>
+                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $centros }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <img src="{{ asset('public/assets/images/centros_tarjeta.svg')}}" style="width: 75px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usuarios -->
+        <div class="col-xl-4 col-md-6 mb-4">
+            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;">
+                                Usuarios</div>
+                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $usuarios }}</div>
+                        </div>
+                        <div class="col-auto">
+                        <img src="{{ asset('public/assets/images/usuarios_tarjeta.svg')}}" style="width: 75px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- otro -->
+        {{--<div class="col-xl-4 col-md-6 mb-4">
+            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;"> Jornadas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $jornadas }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <img src="{{ asset('public/assets/images/jornada.svg')}}" style="width: 75px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>--}}
         <!-- Pending Requests Card Example
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">

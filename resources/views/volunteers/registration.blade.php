@@ -200,7 +200,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button id="botonEnviar" type="submit" class="btn btn-success" id="sendFormVoluntaries">Enviar</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white; width: 184px;" href="{{route('home')}}">Cancelar</a></button>
+                                        <a class="btn btn-secondary" style="color:white; width: 184px;" href="{{route('home')}}">Cancelar</a>
                                     </div>
                                 </div>
 
