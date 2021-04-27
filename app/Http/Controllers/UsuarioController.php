@@ -132,9 +132,49 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required', 
+            'ape_pat' => 'required', 
+            'email' => 'required|email', 
+            'tel' => 'required',
+            'cargo' => 'required',
+            'rol' => 'required',
+            'id_insti' => 'required'
+            ]);
+    
+            $usuario = Usuario::findOrFail($id);
+            $usuario->nombre = $request->nombre;
+            $usuario->ape_pat = $request->ape_pat;
+            $usuario->ape_mat = $request->ape_mat;
+            $usuario->id_insti = (int)$request->id_insti;
+            $usuario->cargo = $request->cargo;
+            $usuario->rol = $request->rol;
+            $usuario->tel = $request->tel;
+            $usuario->email = $request->email;
+            $usuario->fecha_edicion = Carbon::now();
+            $save = $usuario->save();
+
+            // DB::table('usuarios')
+            // ->where('id_user', $id)
+            // ->update([
+            //     'nombre' => $request->nombre,
+            //     'ape_pat' => $request->ape_pat,
+            //     'ape_mat' => $request->ape_mat,
+            //     'id_insti' => $request->id_insti,
+            //     'cargo' => $request->cargo,
+            //     'rol' => $request->rol,
+            //     'tel' => $request->tel,
+            //     'email' => $request->email,
+            //     'fecha_edicion' => $request->fecha_edicion
+            // ]);
+    
+            if($save){
+                return redirect()->back()->with('success', '¡Usuario actualizado correctamente!');
+            }else{
+                return redirect()->back()->with('fail', 'No se pudo actualizar el usuario');
+            }
     }
 
     /**

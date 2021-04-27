@@ -52,13 +52,14 @@
 
 <!-- DataTales Example -->
 <form action= "{{route('updateUser', $userEdit->id_user)}}"  method="POST">
-{{ csrf_field() }}
+@method('PATCH')
+@csrf
 @if(Session::get('success'))
 @section('scripts')
     <script>    
         Swal.fire({
             title: '¡Registro completado!',
-            text: '¡El usuario fue registrado correctamente!',
+            text: '¡El usuario fue actualizado correctamente!',
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Aceptar'
@@ -114,8 +115,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="nameUser">Email</label>
-                            <input type="email" class="form-control" id="emailUser" name="email" placeholder="Email" value="{{ $userEdit->email }}"/>
+                            <label for="emailUser">Email</label>
+                            <input type="email" class="form-control" id="emailUser" name="email" placeholder="Email" value="{{ $userEdit->email }}" required="required"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese el email' }} @enderror </span>
                         </div>
                     </div>
@@ -130,7 +131,7 @@
                         <div class="form-group">
                             <label for="townUser">Institución</label>
                             <select class="form-control" id="townUser" name="id_insti">
-                                <option value="{{$institucion_select}}">{{$institucion_select}}</option>
+                                <option value="{{$userEdit->id_insti}}">{{$institucion_select}}</option>
                                 @foreach ($instituciones as $insti)
                                 @if ($institucion_select != $insti->nombre)
                                 <option value="{{$insti->id_insti}}">{{$insti->nombre}} </option>
@@ -153,7 +154,7 @@
                         <div class="form-group">
                             <label for="rolUser">Rol</label>
                             <select class="form-control" id="rolUser" name="rol">
-                                <option value="{{ $userEdit->rol }}" disabled selected hidden>{{ $userEdit->rol }}</option>
+                                <option value="{{ $userEdit->rol }}" selected hidden>{{ $userEdit->rol }}</option>
                                 <option value="Administrador General">Administrador General</option>
                                 <option value="Enlace de institución">Enlace de institución</option>
                             </select>
@@ -168,7 +169,7 @@
                 </div>
             </div>
             <button id="botonEnviar" class="btn btn-success" type="submit">Guardar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('tabla_sedes')}}">Cancelar</a></button>       
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" ><a style="color:white;" href="{{route('indexUsers')}}">Cancelar</a></button>       
         </div>
     </div>
 </form>

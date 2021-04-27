@@ -32,21 +32,21 @@
               src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
               ">
-                <img class="mx-1" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 40px;"/>
+                <img class="mx-1" src="{{ asset('public/assets/images/usuario_desactivado_blanco.svg')}}" style="width: 40px;"/>
                 <span class="h2">Usuarios desactivados</span>
         </button>
 
         <button 
         id="btnActiveUsers"
         class="btn btn-success float-right"
-        style="background-color: #6EDE9E; 
-              border: #6EDE9E; 
+        style="background-color: #2e59d9;
+              border-color: #2653d4; 
               font-family: 
               nutmeg-bold; 
               src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
               ">
-                <img class="mx-1" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 40px;"/>
+                <img class="mx-1" src="{{ asset('public/assets/images/usuario_blanco.svg')}}" style="width: 40px;"/>
                 <span class="h2">Usuarios activos</span>
         </button>
     </div>

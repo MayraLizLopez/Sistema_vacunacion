@@ -31,7 +31,7 @@
               src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
               ">
-                <img class="mx-1" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 40px;"/>
+                <img class="mx-1" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 40px;"/>
                 <span class="h2">Generar reporte</span>
         </button>
     </div>

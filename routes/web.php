@@ -170,7 +170,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/users/store/', [UsuarioController::class, "store"])->name('storeUser');
 
-    Route::post('admin/panel/users/update/', [UsuarioController::class, "update"])->name('updateUser');
+    Route::patch('admin/panel/users/update/{id_user}', [UsuarioController::class, "update"])->name('updateUser');
 
     Route::get('admin/panel/users/create', [UsuarioController::class, "createAdmin"])->name('createUser');
 

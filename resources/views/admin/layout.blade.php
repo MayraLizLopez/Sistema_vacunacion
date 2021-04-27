@@ -110,8 +110,8 @@
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    {{-- <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="#">
+                    <li class="nav-item active">
+                        <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
                         <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
                     </li>
