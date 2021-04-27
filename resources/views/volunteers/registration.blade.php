@@ -198,7 +198,7 @@
                                 </div>
                                 
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 py-2">
                                         <button id="botonEnviar" type="submit" class="btn btn-success" id="sendFormVoluntaries">Enviar</button>
                                         <a class="btn btn-secondary" style="color:white; width: 184px;" href="{{route('home')}}">Cancelar</a>
                                     </div>

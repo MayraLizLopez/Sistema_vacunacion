@@ -96,7 +96,7 @@
 
     <div class="row">
         <!-- Centros -->
-        <div class="col-xl-6 col-md-12 mb-6">
+        <div class="col-xl-4 col-md-6 mb-4">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -114,7 +114,7 @@
         </div>
 
         <!-- Usuarios -->
-        <div class="col-xl-6 col-md-12 mb-6">
+        <div class="col-xl-4 col-md-6 mb-4">
             <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
@@ -131,23 +131,7 @@
             </div>
         </div>
 
-        <!-- otro -->
-        {{--<div class="col-xl-4 col-md-6 mb-4">
-            <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;"> Jornadas
-                            </div>
-                            <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $jornadas }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <img src="{{ asset('public/assets/images/jornada.svg')}}" style="width: 75px;"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--}}
+        
         <!-- Pending Requests Card Example
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-warning shadow h-100 py-2">
