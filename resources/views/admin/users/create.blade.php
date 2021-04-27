@@ -51,7 +51,7 @@
 <p class="mb-4"> </p>
 
 <!-- DataTales Example -->
-<form action= "{{route('storeUsers')}}"  method="POST">
+<form action= "{{route('storeUser')}}"  method="POST">
 {{ csrf_field() }}
 @if(Session::get('success'))
 @section('scripts')
@@ -64,7 +64,7 @@
             confirmButtonText: 'Aceptar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    location.href = "{{route('admin/panel/users/index')}}";
+                    location.href = "{{route('indexUsers')}}";
                 }
             });
     </script>
@@ -126,7 +126,7 @@
                             <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="townUser">Institución</label>
                             <select class="form-control" id="townUser" name="id_insti">
@@ -137,6 +137,31 @@
                             </select>
                             <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
                         </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="cargoUser">Cargo</label>
+                            <input type="text" class="form-control" id="cargoUser" name="cargo" placeholder="Cargo"/>
+                            <span class="text-danger">@error('cargo'){{ 'Ingrese un cargo' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="rolUser">Rol</label>
+                            <select class="form-control" id="rolUser" name="rol">
+                                <option value="" disabled selected hidden>Elija un rol</option>
+                                <option value="Administrador General">Administrador General</option>
+                                <option value="Enlace de institución">Enlace de institución</option>
+                            </select>
+                            <span class="text-danger">@error('rol'){{ 'Seleccione un rol' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="passwordUser">Contraseña</label>
+                        <input type="password" class="form-control" id="passwordUser" name="password" placeholder="Contraseña"/>
+                        <span class="text-danger">@error('email'){{ 'Ingrese una contraseña' }} @enderror </span>
                     </div>
                 </div>
             </div>

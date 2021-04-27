@@ -86,7 +86,7 @@
 
         <div class="form-group ml-1">
             <button type="button" class="btn btn-primary btn-table" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar usuario">
-                <a style="color:white;" href="#">
+                <a style="color:white;" href="{{route('createUser')}}">
                     <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
                     <span class="item-label">Registrar Usuario</span>                 
                 </a>
@@ -366,7 +366,7 @@
              }
 
             return [
-            '<a class="like mr-3" href="voluntario/edit/' + row.id_voluntario + '"' + 'title="Edit">',
+            '<a class="like mr-3" href="edit/' + row.id_user + '"' + 'title="Edit">',
             '<i class="fas fa-edit"></i>',
             '</a>', actionButton
             ].join('')
