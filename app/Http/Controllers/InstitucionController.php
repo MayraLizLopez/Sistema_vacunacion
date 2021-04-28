@@ -14,31 +14,30 @@ use Carbon\Carbon;
 class InstitucionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        $municipios = DB::table('municipios')->get();   
-        return view('admin.create_institutions', compact('municipios'), $data);
+        
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Método de redireccionando a la vista de registroro de Instituciones, consulta los municipios como carga inicial
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
+        //Variable que almanece los datos del usuario logeado
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $municipios = DB::table('municipios')->get();   
         return view('admin.create_institutions', compact('municipios'), $data);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Método para el guardado de la institución en el registro. Retornando "success" si el registro se guardo con éxito y "fail" en caso contrario.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -60,14 +59,9 @@ class InstitucionController extends Controller
         $institucion = new Institucion;
         $institucion->nombre = $request->nombre;
         $institucion->domicilio = $request->domicilio;
-        //$institucion->nombre_enlace = $request->nombre_enlace . ' ' . $request->ape_pat . ' ' . $request->ape_mat;
-        //$institucion->cargo_enlace = $request->cargo_enlace;
         $institucion->id_municipio = (int)$request->id_municipio;
-        //$institucion->tel = $request->tel;
-        //$institucion->email = $request->email;
         $institucion->activo = true;
         $institucion->fecha_creacion = Carbon::now();
-        //$institucion->password = Hash::make($request->password);
         $save = $institucion->save();
         
         $usuario = new Usuario;
@@ -95,13 +89,14 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Método de redireccionando a la vista inicial de las instituciones donde se realizan consultas para obtener los datos a mostrar en la tabla de instituciones
      *
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
+        //Variable que almanece los datos del usuario logeado
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $instituciones = DB::table('instituciones')
         ->join('municipios', 'instituciones.id_municipio', '=', 'municipios.id_municipio')
@@ -113,14 +108,14 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Método de redireccionado a la vista de edición de una institución, teniendo como carga inicial los municipios y los datos de la institución a editar
      *
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //dd($id);
+        //Variable que almanece los datos del usuario logeado
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $institucion = DB::table('instituciones')->where('id_insti', $id)->first();  
         $usuario = DB::table('usuarios')->where('id_user', $institucion->id_user)->first();   
@@ -131,7 +126,7 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Método que permite guardar los datos de la edición de la institución. Retornando "success" si el registro se guardo con éxito y "fail" en caso contrario.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Institucion  $institucion
@@ -139,7 +134,7 @@ class InstitucionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd($request);
+        //Validación de campos
         $request->validate([
             'nombre' => 'required', 
             'domicilio' => 'required',
@@ -149,7 +144,7 @@ class InstitucionController extends Controller
             'tel' => 'required',
             'email' => 'required|email', 
         ]);
-
+        
         $institucionEditado = Institucion::findOrFail($id);
         $usuarioEditado = Usuario::findOrFail($institucionEditado->id_user);
         if(($usuarioEditado->nombre != $request->nombre_enlace) || ($usuarioEditado->ape_pat != $request->ape_pat) || ($usuarioEditado->ape_mat != $request->ape_mat) || ($usuarioEditado->cargo != $request->cargo_enlace) || ($usuarioEditado->email != $request->email) || ($usuarioEditado->tel != $request->tel)){
@@ -166,10 +161,6 @@ class InstitucionController extends Controller
         $institucionEditado->nombre = $request->nombre;
         $institucionEditado->domicilio = $request->domicilio;
         $institucionEditado->id_municipio = (int)$request->id_municipio;
-        // $institucionEditado->nombre_enlace = $request->nombre_enlace;
-        // $institucionEditado->cargo_enlace = $request->cargo_enlace;
-        // $institucionEditado->email = $request->email;
-        // $institucionEditado->tel = $request->tel;
         $institucionEditado->activo = true;
         $institucionEditado->fecha_edicion = Carbon::now();
         $save = $institucionEditado->save();
@@ -182,7 +173,7 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Método que permite la eliminación lógica de una institución cambiando el campo "activo" a false. Retornando "success" si se realizo el cambio correctamente y "fail" en caso contrario.
      *
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response

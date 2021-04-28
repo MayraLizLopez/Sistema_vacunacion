@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AuthCheck
 {
     /**
-     * Handle an incoming request.
+     * Método que permite el accesos a vista dependiendo el rol de usuarios y si los registros para el login son correctos o incorrectos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

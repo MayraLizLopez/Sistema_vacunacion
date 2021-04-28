@@ -20,7 +20,7 @@ class SedeController extends Controller
 {
     
      /**
-     * Show the form for creating a new resource.
+     * Método que redirreciona a la vista de registro de centros, teniendo como carga inicial municipios.
      *
      * @return \Illuminate\Http\Response
      */
@@ -32,13 +32,14 @@ class SedeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Método que permite el guardado del registro de Centros En caso de que el registro sea realizado correctamente se retorna "success", en caso contrario "fail".
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        //Validación de campos
         $request->validate([
             'nombre' => 'required', 
             'direccion' => 'required',
@@ -75,7 +76,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Método que redirecciona a la vista principal de Centros donde se muestra una tabla con todos los registros activos.
      *
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
@@ -94,7 +95,7 @@ class SedeController extends Controller
     }
 
      /**
-     * Show the form for editing the specified resource.
+     * Método que redirecciona a la vista de edición de un Centro, teniendo como carga inicial municipios y los datos del Centro a editar.
      *
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response
@@ -111,7 +112,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Método que permite la actualización de datos del centro. Retornando "success" si el registro fue actualizado correctamente o "fail" en caso contrario.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Institucion  $institucion
@@ -155,7 +156,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Método que permite el borrado lógico de un centro, cambiando el campo "activo" a false
      *
      * @param  \App\Models\Institucion  $institucion
      * @return \Illuminate\Http\Response

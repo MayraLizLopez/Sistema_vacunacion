@@ -21,6 +21,7 @@ class Voluntario extends Migration
             $table->string ('ape_pat', 100);
             $table->string ('ape_mat', 100)->nullable();
             $table->string ('curp', 18)->nullable();
+            $table->date('fecha_nacimiento')->nullable();
             $table->string('tel', 20);
             $table->string('email', 100)->unique();
             $table->boolean('activo');

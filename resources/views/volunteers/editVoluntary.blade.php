@@ -150,6 +150,29 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha de nacimiento</label>
+                                        <input type="date" class="form-control" id="fecha" name="fecha_nacimiento" placeholder="Ejem. 15/12/1993" value="{{ $voluntarioEdit->fecha_nacimiento }}" required="required">
+                                        <span class="text-danger">@error('fecha_nacimiento'){{ 'Ingrese su fecha de nacimiento' }} @enderror </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="townVoluntary">Municipio</label>
+                                        <select class="form-control" id="townVoluntary" name="id_municipio">
+                                            <option value="{{$voluntarioEdit->id_municipio}}">{{$municipio_select}}</option>
+                                            @foreach ($municipios as $municipio)
+                                                @if ($municipio_select != $municipio->nombre)
+                                                    <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,19 +192,6 @@
                                             @foreach ($instituciones as $institucion)
                                                 @if ($institucion_select != $institucion->nombre)
                                                     <option value="{{$institucion->id_insti}}">{{$institucion->nombre}} </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="townVoluntary">Municipio</label>
-                                        <select class="form-control" id="townVoluntary" name="id_municipio">
-                                            <option value="{{$voluntarioEdit->id_municipio}}">{{$municipio_select}}</option>
-                                            @foreach ($municipios as $municipio)
-                                                @if ($municipio_select != $municipio->nombre)
-                                                    <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -211,5 +221,19 @@
 
             console.log(voluntarios);
         });  
+
+        let date = new Date();
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+        var hoy;
+
+        if(month < 10){
+            hoy=`${year}-0${month}-${day}`;
+        }else{
+            hoy=`${year}-${month}-${day}`;
+        }
+        document.getElementById("fecha").max = hoy;
+
     </script>
 @endsection

@@ -12,7 +12,7 @@ class Voluntario extends Model
     protected $primaryKey = 'id_voluntario';
     protected $table = "voluntarios";
     public $timestamps = false;
-    protected $fillable = ['id_insti', 'id_municipio', 'nombre', 'ape_pat', 'ape_mat', 'curp', 'email', 'tel', 'activo'];
+    protected $fillable = ['id_insti', 'id_municipio', 'nombre', 'ape_pat', 'ape_mat', 'curp', 'fecha_nacimiento', 'email', 'tel', 'activo'];
 }
 
 

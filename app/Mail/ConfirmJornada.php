@@ -23,7 +23,7 @@ class ConfirmJornada extends Mailable
     }
 
     /**
-     * Build the message.
+     * Método que permite el envió de correos electónicos.
      *
      * @return $this
      */

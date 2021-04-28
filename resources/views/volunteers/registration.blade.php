@@ -145,7 +145,14 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="fecha">Fecha de nacimiento</label>
+                                                        <input type="date" class="form-control" id="fecha" name="fecha_nacimiento" placeholder="Ejem. 15/12/1993" required="required">
+                                                        <span class="text-danger">@error('fecha_nacimiento'){{ 'Ingrese su fecha de nacimiento' }} @enderror </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="townVoluntary">Municipio de residencia</label>
                                                         <select class="form-control" id="townVoluntary" name="id_municipio">
@@ -217,16 +224,28 @@
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
     <script>
-    document.getElementById("botonEnviar").disabled = true;
-    document.getElementById("myCheck").checked = false;
-        function myFunction() {
-            var checkBox = document.getElementById("myCheck");
-            
-            if (checkBox.checked == true){
-                document.getElementById("botonEnviar").disabled = false;
-            } else {
-                document.getElementById("botonEnviar").disabled = true;
-            }
+        document.getElementById("botonEnviar").disabled = true;
+        document.getElementById("myCheck").checked = false;
+        let date = new Date();
+        let day = date.getDate()
+        let month = date.getMonth() + 1
+        let year = date.getFullYear()
+        var hoy;
+
+        if(month < 10){
+            hoy=`${year}-0${month}-${day}`;
+        }else{
+            hoy=`${year}-${month}-${day}`;
         }
+        document.getElementById("fecha").max = hoy;
+
+            function myFunction() {
+                var checkBox = document.getElementById("myCheck");
+                if (checkBox.checked == true){
+                    document.getElementById("botonEnviar").disabled = false;
+                } else {
+                    document.getElementById("botonEnviar").disabled = true;
+                }
+            }
     </script>
 @endsection

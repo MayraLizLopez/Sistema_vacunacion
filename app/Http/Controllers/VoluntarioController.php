@@ -18,7 +18,7 @@ class VoluntarioController extends Controller
 {
 
      /**
-     * Display a listing of the resource.
+     * Método que redirecciona a la vista inicial pública para el registro de voluntarios.
      *
      * @return \Illuminate\Http\Response
      */
@@ -28,7 +28,7 @@ class VoluntarioController extends Controller
         return view('index', compact('municipios', 'instituciones'), $data);
     }
     /**
-     * Display a listing of the resource.
+     * Método que redirecciona a la vista de registro público de voluntarios, teniendo como carga inicial municipios e instituciones.
      *
      * @return \Illuminate\Http\Response
      */
@@ -41,7 +41,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Método que redirecciona a la vista de registro público de voluntarios, teniendo como carga inicial municipios e instituciones.
      *
      * @return \Illuminate\Http\Response
      */
@@ -53,7 +53,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Método que redireciona a la vista para el registro de voluntarios para administradores o enlaces. Teniendo como carga inicial instituciones y municipios
      *
      * @return \Illuminate\Http\Response
      */
@@ -66,7 +66,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Método que almacena el resgistro de voluntarios. Si el registro se almaceno correctamente retorna "success" o "fail" en caso contrario
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -79,6 +79,7 @@ class VoluntarioController extends Controller
             'id_municipio' => 'required',
             'id_insti' => 'required', 
             'email' => 'required|email|unique:voluntarios|unique:usuarios', 
+            'fecha_nacimiento' => 'required',
             'tel' => 'required',
         ]);
 
@@ -88,7 +89,8 @@ class VoluntarioController extends Controller
         $voluntario->nombre = $request->nombre;
         $voluntario->ape_pat = $request->ape_pat;
         $voluntario->ape_mat = $request->ape_mat;
-        $voluntario->curp = $request->curp;
+        $voluntario->curp = strtoupper($request->curp);
+        $voluntario->fecha_nacimiento = $request->fecha_nacimiento;
         $voluntario->tel = $request->tel;
         $voluntario->email = $request->email;
         $voluntario->activo = false;
@@ -111,7 +113,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Método que redirecciona a la vista donde se muestra la tabla de voluntarios activos.
      *
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
@@ -142,7 +144,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Método que redirrecciona la edición de voluntarios 
      *
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response
@@ -165,7 +167,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Método que permite la actualización de los datos de un voluntario, si se actualizo correctamente entonces retorna "success" o "fail" en caso contrario
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Voluntario  $voluntario
@@ -179,6 +181,7 @@ class VoluntarioController extends Controller
             'id_municipio' => 'required',
             'id_insti' => 'required',
             'tel' => 'required', 
+            'fecha_nacimiento' => 'required',
             'email' => 'required',
         ]);
         $voluntarioEditado = Voluntario::findOrFail($id);
@@ -187,7 +190,8 @@ class VoluntarioController extends Controller
         $voluntarioEditado->nombre = $request->nombre;
         $voluntarioEditado->ape_pat = $request->ape_pat;
         $voluntarioEditado->ape_mat = $request->ape_mat;
-        $voluntarioEditado->curp = $request->curp;
+        $voluntarioEditado->curp = strtoupper($request->curp);
+        $voluntarioEditado->fecha_nacimiento = $request->fecha_nacimiento;
         $voluntarioEditado->tel = $request->tel;
         $voluntarioEditado->email = $request->email;
         $voluntarioEditado->activo = false;
@@ -202,7 +206,7 @@ class VoluntarioController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Método que permite el eliminado lógico de un voluntario cambiarndo el campo "eliminado" a true.
      *
      * @param  \App\Models\Voluntario  $voluntario
      * @return \Illuminate\Http\Response

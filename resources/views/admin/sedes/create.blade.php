@@ -166,7 +166,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Número de voluntarios necesarios</label>
-                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 30" min="1" max="30" required="required"/>
+                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 30" min="1" max="50" required="required"/>
                             <span class="text-danger">@error('cupo'){{ 'Ingrese el número de voluntarios' }} @enderror </span>
                         </div>
                     </div>

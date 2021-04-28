@@ -13,10 +13,18 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+     /**
+     * Método que permite la redirección a la vista de login.
+     *
+     */
     public function login(){
         return view('security.login');
     }
-    //
+    
+    /**
+     * Método que permite la autentificación del login validando el correo y la contraseña en caso de ser correctos los datos, redireccionara a inicio , en caso contrario enviara mensajes de error
+     */
     public function authenticate(Request $request)
     {
         $request->validate([
@@ -38,6 +46,9 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * Método que permite el cierre de sesión
+     */
     public function logout()
     {
         if(session()->has('LoggedUser')){
@@ -48,6 +59,9 @@ class LoginController extends Controller
         
     }
 
+    /**
+     * Método que redirecciona al inicio y se realizan consultas para el despliegue de información tomando en cuenta el rol del usuario
+     */
     public function dashboard(){
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
 
