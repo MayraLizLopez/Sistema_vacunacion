@@ -15,6 +15,7 @@ class Jornada extends Migration
     {
         Schema::create('jornadas', function (Blueprint $table) {
             $table->bigIncrements('id_jornada');
+            $table->string('folio', 500)->nullable();
             $table->date ('fecha_inicio', 255);
             $table->date ('fecha_fin', 255);
             $table->string ('mensaje', 500);

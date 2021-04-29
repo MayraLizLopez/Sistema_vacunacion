@@ -12,5 +12,5 @@ class Jornada extends Model
     protected $primaryKey = 'id_jornada';
     protected $table = "jornadas";
     public $timestamps = false;
-    protected $fillable = ['fecha_inicio', 'fecha_fin', 'mensaje', 'activo', 'fecha_creacion', 'fecha_edicion'];
+    protected $fillable = ['folio', 'fecha_inicio', 'fecha_fin', 'mensaje', 'activo', 'fecha_creacion', 'fecha_edicion'];
 }

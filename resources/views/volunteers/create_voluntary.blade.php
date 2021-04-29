@@ -140,6 +140,7 @@
                                     <div class="form-group">
                                         <label for="curpVoluntary">CURP</label>
                                         <input type="text" class="form-control" id="curpVoluntary" name="curp" placeholder="CURP" data-mask="SSSS000000SSSSSSA0"/>
+                                        <span class="text-danger">@error('curp'){{ 'Ingrese su CURP' }} @enderror </span>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +217,7 @@
         let day = date.getDate()
         let month = date.getMonth() + 1
         let year = date.getFullYear()
-        var hoy;
+        let hoy;
 
         if(month < 10){
             hoy=`${year}-0${month}-${day}`;
