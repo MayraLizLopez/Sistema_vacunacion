@@ -1097,13 +1097,12 @@
 
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea eliminar esta jornada?",
+                    title: '¿Está seguro que desea eliminar esta jornada?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6A7379',
+                    confirmButtonText: 'Eliminar',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false

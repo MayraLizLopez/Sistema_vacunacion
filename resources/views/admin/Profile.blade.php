@@ -154,7 +154,7 @@
 </form>
 
 <!-- password Modal-->
-<!-- <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+{{-- <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -183,37 +183,34 @@
             </form>
         </div>
     </div>
-</div> -->
+</div> --}}
 @endsection
 @section('scripts')
 <script>
-function modal(){
-    Swal.fire({
+async function modal(){
+    const { value: password } = await Swal.fire({
         title: 'Cambiar contraseña',
         text: "Nueva contraseña",
         input: 'text',
         showCancelButton: true,
-        confirmButtonColor: '#6A7379',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#54A583',
+        cancelButtonColor: '#6A7379',
         confirmButtonText: 'Aceptar',
-        preConfirm: (pass) => {
-            cambiarPass(pass);
+        inputValidator: (value) => {
+            if (!value) {
+            return 'Debe ingresar la contraseña!'
+            }
         }
-        }).then((result) => {
-        if (result.isConfirmed) {
-            cambiarPass();
-        }
-    });
+        });
+
+        cambiarPass(password);
 }
 
 
 function cambiarPass(pass){
             $.ajax({
                 url: "profile/savePassword/" + pass,
-                type: "POST",
-                data: {
-                    _token: $('meta[name="csrf-token"]').attr('content')
-                },
+                type: "GET",
                 success: function (response) {
                     if(response.isOk == true){
                         Swal.fire({

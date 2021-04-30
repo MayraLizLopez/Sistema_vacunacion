@@ -75,22 +75,21 @@
         window.operateEvents = {
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea eliminar este centro?",
+                    title: 'Está seguro que desea eleminar esta sede?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6A7379',
                     confirmButtonText: 'Aceptar'
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        deleteVoluntary(row.id_sede);
+                        deleteSede(row.id_sede);
                     }
                     });
             }
         }
 
-        function deleteVoluntary(id){
+        function deleteSede(id){
             $.ajax({
                 url: "eliminar/" + id,
                 type: "POST",

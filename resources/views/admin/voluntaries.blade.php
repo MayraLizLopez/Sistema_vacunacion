@@ -471,13 +471,12 @@
         window.operateEvents = {
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea eliminar este voluntario?",
+                    title: '¿Está seguro que desea eliminar este voluntario?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6A7379',
+                    confirmButtonText: 'Eliminar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteVoluntary(row.id_voluntario);

@@ -136,7 +136,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     //Perfil
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
 
-    Route::post('admin/panel/profile/savePassword', [UsuarioController::class, "savePassword"])->name('savePassword');
+    Route::get('admin/panel/profile/savePassword/{pass}', [UsuarioController::class, "savePassword"])->name('savePassword');
 
     //Sedes
     Route::get('admin/panel/sedes/index', [SedeController::class, "show"])->name('tabla_sedes');

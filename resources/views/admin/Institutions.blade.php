@@ -75,13 +75,12 @@
         window.operateEvents = {
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea eliminar esta institución?",
+                    title: '¿Está seguro que desea eliminar esta institución?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6A7379',
+                    confirmButtonText: 'Eliminar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteInstitution(row.id_insti);

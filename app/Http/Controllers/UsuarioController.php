@@ -294,9 +294,9 @@ class UsuarioController extends Controller
      */
     public function savePassword($pass)
     {
-        return response()->json([
-            'data' => $pass         
-        ]); 
+        // return response()->json([
+        //     'data' => $pass         
+        // ]); 
         $id =  session('LoggedUser');
         $user = Usuario::findOrFail($id);
         $user->password = Hash::make($pass);

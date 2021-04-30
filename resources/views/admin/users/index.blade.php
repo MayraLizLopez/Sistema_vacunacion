@@ -375,13 +375,12 @@
         window.operateEvents = {
             'click .disable': function (e, value, row, index) {
                 Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea deshabilitar este usuario?",
+                    title: '¿Está seguro que desea desactivar este usuario?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6A7379',
+                    confirmButtonText: 'Desactivar'
                     }).then((result) => {
                     if (result.isConfirmed) {
                         desableUser(row.id_user);
@@ -390,13 +389,12 @@
             },
             'click .enable': function (e, value, row, index) {
                 Swal.fire({
-                    title: 'Advertencia',
-                    text: "¿Está seguro que desea habilitar este usuario?",
+                    title: '¿Está seguro que desea activar este usuario?',
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Aceptar'
+                    confirmButtonColor: '#54A583',
+                    cancelButtonColor: '#6A7379',
+                    confirmButtonText: 'Activar'
                     }).then((result) => {
                     if (result.isConfirmed) {
                         enableUser(row.id_user);
