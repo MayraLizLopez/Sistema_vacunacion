@@ -292,21 +292,21 @@ class UsuarioController extends Controller
      * @param  \App\Models\Usuario  $usuario
      * @return \Illuminate\Http\Response
      */
-    public function savePassword(Request $request)
+    public function savePassword($pass)
     {
-        $request->validate([
-            'password' => 'required', 
-        ]);
-        
+        return response()->json([
+            'data' => $pass         
+        ]); 
         $id =  session('LoggedUser');
         $user = Usuario::findOrFail($id);
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($pass);
         $save = $user->save();     
         
         if($save){
-            return redirect()->back()->with('success', '¡Tus datos fueron agregados correctamente, te enviamos un correo a tu email!');
-        }else{
-            return redirect()->back()->with('fail', 'tus datos no puedieron ser agregados correctamente');
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡La contraseña fue cambiada correctamente!'
+            ]);    
         }
     }
 }

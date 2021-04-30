@@ -1,7 +1,7 @@
 @extends('admin.layout')
 @section('css')
-    <link href="{{ asset('public/assets/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('public/assets/css/miEstilo.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 <!-- Page Heading -->
@@ -96,68 +96,65 @@
         <div class="card-body">
             <div class="content">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="nameVoluntary">Nombre</label>
                             <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" value="{{ $user->nombre }}" disabled/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre de la institución' }} @enderror </span>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Apellido Paterno</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_pat" placeholder="" value="{{ $user->ape_pat }}" disabled/>
                             <span class="text-danger">@error('domicilio'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Apellido Materno</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_Mat" placeholder="" value="{{ $user->ape_pat }}" disabled/>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-md-6">
+                <div class="row">
+                
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Institución</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="institucion" placeholder="" value="{{ $institucion->nombre }}" disabled/>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Cargo</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_Mat" placeholder="" value="{{ $user->cargo }}" disabled/>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Teléfono</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="institucion" placeholder="" value="{{ $user->tel }}" disabled/>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Correo</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="institucion" placeholder="" value="{{ $user->email }}" disabled/>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success botonCambiarPass" data-toggle="modal" data-target="#passwordModal" >Cambiar contraseña</button>
             </div>
         </div>
     </div>
-
+    <button type="button" class="btn btn-success botonCambiarPass" onclick="modal()">Cambiar contraseña</button>
 </form>
 
 <!-- password Modal-->
-<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -186,7 +183,63 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->
 @endsection
 @section('scripts')
+<script>
+function modal(){
+    Swal.fire({
+        title: 'Cambiar contraseña',
+        text: "Nueva contraseña",
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonColor: '#6A7379',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Aceptar',
+        preConfirm: (pass) => {
+            cambiarPass(pass);
+        }
+        }).then((result) => {
+        if (result.isConfirmed) {
+            cambiarPass();
+        }
+    });
+}
+
+
+function cambiarPass(pass){
+            $.ajax({
+                url: "profile/savePassword/" + pass,
+                type: "POST",
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if(response.isOk == true){
+                        Swal.fire({
+                        title: 'Hecho',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message,
+                            icon: 'error',
+                            showCancelButton: true
+                        });
+                    } 
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+</script>
 @endsection

@@ -174,6 +174,7 @@
 </html>
 
 <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
+<script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
 <script>
     function mostrar() {
         var checkBox = document.getElementById("InputPassword");
