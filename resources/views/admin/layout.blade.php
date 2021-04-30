@@ -109,19 +109,19 @@
 
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
+                    {{--<li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
                         <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
-                    </li>
+                    </li>--}}
 
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
+                    {{-- <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_centros.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Centros</span></a>
-                    </li>
+                    </li> --}}
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}

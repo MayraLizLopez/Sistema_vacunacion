@@ -21,6 +21,7 @@
         <h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
         <p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos</p>
     </div>
+    {{--
     <div class="col-md-6">
         <button id="btnExportToExcel" 
         class="btn btn-success float-right" 
@@ -34,7 +35,7 @@
                 <img class="mx-1" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 40px;"/>
                 <span class="h2">Generar reporte</span>
         </button>
-    </div>
+    </div> --}}
 </div>
 
 <div id="toolbar">
@@ -88,13 +89,13 @@
             <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
         </div>
 
-        <div class="form-group ml-1">
+       {{-- <div class="form-group ml-1">
             <button type="button" class="btn btn-info btn-table" id="showMoreFilters" 
             data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters"
             data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros">
                 <i class="fas fa-chevron-circle-down"></i>
             </button>      
-        </div>
+        </div>--}}
 
         <div class="form-group ml-1">
             <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
