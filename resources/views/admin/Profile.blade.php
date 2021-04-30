@@ -203,7 +203,9 @@ async function modal(){
         }
         });
 
-        cambiarPass(password);
+        if (password) {
+            cambiarPass(password);
+        }
 }
 
 
