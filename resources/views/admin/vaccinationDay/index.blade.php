@@ -362,7 +362,7 @@
           </button>
         </div>
         <div class="modal-body">
-            <div id="toolbar2">
+            <div id="toolbar4">
                 <div class="form-inline" role="form">
                     <button type="button" class="btn btn-primary" id="sendEmails">
                         <i class="far fa-envelope"></i>
@@ -377,7 +377,7 @@
                     data-pagination="true"
                     data-sort-name="nombre"
                     data-sort-order="desc"
-                    data-toolbar="#toolbar2">
+                    data-toolbar="#toolbar4">
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
