@@ -20,6 +20,7 @@ class ConfirmJornada extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
+    //    $img_url = "{{ asset('public/assets/images/isologo_jalisco_v.svg') }}";
     }
 
     /**

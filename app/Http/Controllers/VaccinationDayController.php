@@ -359,6 +359,7 @@ class VaccinationDayController extends Controller
                     'sedes.id_sede AS id_sede',
                     'sedes.nombre AS nombre',
                     'sedes.direccion AS direccion',
+                    'sedes.colonia AS colonia',
                     'sedes.cupo AS cupo',
                     'uuid' 
                 )

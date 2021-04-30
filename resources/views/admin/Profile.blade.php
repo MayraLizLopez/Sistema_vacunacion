@@ -1,6 +1,7 @@
 @extends('admin.layout')
 @section('css')
     <link href="{{ asset('public/assets/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('public/assets/css/miEstilo.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
 <!-- Page Heading -->
@@ -32,11 +33,11 @@
             
         }
 
-        .botonEnviar2{
+        .botonCambiarPass{
             margin-right: 16px;
+            width: 250px;
             font-family: montserrat;
             font-weight: bold;
-            
         }
 
         h1{
@@ -148,7 +149,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-success botonEnviar2" data-toggle="modal" data-target="#passwordModal" >Cambiar contraseña</button>
+                <button type="button" class="btn btn-success botonCambiarPass" data-toggle="modal" data-target="#passwordModal" >Cambiar contraseña</button>
             </div>
         </div>
     </div>

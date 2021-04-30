@@ -1,0 +1,82 @@
+@font-face {
+    font-family: nutmeg-bold;
+    src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf') }}");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: montserrat;
+    src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf') }}");
+}
+button{
+    width: 184px;
+    font-family: montserrat;
+    font-weight: bold;
+}
+
+#boton{
+    width: 184px;
+    font-family: montserrat;
+    font-weight: bold;
+}
+
+#botonEnviar{
+    margin-right: 16px;
+    width: 184px;
+    font-family: montserrat;
+    font-weight: bold;
+}
+
+h1{
+    font-family: nutmeg-bold;
+}
+
+h5{
+    font-family: nutmeg-bold;
+}
+
+label{
+    font-family: montserrat;
+}
+
+input{
+    font-family: montserrat;
+}
+
+a{
+    font-family: montserrat;
+}
+
+.botonEnviar{
+    margin-right: 16px;
+    width: 184px;
+    font-family: montserrat;
+    font-weight: bold;
+    
+}
+
+.botonCambiarPass{
+    margin-right: 16px;
+    width: 250px;
+    font-family: montserrat;
+    font-weight: bold;
+}
+
+.cerrar{
+    background-color: #6A7379;
+}
+
+#button-largo{
+    width: 184px;
+    font-family: montserrat;
+    font-weight: bold;
+}
+
+#logo{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#menu {
+    color: #0B55B8;     
+}  

@@ -895,7 +895,7 @@
                 beforeSend: () => {
                     Swal.fire({
                         showConfirmButton: false,
-                        imageUrl: '{{ url("../resources/image/loading.png") }}',
+                        imageUrl: "{{ asset('public/assets/images/loading.png') }}",
                         title: 'Por favor espere.',
                         text: 'enviando correo(s)',
                         allowOutsideClick: false,
