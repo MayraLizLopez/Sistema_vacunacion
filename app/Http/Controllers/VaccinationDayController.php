@@ -54,6 +54,7 @@ class VaccinationDayController extends Controller
         ]);
         
         $jornada = new Jornada;
+        $jornada->folio = 'F000';
         $jornada->fecha_inicio = $request->fecha_inicio;
         $jornada->fecha_fin = $request->fecha_fin;
         $jornada->mensaje = $request->mensaje;
@@ -210,7 +211,7 @@ class VaccinationDayController extends Controller
         ]);
     }
 
-    public function getAllVoluntantiesByActive($id_institution){
+    public function getVoluntariesByInstitution(Request $request){
         $voluntarios = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -219,12 +220,11 @@ class VaccinationDayController extends Controller
          'instituciones.nombre AS nombre_institucion',
          'municipios.nombre AS nombre_municipio')
         ->where([['eliminado', '=', 0],
-                ['voluntarios.activo', '=', 0],
-                ['voluntarios.id_insti', '=', $id_institution]
-          ])
+                ['voluntarios.activo', '=', 0]])
+        ->whereIn('voluntarios.id_insti', $request->ids_institution)
         ->get();
         return response()->json([
-            'data' => $voluntarios        
+            'data' => $voluntarios       
         ]); 
     }
 
@@ -326,17 +326,32 @@ class VaccinationDayController extends Controller
 
     public function getAllInstitutions()
     {  
-        $institutions = DB::table('instituciones')->where('activo', '=', 1)
-        ->orderBy('nombre', 'asc')
+        $institutions = DB::table('instituciones')
+        ->join('municipios', 'instituciones.id_municipio', '=', 'municipios.id_municipio')
+        ->select('instituciones.*', 'municipios.nombre AS nombre_municipio')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'asc')
         ->get();
         return response()->json([
             'data' => $institutions       
         ]); 
     }
 
+    public function getAllTowns()
+    {  
+        $towns = DB::table('municipios')
+        ->orderBy('nombre', 'asc')
+        ->get();
+        return response()->json([
+            'data' => $towns          
+        ]); 
+    }
+
    public function getAllSedesByIdTown($id_municipio){
         $jornadas = DB::table('sedes')
-        ->where('id_municipio', '=', $id_municipio)
+        ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
+        ->select('sedes.*', 'municipios.nombre AS nombre_municipio')
+        ->where('sedes.id_municipio', '=', $id_municipio)
         ->get();
         return response()->json([
             'data' => $jornadas        

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -356,7 +355,8 @@
             <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- admin layout -->
+		<!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -386,7 +386,7 @@
         <!-- Bootstrap core JavaScript-->
         <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('public/assets/js/custom.min.js') }}"></script>
+        {{-- <script src="{{ asset('public/assets/js/custom.min.js') }}"></script> --}}
 
         <!-- Core plugin JavaScript-->
         <script src="{{ asset('public/assets/js/jquery.easing.min.js') }}"></script>
