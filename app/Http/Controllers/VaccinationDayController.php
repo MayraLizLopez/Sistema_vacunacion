@@ -54,7 +54,7 @@ class VaccinationDayController extends Controller
         ]);
         
         $jornada = new Jornada;
-        $jornada->folio = 'F000';
+        //$jornada->folio = 'F000';
         $jornada->fecha_inicio = $request->fecha_inicio;
         $jornada->fecha_fin = $request->fecha_fin;
         $jornada->mensaje = $request->mensaje;
