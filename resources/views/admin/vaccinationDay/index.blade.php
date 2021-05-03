@@ -421,13 +421,16 @@
             startEvents();
         });
 
-        function defaultValues(){
-            $('#inTown').empty();
-            $('#inTown').append($('<option>').text('Eliga un municipio').
-                                attr({ 'value': 0, 'disabled': true, 'selected': true, 'hidden': true }));
-            $('#editInTown').empty();
-            $('#editInTown').append($('<option>').text('Eliga un municipio').
-                                attr({ 'value': 0, 'disabled': true, 'selected': true, 'hidden': true }));                 
+        function defaultValues(actionType){
+            if(actionType == 'create'){
+                $('#inTown').empty();
+                $('#inTown').append($('<option>').text('Eliga un municipio').
+                                    attr({ 'value': 0, 'disabled': true, 'selected': true, 'hidden': true }));
+            } else if(actionType == 'edit'){
+                $('#editInTown').empty();
+                $('#editInTown').append($('<option>').text('Eliga un municipio').
+                                    attr({ 'value': 0, 'disabled': true, 'selected': true, 'hidden': true })); 
+            }                
         }
 
         function startEvents(){
@@ -459,10 +462,10 @@
 
             //evento para obtener la lista de todos los voluntarios activos y no eliminados
             $('#modalCreateVaccinationDay').on('show.bs.modal', () => {
-                $voluntariesTable.bootstrapTable({data: []});
-                $sedesTable.bootstrapTable({data: []});
                 getAllTowns('create');
                 getAllInstitutions('create');
+                $voluntariesTable.bootstrapTable({data: []});
+                $sedesTable.bootstrapTable({data: []});
             });
 
             //Envento que limpia la lista de instituciones
@@ -607,13 +610,16 @@
                 url: "vaccinationDay/getAllTowns/",
                 type: "GET",
                 success: function (response) {
-                    defaultValues();
+                    console.log(response);
+                    
                     if(actionType == 'create'){
+                        defaultValues('create');
                         for(let i in response.data){
                         $('#inTown').append($('<option>').text(response.data[i].nombre).
                                 attr({ 'value': response.data[i].id_municipio, 'disabled': false, 'selected': false, 'hidden': false }));
                         }
                     }else if(actionType == 'edit'){
+                        defaultValues('edit');
                         for(let i in response.data){
                         $('#editInTown').append($('<option>').text(response.data[i].nombre).
                                 attr({ 'value': response.data[i].id_municipio, 'disabled': false, 'selected': false, 'hidden': false }));
@@ -621,7 +627,7 @@
                     }
                 },
                 error: function (error, resp, text) {
-                    // console.error(error);
+                    console.error(error);
                 }
             });
         }
