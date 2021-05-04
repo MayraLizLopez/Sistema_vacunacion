@@ -299,7 +299,8 @@
                         text: response.message,
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Aceptar'
+                        confirmButtonText: 'Aceptar',
+                        cancelButtonText: 'Calcelar',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 location.reload();
@@ -331,7 +332,8 @@
                         text: response.message,
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Aceptar'
+                        confirmButtonText: 'Aceptar',
+                        cancelButtonText: 'Calcelar',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 location.reload();
@@ -376,11 +378,11 @@
             'click .disable': function (e, value, row, index) {
                 Swal.fire({
                     title: '¿Está seguro que desea desactivar este usuario?',
-                    icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#6A7379',
-                    confirmButtonText: 'Desactivar'
+                    confirmButtonText: 'Desactivar',
+                    cancelButtonText: 'Calcelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         desableUser(row.id_user);
@@ -390,11 +392,11 @@
             'click .enable': function (e, value, row, index) {
                 Swal.fire({
                     title: '¿Está seguro que desea activar este usuario?',
-                    icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#54A583',
                     cancelButtonColor: '#6A7379',
-                    confirmButtonText: 'Activar'
+                    confirmButtonText: 'Activar',
+                    cancelButtonText: 'Calcelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         enableUser(row.id_user);

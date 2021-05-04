@@ -90,8 +90,11 @@ class SedeController extends Controller
         ->select('sedes.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio')
         ->where('sedes.activo', '=', 1)
         ->get();
+        $municipios = DB::table('municipios')->get();   
+        $muni = DB::table('municipios')->where('id_municipio', 40)->first();   
+        $municipio_select = $muni->nombre;
     
-        return view('admin.sedes.index', compact('sedes'), $data);
+        return view('admin.sedes.index', compact('sedes', 'municipios'), $data);
     }
 
      /**
@@ -177,6 +180,18 @@ class SedeController extends Controller
                 'message' => 'Error al eliminar el centro'
             ]);
         }
+    }
+
+    public function  getDetalleSede($id_sede){
+        $sedes = DB::table('sedes')
+        ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
+        ->select('sedes.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio')
+        ->where('sedes.id_sede', '=', $id_sede)
+        ->first();
+
+        return response()->json([
+            'data' => $sedes    
+        ]);
     }
 
 }
