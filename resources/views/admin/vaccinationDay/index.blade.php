@@ -102,7 +102,7 @@
         <div class="modal-header">
           <h5 class="modal-title">Crear jornada</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
           </button>
         </div>
         <div class="modal-body">
@@ -230,7 +230,7 @@
         <div class="modal-header">
           <h5 class="modal-title">Editar jornada</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
           </button>
         </div>
         <div class="modal-body">
