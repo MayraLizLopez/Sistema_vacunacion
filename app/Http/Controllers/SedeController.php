@@ -49,7 +49,6 @@ class SedeController extends Controller
             'cp' => 'required',
             'cruce_calles' => 'required',
             'nombre_encargado' => 'required',
-            'georeferencia' => 'required',
         ]);
 
         $sede = new Sede;
@@ -133,7 +132,6 @@ class SedeController extends Controller
             'cp' => 'required',
             'cruce_calles' => 'required',
             'nombre_encargado' => 'required',
-            'georeferencia' => 'required',
         ]);
 
         $sedeEditado = Sede::findOrFail($id);
@@ -182,6 +180,9 @@ class SedeController extends Controller
         }
     }
 
+    /**
+     * Método que retorna los detalles de la sede selecciona.
+     */
     public function  getDetalleSede($id_sede){
         $sedes = DB::table('sedes')
         ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
@@ -192,6 +193,34 @@ class SedeController extends Controller
         return response()->json([
             'data' => $sedes    
         ]);
+    }
+
+    /**
+     * Método que almacena las coordenadas de una sede que no tiene coordenadas
+     */
+    public function  saveCoordenadas(Request $request){
+        $request->validate([
+            'latitud' => 'required', 
+            'longitud' => 'required',
+        ]);
+
+        $sedeEditado = Sede::findOrFail($request->id_sede);
+        $sedeEditado->latitud = $request->latitud;
+        $sedeEditado->longitud = $request->longitud;
+        $sedeEditado->fecha_edicion = Carbon::now();
+        $save = $sedeEditado->save();
+        
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Geolocalización guardada correctamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => false,
+                'message' => 'Error al guardar la geolocalización'
+            ]);
+        }
     }
 
 }

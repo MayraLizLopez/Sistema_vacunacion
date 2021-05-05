@@ -153,6 +153,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/sedes/detalles/{id_sede}', [SedeController::class, "getDetalleSede"])->name('getDetalleSede');
 
+    Route::post('admin/panel/sedes/coordenadas/', [SedeController::class, "saveCoordenadas"])->name('saveCoordenadas');
+
 
     //Usuarios
     Route::get('admin/panel/users/index', [UsuarioController::class, "index"])->name('indexUsers');
