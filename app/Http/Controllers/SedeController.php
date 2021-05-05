@@ -147,6 +147,8 @@ class SedeController extends Controller
         $sedeEditado->email_encargado = $request->email_encargado;
         $sedeEditado->activo = true;
         $sedeEditado->fecha_edicion = Carbon::now();
+        $sedeEditado->latitud = null;
+        $sedeEditado->longitud= null;
         $save = $sedeEditado->save();
         
         if($save){

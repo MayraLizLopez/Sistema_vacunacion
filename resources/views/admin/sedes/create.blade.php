@@ -186,9 +186,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <button id="botonEnviar" class="btn btn-success" type="submit">Guardar</button>
+            <button id="botonEnviar" class="btn btn-success" type="submit" onclick="buscar()">Guardar</button>
             <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_sedes')}}">Cancelar</a>
             
         </div>
