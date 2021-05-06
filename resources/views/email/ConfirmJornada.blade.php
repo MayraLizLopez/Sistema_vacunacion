@@ -27,7 +27,7 @@
     </style>
     <body>
         <center>
-            <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="width:30%;" />
+            <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="max-width:30%;" />
             <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡{{ $nombre }} Felicidades has sido seleccionado(a) como voluntario(a) para una jornada!</h1>
         </center>
 
@@ -58,7 +58,7 @@
                 <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailRechazar/{{$uuid}}">Rechazar todos</a>
             </div>
             <br>
-            <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo2.png" style="width:30%; margin-top: 25px;" />
+            <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo2.png" style="max-width:30%; margin-top: 25px;" />
         </center>
 
     </body>

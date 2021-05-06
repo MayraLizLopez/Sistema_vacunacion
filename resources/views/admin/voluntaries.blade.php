@@ -21,7 +21,7 @@
         <h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
         <p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos.</p>
     </div>
-    {{--
+    
     <div class="col-md-6">
         <button id="btnExportToExcel" 
         class="btn btn-success float-right" 
@@ -35,7 +35,7 @@
                 <img class="mx-1" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 40px;"/>
                 <span class="h2">Generar reporte</span>
         </button>
-    </div> --}}
+    </div> 
 </div>
 
 <div id="toolbar">
@@ -479,6 +479,7 @@
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#6A7379',
                     confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Calcelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteVoluntary(row.id_voluntario);

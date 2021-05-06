@@ -373,7 +373,7 @@
     </div>
   </div>
 
-  <div id="modalViewJornadaDetail" class="modal" tabindex="-1" role="dialog">
+<div id="modalViewJornadaDetail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -1171,7 +1171,7 @@
             '<a class="edit mr-2" href="javascript:void(0)" title="Editar">',
             '<i class="fas fa-edit"></i>',
             '</a>',
-            '<a class="remove mr-2" href="javascript:void(0)" title="Elimnar">',
+            '<a class="remove mr-2" href="javascript:void(0)" title="Eliminar">',
             '<i class="fa fa-trash"></i>',
             '</a>'
             ].join('')

@@ -79,7 +79,8 @@
                     showCancelButton: true,
                     confirmButtonColor: '#E33C3C',
                     cancelButtonColor: '#67737A',
-                    confirmButtonText: 'Eliminar'
+                    confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Calcelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteInstitution(row.id_insti);

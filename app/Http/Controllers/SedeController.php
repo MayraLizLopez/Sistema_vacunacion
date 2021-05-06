@@ -49,7 +49,6 @@ class SedeController extends Controller
             'cp' => 'required',
             'cruce_calles' => 'required',
             'nombre_encargado' => 'required',
-            'georeferencia' => 'required',
         ]);
 
         $sede = new Sede;
@@ -90,8 +89,11 @@ class SedeController extends Controller
         ->select('sedes.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio')
         ->where('sedes.activo', '=', 1)
         ->get();
+        $municipios = DB::table('municipios')->get();   
+        $muni = DB::table('municipios')->where('id_municipio', 40)->first();   
+        $municipio_select = $muni->nombre;
     
-        return view('admin.sedes.index', compact('sedes'), $data);
+        return view('admin.sedes.index', compact('sedes', 'municipios'), $data);
     }
 
      /**
@@ -130,7 +132,6 @@ class SedeController extends Controller
             'cp' => 'required',
             'cruce_calles' => 'required',
             'nombre_encargado' => 'required',
-            'georeferencia' => 'required',
         ]);
 
         $sedeEditado = Sede::findOrFail($id);
@@ -146,6 +147,8 @@ class SedeController extends Controller
         $sedeEditado->email_encargado = $request->email_encargado;
         $sedeEditado->activo = true;
         $sedeEditado->fecha_edicion = Carbon::now();
+        $sedeEditado->latitud = null;
+        $sedeEditado->longitud= null;
         $save = $sedeEditado->save();
         
         if($save){
@@ -175,6 +178,49 @@ class SedeController extends Controller
             return response()->json([
                 'isOk' => false,
                 'message' => 'Error al eliminar el centro'
+            ]);
+        }
+    }
+
+    /**
+     * Método que retorna los detalles de la sede selecciona.
+     */
+    public function  getDetalleSede($id_sede){
+        $sedes = DB::table('sedes')
+        ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
+        ->select('sedes.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio')
+        ->where('sedes.id_sede', '=', $id_sede)
+        ->first();
+
+        return response()->json([
+            'data' => $sedes    
+        ]);
+    }
+
+    /**
+     * Método que almacena las coordenadas de una sede que no tiene coordenadas
+     */
+    public function  saveCoordenadas(Request $request){
+        $request->validate([
+            'latitud' => 'required', 
+            'longitud' => 'required',
+        ]);
+
+        $sedeEditado = Sede::findOrFail($request->id_sede);
+        $sedeEditado->latitud = $request->latitud;
+        $sedeEditado->longitud = $request->longitud;
+        $sedeEditado->fecha_edicion = Carbon::now();
+        $save = $sedeEditado->save();
+        
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Geolocalización guardada correctamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => false,
+                'message' => 'Error al guardar la geolocalización'
             ]);
         }
     }

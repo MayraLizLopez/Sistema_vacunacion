@@ -103,14 +103,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nameVoluntary">Nombre del centro</label>
+                            <label for="nameVoluntary">Nombre de la sede</label>
                             <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" required="required"/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="paternalSurnameVoluntary">Domicilio del centro</label>
+                            <label for="paternalSurnameVoluntary">Domicilio de la institución</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="direccion" placeholder="Domicilio" required="required"/>
                             <span class="text-danger">@error('direccion'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
@@ -118,23 +118,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nameVoluntary">Colonia</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="colonia" placeholder="colonia" required="required"/>
-                            <span class="text-danger">@error('colonia'){{ 'Ingrese la colonia' }} @enderror </span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="paternalSurnameVoluntary">Código postal</label>
-                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cp" placeholder="código postal" min="11111" max="99999" required="required"/>
-                            <span class="text-danger">@error('cp'){{ 'Ingrese el código postal' }} @enderror </span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="nameVoluntary">Cruce de calles</label>
@@ -142,17 +126,25 @@
                             <span class="text-danger">@error('cruce_calles'){{ 'Ingrese el cruce de calles' }} @enderror </span>
                         </div>
                     </div>
+
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nameVoluntary">Georeferencia</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="georeferencia" placeholder="georefernecia" required="required"/>
-                            <span class="text-danger">@error('georeferencia'){{ 'Ingrese la georeferencia' }} @enderror </span>
+                            <label for="nameVoluntary">Colonia</label>
+                            <input type="text" class="form-control" id="nameVoluntary" name="colonia" placeholder="colonia" required="required"/>
+                            <span class="text-danger">@error('colonia'){{ 'Ingrese la colonia' }} @enderror </span>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="paternalSurnameVoluntary">Código postal</label>
+                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cp" placeholder="código postal" min="11111" max="99999" required="required"/>
+                            <span class="text-danger">@error('cp'){{ 'Ingrese el código postal' }} @enderror </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="emailVoluntary">Municipio</label>
                             <select class="form-control" id="townVoluntary" name="id_municipio">
@@ -164,10 +156,10 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="paternalSurnameVoluntary">Número de voluntarios necesarios</label>
-                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 30" min="1" max="50" required="required"/>
+                            <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 50" min="1" max="50" required="required"/>
                             <span class="text-danger">@error('cupo'){{ 'Ingrese el número de voluntarios' }} @enderror </span>
                         </div>
                     </div>
@@ -194,9 +186,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <button id="botonEnviar" class="btn btn-success" type="submit">Guardar</button>
+            <button id="botonEnviar" class="btn btn-success" type="submit" onclick="buscar()">Guardar</button>
             <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_sedes')}}">Cancelar</a>
             
         </div>

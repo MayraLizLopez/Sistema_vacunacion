@@ -195,7 +195,8 @@ async function modal(){
         showCancelButton: true,
         confirmButtonColor: '#54A583',
         cancelButtonColor: '#6A7379',
-        confirmButtonText: 'Aceptar',
+        confirmButtonText: 'Guardar',
+        cancelButtonText: 'Calcelar',
         inputValidator: (value) => {
             if (!value) {
             return 'Debe ingresar la contraseña!'

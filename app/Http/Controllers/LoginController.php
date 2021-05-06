@@ -64,10 +64,9 @@ class LoginController extends Controller
      */
     public function dashboard(){
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-
         $rol = session('LoggedUserNivel');
         if($rol == 'Administrador General'){
-            $voluntarios = DB::table('voluntarios')->count(); 
+            $voluntarios = DB::table('voluntarios')->where('activo', '=', false)->count(); 
             $instituciones = DB::table('instituciones')->where('activo', '=', true)->count();   
             $jornadas = DB::table('jornadas')->where('activo', '=', true)->count();   
             $centros = DB::table('sedes')->where('activo', '=', true)->count();   
