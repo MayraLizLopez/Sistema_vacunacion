@@ -115,7 +115,11 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/vaccinationDay/store/', [VaccinationDayController::class, "store"])->name('store');
 
+    Route::post('admin/panel/vaccinationDay/storeFiles/', [VaccinationDayController::class, "storeFiles"])->name('storeFiles');
+
     Route::post('admin/panel/vaccinationDay/update/', [VaccinationDayController::class, "update"])->name('update');
+
+    Route::post('admin/panel/vaccinationDay/updateFiles/', [VaccinationDayController::class, "updateFiles"])->name('updateFiles');
 
     Route::get('admin/panel/vaccinationDay/show/', [VaccinationDayController::class, "show"])->name('show');
 
@@ -125,11 +129,15 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/vaccinationDay/getJornada/{id_jornada}', [VaccinationDayController::class, "getJornada"])->name('getJornada');
 
+    Route::get('admin/panel/vaccinationDay/getFilesJornada/{id_jornada}', [VaccinationDayController::class, "getFilesJornada"])->name('getFilesJornada');
+
     Route::get('admin/panel/vaccinationDay/getJornadaForVoluntaries/{id_jornada}', [VaccinationDayController::class, "getJornadaForVoluntaries"])->name('getJornadaForVoluntaries');
 
     Route::get('admin/panel/vaccinationDay/getJornadaForSedes/{id_jornada}', [VaccinationDayController::class, "getJornadaForSedes"])->name('getJornadaForSedes');
 
     Route::get('admin/panel/vaccinationDay/getAllSedesByIdTown/{id_municipio}', [VaccinationDayController::class, "getAllSedesByIdTown"])->name('getAllSedesByIdTown');
+
+    Route::get('admin/panel/vaccinationDay/downloadFiles/', [VaccinationDayController::class, "downloadFiles"])->name('downloadFiles');
 
     Route::post('admin/panel/vaccinationDay/sendemail/', [VaccinationDayController::class, "enviarCorreoJornada"])->name('enviarCorreo');
     
