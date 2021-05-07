@@ -7,11 +7,12 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 use App\Models\Usuario;
-use App\Models\Voluntario;
 use App\Models\Jornada;
 use App\Models\DetalleJornada;
 
 use App\Mail\ConfirmJornada;
+use App\Models\AnexoJornada;
+
 use Illuminate\Support\Facades\Mail;
 
 class VaccinationDayController extends Controller
@@ -60,10 +61,10 @@ class VaccinationDayController extends Controller
         $jornada->mensaje = $request->mensaje;
         $jornada->activo = true;
         $jornada->fecha_creacion = Carbon::now();
-        $save = $jornada->save();
+        $save1 = $jornada->save();
 
-        foreach($request->idSedes as $id_sede){
-            foreach($request->idsVoluntarios as $id_voluntario){
+        foreach(json_decode($request->idSedes) as $id_sede){
+            foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
                 $detalle_jornada = new DetalleJornada;
                 $detalle_jornada->id_jornada = $jornada->id_jornada;
                 $detalle_jornada->id_voluntario = (int)$id_voluntario;
@@ -72,11 +73,11 @@ class VaccinationDayController extends Controller
                 $detalle_jornada->horas = 0;
                 $detalle_jornada->correo_enviado = false;
                 $detalle_jornada->eliminado = false;
-                $save1 = $detalle_jornada->save();
+                $save2 = $detalle_jornada->save();
             }
         }
 
-        if($save && $save1){
+        if($save1 && $save2){
             return response()->json([
                 'isOk' => true,
                 'message' => '¡La jornada fue guardada exitosamente!'
@@ -87,11 +88,133 @@ class VaccinationDayController extends Controller
                 'message' => 'Error al registrar la jornada'       
             ]); 
         }
+    }
 
-        // return response()->json([
-        //     'isOk' => true,
-        //     'message' => $request->idSedes
-        // ]);
+    public function storeFiles(Request $request){
+        $nombre_archivo = $request->file->getClientOriginalName();
+        $tipo_archivo = $request->file->getMimeType();
+        $data_archivo = file_get_contents($request->file->getRealPath());
+
+        foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+            $jornada = DB::table('jornadas')->latest('id_jornada')->first();
+
+            $anexo_jornada = new AnexoJornada;
+            $anexo_jornada->id_jornada = $jornada->id_jornada;
+            $anexo_jornada->id_voluntario = (int)$id_voluntario;
+            $anexo_jornada->nombre = $nombre_archivo;
+            $anexo_jornada->anexo = base64_encode($data_archivo);
+            $anexo_jornada->tipo = $tipo_archivo;
+            $save = $anexo_jornada->save();
+        }
+
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Los anexos fueron guardados exitosamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => true,
+                'message' => 'Error al intentar guardar los anexos'       
+            ]); 
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id_jornada' => 'required',
+            'fecha_inicio' => 'required', 
+            'fecha_fin' => 'required',
+            'mensaje' => 'required',
+            'idsVoluntarios' => 'required',
+            'idSedes' => 'required'
+        ]);
+        
+        DB::table('jornadas')
+        ->where('id_jornada', $request->id_jornada)
+        ->update([
+            'fecha_inicio' => $request->fecha_inicio,
+            'fecha_fin' => $request->fecha_fin,
+            'mensaje' => $request->mensaje
+        ]);
+
+        DB::table('detalle_jornadas')
+        ->where('id_jornada', '=', $request->id_jornada)
+        ->delete();
+
+        foreach(json_decode($request->idSedes) as $id_sede){
+            foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+                $detalle_jornada = new DetalleJornada;
+                $detalle_jornada->id_jornada = $request->id_jornada;
+                $detalle_jornada->id_voluntario = (int)$id_voluntario;
+                $detalle_jornada->uuid = DB::raw('UUID()');
+                $detalle_jornada->id_sede = (int)$id_sede;
+                $detalle_jornada->horas = 0;
+                $detalle_jornada->correo_enviado = false;
+                $detalle_jornada->eliminado = false;
+                $save1 = $detalle_jornada->save();
+            }
+        }
+
+        if($save1){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡La jornada fue actualizada exitosamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => true,
+                'message' => 'Error al editar la jornada'       
+            ]); 
+        }
+    }
+
+    public function updateFiles(Request $request){
+        DB::table('anexo_jornadas')
+        ->where('id_jornada', '=', $request->id_jornada)
+        ->delete();
+        
+        $nombre_archivo = $request->file->getClientOriginalName();
+        $tipo_archivo = $request->file->getMimeType();
+        $data_archivo = file_get_contents($request->file->getRealPath());
+
+        foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+            $jornada = DB::table('jornadas')->latest('id_jornada')->first();
+
+            $anexo_jornada = new AnexoJornada;
+            $anexo_jornada->id_jornada = $jornada->id_jornada;
+            $anexo_jornada->id_voluntario = (int)$id_voluntario;
+            $anexo_jornada->nombre = $nombre_archivo;
+            $anexo_jornada->anexo = base64_encode($data_archivo);
+            $anexo_jornada->tipo = $tipo_archivo;
+            $save = $anexo_jornada->save();
+        }
+
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Los anexos fueron guardados exitosamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => true,
+                'message' => 'Error al intentar guardar los anexos'       
+            ]); 
+        }
+    }
+
+    public function downloadFiles(){
+        $file = DB::table('anexo_jornadas')->latest('id_anexo_jornadas')->first();
+        $file_contents = base64_decode($file->anexo);
+
+        return response($file_contents)
+        ->header('Cache-Control', 'no-cache private')
+        ->header('Content-Description', 'File Transfer')
+        ->header('Content-Type', $file->tipo)
+        ->header('Content-length', strlen($file_contents))
+        ->header('Content-Disposition', 'attachment; filename=' . $file->nombre)
+        ->header('Content-Transfer-Encoding', 'binary');
     }
 
     /**
@@ -132,63 +255,6 @@ class VaccinationDayController extends Controller
     public function edit($id)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        $request->validate([
-            'id_jornada' => 'required',
-            'fecha_inicio' => 'required', 
-            'fecha_fin' => 'required',
-            'mensaje' => 'required',
-            'idsVoluntarios' => 'required',
-            'idSedes' => 'required'
-        ]);
-        
-        DB::table('jornadas')
-        ->where('id_jornada', $request->id_jornada)
-        ->update([
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
-            'mensaje' => $request->mensaje
-        ]);
-
-        DB::table('detalle_jornadas')
-        ->where('id_jornada', '=', $request->id_jornada)
-        ->delete();
-
-        foreach($request->idSedes as $id_sede){
-            foreach($request->idsVoluntarios as $id_voluntario){
-                $detalle_jornada = new DetalleJornada;
-                $detalle_jornada->id_jornada = $request->id_jornada;
-                $detalle_jornada->id_voluntario = (int)$id_voluntario;
-                $detalle_jornada->uuid = DB::raw('UUID()');
-                $detalle_jornada->id_sede = (int)$id_sede;
-                $detalle_jornada->horas = 0;
-                $detalle_jornada->correo_enviado = false;
-                $detalle_jornada->eliminado = false;
-                $save1 = $detalle_jornada->save();
-            }
-        }
-
-        if($save1){
-            return response()->json([
-                'isOk' => true,
-                'message' => '¡La jornada fue actualizada exitosamente!'
-            ]); 
-        }else{
-            return response()->json([
-                'isOk' => true,
-                'message' => 'Error al editar la jornada'       
-            ]); 
-        }
     }
 
     /**
@@ -242,6 +308,18 @@ class VaccinationDayController extends Controller
 
         return response()->json([
             'data' => $jornadas        
+        ]); 
+    }
+
+    public function getFilesJornada($id_jornada){
+        $files = DB::table('anexo_jornadas')
+        ->select('nombre')
+        ->where('id_jornada', '=', $id_jornada)
+        ->distinct()
+        ->get();
+
+        return response()->json([
+            'data' => $files        
         ]); 
     }
 

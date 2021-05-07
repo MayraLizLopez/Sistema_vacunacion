@@ -63,6 +63,7 @@
             Registrar jornada
         </button>
     </div>
+    <a href="{{ route('downloadFiles') }}">Descargar archivos</a>
 </div>
 
 <!-- DataTales Example -->
@@ -134,6 +135,16 @@
                 <div class="form-group">
                     <label for="inMessage">Mensaje para el voluntario</label>
                     <textarea class="form-control" id="inMessage" rows="3"></textarea>
+                  </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cargar anexo(s)...</label>
+                    </div>
                   </div>
             </div>
           </div>
@@ -262,6 +273,16 @@
                 <div class="form-group">
                     <label for="editInMessage">Mensaje para el voluntario</label>
                     <textarea class="form-control" id="editInMessage" rows="3"></textarea>
+                  </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="editInFile" lang="es" multiple>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cargar anexo(s)...</label>
+                    </div>
                   </div>
             </div>
           </div>
@@ -434,16 +455,29 @@
         }
 
         function startEvents(){
-            //evento para invocar la modal de creación de jornadas
-            $('#createVaccinationDay').on('click', () => {
-                $('#modalCreateVaccinationDay').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
+            $('#inFile').on('change', (e) => {
+                //get the file name
+                let fileNames = e.target.files;
+                let names = [];
+                //replace the "Choose a file" label
+                for(let i = 0; i < fileNames.length; i++){
+                    names.push(fileNames[i].name);
+                }
+
+                $('#inFile').next('.custom-file-label').html(names.join(', '));
             });
 
-            $('#inEndDate').on('change', () => {
-                validateDateRange();
+
+            $('#editInFile').on('change', (e) => {
+                //get the file name
+                let fileNames = e.target.files;
+                let names = [];
+                //replace the "Choose a file" label
+                for(let i = 0; i < fileNames.length; i++){
+                    names.push(fileNames[i].name);
+                }
+
+                $('#editInFile').next('.custom-file-label').html(names.join(', '));
             });
 
             //#region Modal events
@@ -486,53 +520,64 @@
                 $('#editInTown').empty();
             });
 
-            //evento para crear una nueva jornada
-            $('#saveVaccinationDay').on('click', () => {           
-                let idsVoluntarios = [];
-                let idSedes = [];
-                let idsDetalleJornada = [];
+            //evento para invocar la modal de creación de jornadas
+            $('#createVaccinationDay').on('click', () => {
+                $('#modalCreateVaccinationDay').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            });
 
+            //evento para crear una nueva jornada
+            $('#saveVaccinationDay').on('click', () => {
+                let form = new FormData();
+                let filesForm = new FormData();
+                 
+                let voluntariesTable = $voluntariesTable.bootstrapTable('getSelections');
+                let sedesTable = $sedesTable.bootstrapTable('getSelections');
+
+                let anexoFiles =  document.getElementById('inFile');
+                
+                //console.log(anexoFiles);
+                
                 if(validateFields('createJornada') == false){
                     if(validateDateRange('create') == true){
-                        for(let data in $voluntariesTable.bootstrapTable('getSelections')){
-                            idsVoluntarios.push(
-                                $voluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
-                            );
-                        }
-
-                        for(let data in $sedesTable.bootstrapTable('getSelections')){
-                            idSedes.push(
-                                $sedesTable.bootstrapTable('getSelections')[data].id_sede
-                            );
-                        }
-
-                        for(let data in $editSedesTable.bootstrapTable('getSelections')){
-                            idsDetalleJornada.push(
-                                $editSedesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
-                            );
-                        }
+                        let idsVoluntarios = voluntariesTable.map(element => element.id_voluntario);
+                        let idSedes = sedesTable.map(element => element.id_sede);
 
                         //console.log(idJornada);
                         if(idJornada == 0){
-                            let dataVaccinationDay = {
-                                fecha_inicio: $('#inStartDate').val(),
-                                fecha_fin: $('#inEndDate').val(),
-                                mensaje: $('#inMessage').val(),
-                                idsVoluntarios: idsVoluntarios,
-                                idSedes: idSedes
-                            };
-                            insVaccinationDay(dataVaccinationDay);   
+                            form.set('fecha_inicio', $('#inStartDate').val());
+                            form.set('fecha_fin', $('#inEndDate').val());
+                            form.set('mensaje', $('#inMessage').val());
+                            form.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                            form.set('idSedes', JSON.stringify(idSedes));
+
+                            insVaccinationDay(form);
+
+                            for(let i = 0; i < anexoFiles.files.length; i++){
+                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                filesForm.set('file', anexoFiles.files[i]);
+
+                                insAnexos(filesForm);
+                            }   
                         }else{
-                            let dataVaccinationDay = {
-                                id_jornada: idJornada,
-                                fecha_inicio: $('#inStartDate').val(),
-                                fecha_fin: $('#inEndDate').val(),
-                                mensaje: $('#inMessage').val(),
-                                idsVoluntarios: idsVoluntarios,
-                                idSedes: idSedes,
-                                idsDetalleJornada: idsDetalleJornada
-                            };
-                            updVaccinationDay(dataVaccinationDay, 'create');
+                            form.set('id_jornada', idJornada);
+                            form.set('fecha_inicio', $('#inStartDate').val());
+                            form.set('fecha_fin', $('#inEndDate').val());
+                            form.set('mensaje', $('#inMessage').val());
+                            form.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                            form.set('idSedes', JSON.stringify(idSedes));
+
+                            updVaccinationDay(form, 'create');
+
+                            for(let i = 0; i < anexoFiles.files.length; i++){
+                                filesForm.set('id_jornada', idJornada);
+                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                filesForm.set('file', anexoFiles.files[i]);
+
+                                updAnexos(filesForm);
+                            }
                         }
                     }
                 }                                
@@ -540,39 +585,36 @@
 
             //evento para editar una jornada
             $('#saveEditedVaccinationDay').on('click', () => {
-                let idsVoluntarios = [];
-                let idSedes = [];
-                let idsDetalleJornada = [];
+                let form = new FormData();
+                let filesForm = new FormData();
+
+                let editVoluntariesTable = $editVoluntariesTable.bootstrapTable('getSelections');
+                let editSedesTable = $editSedesTable.bootstrapTable('getSelections');
+
+                let anexoFiles =  document.getElementById('editInFile');
 
                 if(validateFields('editJornada') == false){
-                    for(let data in $editVoluntariesTable.bootstrapTable('getSelections')){
-                    idsVoluntarios.push(
-                        $editVoluntariesTable.bootstrapTable('getSelections')[data].id_voluntario
-                        );
-                    }
+                    if(validateDateRange('edit') == true){
+                        let idsVoluntarios = editVoluntariesTable.map(element => element.id_voluntario);
+                        let idSedes = editSedesTable.map(element => element.id_sede);
 
-                    for(let data in $editSedesTable.bootstrapTable('getSelections')){
-                        idSedes.push(
-                            $editSedesTable.bootstrapTable('getSelections')[data].id_sede
-                        );
-                    }
+                        form.set('id_jornada', idJornada);
+                        form.set('fecha_inicio', $('#editInStartDate').val());
+                        form.set('fecha_fin', $('#editInEndDate').val());
+                        form.set('mensaje', $('#editInMessage').val());
+                        form.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                        form.set('idSedes', JSON.stringify(idSedes));
 
-                    for(let data in $editSedesTable.bootstrapTable('getSelections')){
-                        idsDetalleJornada.push(
-                            $editSedesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
-                        );
-                    }
+                        updVaccinationDay(form, 'edit');
 
-                    let dataVaccinationDay = {
-                        id_jornada: idJornada,
-                        fecha_inicio: $('#editInStartDate').val(),
-                        fecha_fin: $('#editInEndDate').val(),
-                        mensaje: $('#editInMessage').val(),
-                        idsVoluntarios: idsVoluntarios,
-                        idSedes: idSedes,
-                        idsDetalleJornada: idsDetalleJornada
-                    };
-                    updVaccinationDay(dataVaccinationDay, 'edit');  
+                        for(let i = 0; i < anexoFiles.files.length; i++){
+                            filesForm.set('id_jornada', idJornada);
+                            filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                            filesForm.set('file', anexoFiles.files[i]);
+
+                            updAnexos(filesForm);
+                        }
+                    }
                 }
             });
             //#endregion
@@ -609,9 +651,7 @@
             $.ajax({
                 url: "vaccinationDay/getAllTowns/",
                 type: "GET",
-                success: function (response) {
-                    console.log(response);
-                    
+                success: function (response) {                   
                     if(actionType == 'create'){
                         defaultValues('create');
                         for(let i in response.data){
@@ -741,8 +781,23 @@
                     $('#editInEndDate').val(response.data.fecha_fin);
                     $('#editInMessage').text(response.data.mensaje);
 
+                    getFilesJornada(id_jornada);
                     getJornadaForVoluntaries(id_jornada);
                     getJornadaForSedes(id_jornada);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function getFilesJornada(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/getFilesJornada/" + id_jornada,
+                type: "GET",
+                success: function (response) {
+                    let filesName = response.data.map(item => item.nombre);
+                    $('#editInFile').next('.custom-file-label').html(filesName.join(', '));
                 },
                 error: function (error, resp, text) {
                     console.error(error);
@@ -860,15 +915,12 @@
             $.ajax({
                 url: "vaccinationDay/store",
                 type: "POST",
-                data: {
-                    fecha_inicio: data.fecha_inicio,
-                    fecha_fin: data.fecha_fin,
-                    id_insti: data.id_insti,
-                    mensaje: data.mensaje,
-                    idsVoluntarios: data.idsVoluntarios,
-                    idSedes: data.idSedes,
-                    _token: $('meta[name="csrf-token"]').attr('content')
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                data: data,
+                processData: false,
+                contentType: false,
                 success: function (response) {
                     Swal.fire({
                         icon: 'success',
@@ -898,21 +950,54 @@
             });
         }
 
+        function insAnexos(data){
+            $.ajax({
+                url: "vaccinationDay/storeFiles",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function updAnexos(data){
+            $.ajax({
+                url: "vaccinationDay/updateFiles",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
         function updVaccinationDay(data, actionType){
             $.ajax({
                 url: "vaccinationDay/update",
                 type: "POST",
-                data: {
-                    id_jornada: data.id_jornada,
-                    fecha_inicio: data.fecha_inicio,
-                    fecha_fin: data.fecha_fin,
-                    id_insti: data.id_insti,
-                    mensaje: data.mensaje,
-                    idsVoluntarios: data.idsVoluntarios,
-                    idSedes: data.idSedes,
-                    idsDetalleJornada: data.idsDetalleJornada,
-                    _token: $('meta[name="csrf-token"]').attr('content')
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                data: data,
+                processData: false,
+                contentType: false,
                 success: function (response) {
                     Swal.fire({
                         icon: 'success',
