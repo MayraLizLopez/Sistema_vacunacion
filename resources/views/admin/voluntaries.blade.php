@@ -106,6 +106,13 @@
         </div>
 
         <div class="form-group ml-1">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" style="color:white; background-color: #0B97B8; border: #0B97B8;">
+                <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
+                <span class="item-label">Agregar horas</span>         
+            </button>
+        </div>
+
+        <div class="form-group ml-1">
             <a class="btn btn-primary btn-table" style="color:white;" href="{{route('crearVoluntario')}}">
                 <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Registrar Voluntario</span>                 
@@ -151,6 +158,29 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Agregar horas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
