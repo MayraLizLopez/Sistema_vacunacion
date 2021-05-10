@@ -46,7 +46,7 @@
 </div>
 
 
-<div id="modalViewJornadaDetail" class="modal" tabindex="-1" role="dialog">
+<div id="modalViewSedeDetail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -137,7 +137,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="mapa">Mapa</label>
-                                <div id="map" style="height: 500px;"></div>
+                                <div id="map" style="height: 450px;"></div>
                             </div>
                         </div>
                     </div>
@@ -166,14 +166,14 @@
 
         function operateFormatter(value, row, index) {
             return [
-            '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
-            '<i class="fas fa-info-circle"></i>',
+            '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
+            '<img class="mx-2" src="{{ asset('public/assets/images/geo.svg')}}" style="width: 15px; margin:0px;"/>',
             '</a>',
             '<a class="like mr-3" href="editar/' + row.id_sede + '"' + 'title="Editar">',
-            '<i class="fas fa-edit"></i>',
+            '<img class="mx-2" src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; margin:0px;"/>',
             '</a>',
             '<a class="remove" href="javascript:void(0)" title="Eliminar">',
-            '<i class="fa fa-trash"></i>',
+            '<img class="mx-2" src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; margin:0px;"/>',,
             '</a>'
             ].join('')
         }
@@ -195,7 +195,7 @@
             },
 
             'click .detail': function (e, value, row, index) {
-                $('#modalViewJornadaDetail').modal({
+                $('#modalViewSedeDetail').modal({
                     backdrop: 'static',
                     keyboard: false
                 });

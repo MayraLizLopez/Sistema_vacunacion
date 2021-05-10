@@ -183,7 +183,7 @@ class SedeController extends Controller
     }
 
     /**
-     * Método que retorna los detalles de la sede selecciona.
+     * Método que retorna los detalles de la sede seleccionada.
      */
     public function  getDetalleSede($id_sede){
         $sedes = DB::table('sedes')
