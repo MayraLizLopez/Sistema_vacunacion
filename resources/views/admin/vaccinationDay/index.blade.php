@@ -63,7 +63,7 @@
             Registrar jornada
         </button>
     </div>
-    <a href="{{ route('downloadFiles') }}">Descargar archivos</a>
+    {{-- <a href="{{ route('downloadFiles') }}">Descargar archivos</a> --}}
 </div>
 
 <!-- DataTales Example -->
@@ -538,7 +538,7 @@
 
                 let anexoFiles =  document.getElementById('inFile');
                 
-                //console.log(anexoFiles);
+                console.log(anexoFiles.files);
                 
                 if(validateFields('createJornada') == false){
                     if(validateDateRange('create') == true){
@@ -555,12 +555,14 @@
 
                             insVaccinationDay(form);
 
-                            for(let i = 0; i < anexoFiles.files.length; i++){
-                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                filesForm.set('file', anexoFiles.files[i]);
+                            if(anexoFiles.files != []){
+                                for(let i = 0; i < anexoFiles.files.length; i++){
+                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                    filesForm.set('file', anexoFiles.files[i]);
 
-                                insAnexos(filesForm);
-                            }   
+                                    insAnexos(filesForm);
+                                }
+                            }
                         }else{
                             form.set('id_jornada', idJornada);
                             form.set('fecha_inicio', $('#inStartDate').val());
@@ -571,12 +573,14 @@
 
                             updVaccinationDay(form, 'create');
 
-                            for(let i = 0; i < anexoFiles.files.length; i++){
-                                filesForm.set('id_jornada', idJornada);
-                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                filesForm.set('file', anexoFiles.files[i]);
+                            if(anexoFiles.files != []){
+                                for(let i = 0; i < anexoFiles.files.length; i++){
+                                    filesForm.set('id_jornada', idJornada);
+                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                    filesForm.set('file', anexoFiles.files[i]);
 
-                                updAnexos(filesForm);
+                                    updAnexos(filesForm);
+                                }
                             }
                         }
                     }
@@ -607,14 +611,16 @@
 
                         updVaccinationDay(form, 'edit');
 
-                        for(let i = 0; i < anexoFiles.files.length; i++){
-                            filesForm.set('id_jornada', idJornada);
-                            filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                            filesForm.set('file', anexoFiles.files[i]);
+                        if(anexoFiles.files != []){
+                            for(let i = 0; i < anexoFiles.files.length; i++){
+                                filesForm.set('id_jornada', idJornada);
+                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                filesForm.set('file', anexoFiles.files[i]);
 
-                            updAnexos(filesForm);
+                                updAnexos(filesForm);
+                            }
                         }
-                    }
+                    }                   
                 }
             });
             //#endregion
@@ -796,8 +802,10 @@
                 url: "vaccinationDay/getFilesJornada/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    let filesName = response.data.map(item => item.nombre);
-                    $('#editInFile').next('.custom-file-label').html(filesName.join(', '));
+                    if(response.data != []){
+                        let filesName = response.data.map(item => item.nombre);
+                        $('#editInFile').next('.custom-file-label').html(filesName.join(', '));
+                    }
                 },
                 error: function (error, resp, text) {
                     console.error(error);
