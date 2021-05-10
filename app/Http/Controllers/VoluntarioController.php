@@ -423,4 +423,21 @@ class VoluntarioController extends Controller
     {
         return view('volunteers.aviso');
     }
+
+    /**
+     * Método que retorna los detalles del voluntario seleccionado.
+     */
+    public function  getDetalleVoluntario($id_voluntario){
+        $voluntario = DB::table('voluntarios')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        //->join('detalle_jornadas', 'voluntarios.id_voluntario', '=', 'detalle_jornadas.id_voluntario')
+        ->select('voluntarios.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio', 'instituciones.nombre AS nombre_institucion',)
+        ->where('voluntarios.id_voluntario', '=', $id_voluntario)
+        ->first();
+
+        return response()->json([
+            'data' => $voluntario   
+        ]);
+    }
 }

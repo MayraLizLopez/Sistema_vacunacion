@@ -106,7 +106,7 @@
         </div>
 
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" style="color:white; background-color: #0B97B8; border: #0B97B8;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" style="color:white; background-color: #0B97B8; border: #0B97B8;" onclick="limpiar()">
                 <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Agregar horas</span>         
             </button>
@@ -160,26 +160,124 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Agregar horas</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-md-5 modal fade align-items-center" data-bs-toggle="modal" id="staticBackdrop" tabindex="-1"  aria-hidden="true"  role="dialog">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Agregar horas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 20px;"/>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Seleccione o ingrese la cantidad de horas que quiere agregar a los voluntarios seleccionados</label>
+                        
+                        <div class="row align-items-center">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-group">
+                                    <img class="mx-2" src="{{ asset('public/assets/images/mas.svg')}}" style="width: 50px;" onclick="sumar()"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="number" class="form-control mx-2" id="horas" name="institucion" placeholder="" min="0"/>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-group">
+                                    <img class="mx-2" src="{{ asset('public/assets/images/menos.svg')}}" style="width: 50px;" onclick="restar()"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="botonEnviar" class="btn btn-success" type="submit" >Guardar</button>
+                        <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
+
+<div id="modalViewVoluntarioDetail" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="m-0 font-weight-bold text-primary">Información del voluntario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 20px;"/>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div id="toolbar4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre_encargado">Nombre(s)</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="emailVoluntary">Apellido Paterno</label>
+                                <input type="text" class="form-control" id="ape_pat" name="ape_pat"/>
+                            </div>
+                        </div> 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="num_voluntarios">Apellido Materno</label>
+                                <input type="text" class="form-control" id="ape_mat" name="ape_mat"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nombre_encargado">Institución</label>
+                                <input type="text" class="form-control" id="insti" name="insti"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="emailVoluntary">Municipio</label>
+                                <input type="text" class="form-control" id="municipio" name="municipio"/>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="nombre_encargado">Correo electrónico</label>
+                                <input type="text" class="form-control" id="email" name="email"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="emailVoluntary">Teléfono / Celular</label>
+                                <input type="text" class="form-control" id="tel" name="tel"/>
+                            </div>
+                        </div> 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="num_voluntarios">Número de horas</label>
+                                <input type="text" class="form-control" id="num_horas" name="num_horas"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 @section('scripts')
@@ -188,7 +286,7 @@
     <script src="{{ asset('public/assets/js/tableExport.min.js') }}"></script>
     <script>
         let $table = $('#voluntariesTable');
-
+        document.getElementById("horas").value = 0;
         $(document).ready(()=>{
             getAllVolunataries();
             startEvents();
@@ -491,11 +589,14 @@
 
         function operateFormatter(value, row, index) {
             return [
+            '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
+            '<img class="mx-2" src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
+            '</a>',
             '<a class="like mr-3" href="voluntario/edit/' + row.id_voluntario + '"' + 'title="Edit">',
-            '<i class="fas fa-edit"></i>',
+            '<img class="mx-2" src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="fa fa-trash"></i>',
+            '<img class="mx-2" src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')
         }
@@ -514,8 +615,66 @@
                     if (result.isConfirmed) {
                         deleteVoluntary(row.id_voluntario);
                     }
-                    });
+                });
+            },
+
+            'click .detail': function (e, value, row, index) {
+                $('#modalViewVoluntarioDetail').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                getDetallevoluntario(row.id_voluntario);
             }
+        }
+
+        function getDetallevoluntario(id_voluntario){
+            $.ajax({
+                url: "voluntario/detalles/" + id_voluntario,
+                type: "GET",
+                success: function (response) {
+                    console.log(response);
+
+                    //idVoluntario = response.data.id_voluntario;
+                    $('#nombre').val(response.data.nombre);
+                    $('#nombre').prop( "disabled", true );
+                    $('#ape_pat').val(response.data.ape_pat);
+                    $('#ape_pat').prop( "disabled", true );
+                    $('#ape_mat').val(response.data.ape_mat);
+                    $('#ape_mat').prop( "disabled", true );
+                    $('#municipio').val(response.data.nombre_municipio);
+                    $('#municipio').prop( "disabled", true );
+                    $('#insti').val(response.data.nombre_institucion);
+                    $('#insti').prop( "disabled", true );
+                    $('#tel').val(response.data.tel);
+                    $('#tel').prop( "disabled", true );
+                    $('#email').val(response.data.email);
+                    $('#email').prop( "disabled", true );
+                    $('#num_horas').val(0);
+                    $('#num_horas').prop( "disabled", true );
+                    
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+
+        function limpiar() {
+            document.getElementById("horas").value = 0;
+        }
+
+        function sumar() {
+            var horas = document.getElementById("horas").value;
+            horas++;
+            document.getElementById("horas").value=horas;
+        }
+
+        function restar() {
+            var horas = document.getElementById("horas").value;
+            if (!(horas == 0)){
+                horas--;
+                document.getElementById("horas").value = horas;
+            } 
         }
     </script>
 @endsection
