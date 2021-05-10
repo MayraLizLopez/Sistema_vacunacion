@@ -143,7 +143,7 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cargar anexo(s)...</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no debe ser mayor a 2MB, de lo contrario estos no se cargaran.</label>
                     </div>
                   </div>
             </div>
@@ -281,7 +281,7 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="editInFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cargar anexo(s)...</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no debe ser mayor a 2MB, de lo contrario estos no se cargaran.</label>
                     </div>
                   </div>
             </div>
@@ -538,7 +538,7 @@
 
                 let anexoFiles =  document.getElementById('inFile');
                 
-                console.log(anexoFiles.files);
+                console.log(anexoFiles.files[0].size);
                 
                 if(validateFields('createJornada') == false){
                     if(validateDateRange('create') == true){
@@ -557,10 +557,12 @@
 
                             if(anexoFiles.files != []){
                                 for(let i = 0; i < anexoFiles.files.length; i++){
-                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                    filesForm.set('file', anexoFiles.files[i]);
+                                    if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                        filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                        filesForm.set('file', anexoFiles.files[i]);
 
-                                    insAnexos(filesForm);
+                                        insAnexos(filesForm);
+                                    }
                                 }
                             }
                         }else{
@@ -575,11 +577,13 @@
 
                             if(anexoFiles.files != []){
                                 for(let i = 0; i < anexoFiles.files.length; i++){
-                                    filesForm.set('id_jornada', idJornada);
-                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                    filesForm.set('file', anexoFiles.files[i]);
+                                    if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                        filesForm.set('id_jornada', idJornada);
+                                        filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                        filesForm.set('file', anexoFiles.files[i]);
 
-                                    updAnexos(filesForm);
+                                        updAnexos(filesForm); 
+                                    }
                                 }
                             }
                         }
@@ -613,11 +617,13 @@
 
                         if(anexoFiles.files != []){
                             for(let i = 0; i < anexoFiles.files.length; i++){
-                                filesForm.set('id_jornada', idJornada);
-                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                filesForm.set('file', anexoFiles.files[i]);
+                                if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                    filesForm.set('id_jornada', idJornada);
+                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                    filesForm.set('file', anexoFiles.files[i]);
 
-                                updAnexos(filesForm);
+                                    updAnexos(filesForm);
+                                }
                             }
                         }
                     }                   
