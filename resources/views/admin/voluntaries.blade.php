@@ -14,6 +14,11 @@
         font-family: montserrat;
         src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
     }
+
+    .modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
 </style>  
 <!-- Page Heading -->
 <div class="row">
@@ -106,7 +111,7 @@
         </div>
 
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" style="color:white; background-color: #0B97B8; border: #0B97B8;" onclick="limpiar()">
+            <button type="button" class="btn btn-primary" id="btnLoadHours" data-target="#staticBackdrop" style="color:white; background-color: #0B97B8; border: #0B97B8;">
                 <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Agregar horas</span>         
             </button>
@@ -160,49 +165,45 @@
 </div>
 
 <!-- Modal -->
-<div class="container">
-    <div class="row align-items-center">
-        <div class="col-md-5 modal fade align-items-center" data-bs-toggle="modal" id="staticBackdrop" tabindex="-1"  aria-hidden="true"  role="dialog">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Agregar horas</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 20px;"/>
-                        </button>
+<div id="modalLoadHours" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Agregar horas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+          </button>
+        </div>
+        <div class="modal-body">
+            <label>Seleccione o ingrese la cantidad de horas que quiere agregar a los voluntarios seleccionados</label>
+                    
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                </div>
+                <div class="col-auto">
+                    <div class="form-group">
+                        <img class="mx-2" src="{{ asset('public/assets/images/mas.svg')}}" style="width: 50px;" onclick="sumar()"/>
                     </div>
-                    <div class="modal-body">
-                        <label>Seleccione o ingrese la cantidad de horas que quiere agregar a los voluntarios seleccionados</label>
-                        
-                        <div class="row align-items-center">
-                            <div class="col-md-2">
-                            </div>
-                            <div class="col-auto">
-                                <div class="form-group">
-                                    <img class="mx-2" src="{{ asset('public/assets/images/mas.svg')}}" style="width: 50px;" onclick="sumar()"/>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <input type="number" class="form-control mx-2" id="horas" name="institucion" placeholder="" min="0"/>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="form-group">
-                                    <img class="mx-2" src="{{ asset('public/assets/images/menos.svg')}}" style="width: 50px;" onclick="restar()"/>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="number" class="form-control mx-2" id="horas" name="institucion" placeholder="" min="0"/>
                     </div>
-                    <div class="modal-footer">
-                        <button id="botonEnviar" class="btn btn-success" type="submit" >Guardar</button>
-                        <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>
+                </div>
+                <div class="col-auto">
+                    <div class="form-group">
+                        <img class="mx-2" src="{{ asset('public/assets/images/menos.svg')}}" style="width: 50px;" onclick="restar()"/>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="modal-footer mr-auto">
+            <button id="botonEnviar" class="btn btn-success" type="submit" >Guardar</button>
+            <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
 <div id="modalViewVoluntarioDetail" class="modal" tabindex="-1" role="dialog">
@@ -360,6 +361,13 @@
                 } else {
                     searchBySedes($('#inSearchBySede').children('option:selected').val());
                 }                               
+            });
+
+            $('#btnLoadHours').on('click', () => {
+                $('#modalLoadHours').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
             });
 
             $('#cleanFilters').on('click', () => {
