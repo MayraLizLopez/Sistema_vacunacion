@@ -83,7 +83,8 @@
                 <thead>
                   <tr>
                     <th class="d-none" data-radio="true"></th>
-                    <th class="d-none" data-field="id_jornada">ID</th>
+                    <th class="d-none" data-field="id_jornada">ID</th>    
+                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
                     <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
                     <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
@@ -143,7 +144,8 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no debe ser mayor a 2MB, de lo contrario estos no se cargaran.</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB,
+                           de lo contrario estos no se guardaran.</label>
                     </div>
                   </div>
             </div>
@@ -281,7 +283,8 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="editInFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no debe ser mayor a 2MB, de lo contrario estos no se cargaran.</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB,
+                           de lo contrario estos no se guardaran.</label>
                     </div>
                   </div>
             </div>

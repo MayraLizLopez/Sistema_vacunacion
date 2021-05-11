@@ -55,13 +55,18 @@ class VaccinationDayController extends Controller
         ]);
         
         $jornada = new Jornada;
-        //$jornada->folio = 'F000';
         $jornada->fecha_inicio = $request->fecha_inicio;
         $jornada->fecha_fin = $request->fecha_fin;
         $jornada->mensaje = $request->mensaje;
         $jornada->activo = true;
         $jornada->fecha_creacion = Carbon::now();
         $save1 = $jornada->save();
+
+        DB::table('jornadas')
+        ->where('id_jornada', $jornada->id_jornada)
+        ->update([
+            'folio' => 'F000' . $jornada->id_jornada
+        ]);
 
         foreach(json_decode($request->idSedes) as $id_sede){
             foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
@@ -230,6 +235,7 @@ class VaccinationDayController extends Controller
         ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
         ->select(
             'jornadas.id_jornada AS id_jornada',
+            'jornadas.folio AS folio',
             'jornadas.fecha_inicio AS fecha_inicio',
             'jornadas.fecha_fin AS fecha_fin' ,
             'municipios.id_municipio AS id_municipio',
