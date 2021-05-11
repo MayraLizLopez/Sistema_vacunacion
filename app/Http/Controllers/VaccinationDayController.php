@@ -84,6 +84,7 @@ class VaccinationDayController extends Controller
 
         if($save1 && $save2){
             return response()->json([
+                'id_jornada' => $jornada->id_jornada,
                 'isOk' => true,
                 'message' => '¡La jornada fue guardada exitosamente!'
             ]); 
@@ -101,10 +102,9 @@ class VaccinationDayController extends Controller
         $data_archivo = file_get_contents($request->file->getRealPath());
 
         foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
-            $jornada = DB::table('jornadas')->latest('id_jornada')->first();
 
             $anexo_jornada = new AnexoJornada;
-            $anexo_jornada->id_jornada = $jornada->id_jornada;
+            $anexo_jornada->id_jornada = $request->id_jornada;
             $anexo_jornada->id_voluntario = (int)$id_voluntario;
             $anexo_jornada->nombre = $nombre_archivo;
             $anexo_jornada->anexo = base64_encode($data_archivo);
@@ -164,6 +164,7 @@ class VaccinationDayController extends Controller
 
         if($save1){
             return response()->json([
+                'id_jornada' => $request->id_jornada,
                 'isOk' => true,
                 'message' => '¡La jornada fue actualizada exitosamente!'
             ]); 
