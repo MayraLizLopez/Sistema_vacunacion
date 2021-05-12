@@ -467,7 +467,7 @@ class VaccinationDayController extends Controller
                     'mensaje' => $jornada->mensaje,
                     'sedes' => $sedes,
                 ];
-
+                
                 Mail::to($voluntario->email)->send(new ConfirmJornada($data));
                  
                 for($k = 0; $k < count($sedes); $k++){
