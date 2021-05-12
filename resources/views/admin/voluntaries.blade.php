@@ -24,6 +24,7 @@
         max-width: 1500px;
         margin: 1.75rem auto;
     }
+    
 </style>  
 <!-- Page Heading -->
 <div class="row">
@@ -210,7 +211,6 @@
     </div>
   </div>
 
-
 <div id="modalViewVoluntarioDetail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog large" role="document">
         <div class="modal-content">
@@ -284,7 +284,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
