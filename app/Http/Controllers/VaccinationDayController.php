@@ -320,7 +320,7 @@ class VaccinationDayController extends Controller
 
     public function getFilesJornada($id_jornada){
         $files = DB::table('anexo_jornadas')
-        ->select('nombre')
+        ->select( 'nombre')
         ->where('id_jornada', '=', $id_jornada)
         ->distinct()
         ->get();
@@ -447,6 +447,8 @@ class VaccinationDayController extends Controller
         if(count($request->ids_detalle_jornadas) != 0){  
             $detalle_jornada = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[0])->first();
             $jornada = DB::table('jornadas')->where('id_jornada', '=', $detalle_jornada->id_jornada)->first();
+            $anexos = DB::table('anexo_jornadas')->select('nombre', 'anexo', 'tipo')->where('id_jornada', '=', $detalle_jornada->id_jornada)->distinct()->get();
+
             for ($j = 0; $j < count($request->ids_detalle_jornadas); $j++) {
                 $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[$j])->first();
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detalle_jornadas->id_voluntario)->first();
@@ -473,6 +475,7 @@ class VaccinationDayController extends Controller
                     'id_jornada' => $detalle_jornadas->id_jornada,
                     'mensaje' => $jornada->mensaje,
                     'sedes' => $sedes,
+                    'anexos' => $anexos
                 ];
 
                 Mail::to($voluntario->email)->send(new ConfirmJornada($data));
@@ -483,6 +486,7 @@ class VaccinationDayController extends Controller
                     $editarJornada->save();
                 }
             }
+
             return response()->json([
                 'mensaje' => 'Correos enviados',
             ]); 

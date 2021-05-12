@@ -621,14 +621,10 @@
             //#endregion
 
             $('#sendEmails').on('click', () => {
-                let idsDetalleJornadas = [];
+                let viewDetailVoluntariesTable = $viewDetailVoluntariesTable.bootstrapTable('getSelections');
+                let idsDetalleJornadas = viewDetailVoluntariesTable.map(element => element.id_detalle_jornada);
 
                 if(validateFields('sendEmail') == false){
-                    for(let data in $viewDetailVoluntariesTable.bootstrapTable('getSelections')){
-                    idsDetalleJornadas.push(
-                        $viewDetailVoluntariesTable.bootstrapTable('getSelections')[data].id_detalle_jornada
-                        );
-                    }
                     enviarCorreoJornada(idsDetalleJornadas); 
                 }
             });
@@ -727,9 +723,11 @@
             $.ajax({
                 url: "vaccinationDay/getVoluntariesByInstitution",
                 type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 data: {
-                    ids_institution: ids_institution,
-                    _token: $('meta[name="csrf-token"]').attr('content')
+                    ids_institution: ids_institution
                 },
                 success: function (response) {
                     //console.log(response);
@@ -1060,9 +1058,11 @@
             $.ajax({
                 url: "vaccinationDay/destroy",
                 type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 data: {
-                    id_jornada: id_jornada,
-                    _token: $('meta[name="csrf-token"]').attr('content')
+                    id_jornada: id_jornada
                 },
                 success: function (response) {
                     Swal.fire({
@@ -1091,9 +1091,11 @@
             $.ajax({
                 url: "vaccinationDay/sendemail",
                 type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 data: {
-                    ids_detalle_jornadas: idsDetalleJornadas,
-                    _token: $('meta[name="csrf-token"]').attr('content')
+                    ids_detalle_jornadas: idsDetalleJornadas
                 },
                 beforeSend: () => {
                     Swal.fire({
@@ -1187,13 +1189,13 @@
         function operateFormatter(value, row, index) {
             return [
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
-            '<i class="fas fa-info-circle"></i>',
+                '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="edit mr-2" href="javascript:void(0)" title="Editar">',
-            '<i class="fas fa-edit"></i>',
+                '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="remove mr-2" href="javascript:void(0)" title="Eliminar">',
-            '<i class="fa fa-trash"></i>',
+                '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')
         }
