@@ -16,9 +16,14 @@
     }
 
     .modal-dialog {
-    max-width: 800px;
-    margin: 1.75rem auto;
-}
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
+
+    .large{
+        max-width: 1500px;
+        margin: 1.75rem auto;
+    }
 </style>  
 <!-- Page Heading -->
 <div class="row">
@@ -207,7 +212,7 @@
 
 
 <div id="modalViewVoluntarioDetail" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog large" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="m-0 font-weight-bold text-primary">Información del voluntario</h5>

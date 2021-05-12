@@ -402,12 +402,12 @@ class VaccinationDayController extends Controller
         ]);
     }
 
-    public function getLastJornada(){
-        $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
-        return response()->json([
-            'data' => $jornadas        
-        ]); 
-    }
+    // public function getLastJornada(){
+    //     $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
+    //     return response()->json([
+    //         'data' => $jornadas        
+    //     ]); 
+    // }
 
     public function getAllInstitutions()
     {  
