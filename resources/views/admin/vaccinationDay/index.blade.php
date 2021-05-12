@@ -1108,7 +1108,7 @@
                                 location.reload();
                             }
                         });
-                    console.log(response);
+                    //console.log(response);
                 },
                 error: function (error, resp, text) {
                     console.error(error);
