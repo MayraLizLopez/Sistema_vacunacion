@@ -83,7 +83,8 @@
                 <thead>
                   <tr>
                     <th class="d-none" data-radio="true"></th>
-                    <th class="d-none" data-field="id_jornada">ID</th>
+                    <th class="d-none" data-field="id_jornada">ID</th>    
+                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
                     <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
                     <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
@@ -143,7 +144,8 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cargar anexo(s)...</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB,
+                           de lo contrario estos no se guardaran.</label>
                     </div>
                   </div>
             </div>
@@ -281,7 +283,8 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="editInFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cargar anexo(s)...</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB,
+                           de lo contrario estos no se guardaran.</label>
                     </div>
                   </div>
             </div>
@@ -379,7 +382,7 @@
         <div class="modal-header">
           <h5 class="modal-title">Datos de los Voluntarios</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
           </button>
         </div>
         <div class="modal-body">
@@ -531,14 +534,11 @@
             //evento para crear una nueva jornada
             $('#saveVaccinationDay').on('click', () => {
                 let form = new FormData();
-                let filesForm = new FormData();
                  
                 let voluntariesTable = $voluntariesTable.bootstrapTable('getSelections');
                 let sedesTable = $sedesTable.bootstrapTable('getSelections');
-
-                let anexoFiles =  document.getElementById('inFile');
                 
-                console.log(anexoFiles.files);
+                //console.log(anexoFiles.files[0].size);
                 
                 if(validateFields('createJornada') == false){
                     if(validateDateRange('create') == true){
@@ -554,15 +554,6 @@
                             form.set('idSedes', JSON.stringify(idSedes));
 
                             insVaccinationDay(form);
-
-                            if(anexoFiles.files != []){
-                                for(let i = 0; i < anexoFiles.files.length; i++){
-                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                    filesForm.set('file', anexoFiles.files[i]);
-
-                                    insAnexos(filesForm);
-                                }
-                            }
                         }else{
                             form.set('id_jornada', idJornada);
                             form.set('fecha_inicio', $('#inStartDate').val());
@@ -575,11 +566,13 @@
 
                             if(anexoFiles.files != []){
                                 for(let i = 0; i < anexoFiles.files.length; i++){
-                                    filesForm.set('id_jornada', idJornada);
-                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                    filesForm.set('file', anexoFiles.files[i]);
+                                    if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                        filesForm.set('id_jornada', idJornada);
+                                        filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                        filesForm.set('file', anexoFiles.files[i]);
 
-                                    updAnexos(filesForm);
+                                        updAnexos(filesForm); 
+                                    }
                                 }
                             }
                         }
@@ -613,11 +606,13 @@
 
                         if(anexoFiles.files != []){
                             for(let i = 0; i < anexoFiles.files.length; i++){
-                                filesForm.set('id_jornada', idJornada);
-                                filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                filesForm.set('file', anexoFiles.files[i]);
+                                if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                    filesForm.set('id_jornada', idJornada);
+                                    filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                                    filesForm.set('file', anexoFiles.files[i]);
 
-                                updAnexos(filesForm);
+                                    updAnexos(filesForm);
+                                }
                             }
                         }
                     }                   
@@ -920,6 +915,9 @@
         }
 
         function insVaccinationDay(data){
+            let filesForm = new FormData();
+            let anexoFiles =  document.getElementById('inFile');
+
             $.ajax({
                 url: "vaccinationDay/store",
                 type: "POST",
@@ -930,6 +928,19 @@
                 processData: false,
                 contentType: false,
                 success: function (response) {
+
+                    if(anexoFiles.files != []){
+                        for(let i = 0; i < anexoFiles.files.length; i++){
+                            if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                filesForm.set('id_jornada', response.id_jornada);
+                                filesForm.set('idsVoluntarios', data.get('idsVoluntarios'));
+                                filesForm.set('file', anexoFiles.files[i]);
+
+                                insAnexos(filesForm);
+                            }
+                        }
+                    }
+
                     Swal.fire({
                         icon: 'success',
                         title: 'Hecho',
@@ -943,7 +954,8 @@
                         denyButtonText: 'Cancelar',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                getLastJornada();   
+                                idJornada = parseInt(response.id_jornada);
+                                //getLastJornada();   
                             } else if(result.isDenied){
                                 idJornada = 0;
                                 $('#modalCreateVaccinationDay').modal('hide');
@@ -961,25 +973,6 @@
         function insAnexos(data){
             $.ajax({
                 url: "vaccinationDay/storeFiles",
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: data,
-                processData: false,
-                contentType: false,
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (error, resp, text) {
-                    console.error(error);
-                }
-            });
-        }
-
-        function updAnexos(data){
-            $.ajax({
-                url: "vaccinationDay/updateFiles",
                 type: "POST",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1021,7 +1014,8 @@
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 if(actionType == 'create'){
-                                    getLastJornada();
+                                    idJornada = parseInt(response.id_jornada);
+                                    //getLastJornada();
                                 }                             
                             } else if(result.isDenied){
                                 if(actionType == 'create'){
@@ -1036,6 +1030,25 @@
                             }
                         });
                     //console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function updAnexos(data){
+            $.ajax({
+                url: "vaccinationDay/updateFiles",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
                 },
                 error: function (error, resp, text) {
                     console.error(error);

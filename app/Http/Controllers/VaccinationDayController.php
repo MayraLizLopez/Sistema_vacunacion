@@ -55,13 +55,18 @@ class VaccinationDayController extends Controller
         ]);
         
         $jornada = new Jornada;
-        //$jornada->folio = 'F000';
         $jornada->fecha_inicio = $request->fecha_inicio;
         $jornada->fecha_fin = $request->fecha_fin;
         $jornada->mensaje = $request->mensaje;
         $jornada->activo = true;
         $jornada->fecha_creacion = Carbon::now();
         $save1 = $jornada->save();
+
+        DB::table('jornadas')
+        ->where('id_jornada', $jornada->id_jornada)
+        ->update([
+            'folio' => 'F000' . $jornada->id_jornada
+        ]);
 
         foreach(json_decode($request->idSedes) as $id_sede){
             foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
@@ -79,6 +84,7 @@ class VaccinationDayController extends Controller
 
         if($save1 && $save2){
             return response()->json([
+                'id_jornada' => $jornada->id_jornada,
                 'isOk' => true,
                 'message' => '¡La jornada fue guardada exitosamente!'
             ]); 
@@ -96,10 +102,9 @@ class VaccinationDayController extends Controller
         $data_archivo = file_get_contents($request->file->getRealPath());
 
         foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
-            $jornada = DB::table('jornadas')->latest('id_jornada')->first();
 
             $anexo_jornada = new AnexoJornada;
-            $anexo_jornada->id_jornada = $jornada->id_jornada;
+            $anexo_jornada->id_jornada = $request->id_jornada;
             $anexo_jornada->id_voluntario = (int)$id_voluntario;
             $anexo_jornada->nombre = $nombre_archivo;
             $anexo_jornada->anexo = base64_encode($data_archivo);
@@ -159,6 +164,7 @@ class VaccinationDayController extends Controller
 
         if($save1){
             return response()->json([
+                'id_jornada' => $request->id_jornada,
                 'isOk' => true,
                 'message' => '¡La jornada fue actualizada exitosamente!'
             ]); 
@@ -230,6 +236,7 @@ class VaccinationDayController extends Controller
         ->join('municipios', 'sedes.id_municipio', '=', 'municipios.id_municipio')
         ->select(
             'jornadas.id_jornada AS id_jornada',
+            'jornadas.folio AS folio',
             'jornadas.fecha_inicio AS fecha_inicio',
             'jornadas.fecha_fin AS fecha_fin' ,
             'municipios.id_municipio AS id_municipio',
@@ -395,12 +402,12 @@ class VaccinationDayController extends Controller
         ]);
     }
 
-    public function getLastJornada(){
-        $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
-        return response()->json([
-            'data' => $jornadas        
-        ]); 
-    }
+    // public function getLastJornada(){
+    //     $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
+    //     return response()->json([
+    //         'data' => $jornadas        
+    //     ]); 
+    // }
 
     public function getAllInstitutions()
     {  
