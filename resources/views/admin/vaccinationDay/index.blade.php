@@ -125,7 +125,10 @@
           <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="inTown">Municipio</label>
+                    <label for="inTown">Municipio
+                        <span style="font-size: 20px; color: red;">*</span>
+                        <span id="spanTown" style="color: red;">Es necesario elegir un municipio para ver la tabla de Centros e Instituciones</span>
+                    </label>
                     <select class="custom-select" id="inTown">
                     </select>           
                 </div>
@@ -150,37 +153,10 @@
                   </div>
             </div>
           </div> --}}
-          <div class="row mb-3">
-            <div class="col-md-12">
-                <div id="toolbar2">
-                    <button class="btn btn-primary" id="btnFilterVoluntary">Filtrar Voluntarios</button>
-                </div>
-                <div class="table-responsive"> 
-                    <label for="institutionsTable">Instituciones</label>
-                    <table id="institutionsTable" class="table table-striped table-bordered"
-                    data-locale="es-MX"
-                    data-pagination="false"
-                    data-height="300"
-                    data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#toolbar2"> 
-                        <thead>
-                            <tr>
-                                <th data-checkbox="true"></th>
-                                <th class="d-none" data-field="id_insti">ID</th>
-                                <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                                <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
-                                <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-          </div>
-          <div class="row mb-3">
+          <div class="row mb-3 divSedesTable">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="sedesTable">Sedes</label>           
+                    <label for="sedesTable">Centros</label>           
                     <table id="sedesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
@@ -200,7 +176,37 @@
                 </div>
             </div>
           </div>
-          <div class="row">
+          <div class="row mb-3 divInstitutionsTable">
+            <div class="col-md-12">
+                <div class="table-responsive"> 
+                    <label for="institutionsTable">
+                        Instituciones
+                        <span style="font-size: 20px; color: red;">*</span>
+                        <span id="spanInstitution" style="color: red;">Es necesario elegir al menos una Institución para poder ver la tabla de Voluntarios</span>
+                    </label>
+                    <table id="institutionsTable" class="table table-striped table-bordered"
+                    data-locale="es-MX"
+                    data-pagination="false"
+                    data-height="300"
+                    data-sort-name="nombre"
+                    data-sort-order="desc"> 
+                        <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th class="d-none" data-field="id_insti">ID</th>
+                                <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                                <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
+                                <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mt-3 float-right">
+                    <button class="btn btn-primary" id="btnFilterVoluntary">Filtrar Voluntarios</button>
+                </div>
+            </div>
+          </div>
+          <div class="row divVoluntariesTable">
             <div class="col-md-12">
                 <div class="table-responsive">
                     <label for="voluntariesTable">Voluntarios</label>     
@@ -264,7 +270,10 @@
           <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="editInTown">Municipio</label>
+                    <label for="editInTown">
+                        Municipio
+                        <span style="font-size: 20px; color: red;">*</span>
+                    </label>
                     <select class="custom-select" id="editInTown">
                     </select>           
                 </div>
@@ -291,35 +300,8 @@
           </div> --}}
           <div class="row mb-3">
             <div class="col-md-12">
-                <div id="toolbar3">
-                    <button class="btn btn-primary" id="btnEditFilterVoluntary">Filtrar Voluntarios</button>
-                </div>
-                <div class="table-responsive"> 
-                    <label for="editInstitutionsTable">Instituciones</label>
-                    <table id="editInstitutionsTable" class="table table-striped table-bordered"
-                    data-locale="es-MX"
-                    data-pagination="false"
-                    data-height="300"
-                    data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#toolbar3">
-                        <thead>
-                            <tr>
-                                <th data-checkbox="true"></th>
-                                <th class="d-none" data-field="id_insti">ID</th>
-                                <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                                <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
-                                <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="editSedesTable">Sedes</label>           
+                    <label for="editSedesTable">Centros</label>           
                     <table id="editSedesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
@@ -337,6 +319,35 @@
                           </tr>
                         </thead>
                     </table>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive"> 
+                    <label for="editInstitutionsTable">
+                        Instituciones
+                        <span style="font-size: 20px; color: red;">*</span>
+                    </label>
+                    <table id="editInstitutionsTable" class="table table-striped table-bordered"
+                    data-locale="es-MX"
+                    data-pagination="false"
+                    data-height="300"
+                    data-sort-name="nombre"
+                    data-sort-order="desc">
+                        <thead>
+                            <tr>
+                                <th data-checkbox="true"></th>
+                                <th class="d-none" data-field="id_insti">ID</th>
+                                <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                                <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
+                                <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="mt-3 float-right">
+                    <button class="btn btn-primary" id="btnEditFilterVoluntary">Filtrar Voluntarios</button>
                 </div>
             </div>
           </div>
@@ -487,7 +498,10 @@
             //evento para la busqueda de voluntarios por institución
             $('#inTown').on('change', () => {
                 if($('#inTown').children('option:selected').val().length > 0){
-                    getAllSedesByIdTown($('#inTown').children('option:selected').val(), 'create');
+                    getAllSedesByIdTown($('#inTown').children('option:selected').val(), 'create');                   
+                    $('#spanTown').attr({'hidden': true});
+                    $('.divSedesTable').attr({'hidden': false});
+                    $('.divInstitutionsTable').attr({'hidden': false});
                 }                            
             });
 
@@ -499,6 +513,13 @@
 
             //evento para obtener la lista de todos los voluntarios activos y no eliminados
             $('#modalCreateVaccinationDay').on('show.bs.modal', () => {
+                $('#spanTown').attr({'hidden': false});
+                $('#spanInstitution').attr({'hidden': false});
+
+                $('.divInstitutionsTable').attr({'hidden': true});
+                $('.divSedesTable').attr({'hidden': true});
+                $('.divVoluntariesTable').attr({'hidden': true});
+
                 getAllTowns('create');
                 getAllInstitutions('create');
                 $voluntariesTable.bootstrapTable({data: []});
@@ -632,6 +653,8 @@
             $('#btnFilterVoluntary').on('click', () => {
                 let institutionsTable = $institutionsTable.bootstrapTable('getSelections');
                 let idsIinstitution = institutionsTable.map(element => element.id_insti);
+                $('#spanInstitution').attr({'hidden': true});
+                $('.divVoluntariesTable').attr({'hidden': false});
 
                 getVoluntariesByInstitution(idsIinstitution, 'create');
             });
