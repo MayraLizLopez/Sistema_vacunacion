@@ -29,7 +29,15 @@
                                 <div class="card-body">
                                     <div class="content">
                                         <div class="row">
-                                            <h4>El equipo de voluntariado te contactara dentro de poco para dar más información sobre la jornada, por favor este al pendiente de su correo eléctronico y/o teléfono que fueron proporcionados en su registro</h4>
+                                            <h4>{{ $mensaje_jornada->mensaje}}</h4>
+                                            <h4>Seleccionaste participar en la sede: </h4>
+                                            <div style="color:#54A583; font-weight: bold; font-size: 24px; margin-top: 15px;">{{ $sede->nombre }}</div>
+                                            <p class="card-text" style="color: #7B868C; font-size: 24px;">{{ $sede->direccion }} 
+                                            @if(!($sede->colonia == null))
+                                                colonia {{ $sede->colonia }}
+                                            @endif
+                                            </p>
+                                        
                                         </div>
                                     </div>
                                 </div>

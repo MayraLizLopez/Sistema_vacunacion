@@ -42,7 +42,11 @@
                 
                 <div class="card-body text-secondary" >
                     <!-- <h5 class="card-title">Secondary card title</h5> -->
-                    <p class="card-text" style="color: #7B868C; font-size: 24px;">{{ $sede->direccion }} colonia {{ $sede->colonia }}</p>
+                    <p class="card-text" style="color: #7B868C; font-size: 24px;">{{ $sede->direccion }} 
+                    @if(!($sede->colonia == null))
+                        colonia {{ $sede->colonia }}
+                    @endif
+                    </p>
                     <div style="padding-bottom: 20px;">
                         <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailAceptar/{{$sede->uuid}}">Aceptar</a>        
                     </div>
@@ -51,8 +55,9 @@
             <div class="mb-3" style="margin-top: 35px;"></div>
             <p></p>
             @endforeach()
-
-
+            <object
+            data="data:text/plain;base64,MTIzNA=="type="text/plain" width="100%" height="600px"></object>
+            <!-- <a id='documento' title="Descargar"></a> -->
             <!-- <a style="color: #F5F5F5; background-color: #5BC0DE; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 5px;" href="http://localhost:8080/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a> -->
             <div style="padding-bottom: 20px;">
                 <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailRechazar/{{$uuid}}">Rechazar todos</a>
@@ -82,5 +87,8 @@
     <script src="{{ asset('public/js/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('public/js/fontawesome.min.js') }}"></script>
     <script src="{{ asset('public/js/sweetalert2.min.js') }}"></script>
+    <script>
+        
+    </script>
 </head>
 </html>
