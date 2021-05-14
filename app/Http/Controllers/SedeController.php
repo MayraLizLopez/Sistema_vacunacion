@@ -45,10 +45,6 @@ class SedeController extends Controller
             'direccion' => 'required',
             'id_municipio' => 'required',
             'cupo' => 'required',
-            'colonia' => 'required',
-            'cp' => 'required',
-            'cruce_calles' => 'required',
-            'nombre_encargado' => 'required',
         ]);
 
         $sede = new Sede;
@@ -58,7 +54,6 @@ class SedeController extends Controller
         $sede->colonia = $request->colonia;
         $sede->cp = $request->cp;
         $sede->cruce_calles = $request->cruce_calles;
-        $sede->georeferencia = $request->georeferencia;
         $sede->nombre_encargado = $request->nombre_encargado;
         $sede->tel_encargado = $request->tel_encargado;
         $sede->email_encargado = $request->email_encargado;
@@ -128,10 +123,6 @@ class SedeController extends Controller
             'direccion' => 'required',
             'id_municipio' => 'required',
             'cupo' => 'required',
-            'colonia' => 'required',
-            'cp' => 'required',
-            'cruce_calles' => 'required',
-            'nombre_encargado' => 'required',
         ]);
 
         $sedeEditado = Sede::findOrFail($id);
@@ -141,7 +132,6 @@ class SedeController extends Controller
         $sedeEditado->colonia = $request->colonia;
         $sedeEditado->cp = $request->cp;
         $sedeEditado->cruce_calles = $request->cruce_calles;
-        $sedeEditado->georeferencia = $request->georeferencia;
         $sedeEditado->nombre_encargado = $request->nombre_encargado;
         $sedeEditado->tel_encargado = $request->tel_encargado;
         $sedeEditado->email_encargado = $request->email_encargado;

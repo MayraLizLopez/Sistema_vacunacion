@@ -122,7 +122,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="emailVoluntary">Tel. del encargado</label>
-                                <input type="text" class="form-control" id="tel" name="tel_encargado" required="required"/>      
+                                <input type="text" class="form-control" id="tel" name="tel_encargado" data-mask="000 000 0000" required="required"/>      
                             </div>
                         </div> 
                         <div class="col-md-4">
@@ -239,10 +239,15 @@
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         });
 
-                        let direccion = document.getElementById("nombre").value + " " + document.getElementById("domicilio").value + " " + document.getElementById("municipio").value;
+                        let direccion = document.getElementById("nombre").value + " " + document.getElementById("domicilio").value;
                         if(response.data.colonia !== null){
                             direccion= direccion + " " + response.data.colonia;
                         }
+                        if(response.data.cp !== null){
+                            direccion= direccion + " " + response.data.cp;
+                        }
+                        direccion = direccion + " " + document.getElementById("municipio").value + " Jal."
+                        console.log(direccion);
                         geocoder.geocode({'address': direccion}, function(results, status) {
                             if (status === 'OK') {
                                 var resultados = results[0].geometry.location,

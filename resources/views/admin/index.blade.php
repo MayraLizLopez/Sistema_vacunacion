@@ -154,11 +154,11 @@
         <div class="row">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-6 col-md-6 mb-4">
-                <div class="card shadow h-100 py-2" style=" border-left: 8px solid #6EDE9E;">
+                <div class="card shadow h-100 py-2" style=" border-left: 8px solid #54A583;">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-mb font-weight-bold" style="color:#6EDE9E; font-family: nutmeg-bold; font-size: 18px;" >
+                                <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;" >
                                     Voluntarios</div>
                                 <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $voluntarios }}</div>
                             </div>

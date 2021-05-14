@@ -66,7 +66,7 @@ class LoginController extends Controller
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $rol = session('LoggedUserNivel');
         if($rol == 'Administrador General'){
-            $voluntarios = DB::table('voluntarios')->where('activo', '=', false)->count(); 
+            $voluntarios = DB::table('voluntarios')->where('eliminado', '=', false)->count(); 
             $instituciones = DB::table('instituciones')->where('activo', '=', true)->count();   
             $jornadas = DB::table('jornadas')->where('activo', '=', true)->count();   
             $centros = DB::table('sedes')->where('activo', '=', true)->count();   
@@ -77,7 +77,7 @@ class LoginController extends Controller
         }else{
             $id_user = session('LoggedUser');
             $id = DB::table('usuarios')->where('id_user', '=', $id_user)->value('id_insti'); 
-            $voluntarios = DB::table('voluntarios')->where('id_insti', '=', $id)->count(); 
+            $voluntarios = DB::table('voluntarios')->where('id_insti', '=', $id)->where('eliminado', '=', false)->count(); 
             $jornadas = DB::table('jornadas')->where('activo', '=', true)->count();   
 
             return view('admin.index', compact('voluntarios', 'jornadas'), $data); 
