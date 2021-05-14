@@ -44,7 +44,7 @@
               font-weight: bold;
               ">
                 <img class="mx-1" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 40px;"/>
-                <span class="h2">Generar reporte</span>
+                <span style="font-size: 30px;">Generar reporte</span>
         </button>
     </div> 
 </div>
@@ -100,14 +100,12 @@
         <div class="form-group ml-1">
             <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
         </div>
-
-       {{-- <div class="form-group ml-1">
-            <button type="button" class="btn btn-info btn-table" id="showMoreFilters" 
-            data-toggle="collapse" data-target="#moreFilters" aria-expanded="false" aria-controls="moreFilters"
-            data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros">
-                <i class="fas fa-chevron-circle-down"></i>
+        
+        <div class="form-group ml-1">
+            <button type="button" class="btn btn-info btn-table" id="showMoreFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros">
+                <i class="fas fa-chevron-circle-down" style="height: 24px;"></i>
             </button>      
-        </div>--}}
+        </div>
 
         <div class="form-group ml-1">
             <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
@@ -117,14 +115,14 @@
         </div>
 
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-primary" id="btnLoadHours" data-target="#staticBackdrop" style="color:white; background-color: #0B97B8; border: #0B97B8;">
+            <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
                 <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
-                <span class="item-label">Agregar horas</span>         
-            </button>
+                <span class="item-label">Agregar horas</span>                 
+            </a>
         </div>
 
         <div class="form-group ml-1">
-            <a class="btn btn-primary btn-table" style="color:white;" href="{{route('crearVoluntario')}}">
+            <a class="btn btn-primary btn-table" href="{{route('crearVoluntario')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntarios">
                 <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Registrar Voluntario</span>                 
             </a>
@@ -379,7 +377,7 @@
             });
 
             $('#showMoreFilters').on('click', () => {
-                console.log( $('.main-form').is(':hidden') + ' - ' + $('.second-form').is(':hidden'));
+                // console.log( $('.main-form').is(':hidden') + ' - ' + $('.second-form').is(':hidden'));
 
                 if(!$('.main-form').is(':hidden') && $('.second-form').is(':hidden')){
                     $('.main-form').attr('hidden', true);
@@ -602,13 +600,13 @@
         function operateFormatter(value, row, index) {
             return [
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
-            '<img class="mx-2" src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
+            '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="like mr-3" href="voluntario/edit/' + row.id_voluntario + '"' + 'title="Edit">',
-            '<img class="mx-2" src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
+            '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<img class="mx-2" src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
+            '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')
         }
@@ -644,7 +642,7 @@
                 url: "voluntario/detalles/" + id_voluntario,
                 type: "GET",
                 success: function (response) {
-                    console.log(response);
+                    // console.log(response);
 
                     //idVoluntario = response.data.id_voluntario;
                     $('#nombre').val(response.data.nombre);

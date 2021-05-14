@@ -167,13 +167,13 @@
         function operateFormatter(value, row, index) {
             return [
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
-            '<img class="mx-2" src="{{ asset('public/assets/images/geo.svg')}}" style="width: 15px; margin:0px;"/>',
+            '<img src="{{ asset('public/assets/images/geo.svg')}}" style="width: 15px; margin:0px;"/>',
             '</a>',
             '<a class="like mr-3" href="editar/' + row.id_sede + '"' + 'title="Editar">',
-            '<img class="mx-2" src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; margin:0px;"/>',
+            '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; margin:0px;"/>',
             '</a>',
             '<a class="remove" href="javascript:void(0)" title="Eliminar">',
-            '<img class="mx-2" src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; margin:0px;"/>',,
+            '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; margin:0px;"/>',,
             '</a>'
             ].join('')
         }
