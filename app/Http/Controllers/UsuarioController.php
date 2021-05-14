@@ -39,14 +39,22 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $instituciones =  DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $instituciones = DB::table('instituciones')
+        ->select('instituciones.*')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'asc')
+        ->get();
         return view('users.registration', compact('instituciones'));
     }
 
     public function createAdmin()
     {
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
-        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $instituciones = DB::table('instituciones')
+        ->select('instituciones.*')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'asc')
+        ->get();
         return view('admin.users.create', compact('instituciones'), $data);
     }
 
@@ -121,7 +129,11 @@ class UsuarioController extends Controller
         $insti = DB::table('instituciones')->where('id_insti', $userEdit->id_insti)->first();
         $institucion_select = $insti->nombre;
 
-        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $instituciones = DB::table('instituciones')
+        ->select('instituciones.*')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'asc')
+        ->get();
         return view('admin.users.edit', compact('userEdit', 'instituciones', 'institucion_select'), $data);
     }
 

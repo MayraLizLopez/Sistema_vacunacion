@@ -85,12 +85,10 @@
         </div>
 
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-primary btn-table" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar usuario">
-                <a style="color:white;" href="{{route('createUser')}}">
-                    <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
-                    <span class="item-label">Registrar Usuario</span>                 
-                </a>
-            </button>
+            <a class="btn btn-primary" style="color:white;" href="{{route('createUser')}}">
+                <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
+                Registrar Usuario
+            </a>
         </div>
 
     </div>
