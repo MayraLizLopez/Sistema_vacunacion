@@ -64,10 +64,10 @@
         function operateFormatter(value, row, index) {
             return [
             '<a class="like mr-3" href="institutions/edit/' + row.id_insti + '"' + 'title="Edit">',
-            '<i class="fas fa-edit"></i>',
+                '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="fa fa-trash"></i>',
+                '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')
         }

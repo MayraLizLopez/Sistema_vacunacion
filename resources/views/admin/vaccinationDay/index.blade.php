@@ -139,7 +139,7 @@
                   </div>
             </div>
           </div>
-          <div class="row">
+          {{-- <div class="row">
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="custom-file">
@@ -149,7 +149,7 @@
                     </div>
                   </div>
             </div>
-          </div>
+          </div> --}}
           <div class="row mb-3">
             <div class="col-md-12">
                 <div id="toolbar2">
@@ -278,7 +278,7 @@
                   </div>
             </div>
           </div>
-          <div class="row">
+          {{-- <div class="row">
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="custom-file">
@@ -288,7 +288,7 @@
                     </div>
                   </div>
             </div>
-          </div>
+          </div> --}}
           <div class="row mb-3">
             <div class="col-md-12">
                 <div id="toolbar3">

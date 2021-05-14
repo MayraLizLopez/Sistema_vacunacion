@@ -359,17 +359,17 @@
 
              if(row.activo == 1){
                 actionButton = '<a class="disable" href="javascript:void(0)" title="Disable">'
-                + '<i class="fas fa-user-slash"></i>'         
+                + '<img src="{{ asset('public/assets/images/desactivar_usuario.svg')}}" style="width: 15px; padding:0px;"/>',         
                 + '</a>';
              } else {
                 actionButton = '<a class="enable" href="javascript:void(0)" title="Enable">'
-                + '<i class="fas fa-user"></i>'         
+                + '<img src="{{ asset('public/assets/images/activar_usuario.svg')}}" style="width: 15px; padding:0px;"/>'         
                 + '</a>';
              }
 
             return [
             '<a class="like mr-3" href="edit/' + row.id_user + '"' + 'title="Edit">',
-            '<i class="fas fa-edit"></i>',
+                '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>', actionButton
             ].join('')
         }
