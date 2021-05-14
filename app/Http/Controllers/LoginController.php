@@ -78,7 +78,23 @@ class LoginController extends Controller
             $id_user = session('LoggedUser');
             $id = DB::table('usuarios')->where('id_user', '=', $id_user)->value('id_insti'); 
             $voluntarios = DB::table('voluntarios')->where('id_insti', '=', $id)->where('eliminado', '=', false)->count(); 
-            $jornadas = DB::table('jornadas')->where('activo', '=', true)->count();   
+            $jornadas = DB::table('detalle_jornadas')
+            ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+            ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+            ->select(
+                'voluntarios.id_voluntario AS id_voluntario',              
+                'voluntarios.nombre AS nombre',
+                'voluntarios.ape_pat AS ape_pat',
+                'voluntarios.ape_mat AS ape_mat',
+                'voluntarios.email AS email',
+                'voluntarios.tel AS tel',
+                'voluntarios.curp AS curp',
+                'instituciones.nombre AS nombre_institucion',
+                'municipios.nombre AS nombre_municipio'
+            )
+            ->where('voluntarios.id_insti', '=', $id)
+            ->distinct()
+            ->count();
 
             return view('admin.index', compact('voluntarios', 'jornadas'), $data); 
         }

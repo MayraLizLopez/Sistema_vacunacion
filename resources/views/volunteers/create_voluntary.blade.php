@@ -189,7 +189,7 @@
                                         @else
                                             @foreach ($instituciones as $institucion)
                                                 @if( $LoggedUserInfo['id_insti'] == $institucion->id_insti)
-                                                    <select class="form-control" id="instututionVoluntary" name="id_insti" disabled>
+                                                    <select class="form-control" id="instututionVoluntary" name="id_insti" >
                                                         <option value="{{$institucion->id_insti}}"> {{$institucion->nombre}} </option>
                                                         <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
                                                     </select>

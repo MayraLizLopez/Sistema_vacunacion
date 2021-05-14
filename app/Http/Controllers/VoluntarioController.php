@@ -171,7 +171,11 @@ class VoluntarioController extends Controller
         $insti = DB::table('instituciones')->where('id_insti', $voluntarioEdit->id_insti)->first();
         $institucion_select = $insti->nombre;
 
-        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $instituciones = DB::table('instituciones')
+        ->select('instituciones.*')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'asc')
+        ->get();
         return view('volunteers.editVoluntary', compact('voluntarioEdit', 'municipios', 'municipio_select', 'instituciones', 'institucion_select'), $data);
     }
 
