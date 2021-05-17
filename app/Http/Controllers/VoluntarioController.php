@@ -34,14 +34,17 @@ class VoluntarioController extends Controller
      */
     public function index()
     {
-        $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
-        $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
+        //$data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
+        $municipios = DB::table('municipios')
+        ->select('municipios.*')
+        ->orderBy('municipios.nombre', 'asc')
+        ->get();
         $instituciones = DB::table('instituciones')
         ->select('instituciones.*')
         ->where('instituciones.activo', '=', 1)
         ->orderBy('instituciones.nombre', 'asc')
         ->get();
-        return view('volunteers.registration', compact('municipios', 'instituciones'), $data);
+        return view('volunteers.registration', compact('municipios', 'instituciones'));
     }
 
     /**

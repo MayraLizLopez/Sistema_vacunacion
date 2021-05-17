@@ -367,5 +367,5 @@
 
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArelYYPGecMIlIwE5UUmC_e5FJr6qBh8M&libraries=&v=weekly" async></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvIjiJbFWxtsjZnXzcr_UTolRreZRVkUo&libraries=&v=weekly" async></script>
 @endsection
