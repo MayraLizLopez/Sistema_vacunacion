@@ -247,7 +247,7 @@
                             direccion= direccion + " " + response.data.cp;
                         }
                         direccion = direccion + " " + document.getElementById("municipio").value + " Jal."
-                        console.log(direccion);
+                        //console.log(direccion);
                         geocoder.geocode({'address': direccion}, function(results, status) {
                             if (status === 'OK') {
                                 var resultados = results[0].geometry.location,
@@ -367,5 +367,5 @@
 
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvIjiJbFWxtsjZnXzcr_UTolRreZRVkUo&libraries=&v=weekly" async></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArelYYPGecMIlIwE5UUmC_e5FJr6qBh8M&libraries=&v=weekly" async></script>
 @endsection

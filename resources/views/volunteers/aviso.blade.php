@@ -4,8 +4,10 @@
 @endsection
 @section('title', 'Registro de Voluntarios')
 @section('content')
+<style>
+</style>
 <div class="container" style="width: 100%;">
-    <div class="card shadow mb-4"  style="margin-top: 30px;">
+    <div class="card shadow mb-4"  style="margin-top: 30px; margin-top: 10vh;">
         <div class="card-body">
             <div class="content">
                 <div class="col-sm-12">
@@ -35,18 +37,5 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('public/js/bootstrap-table.min.js') }}"></script>
-    <script>
-    document.getElementById("botonEnviar").disabled = true;
-    document.getElementById("myCheck").checked = false;
-        function myFunction() {
-            var checkBox = document.getElementById("myCheck");
-            
-            if (checkBox.checked == true){
-                document.getElementById("botonEnviar").disabled = false;
-            } else {
-                document.getElementById("botonEnviar").disabled = true;
-            }
-        }
-    </script>
+
 @endsection

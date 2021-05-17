@@ -36,7 +36,11 @@ class VoluntarioController extends Controller
     {
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()];    
         $municipios = DB::select('SELECT * FROM municipios ORDER BY nombre ASC');
-        $instituciones = DB::select('SELECT * FROM instituciones ORDER BY nombre ASC');
+        $instituciones = DB::table('instituciones')
+        ->select('instituciones.*')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'asc')
+        ->get();
         return view('volunteers.registration', compact('municipios', 'instituciones'), $data);
     }
 
