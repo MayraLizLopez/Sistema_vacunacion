@@ -13,7 +13,7 @@
     </head>
     <style>
         body {
-            background-image: url('{{ asset('public/assets/images/inicioRegistro2.png')}}');
+            background-image: url('{{ asset('public/assets/images/fondo_inicio_xl.png')}}');
             
             background-position: center center;
             
@@ -27,11 +27,23 @@
             height: 100%; 
         }
 
-@media only screen and (max-width: 767px) {
-  body {
-    background-image: url('{{ asset('public/assets/images/inicioRegistro2.png')}}');
-  }
-	}
+        @media only screen and (max-width: 1200px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/fondo_inicio_1100_670.png')}}');
+            }
+        }
+
+        @media only screen and (max-width: 760px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/fondo_inicio_720_1080.png')}}');
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/fondo_inicio_414_737.png')}}');
+            }
+        }
     </style>
     <body>
             @yield('content')

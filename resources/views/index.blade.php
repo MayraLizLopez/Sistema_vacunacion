@@ -49,7 +49,7 @@
     #boton{
         font-size:70px; 
         background-color:#6EDE9E; 
-        margin-top: 15vh; 
+        margin-top: 50vh; 
         padding-left: 40px; 
         padding-right:40px;
     }
@@ -78,14 +78,7 @@
             color: #6EDE9E;
             margin-top:0px;
         }
-
-        #boton{
-            font-size: 55px; 
-            background-color:#6EDE9E; 
-            margin-top: 12vh; 
-            padding-left: 30px; 
-            padding-right:30px;
-        }  
+  
     }
 
     @media only screen and (max-width: 570px) {
@@ -112,14 +105,6 @@
             color: #6EDE9E;
             margin-top:0px;
         }
-
-        #boton{
-            font-size: 40px; 
-            background-color:#6EDE9E; 
-            margin-top: 10vh; 
-            padding-left: 15px; 
-            padding-right:15px;
-        }  
     }
 
     @media only screen and (max-width: 380px) {
@@ -146,20 +131,42 @@
             color: #6EDE9E;
             margin-top:0px;
         }
-
-        #boton{
-            font-size: 35px; 
-            background-color:#6EDE9E; 
-            margin-top: 10vh; 
-            padding-left: 15px; 
-            padding-right:15px;
-        }  
     }
+
+    @media only screen and (max-width: 1200px) {
+            #boton{
+                font-size: 55px; 
+                background-color:#6EDE9E; 
+                margin-top: 50vh; 
+                padding-left: 30px; 
+                padding-right:30px;
+            }
+        }
+
+        @media only screen and (max-width: 760px) {
+            #boton{
+                font-size: 55px; 
+                background-color:#6EDE9E; 
+                margin-top: 50vh; 
+                padding-left: 30px; 
+                padding-right:30px;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            #boton{
+                font-size: 40px; 
+                background-color:#6EDE9E; 
+                margin-top: 50vh; 
+                padding-left: 20px; 
+                padding-right:20px;
+            }
+        }
 </style>
 <div class="container" style="padding-top:30px;">
 
     <div class="content" >
-        <center>
+        <!-- <center>
             <div style="display: block; margin-top: 5vh;">
                 <span id="white-text">¿Quieres formar parte del</span>
             </div>
@@ -167,7 +174,7 @@
                 <span id="white-text-big">Plan Jalisco</span>
             </div>
             <span id="green-text">ante la Pandemia 2021?</span>
-        </center>
+        </center> -->
         <div class="row justify-content-center" style="padding-bottom: 45px;">
             <a href="{{ url("voluntario/index") }}" class="btn btn-success" id="boton">¡Registrate ahora!</a>
         </div>
