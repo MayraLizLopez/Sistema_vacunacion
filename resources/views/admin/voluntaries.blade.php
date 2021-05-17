@@ -139,12 +139,14 @@
         <div class="table-responsive">           
             <table id="voluntariesTable" class="table table-striped table-bordered"
             data-locale="es-MX"
-            data-pagination="true"
+            {{-- data-pagination="true" --}}
+            data-height="500"
+            data-show-export="true"
+            {{-- data-page-size="5"
+            data-page-list="[5, 10, 25, 50, 100, 200, 500, 1000]" --}}
             data-single-select="true"
             data-click-to-select="true"
             data-search-selector="#inSearchCustom"
-            data-page-size="5"
-            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"
             data-toolbar="#toolbar">
@@ -391,6 +393,7 @@
 
             $('#btnExportToExcel').on('click', () => {
                 let today = new Date();
+
                 $table.tableExport({
                     fileName: 'reporte voluntarios_' 
                     + today.getDay() 
@@ -404,7 +407,8 @@
                     exportDataType: 'all',
                     refreshOptions: {
                         exportDataType: 'all'
-                    }
+                    },
+                    ignoreColumn: ['operate']
                 });
             });
         }
