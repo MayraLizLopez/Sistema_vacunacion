@@ -950,14 +950,16 @@
                 contentType: false,
                 success: function (response) {
 
-                    if(anexoFiles.files != []){
-                        for(let i = 0; i < anexoFiles.files.length; i++){
-                            if(anexoFiles.files[i].size <= 2097152){ // 2MB
-                                filesForm.set('id_jornada', response.id_jornada);
-                                filesForm.set('idsVoluntarios', data.get('idsVoluntarios'));
-                                filesForm.set('file', anexoFiles.files[i]);
+                    if(anexoFiles != null){
+                        if(anexoFiles.files != []){
+                            for(let i = 0; i < anexoFiles.files.length; i++){
+                                if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                    filesForm.set('id_jornada', response.id_jornada);
+                                    filesForm.set('idsVoluntarios', data.get('idsVoluntarios'));
+                                    filesForm.set('file', anexoFiles.files[i]);
 
-                                insAnexos(filesForm);
+                                    insAnexos(filesForm);
+                                }
                             }
                         }
                     }
