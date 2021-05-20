@@ -33,7 +33,7 @@
             }
         }
 
-        @media only screen and (max-width: 760px) {
+        @media only screen and (max-width: 1024px) {
             body {
                 background-image: url('{{ asset('public/assets/images/fondo_inicio_720_1080.png')}}');
             }

@@ -96,9 +96,9 @@
             <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate">
         </div>
 
-        <div class="form-group second-form ml-1">
+        {{-- <div class="form-group second-form ml-1">
             <input type="text" class="form-control" placeholder="Nombre del Enlace" id="inLinkName">
-        </div>
+        </div> --}}
 
         <div class="form-group second-form ml-1">
             <select class="custom-select" id="inSearchBySede">
@@ -357,6 +357,7 @@
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
     <script src="{{ asset('public/assets/js/tableExport.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/xls-export.js') }}"></script>
     <script>
         var id_volun = 0;
         var bandera = false;
@@ -364,6 +365,8 @@
         var total_horas = 0;
         let $table = $('#voluntariesTable');
         document.getElementById("horas").value = 0;
+        let voluntariosData = [];
+
         $(document).ready(()=>{
             getAllVolunataries();
             startEvents();
@@ -465,21 +468,22 @@
 
             $('#btnExportToExcel').on('click', () => {
                 let today = new Date();
-                $table.tableExport({
-                    fileName: 'reporte voluntarios_' 
+
+                const xls = new xlsExport(
+                    voluntariosData, 
+                    'Voluntarios'
+                );
+
+                xls.exportToXLS(
+                    'reporte voluntarios_' 
                     + today.getDay() 
                     + '-' + (today.getMonth() + 1) 
                     + '-' +today.getFullYear()
                     + ' ' +today.getHours()
                     + '.' +today.getMinutes()
-                    + '.' +today.getSeconds(),
-                    type: 'excel',
-                    escape: false,
-                    exportDataType: 'all',
-                    refreshOptions: {
-                        exportDataType: 'all'
-                    }
-                });
+                    + '.' +today.getSeconds()
+                    + '.xls'
+                );
             });
         }
 
@@ -531,9 +535,26 @@
             });
         }
 
-        function getAllVolunataries(){      
-            let voluntarios = @json($voluntarios);  
-            $table.bootstrapTable({data: voluntarios});            
+        function getAllVolunataries(){            
+            let voluntarios = @json($voluntarios);
+            let _voluntarios = voluntarios.map(item => {
+                let data = {
+                    'Nombre': item.nombre,
+                    'Apellido Paterno': item.ape_pat,
+                    'Apellido Materno': item. ape_mat,
+                    'Email': item.email,
+                    'Teléfono': item.tel,
+                    'CURP': item.curp,
+                    'Municipio': item.nombre_municipio,
+                    'Institución': item.nombre_institucion
+                };
+                return data;
+            });
+
+            $table.bootstrapTable({data: voluntarios});
+
+            voluntariosData = [];
+            voluntariosData = _voluntarios;
         }
 
         //#region Seach
@@ -542,6 +563,24 @@
                 url: "voluntario/searchByVoluntaryName/" + id,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
@@ -556,6 +595,24 @@
                 url: "voluntario/searchByTown/" + id,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
@@ -570,6 +627,24 @@
                 url: "voluntario/searchByCURP/" + id,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
@@ -584,6 +659,24 @@
                 url: "voluntario/searchByInstitution/" + id,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
@@ -598,6 +691,24 @@
                 url: "voluntario/searchByDates/" + fecha_inicio + "/" + fecha_fin,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
@@ -612,6 +723,24 @@
                 url: "voluntario/searchBySedes/" + id,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
@@ -626,6 +755,24 @@
                 url: "voluntario/searchByHours/" + horas,
                 type: "GET",
                 success: function (response) {
+                    let voluntarios = response.data;
+                    let _voluntarios = voluntarios.map(item => {
+                        let data = {
+                            'Nombre': item.nombre,
+                            'Apellido Paterno': item.ape_pat,
+                            'Apellido Materno': item. ape_mat,
+                            'Email': item.email,
+                            'Teléfono': item.tel,
+                            'CURP': item.curp,
+                            'Municipio': item.nombre_municipio,
+                            'Institución': item.nombre_institucion
+                        };
+                        return data;
+                    });
+
+                    voluntariosData = [];
+                    voluntariosData = _voluntarios;
+
                     $table.bootstrapTable('destroy');
                     $table.bootstrapTable({data: response.data});
                 },
