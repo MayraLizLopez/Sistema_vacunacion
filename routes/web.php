@@ -90,6 +90,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/voluntario/detalles/{id_voluntario}', [VoluntarioController::class, "getDetalleVoluntario"])->name('getDetalleVoluntario');
 
+    Route::get('admin/panel/voluntario/editarHoras/{id_voluntaro}/{horas}', [VoluntarioController::class, "editarHoras"])->name('editarHoras');
+
     //Instituciones
     Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
