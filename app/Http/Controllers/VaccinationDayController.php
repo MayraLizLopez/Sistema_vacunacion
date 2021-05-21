@@ -285,17 +285,43 @@ class VaccinationDayController extends Controller
     }
 
     public function getVoluntariesByInstitution(Request $request){
-        $voluntarios = DB::table('voluntarios')
+        $voluntarios = DB::table('detalle_jornadas')
+        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*',
-         'instituciones.id_municipio AS id_instituciones_municipio',
-         'instituciones.nombre AS nombre_institucion',
-         'municipios.nombre AS nombre_municipio')
-        ->where([['eliminado', '=', 0],
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.horas AS horas'
+        )
+        ->where([['voluntarios.eliminado', '=', 0],
                 ['voluntarios.activo', '=', 0]])
         ->whereIn('voluntarios.id_insti', $request->ids_institution)
+        ->distinct()
         ->get();
+        
+        
+        // DB::table('voluntarios')
+        // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        // ->select('voluntarios.*',
+        //  'instituciones.id_municipio AS id_instituciones_municipio',
+        //  'instituciones.nombre AS nombre_institucion',
+        //  'municipios.nombre AS nombre_municipio')
+        // ->where([['eliminado', '=', 0],
+        //         ['voluntarios.activo', '=', 0]])
+        // ->whereIn('voluntarios.id_insti', $request->ids_institution)
+        // ->get();
+
+
         return response()->json([
             'data' => $voluntarios       
         ]); 
@@ -345,7 +371,8 @@ class VaccinationDayController extends Controller
             'voluntarios.tel AS tel',
             'voluntarios.email AS email',
             'instituciones.nombre AS nombre_institucion',
-            'municipios.nombre AS nombre_municipio'
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.horas AS horas'
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
         ->where('detalle_jornadas.correo_enviado', '=', 0)

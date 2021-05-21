@@ -209,15 +209,23 @@
           <div class="row divVoluntariesTable">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="voluntariesTable">Voluntarios</label>     
+                    <label for="voluntariesTable">Voluntarios</label>
+                    <div id="toolbar2">
+                        <div class="row">                           
+                                <h5 class="ml-3"><span class="badge badge-success">Disponible</span></h5>                            
+                                <h5 class="ml-2"><span class="badge badge-warning" style="color: black">Por descansar</span></h5>                      
+                                <h5 class="ml-2"><span class="badge badge-danger">No disponible</span></h5>                        
+                        </div>
+                    </div>     
                     <table id="voluntariesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
                     data-sort-name="nombre"
-                    data-sort-order="desc">
+                    data-sort-order="desc"
+                    data-toolbar="#toolbar2">
                         <thead>
                           <tr>
-                            <th data-checkbox="true"></th>
+                            <th data-checkbox="true" data-formatter="stateFormatter"></th>
                             <th class="d-none" data-field="id_voluntario">ID</th>
                             <th class="d-none" data-field="id_insti">ID Institución</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
@@ -227,6 +235,7 @@
                             <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                             <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                             <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                            <th data-field="horas" data-sortable="true" data-halign="center" data-align="center" data-formatter="statusFormater">Horas</th>
                           </tr>
                         </thead>
                     </table>
@@ -237,7 +246,6 @@
         <div class="modal-footer mr-auto">
             <button type="button" class="btn btn-success botonEnviar" id="saveVaccinationDay">Crear jornada</button>
             <button id="button-largo" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>        
-
         </div>
       </div>
     </div>
@@ -354,15 +362,23 @@
           <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="editVoluntariesTable">Voluntarios</label>          
+                    <label for="editVoluntariesTable">Voluntarios</label>
+                    <div id="toolbar3">
+                        <div class="row">                           
+                                <h5 class="ml-3"><span class="badge badge-success">Disponible</span></h5>                            
+                                <h5 class="ml-2"><span class="badge badge-warning" style="color: black">Por descansar</span></h5>                      
+                                <h5 class="ml-2"><span class="badge badge-danger">No disponible</span></h5>                        
+                        </div>
+                    </div>          
                     <table id="editVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
                     data-sort-name="nombre"
-                    data-sort-order="desc">
+                    data-sort-order="desc"
+                    data-toolbar="#toolbar3">
                         <thead>
                           <tr>
-                            <th data-checkbox="true"></th>
+                            <th data-checkbox="true" data-formatter="stateFormatter"></th>
                             <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
@@ -372,6 +388,7 @@
                             <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                             <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                             <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                            <th data-field="horas" data-sortable="true" data-halign="center" data-align="center" data-formatter="statusFormater">Horas</th>
                           </tr>
                         </thead>
                     </table>
@@ -753,7 +770,7 @@
                     ids_institution: ids_institution
                 },
                 success: function (response) {
-                    //console.log(response);
+                    // console.log(response);
                     if(response.data.length > 0){
                         if(actionType == 'create'){
                             $voluntariesTable.bootstrapTable('destroy');
@@ -847,7 +864,8 @@
                             email: response.data.find(s => s.id_voluntario === id_voluntario).email,
                             tel: response.data.find(s => s.id_voluntario === id_voluntario).tel,
                             nombre_municipio: response.data.find(s => s.id_voluntario === id_voluntario).nombre_municipio,
-                            nombre_institucion: response.data.find(s => s.id_voluntario === id_voluntario).nombre_institucion
+                            nombre_institucion: response.data.find(s => s.id_voluntario === id_voluntario).nombre_institucion,
+                            horas: response.data.find(s => s.id_voluntario === id_voluntario).horas
                         };
                     });
 
@@ -1223,6 +1241,30 @@
                 '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')
+        }
+
+        function statusFormater(value, row, index){
+            let status = '';
+
+            if(row.horas >= 40 && row.horas < 50){
+                status = '<h3><span class="badge badge-warning" style="color: black">' + row.horas + '</span></h3>'
+            } 
+            else if(row.horas >= 50){
+                status = '<h3><span class="badge badge-danger">' + row.horas + '</span></h3>'
+            }
+            else if(row.horas < 40) {
+                status = '<h3><span class="badge badge-success">' + row.horas + '</span><h3>'
+            }
+            return [status].join('');
+        }
+
+        function stateFormatter(value, row, index) {
+            if (row.horas >= 50) {
+                return {
+                    disabled: true
+                }
+            }
+            return value;
         }
 
         window.operateEvents = {
