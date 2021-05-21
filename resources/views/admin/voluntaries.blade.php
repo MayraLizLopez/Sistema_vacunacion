@@ -127,12 +127,12 @@
             </button>      
         </div>
 
-        <div class="form-group ml-1">
+        <!-- <div class="form-group ml-1">
             <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
                 <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Agregar horas</span>                 
             </a>
-        </div>
+        </div> -->
 
         <div class="form-group ml-1">
             <a class="btn btn-primary btn-table" href="{{route('crearVoluntario')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntarios">
@@ -1007,10 +1007,11 @@
                     confirmButtonText: 'Aceptar'
                     });
             }
-        }
-            
-        );
+        });
 
+        /**
+        * Método para editar las horas de los voluntarios
+         */
         function editarHoras(id_voluntario, horas){
             $.ajax({
                 url: "voluntario/editarHoras/" + id_voluntario + "/" + horas,

@@ -45,6 +45,10 @@ Route::get('emailRechazar/{uuid}', [VaccinationDayController::class, "rechazarJo
 
 Route::get('emailAceptar/{uuid}', [VaccinationDayController::class, "aceptarJornada"]);
 
+Route::get('security/password', [LoginController::class, "password"])->name('password');
+
+Route::get('security/sendPassword/{email}/{pass}', [LoginController::class, "restartPassword"])->name('sendPassword');
+
 //seguridad
 Route::group(['middleware' =>['AuthCheck']], function(){
     //login
