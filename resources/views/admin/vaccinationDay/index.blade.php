@@ -585,17 +585,17 @@
 
                             updVaccinationDay(form, 'create');
 
-                            if(anexoFiles.files != []){
-                                for(let i = 0; i < anexoFiles.files.length; i++){
-                                    if(anexoFiles.files[i].size <= 2097152){ // 2MB
-                                        filesForm.set('id_jornada', idJornada);
-                                        filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
-                                        filesForm.set('file', anexoFiles.files[i]);
+                            // if(anexoFiles.files != []){
+                            //     for(let i = 0; i < anexoFiles.files.length; i++){
+                            //         if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                            //             filesForm.set('id_jornada', idJornada);
+                            //             filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
+                            //             filesForm.set('file', anexoFiles.files[i]);
 
-                                        updAnexos(filesForm); 
-                                    }
-                                }
-                            }
+                            //             updAnexos(filesForm); 
+                            //         }
+                            //     }
+                            // }
                         }
                     }
                 }                                
@@ -937,7 +937,7 @@
 
         function insVaccinationDay(data){
             let filesForm = new FormData();
-            let anexoFiles =  document.getElementById('inFile');
+            //let anexoFiles =  document.getElementById('inFile');
 
             $.ajax({
                 url: "vaccinationDay/store",
@@ -950,17 +950,17 @@
                 contentType: false,
                 success: function (response) {
 
-                    if(anexoFiles.files != []){
-                        for(let i = 0; i < anexoFiles.files.length; i++){
-                            if(anexoFiles.files[i].size <= 2097152){ // 2MB
-                                filesForm.set('id_jornada', response.id_jornada);
-                                filesForm.set('idsVoluntarios', data.get('idsVoluntarios'));
-                                filesForm.set('file', anexoFiles.files[i]);
+                    // if(anexoFiles.files != []){
+                    //     for(let i = 0; i < anexoFiles.files.length; i++){
+                    //         if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                    //             filesForm.set('id_jornada', response.id_jornada);
+                    //             filesForm.set('idsVoluntarios', data.get('idsVoluntarios'));
+                    //             filesForm.set('file', anexoFiles.files[i]);
 
-                                insAnexos(filesForm);
-                            }
-                        }
-                    }
+                    //             insAnexos(filesForm);
+                    //         }
+                    //     }
+                    // }
 
                     Swal.fire({
                         title: 'Hecho',
