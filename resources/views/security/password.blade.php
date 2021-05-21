@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/sweetalert2.min.css') }}">
 </head>
 
 <style type="text/css">
@@ -102,18 +103,13 @@
                 <div class="card o-hidden border-0 shadow-sm" style="padding-top: 30px; background-color: #F8F9FC; width: 100%;">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-4 d-none d-lg-block">
-                                <img id="logo" src="{{ asset('public/assets/images/isologo_jalisco_v.svg')}}"
-                                alt="jalisco"
-                                class="img-fluid mt-1 mb-3 ml-5">
-                            </div>
-                            <div class="col-lg-8">
+
+                            <div class="col-lg-12">
                                 <div class="p-5">
-                                    <div class="text-center">
-                                        <h1>¡Bienvenido!</h1>
+                                    <div class="form-group">
+                                        <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Ingresa tu correo electrónico para buscar tu cuenta.</h5>
                                     </div>
-                                    <form class="user"  method="POST" action="{{url('/security/authenticate')}}">
+                                    <!-- <form class="user"  method="POST" action="{{url('/security/authenticate')}}"> -->
                                         @if(Session::get('fail'))
                                             <div class="alert alert-danger">
                                                 {{ Session::get('fail') }}
@@ -123,35 +119,20 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control"
                                                 id="InputEmail" aria-describedby="emailHelp" name="email"
-                                                placeholder="Email">
+                                                placeholder="Correo electrónico">
                                                 <span class="text-danger">@error('email') Ingresa tu correo @enderror </span>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control"
-                                                id="InputPassword" name="password" placeholder="Contraseña"> 
-                                                <img class="ojo" onclick="mostrar()" src="{{ asset('public/assets/images/ojo.svg')}}" style="width: 25px; float: right; margin-left: -65px !important; margin-right: 15px; margin-top: -27px; position: relative; z-index: 2;"/>
-                                                <span class="text-danger">@error('password') Ingresa una contraseña @enderror </span>
-                                        </div>
+                                    
                                         <center>
-                                            <div class="form-group">
-                                                <a href="{{route('password')}}" style="color: #1877f2;">¿Olvidaste tu contraseña?</a>
-                                            </div>
-                                        </center>
-                                        <!-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck"> 
-                                                <label class="custom-control-label" for="customCheck">Recordar mis datos</label>
-                                            </div>
-                                        </div> -->
-                                        <center>
-                                            <button type="submit" class="btn btn-success" style="font-family: montserrat; font-weight: bold; font-size: 15px; width:184px;">
-                                                Entrar
+                                            <button type="submit" class="btn btn-success" style="font-family: montserrat; font-weight: bold; font-size: 15px; width:184px;" id="enviarCorreo">
+                                                Buscar
                                             </button>
+                                            <a class="btn btn-secondary" id="boton" style="color:white; font-family: montserrat; font-weight: bold; font-size: 15px; width:184px;" href="{{route('login')}}">Cancelar</a></button>
                                         </center>
-                                    </form>
+                                    <!-- </form> -->
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
 
@@ -179,13 +160,67 @@
 
 <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
 <script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
+<script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
 <script>
-    function mostrar() {
-        var checkBox = document.getElementById("InputPassword");
-        if (checkBox.type == "password"){
-            document.getElementById("InputPassword").type = "text";
-        } else {
-            document.getElementById("InputPassword").type = "password";
+    function makeid(length) {
+        var result           = [];
+        var characters       = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
         }
+        return result.join('');
     }
+
+        /**
+        * Método para el envio de contraseña nueva y mensaje si se envio el correo correctamente
+        */
+        $('#enviarCorreo').on('click', () => {
+
+            if(document.getElementById("InputEmail").value !== null){
+                enviarCorreo(); 
+            }
+            
+        });
+
+        /**
+        * Método Método para el envio de contraseña nueva al correo
+         */
+        function enviarCorreo(){
+            $.ajax({
+                url: "sendPassword/" + document.getElementById("InputEmail").value + "/" + makeid(5),
+                type: "GET",
+                success: function (response) {
+                    //console.log(response);
+                    $('#modalEditarHoras').modal('hide');
+                    if(response.isOk == true){
+                        Swal.fire({
+                        title: '¡Contraseña recuperada!',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.href = "{{route('login')}}";
+                            }
+                        });
+                    }else{
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: response.message,
+                            icon: 'error',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                            });
+                    }
+                    
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+    //console.log(makeid(5));
 </script>
+

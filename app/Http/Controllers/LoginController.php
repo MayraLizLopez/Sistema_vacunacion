@@ -11,6 +11,9 @@ use App\Models\Sede;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Hash;
 
+use App\Mail\RestartPassword;
+use Illuminate\Support\Facades\Mail;
+
 class LoginController extends Controller
 {
 
@@ -57,6 +60,39 @@ class LoginController extends Controller
            return redirect('security/login');
         }
         
+    }
+
+    /**
+     * Método para la vista de recuperar contraseña
+     */
+    public function password(){
+        return view('security.password');
+    }
+
+    /**
+     * Método para la vista de recuperar contraseña envia correo
+     */
+    public function restartPassword($email, $pass){
+        $usuario1 = DB::table('usuarios')->where('email', '=', $email)->first(); 
+        $usuario = Usuario::findOrFail($usuario1->id_user);
+        $data = [
+            'nombre' => $usuario->nombre . ' ' . $usuario->ape_pat . ' ' . $usuario->ape_mat,
+            'pass' => $pass,
+        ];
+        Mail::to($usuario->email)->send(new RestartPassword($data));
+        $usuario->password = Hash::make($pass);
+        $save = $usuario->save();
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Contraseña restaurada, te enviamos un correo con tu nueva contraseña!'
+            ]);     
+        }else{
+            return response()->json([
+                'isOk' => false,
+                'message' => '¡No fue posible restaurar la contraseña!'
+            ]);     
+        }
     }
 
     /**

@@ -447,16 +447,66 @@ class VoluntarioController extends Controller
      * Método que retorna los detalles del voluntario seleccionado.
      */
     public function  getDetalleVoluntario($id_voluntario){
+        $bandera = true;
         $voluntario = DB::table('voluntarios')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
-        //->join('detalle_jornadas', 'voluntarios.id_voluntario', '=', 'detalle_jornadas.id_voluntario')
-        ->select('voluntarios.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio', 'instituciones.nombre AS nombre_institucion',)
-        ->where('voluntarios.id_voluntario', '=', $id_voluntario)
-        ->first();
+        ->join('detalle_jornadas', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+        ->select('detalle_jornadas.id_detalle_jornada','detalle_jornadas.id_jornada','voluntarios.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio', 'instituciones.nombre AS nombre_institucion', 'detalle_jornadas.horas AS horas')
+        ->where('voluntarios.id_voluntario', '=', $id_voluntario)        
+        ->where('detalle_jornadas.activo', '=', 1)
+        ->get();
+
+        if(count($voluntario)== 0 ){
+            $voluntario = DB::table('voluntarios')
+            ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+            ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+            ->select('voluntarios.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio', 'instituciones.nombre AS nombre_institucion')
+            ->where('voluntarios.id_voluntario', '=', $id_voluntario)
+            ->first();
+            $bandera = false;
+        }
 
         return response()->json([
-            'data' => $voluntario   
+            'bandera' => $bandera,
+            'data' => $voluntario,
+            
         ]);
+    }
+
+    /**
+     * Método que permite editar las horas del voluntario si este esta o estuvo asignado a una jornada.
+     */
+    public function editarHoras($id_voluntario, $horas){
+        $voluntario = DB::table('voluntarios')
+        ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        ->join('detalle_jornadas', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+        ->select('detalle_jornadas.id_detalle_jornada','detalle_jornadas.id_jornada','voluntarios.*', 'municipios.nombre AS nombre_municipio', 'municipios.id_municipio AS id_municipio', 'instituciones.nombre AS nombre_institucion', 'detalle_jornadas.horas AS horas')
+        ->where('voluntarios.id_voluntario', '=', $id_voluntario)        
+        ->where('detalle_jornadas.activo', '=', 1)
+        ->orderBy('detalle_jornadas.id_detalle_jornada', 'DESC')
+        ->first();
+
+        $detalle_jornada = DB::table('detalle_jornadas')
+        ->where('detalle_jornadas.id_detalle_jornada', '=', $voluntario->id_detalle_jornada)      
+        ->first();
+
+        $detalle_jornada = DetalleJornada::findOrFail($voluntario->id_detalle_jornada);
+        $detalle_jornada->horas = (int)$detalle_jornada->horas + (int)$horas;
+        $save = $detalle_jornada->save();
+
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Las horas fueron actualizadas correctamente!'
+            ]);          
+        }else{
+            return response()->json([
+                'isOk' => false,
+                'message'=> 'Error al editar horas'
+            ]);  
+        }
+        
     }
 }

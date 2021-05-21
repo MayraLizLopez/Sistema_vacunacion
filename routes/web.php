@@ -45,6 +45,10 @@ Route::get('emailRechazar/{uuid}', [VaccinationDayController::class, "rechazarJo
 
 Route::get('emailAceptar/{uuid}', [VaccinationDayController::class, "aceptarJornada"]);
 
+Route::get('security/password', [LoginController::class, "password"])->name('password');
+
+Route::get('security/sendPassword/{email}/{pass}', [LoginController::class, "restartPassword"])->name('sendPassword');
+
 //seguridad
 Route::group(['middleware' =>['AuthCheck']], function(){
     //login
@@ -89,6 +93,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::post('voluntario/update', [VoluntarioController::class, "update"]);
 
     Route::get('admin/panel/voluntario/detalles/{id_voluntario}', [VoluntarioController::class, "getDetalleVoluntario"])->name('getDetalleVoluntario');
+
+    Route::get('admin/panel/voluntario/editarHoras/{id_voluntaro}/{horas}', [VoluntarioController::class, "editarHoras"])->name('editarHoras');
 
     //Instituciones
     Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
