@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\Usuario;
 use App\Models\Jornada;
 use App\Models\DetalleJornada;
+use App\Models\Voluntario;
 
 use App\Mail\ConfirmJornada;
 use App\Models\AnexoJornada;
@@ -540,6 +541,9 @@ class VaccinationDayController extends Controller
                 $save = $jornada->save();
                 $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+                $voluntarioActivo = Voluntario::findOrFail($detallejornada->id_voluntario);
+                $voluntarioActivo->activo = true;
+                $voluntarioActivo->save();
                 $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
                 if($save){
                     return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));

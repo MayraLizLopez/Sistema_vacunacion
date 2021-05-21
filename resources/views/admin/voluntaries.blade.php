@@ -1001,7 +1001,7 @@
                 $('#modalEditarHoras').modal('hide');
                 Swal.fire({
                     title: '¡Error!',
-                    text: 'El voluntario no se encuentra en una jornada',
+                    text: 'El voluntario no se encuentra en una jornada o no ha aceptado la jornada por correo electrónico',
                     icon: 'error',
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'Aceptar'
