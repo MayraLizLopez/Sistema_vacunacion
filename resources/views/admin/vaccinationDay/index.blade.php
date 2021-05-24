@@ -940,18 +940,33 @@
             });
         }
 
-        function getLastJornada(){
+        function getJornadaDetailForEmails(id_jornada){
             $.ajax({
-                url: "vaccinationDay/getLastJornada/",
+                url: "vaccinationDay/getJornadaDetailForEmails/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    idJornada = parseInt(response.data.id_jornada);
+                    //console.log(response);
+                    let ids_detalle_jornadas = response.data.map(item => item.id_detalle_jornada);
+                    enviarCorreoJornada(ids_detalle_jornadas);
                 },
                 error: function (error, resp, text) {
-                    console.error(error);
+                    console.error(error.responseJSON.message);
                 }
             });
         }
+
+        // function getLastJornada(){
+        //     $.ajax({
+        //         url: "vaccinationDay/getLastJornada/",
+        //         type: "GET",
+        //         success: function (response) {
+        //             idJornada = parseInt(response.data.id_jornada);
+        //         },
+        //         error: function (error, resp, text) {
+        //             console.error(error);
+        //         }
+        //     });
+        // }
 
         function insVaccinationDay(data){
             let filesForm = new FormData();
@@ -1231,6 +1246,9 @@
 
         function operateFormatter(value, row, index) {
             return [
+            '<a class="email mr-2" href="javascript:void(0)" title="Email">',
+                '<i class="far fa-envelope"></i>',
+            '</a>',                
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
                 '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
@@ -1300,6 +1318,10 @@
                     keyboard: false
                 });
                 getJornadaDetail(row.id_jornada);
+            },
+
+            'click .email': function (e, value, row, index) {
+                getJornadaDetailForEmails(row.id_jornada);
             }
         }
 

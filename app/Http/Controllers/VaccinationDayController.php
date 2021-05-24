@@ -430,6 +430,17 @@ class VaccinationDayController extends Controller
         ]);
     }
 
+    public function getJornadaDetailForEmails($id_jornada){
+        $jornadas = DB::table('detalle_jornadas')
+        ->select('id_detalle_jornada')
+        ->where('id_jornada', '=', $id_jornada)
+        ->get();
+    
+        return response()->json([
+            'data' => $jornadas      
+        ]);
+    }
+
     // public function getLastJornada(){
     //     $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
     //     return response()->json([
