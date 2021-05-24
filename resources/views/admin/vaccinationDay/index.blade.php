@@ -397,22 +397,13 @@
           </button>
         </div>
         <div class="modal-body">
-            <div id="toolbar4">
-                <div class="form-inline" role="form">
-                    <button type="button" class="btn btn-primary" id="sendEmails">
-                        <i class="far fa-envelope"></i>
-                        Enviar Correo(s)
-                    </button>
-                </div>
-            </div>
           <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">           
                     <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#toolbar4">
+                    data-sort-order="desc">
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
@@ -640,16 +631,6 @@
                 }
             });
             //#endregion
-
-            $('#sendEmails').on('click', () => {
-                let viewDetailVoluntariesTable = $viewDetailVoluntariesTable.bootstrapTable('getSelections');
-                let idsDetalleJornadas = viewDetailVoluntariesTable.map(element => element.id_detalle_jornada);
-
-                if(validateFields('sendEmail') == false){
-                    enviarCorreoJornada(idsDetalleJornadas); 
-                }
-            });
-
             $('#btnFilterVoluntary').on('click', () => {
                 let institutionsTable = $institutionsTable.bootstrapTable('getSelections');
                 let idsIinstitution = institutionsTable.map(element => element.id_insti);
@@ -922,6 +903,21 @@
             });
         }
 
+        function getJornadaDetailForEmails(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/getJornadaDetailForEmails/" + id_jornada,
+                type: "GET",
+                success: function (response) {
+                    //console.log(response);
+                    let ids_detalle_jornadas = response.data.map(item => item.id_detalle_jornada);
+                    enviarCorreoJornada(ids_detalle_jornadas);
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+
         function getLastJornada(){
             $.ajax({
                 url: "vaccinationDay/getLastJornada/",
@@ -1122,7 +1118,7 @@
             });
         }
 
-        function enviarCorreoJornada(idsDetalleJornadas){
+        function enviarCorreoJornada(ids_detalle_jornadas){
             $.ajax({
                 url: "vaccinationDay/sendemail",
                 type: "POST",
@@ -1130,7 +1126,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    ids_detalle_jornadas: idsDetalleJornadas
+                    ids_detalle_jornadas: ids_detalle_jornadas
                 },
                 beforeSend: () => {
                     Swal.fire({
@@ -1223,6 +1219,9 @@
 
         function operateFormatter(value, row, index) {
             return [
+            '<a class="email mr-2" href="javascript:void(0)" title="Email">',
+                '<i class="far fa-envelope"></i>',
+            '</a>',
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
                 '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
@@ -1268,6 +1267,10 @@
                     keyboard: false
                 });
                 getJornadaDetail(row.id_jornada);
+            },
+
+            'click .email': function (e, value, row, index) {
+                getJornadaDetailForEmails(row.id_jornada);
             }
         }
 

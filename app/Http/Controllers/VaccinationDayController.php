@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Models\Usuario;
 use App\Models\Jornada;
 use App\Models\DetalleJornada;
+use App\Models\Voluntario;
 
 use App\Mail\ConfirmJornada;
 use App\Models\AnexoJornada;
@@ -285,17 +286,43 @@ class VaccinationDayController extends Controller
     }
 
     public function getVoluntariesByInstitution(Request $request){
-        $voluntarios = DB::table('voluntarios')
+        $voluntarios = DB::table('detalle_jornadas')
+        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*',
-         'instituciones.id_municipio AS id_instituciones_municipio',
-         'instituciones.nombre AS nombre_institucion',
-         'municipios.nombre AS nombre_municipio')
-        ->where([['eliminado', '=', 0],
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.horas AS horas'
+        )
+        ->where([['voluntarios.eliminado', '=', 0],
                 ['voluntarios.activo', '=', 0]])
         ->whereIn('voluntarios.id_insti', $request->ids_institution)
+        ->distinct()
         ->get();
+        
+        
+        // DB::table('voluntarios')
+        // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        // ->select('voluntarios.*',
+        //  'instituciones.id_municipio AS id_instituciones_municipio',
+        //  'instituciones.nombre AS nombre_institucion',
+        //  'municipios.nombre AS nombre_municipio')
+        // ->where([['eliminado', '=', 0],
+        //         ['voluntarios.activo', '=', 0]])
+        // ->whereIn('voluntarios.id_insti', $request->ids_institution)
+        // ->get();
+
+
         return response()->json([
             'data' => $voluntarios       
         ]); 
@@ -345,7 +372,8 @@ class VaccinationDayController extends Controller
             'voluntarios.tel AS tel',
             'voluntarios.email AS email',
             'instituciones.nombre AS nombre_institucion',
-            'municipios.nombre AS nombre_municipio'
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.horas AS horas'
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
         ->where('detalle_jornadas.correo_enviado', '=', 0)
@@ -402,6 +430,17 @@ class VaccinationDayController extends Controller
         ]);
     }
 
+    public function getJornadaDetailForEmails($id_jornada){
+        $jornadas = DB::table('detalle_jornadas')
+        ->select('id_detalle_jornada')
+        ->where('id_jornada', '=', $id_jornada)
+        ->get();
+
+        return response()->json([
+            'data' => $jornadas      
+        ]);
+    }
+
     // public function getLastJornada(){
     //     $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
     //     return response()->json([
@@ -451,7 +490,7 @@ class VaccinationDayController extends Controller
         if(count($request->ids_detalle_jornadas) != 0){  
             $detalle_jornada = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[0])->first();
             $jornada = DB::table('jornadas')->where('id_jornada', '=', $detalle_jornada->id_jornada)->first();
-            // $anexos = DB::table('anexo_jornadas')->select('nombre', 'anexo', 'tipo')->where('id_jornada', '=', $detalle_jornada->id_jornada)->distinct()->get();
+            //$anexos = DB::table('anexo_jornadas')->select('nombre', 'anexo', 'tipo')->where('id_jornada', '=', $detalle_jornada->id_jornada)->distinct()->get();
 
             for ($j = 0; $j < count($request->ids_detalle_jornadas); $j++) {
                 $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[$j])->first();
@@ -478,8 +517,8 @@ class VaccinationDayController extends Controller
                     'id_voluntario' => $voluntario->id_voluntario, 
                     'id_jornada' => $detalle_jornadas->id_jornada,
                     'mensaje' => $jornada->mensaje,
-                    'sedes' => $sedes
-                    // 'anexos' => $anexos
+                    'sedes' => $sedes,
+                    //'anexos' => $anexos
                 ];
                 
                 Mail::to($voluntario->email)->send(new ConfirmJornada($data));
@@ -503,16 +542,22 @@ class VaccinationDayController extends Controller
      */
     public static function rechazarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
-        $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
-        for ($i=0; $i<count($detalles); $i++){
-            $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
-            $jornada->activo = false;
-            $save = $jornada->save();   
-        }
-        $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
-        if($save){
+        if($detallejornada->horas == 0){
+            $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
+            for ($i=0; $i<count($detalles); $i++){
+                $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
+                $jornada->activo = false;
+                $save = $jornada->save();   
+            }
+            $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+            if($save){
+                return view('volunteers.rechazarJornada', compact('voluntario'));
+            }
+        }else{
+            $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
             return view('volunteers.rechazarJornada', compact('voluntario'));
         }
+        
     }
 
     /**
@@ -521,22 +566,32 @@ class VaccinationDayController extends Controller
      */
     public static function aceptarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
-        if($detallejornada->activo == null){
-            $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
-            for ($i=0; $i<count($detalles); $i++){
-                $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
-                $jornada->activo = false;
-                $save = $jornada->save();   
+        if($detallejornada->horas == 0){
+            if($detallejornada->activo == null){
+                $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
+                for ($i=0; $i<count($detalles); $i++){
+                    $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
+                    $jornada->activo = false;
+                    $save = $jornada->save();   
+                }
+                $jornada = DetalleJornada::findOrFail($detallejornada->id_detalle_jornada);
+                $jornada->activo = true;
+                $save = $jornada->save();
+                $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
+                $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+                $voluntarioActivo = Voluntario::findOrFail($detallejornada->id_voluntario);
+                $voluntarioActivo->activo = true;
+                $voluntarioActivo->save();
+                $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
+                if($save){
+                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
+                }
             }
-            $jornada = DetalleJornada::findOrFail($detallejornada->id_detalle_jornada);
-            $jornada->activo = true;
-            $save = $jornada->save();
-            $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
+        }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
             $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
-            if($save){
-                return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
-            }
+            $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
+            return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
         }
     }
 }
