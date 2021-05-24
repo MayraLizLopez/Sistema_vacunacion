@@ -414,22 +414,13 @@
           </button>
         </div>
         <div class="modal-body">
-            <div id="toolbar4">
-                <div class="form-inline" role="form">
-                    <button type="button" class="btn btn-primary" id="sendEmails">
-                        <i class="far fa-envelope"></i>
-                        Enviar Correo(s)
-                    </button>
-                </div>
-            </div>
           <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">           
                     <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#toolbar4">
+                    data-sort-order="desc">
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
@@ -657,16 +648,6 @@
                 }
             });
             //#endregion
-
-            $('#sendEmails').on('click', () => {
-                let viewDetailVoluntariesTable = $viewDetailVoluntariesTable.bootstrapTable('getSelections');
-                let idsDetalleJornadas = viewDetailVoluntariesTable.map(element => element.id_detalle_jornada);
-
-                if(validateFields('sendEmail') == false){
-                    enviarCorreoJornada(idsDetalleJornadas); 
-                }
-            });
-
             $('#btnFilterVoluntary').on('click', () => {
                 let institutionsTable = $institutionsTable.bootstrapTable('getSelections');
                 let idsIinstitution = institutionsTable.map(element => element.id_insti);
