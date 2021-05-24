@@ -176,7 +176,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="nameVoluntary">Telefóno del encargado</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="tel_encargado" placeholder="Teléfono"/>
+                            <input type="text" class="form-control" id="nameVoluntary" data-mask="000 000 0000" name="tel_encargado" placeholder="Teléfono"/>
                         </div>
                     </div>
                     <div class="col-md-4">

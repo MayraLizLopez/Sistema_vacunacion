@@ -177,7 +177,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="nameVoluntary">Telefóno del encargado</label>
-                            <input type="text" class="form-control" id="nameVoluntary" name="tel_encargado" placeholder="Teléfono" value="{{ $sede->tel_encargado }}"/>
+                            <input type="text" class="form-control" id="nameVoluntary" name="tel_encargado" placeholder="Teléfono" data-mask="000 000 0000" value="{{ $sede->tel_encargado }}"/>
                         </div>
                     </div>
                     <div class="col-md-4">
