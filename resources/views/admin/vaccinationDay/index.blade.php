@@ -973,8 +973,8 @@
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                         allowEnterKey: false,
-                        confirmButtonText: 'Aceptar',
-                        denyButtonText: 'Cancelar',
+                        confirmButtonText: 'Sí',
+                        denyButtonText: 'No',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 idJornada = parseInt(response.id_jornada);
