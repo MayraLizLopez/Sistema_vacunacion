@@ -142,7 +142,7 @@
                   </div>
             </div>
           </div>
-          {{-- <div class="row">
+          <div class="row">
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="custom-file">
@@ -152,7 +152,7 @@
                     </div>
                   </div>
             </div>
-          </div> --}}
+          </div>
           <div class="row mb-3 divSedesTable">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -295,7 +295,7 @@
                   </div>
             </div>
           </div>
-          {{-- <div class="row">
+          <div class="row">
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="custom-file">
@@ -305,7 +305,7 @@
                     </div>
                   </div>
             </div>
-          </div> --}}
+          </div>
           <div class="row mb-3">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -926,8 +926,17 @@
                 url: "vaccinationDay/getJornadaDetailForEmails/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    //console.log(response);
-                    let ids_detalle_jornadas = response.data.map(item => item.id_detalle_jornada);
+                    let jornadaData = Array.from(new Set(response.data.map(x => x.id_voluntario))).
+                    map(id_voluntario => {
+                        return {
+                            id_voluntario: id_voluntario,
+                            id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada
+                        };
+                    });
+
+                    //console.log(jornadaData);
+
+                    let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
                     enviarCorreoJornada(ids_detalle_jornadas);
                 },
                 error: function (error, resp, text) {
