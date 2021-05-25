@@ -142,7 +142,7 @@
                   </div>
             </div>
           </div>
-          {{-- <div class="row">
+          <div class="row">
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="custom-file">
@@ -152,7 +152,7 @@
                     </div>
                   </div>
             </div>
-          </div> --}}
+          </div>
           <div class="row mb-3 divSedesTable">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -295,7 +295,7 @@
                   </div>
             </div>
           </div>
-          {{-- <div class="row">
+          <div class="row">
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="custom-file">
@@ -305,7 +305,7 @@
                     </div>
                   </div>
             </div>
-          </div> --}}
+          </div>
           <div class="row mb-3">
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -414,22 +414,13 @@
           </button>
         </div>
         <div class="modal-body">
-            <div id="toolbar4">
-                <div class="form-inline" role="form">
-                    <button type="button" class="btn btn-primary" id="sendEmails">
-                        <i class="far fa-envelope"></i>
-                        Enviar Correo(s)
-                    </button>
-                </div>
-            </div>
           <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">           
                     <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="true"
                     data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#toolbar4">
+                    data-sort-order="desc">
                         <thead>
                           <tr>
                             <th data-checkbox="true"></th>
@@ -657,16 +648,6 @@
                 }
             });
             //#endregion
-
-            $('#sendEmails').on('click', () => {
-                let viewDetailVoluntariesTable = $viewDetailVoluntariesTable.bootstrapTable('getSelections');
-                let idsDetalleJornadas = viewDetailVoluntariesTable.map(element => element.id_detalle_jornada);
-
-                if(validateFields('sendEmail') == false){
-                    enviarCorreoJornada(idsDetalleJornadas); 
-                }
-            });
-
             $('#btnFilterVoluntary').on('click', () => {
                 let institutionsTable = $institutionsTable.bootstrapTable('getSelections');
                 let idsIinstitution = institutionsTable.map(element => element.id_insti);
@@ -940,18 +921,42 @@
             });
         }
 
-        function getLastJornada(){
+        function getJornadaDetailForEmails(id_jornada){
             $.ajax({
-                url: "vaccinationDay/getLastJornada/",
+                url: "vaccinationDay/getJornadaDetailForEmails/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    idJornada = parseInt(response.data.id_jornada);
+                    let jornadaData = Array.from(new Set(response.data.map(x => x.id_voluntario))).
+                    map(id_voluntario => {
+                        return {
+                            id_voluntario: id_voluntario,
+                            id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada
+                        };
+                    });
+
+                    //console.log(jornadaData);
+
+                    let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
+                    enviarCorreoJornada(ids_detalle_jornadas);
                 },
                 error: function (error, resp, text) {
-                    console.error(error);
+                    console.error(error.responseJSON.message);
                 }
             });
         }
+
+        // function getLastJornada(){
+        //     $.ajax({
+        //         url: "vaccinationDay/getLastJornada/",
+        //         type: "GET",
+        //         success: function (response) {
+        //             idJornada = parseInt(response.data.id_jornada);
+        //         },
+        //         error: function (error, resp, text) {
+        //             console.error(error);
+        //         }
+        //     });
+        // }
 
         function insVaccinationDay(data){
             let filesForm = new FormData();
@@ -983,23 +988,13 @@
                     }
 
                     Swal.fire({
-                        icon: 'success',
                         title: 'Hecho',
-                        text: response.message + '\n¿Desea realizar cambios antes de salir?',
+                        text: response.message,
+                        icon: 'success',
                         confirmButtonColor: '#3085d6',
-                        showDenyButton: true,
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowEnterKey: false,
-                        confirmButtonText: 'Sí',
-                        denyButtonText: 'No',
+                        confirmButtonText: 'Aceptar'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                idJornada = parseInt(response.id_jornada);
-                                //getLastJornada();   
-                            } else if(result.isDenied){
-                                idJornada = 0;
-                                $('#modalCreateVaccinationDay').modal('hide');
                                 location.reload();
                             }
                         });
@@ -1231,6 +1226,9 @@
 
         function operateFormatter(value, row, index) {
             return [
+            '<a class="email mr-2" href="javascript:void(0)" title="Email">',
+                '<i class="far fa-envelope"></i>',
+            '</a>',                
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
                 '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
@@ -1300,6 +1298,10 @@
                     keyboard: false
                 });
                 getJornadaDetail(row.id_jornada);
+            },
+
+            'click .email': function (e, value, row, index) {
+                getJornadaDetailForEmails(row.id_jornada);
             }
         }
 

@@ -20,6 +20,7 @@ class ConfirmJornada extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
+        //$archivo = "{{ asset('public/assets/images/Vacio.pdf') }}";
     }
 
     /**
@@ -29,9 +30,17 @@ class ConfirmJornada extends Mailable
      */
     public function build()
     {
-        return $this->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco')
-                    ->view('email.ConfirmJornada')
-                    ->subject('¡Felicidades has sido seleccionado como voluntario!')
-                    ->with($this->data);
+        $email = $this;
+
+        foreach($email->data['anexos'] as $anexos){
+            $email->attachData(base64_decode($anexos->anexo), $anexos->nombre);
+        }
+
+        $email->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco');
+        $email->view('email.ConfirmJornada');
+        $email->subject('¡Felicidades has sido seleccionado como voluntario!');
+        $email->with($email->data);
+        
+        return $email;
     }
 }
