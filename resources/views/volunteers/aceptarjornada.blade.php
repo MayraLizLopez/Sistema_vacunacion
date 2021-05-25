@@ -29,16 +29,37 @@
                                 <div class="card-body">
                                     <div class="content">
                                         <div class="row">
-                                            <h4>{{ $mensaje_jornada->mensaje}}</h4>
-                                            <h4>Seleccionaste participar en la sede: </h4>
-                                            <div style="color:#54A583; font-weight: bold; font-size: 24px; margin-top: 15px;">{{ $sede->nombre }}</div>
-                                            <p class="card-text" style="color: #7B868C; font-size: 24px;">{{ $sede->direccion }} 
-                                            @if(!($sede->colonia == null))
-                                                colonia {{ $sede->colonia }}
-                                            @endif
-                                            </p>
-                                        
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <h4>{{ $mensaje_jornada->mensaje}}</h4>
+                                                    <h4>Seleccionaste participar en la sede: </h3>
+                                                    <h4 class="card-text" style="color:#54A583; font-weight: bold; font-size: 24px;">{{ $sede->nombre }}</h4>
+                                                    <p class="card-text" style="color: #7B868C; font-size: 24px;">Dirección: {{ $sede->direccion }} 
+                                                    @if(!($sede->colonia == null))
+                                                        colonia {{ $sede->colonia }}
+                                                    @endif
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
+                                        <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="emailVoluntary">Seleciona tu horario de prefernecia para esta jornada:</label>
+                                                            <select class="form-control" id="turno" name="nombre_enlace">
+                                                            <option value="Completo">Completo</option>
+                                                            <option value="Matutino">Matutino (hasta las 12pm)</option>
+                                                            <option value="Vespertino">Vespertino (12pm en adelante)</option>
+                                                        </select>
+                                                        <span class="text-danger">@error('Turno'){{ 'Seleccione un turno' }} @enderror </span>
+                                                        <div class="form-group">
+                                                            <center>
+                                                                <button style="margin-right: 16px; width: 184px; font-family: montserrat; font-weight: bold; margin-top: 10px;" class="btn btn-success" id="botonEnviar" type="submit">Guardar</button>
+                                                            </center>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -51,4 +72,42 @@
 </div>
 
 
+@endsection
+@section('scripts')
+<script>
+
+    $('#botonEnviar').on('click', () => {
+        guardarTurno();
+    });
+
+
+    function guardarTurno(){
+        $.ajax({
+            url: "guardar/" + {!! json_encode($uuid) !!} + "/" + document.getElementById("turno").value,
+            type: "GET",
+            success: function (response) {
+                if(response.isOk == true){
+                    Swal.fire({
+                    title: 'Hecho',
+                    text: response.message,
+                    icon: 'success',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                    }).then((result) => {
+                    });
+                }else{
+                    Swal.fire({
+                        title: 'Error',
+                        text: response.message,
+                        icon: 'error',
+                        showCancelButton: true
+                    });
+                } 
+            },
+            error: function (error, resp, text) {
+                console.error(error);
+            }
+        });
+     }
+</script>
 @endsection
