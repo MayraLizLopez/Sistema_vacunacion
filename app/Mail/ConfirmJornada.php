@@ -20,7 +20,6 @@ class ConfirmJornada extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
-        $archivo = "{{ asset('public/assets/images/Vacio.pdf') }}";
     }
 
     /**
@@ -32,7 +31,6 @@ class ConfirmJornada extends Mailable
     {
         return $this->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco')
                     ->view('email.ConfirmJornada')
-                    //->attach("{{ asset('public/assets/images/Vacio.pdf') }}")
                     ->subject('¡Felicidades has sido seleccionado como voluntario!')
                     ->with($this->data);
     }
