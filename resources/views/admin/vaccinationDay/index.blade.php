@@ -56,47 +56,116 @@
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Jornada de vacunación</h1>
 <p class="mb-4">La siguiente vista muestra la tabla de todas las jornadas activas, así como la creación y edición de las mismas.</p>
 
-<div id="toolbar1">
-    <div class="form-inline" role="form">
-        <button type="button" class="btn btn-primary" id="createVaccinationDay">
-        <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
-            Registrar jornada
-        </button>
-    </div>
-    {{-- <a href="{{ route('downloadFiles') }}">Descargar archivos</a> --}}
-</div>
 
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-body">
-        <div class="table-responsive">           
-            <table id="vaccinationDayTable" class="table table-striped table-bordered"
-            data-pagination="true"
-            data-single-select="true"
-            data-click-to-select="true"
-            data-search="true"
-            data-page-size="5"
-            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
-            data-sort-name="nombre"
-            data-sort-order="desc"
-            data-toolbar="#toolbar1">
-                <thead>
-                  <tr>
-                    <th class="d-none" data-radio="true"></th>
-                    <th class="d-none" data-field="id_jornada">ID</th>    
-                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
-                    <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
-                    <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
-                    <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
-                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                    <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
-                    <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
-                  </tr>
-                </thead>
-            </table>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inicio</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Voluntarios aceptados</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div id="toolbar1">
+            <div class="form-inline" role="form">
+                <button type="button" class="btn btn-primary" id="createVaccinationDay">
+                <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
+                    Registrar jornada
+                </button>
+            </div>
+        </div>
+        
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="table-responsive">           
+                    <table id="vaccinationDayTable" class="table table-striped table-bordered"
+                    data-pagination="true"
+                    data-single-select="true"
+                    data-click-to-select="true"
+                    data-search="true"
+                    data-page-size="5"
+                    data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+                    data-sort-name="nombre"
+                    data-sort-order="desc"
+                    data-toolbar="#toolbar1">
+                        <thead>
+                          <tr>
+                            <th class="d-none" data-radio="true"></th>
+                            <th class="d-none" data-field="id_jornada">ID</th>    
+                            <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                            <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
+                            <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
+                            <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
+                            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                            <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
+                            <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                          </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div id="voluntariesAcceptedToolbar">
+                <div class="form-inline" role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Folio" id="inSearchByFolio">
+                    </div>
+
+                    <div class="form-group ml-1">
+                        <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
+                    </div>
+
+                    <div class="form-group ml-1">
+                        <button type="button" class="btn btn-primary" id="btnRejectEmail" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
+                            <i class="far fa-envelope"></i>
+                            <span class="item-label">Cancelación</span>
+                        </button>      
+                    </div>
+                </div>
+            </div>
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">           
+                        <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
+                        data-pagination="true"
+                        data-search-selector="#inSearchCustom"
+                        data-page-size="5"
+                        data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+                        data-sort-name="nombre"
+                        data-sort-order="desc"
+                        data-toolbar="#voluntariesAcceptedToolbar">
+                            <thead>
+                              <tr>
+                                <th data-checkbox="true"></th>
+                                <th class="d-none" data-field="id_jornada">ID Jornada</th>
+                                <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                                <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                                <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
+                                <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
+                                <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                                <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                                <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
+                                <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                                <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                {{-- <th data-field="horas" data-sortable="true" data-halign="center" data-align="center" data-formatter="statusFormater">Horas</th> --}}
+                              </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
 
 <div id="modalCreateVaccinationDay" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -451,6 +520,7 @@
     <script>
         let $vaccinationDayTable = $('#vaccinationDayTable');
         let $voluntariesTable = $('#voluntariesTable');
+        let $voluntariesAcceptedTable = $('#voluntariesAcceptedTable');
         let $viewDetailVoluntariesTable = $('#viewDetailVoluntariesTable');
         let $editVoluntariesTable = $('#editVoluntariesTable');
         let $institutionsTable = $('#institutionsTable');
@@ -462,6 +532,8 @@
         $(document).ready(()=>{
             getAllJornadas();
             startEvents();
+
+            $voluntariesAcceptedTable.bootstrapTable({data: []});
         });
 
         function defaultValues(actionType){
@@ -477,11 +549,19 @@
         }
 
         function startEvents(){
+            $('#inSearchByFolio').on('keypress', (event) => {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    if($('#inSearchByFolio').val().length > 0){
+                        getAllVolunteersAccepted($('#inSearchByFolio').val());
+                    }                
+                }               
+            });
+
             $('#inFile').on('change', (e) => {
-                //get the file name
                 let fileNames = e.target.files;
                 let names = [];
-                //replace the "Choose a file" label
+
                 for(let i = 0; i < fileNames.length; i++){
                     names.push(fileNames[i].name);
                 }
@@ -491,10 +571,9 @@
 
 
             $('#editInFile').on('change', (e) => {
-                //get the file name
                 let fileNames = e.target.files;
                 let names = [];
-                //replace the "Choose a file" label
+
                 for(let i = 0; i < fileNames.length; i++){
                     names.push(fileNames[i].name);
                 }
@@ -663,6 +742,12 @@
 
                 getVoluntariesByInstitution(idsIinstitution, 'edit');
             });
+
+            $('#btnRejectEmail').on('click', () => {
+                let idJornada = $voluntariesAcceptedTable.bootstrapTable('getSelections')[0].id_jornada;
+                // console.log(idJornada);
+                enviarCorreoCancelacion(idJornada);
+            });
         }
 
         function getAllTowns(actionType){
@@ -726,18 +811,23 @@
             });
         }
 
-        function getAllVoluntanties(){      
+        function getAllVolunteersAccepted(folio){
             $.ajax({
-                url: "vaccinationDay/getAllVoluntanties/",
+                url: "vaccinationDay/getAllVolunteersAccepted/" + folio,
                 type: "GET",
                 success: function (response) {
-                    //console.log(response);
-                    $voluntariesTable.bootstrapTable({data: response.data});
+                    // console.log(response.data);
+                    if(response.data != []){
+                        $voluntariesAcceptedTable.bootstrapTable('destroy');
+                        $voluntariesAcceptedTable.bootstrapTable({data: response.data});
+                    }else{
+                        $voluntariesAcceptedTable.bootstrapTable({data: []});
+                    }
                 },
                 error: function (error, resp, text) {
                     console.error(error);
                 }
-            });            
+            });  
         }
 
         function getVoluntariesByInstitution(ids_institution, actionType){
@@ -753,13 +843,29 @@
                 success: function (response) {
                     // console.log(response);
                     if(response.data.length > 0){
+
+                        let data = response.data.map(item => {
+                            return {
+                                id_voluntario: item.id_voluntario,
+                                nombre: item.nombre,
+                                ape_pat: item.ape_pat,
+                                ape_mat: item.ape_mat,
+                                email: item.email,
+                                tel: item.tel,
+                                curp: item.curp,
+                                nombre_municipio: item.nombre_municipio,
+                                nombre_institucion: item.nombre_institucion,
+                                horas: item.horas == null ? "0" : item.horas
+                            }
+                        });
+
                         if(actionType == 'create'){
                             $voluntariesTable.bootstrapTable('destroy');
-                            $voluntariesTable.bootstrapTable({data: response.data});
+                            $voluntariesTable.bootstrapTable({data: data});
                         } 
                         else if(actionType == 'edit'){
                             $editVoluntariesTable.bootstrapTable('destroy');
-                            $editVoluntariesTable.bootstrapTable({data: response.data});
+                            $editVoluntariesTable.bootstrapTable({data: data});
                         }
                     }
                 },
@@ -832,7 +938,7 @@
                 url: "vaccinationDay/getJornadaForVoluntaries/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    //console.log(response.data);
+                    // console.log(response.data);
 
                     let voluntaryData = Array.from(new Set(response.data.map(x => x.id_voluntario))).
                     map(id_voluntario => {
@@ -933,9 +1039,7 @@
                             id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada
                         };
                     });
-
-                    //console.log(jornadaData);
-
+                    //console.log(jornadaData);¿
                     let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
                     enviarCorreoJornada(ids_detalle_jornadas);
                 },
@@ -944,19 +1048,6 @@
                 }
             });
         }
-
-        // function getLastJornada(){
-        //     $.ajax({
-        //         url: "vaccinationDay/getLastJornada/",
-        //         type: "GET",
-        //         success: function (response) {
-        //             idJornada = parseInt(response.data.id_jornada);
-        //         },
-        //         error: function (error, resp, text) {
-        //             console.error(error);
-        //         }
-        //     });
-        // }
 
         function insVaccinationDay(data){
             let filesForm = new FormData();
@@ -1134,6 +1225,50 @@
                 },
                 data: {
                     ids_detalle_jornadas: idsDetalleJornadas
+                },
+                beforeSend: () => {
+                    Swal.fire({
+                        showConfirmButton: false,
+                        imageUrl: "{{ asset('public/assets/images/loading.png') }}",
+                        title: 'Por favor espere.',
+                        text: 'enviando correo(s)',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                    });  
+                },
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Hecho',
+                        text: response.mensaje,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    //console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function enviarCorreoCancelacion(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/sendrejectemail",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id_jornada: id_jornada
                 },
                 beforeSend: () => {
                     Swal.fire({

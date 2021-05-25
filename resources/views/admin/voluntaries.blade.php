@@ -123,7 +123,7 @@
         <div class="form-group ml-1">
             <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
             <img class="mx-2" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 20px;"/>
-                <span class="item-label">Limpiar Filtros</span>
+                <span class="item-label"> Limpiar Filtros</span>
             </button>      
         </div>
 
