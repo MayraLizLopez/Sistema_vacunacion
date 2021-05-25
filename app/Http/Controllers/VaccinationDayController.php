@@ -608,6 +608,7 @@ class VaccinationDayController extends Controller
             for ($i=0; $i<count($detalles); $i++){
                 $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
                 $jornada->activo = false;
+                $jornada->turno = null;
                 $save = $jornada->save();   
             }
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
@@ -633,26 +634,48 @@ class VaccinationDayController extends Controller
                 for ($i=0; $i<count($detalles); $i++){
                     $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
                     $jornada->activo = false;
+                    $jornada->turno = null;
                     $save = $jornada->save();   
                 }
                 $jornada = DetalleJornada::findOrFail($detallejornada->id_detalle_jornada);
                 $jornada->activo = true;
                 $save = $jornada->save();
-                $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
+                $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
                 $voluntarioActivo = Voluntario::findOrFail($detallejornada->id_voluntario);
                 $voluntarioActivo->activo = true;
                 $voluntarioActivo->save();
                 $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
                 if($save){
-                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
+                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
                 }
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
             $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
             $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
-            return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
+            return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+        }
+    }
+
+    /**
+     * Método que permite al voluntario seleccionar el turno de su preferencia para la jornada.
+     */
+    public static function guardarTurno($uuid, $turno){
+        $detalle = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+        $detallejornada = DetalleJornada::findOrFail($detalle->id_detalle_jornada);
+        $detallejornada->turno = $turno;
+        $save = $detallejornada->save();
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Elegiste el turno '.$turno.', este se guardo exitosamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => true,
+                'message' => 'Error al intentar guardar el turno'       
+            ]); 
         }
     }
 }
