@@ -147,6 +147,7 @@
                               <tr>
                                 <th data-checkbox="true"></th>
                                 <th class="d-none" data-field="id_jornada">ID Jornada</th>
+                                <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
                                 <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
                                 <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                                 <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
@@ -513,6 +514,33 @@
       </div>
     </div>
   </div>
+
+  <div id="modalRejectEmail" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Mensaje</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="rejectMessage">Mensaje para el voluntario</label>
+                    <textarea class="form-control" id="rejectMessage" rows="3"></textarea>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer mr-auto">
+            <button type="button" class="btn btn-success botonEnviar" id="btnSendRejecEmail">Enviar</button>       
+        </div>
+      </div>
+    </div>
+  </div>
+
 @endsection
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
@@ -744,9 +772,18 @@
             });
 
             $('#btnRejectEmail').on('click', () => {
+                $('#modalRejectEmail').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            });
+
+            $('#btnSendRejecEmail').on('click', () => {
                 let idJornada = $voluntariesAcceptedTable.bootstrapTable('getSelections')[0].id_jornada;
+                let idsDetalleJornadas = $voluntariesAcceptedTable.bootstrapTable('getSelections').map(element => element.id_detalle_jornada);
+                let mensaje = $('#rejectMessage').val();
                 // console.log(idJornada);
-                enviarCorreoCancelacion(idJornada);
+                enviarCorreoCancelacion(idJornada, idsDetalleJornadas, mensaje);
             });
         }
 
@@ -1260,7 +1297,7 @@
             });
         }
 
-        function enviarCorreoCancelacion(id_jornada){
+        function enviarCorreoCancelacion(id_jornada, idsDetalleJornadas, mensaje){
             $.ajax({
                 url: "vaccinationDay/sendrejectemail",
                 type: "POST",
@@ -1268,7 +1305,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    id_jornada: id_jornada
+                    id_jornada: id_jornada,
+                    mensaje: mensaje,
+                    ids_detalle_jornada: idsDetalleJornadas
                 },
                 beforeSend: () => {
                     Swal.fire({

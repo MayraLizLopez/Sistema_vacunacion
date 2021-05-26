@@ -438,6 +438,7 @@ class VaccinationDayController extends Controller
         $voluntarios = DB::table('detalle_jornadas')
         ->select(
             'detalle_jornadas.id_jornada AS id_jornada',
+            'detalle_jornadas.id_detalle_jornada AS id_detalle_jornada',
             'jornadas.folio AS folio',
             'voluntarios.nombre AS nombre',
             'voluntarios.ape_pat AS ape_pat',
@@ -565,29 +566,17 @@ class VaccinationDayController extends Controller
     }
 
     public function enviarCorreoCancelacionJornada(Request $request){ 
-        $detalle_jornada = DB::table('detalle_jornadas')->select('id_detalle_jornada')->where('id_jornada', '=', $request->id_jornada)->get();
         $jornada = DB::table('jornadas')->where('id_jornada', '=', $request->id_jornada)->first();
 
-        for ($j = 0; $j < count($detalle_jornada); $j++) {
-            $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', $detalle_jornada[$j])->first();
+        for ($j = 0; $j < count($request->ids_detalle_jornada); $j++) {
+            $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornada[$j])->first();
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detalle_jornadas->id_voluntario)->first();
-            //$sedes = DB::table('detalle_jornadas')->where('id_voluntario', '=', $voluntario->id_voluntario)->where('id_jornada', '=', $detalle_jornadas->id_jornada)->get();
-            
-            $sedes = DB::table('detalle_jornadas')
-            ->join('sedes', 'detalle_jornadas.id_sede', '=', 'sedes.id_sede')
-            ->select(
-                'sedes.id_sede as id_sede',
-                'sedes.nombre AS nombre_sede'
-            )
-            ->where('detalle_jornadas.id_jornada', '=',  $request->id_jornada)
-            ->distinct()
-            ->get();
 
             $data = [
                 'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
                 'fecha_inicio' => $jornada->fecha_inicio,
                 'fecha_fin' => $jornada->fecha_fin,
-                'sedes' => $sedes
+                'mensaje' => $request->mensaje
             ];
             
             Mail::to($voluntario->email)->send(new CancelarJornada($data));

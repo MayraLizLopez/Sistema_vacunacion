@@ -20,7 +20,6 @@ class CancelarJornada extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
-        //$archivo = "{{ asset('public/assets/images/Vacio.pdf') }}";
     }
 
     /**
@@ -32,7 +31,8 @@ class CancelarJornada extends Mailable
     {
         $email = $this;
         $email->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco');
-        $email->view('email.CancelarJornada');
+        $email->view('email.CancelarJornada', $email->data);
+        $email->subject('¡SEDES CANCELADAS!');
         $email->with($email->data);
         
         return $email;

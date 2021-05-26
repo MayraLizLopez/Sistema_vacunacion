@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> ¡Gracias por ser voluntario(a)! </title>
+    <title> ¡Aviso importante! </title>
     <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/site.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/sb-admin-2.min.css') }}">
@@ -28,14 +28,11 @@
     <body>
         <center>
             <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="max-width:30%;" />
-            <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡{{ $nombre }} JORNADA CANCELADA!</h1>
+            <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡{{ $nombre }}. Algunas de las sedes en las que participa fueron canceladas!</h1>
         </center>
 
-        <h2 style="color: #67737A; font-size:30px; font-weight: bold;">Mensaje: </h2>
-        <h2 style="color: #67737A; font-size:30px; font-weight: bold;"> Le informamos que la jornada de {{ $fecha_inicio }} al {{ $fecha_fin }} en la(s) sede(s)
-            @foreach($sedes as $sede){{ $sede->nombre }}, @endforeach()   
-            ha sido cancelada. Le invitamos a estar atendo a proximas convocatorias.  
-        </h2>
+        <h2 style="color: #67737A; font-size:30px; font-weight: bold;">Jornada del {{ $fecha_inicio }} al {{ $fecha_fin }}</h2>
+        <h2 style="color: #67737A; font-size:30px; font-weight: bold;">{{ $mensaje }} </h2>
 
     </body>
     <script src="{{ asset('public/js/jquery.slim.min.js') }}"></script>
