@@ -34,6 +34,7 @@
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">Mensaje: </h2>
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">{{ $mensaje }} </h2>
         <p style="color: #67737A; font-size:24px;">Para continuar el proceso por favor da click en el botón "Aceptar" para confirmar tu participación en la sede de tu preferencia. Si no puedes participar por favor da click en "Rechazar". </p>
+        <p style="color: #67737A; font-size:24px;">Si por error fuiste seleccionado para una jornada que no es en tu municipio, por favor ignora este correo.</p>
         
         <center>
             @foreach($sedes as $sede)
