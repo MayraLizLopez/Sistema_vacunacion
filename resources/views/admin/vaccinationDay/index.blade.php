@@ -734,7 +734,7 @@
                     ids_institution: ids_institution
                 },
                 success: function (response) {
-                    //console.log(response);
+                    // console.log(response);
                     if(response.data.length > 0){
                         if(actionType == 'create'){
                             $voluntariesTable.bootstrapTable('destroy');
