@@ -16,6 +16,11 @@
             src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
         }
 
+        .horas {
+            max-width: 800px;
+            margin: 1.75rem auto;
+        }
+
         #button-largo{
             width: 184px;
             font-family: montserrat;
@@ -157,6 +162,7 @@
                                 <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                                 <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                                 <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
                                 {{-- <th data-field="horas" data-sortable="true" data-halign="center" data-align="center" data-formatter="statusFormater">Horas</th> --}}
                               </tr>
                             </thead>
@@ -474,47 +480,6 @@
     </div>
   </div>
 
-<div id="modalViewJornadaDetail" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Datos de los Voluntarios</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">           
-                    <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
-                    data-pagination="true"
-                    data-sort-name="nombre"
-                    data-sort-order="desc">
-                        <thead>
-                          <tr>
-                            <th data-checkbox="true"></th>
-                            <th class="d-none" data-field="id_voluntario">ID</th>
-                            <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
-                            <th class="d-none" data-field="id_insti">ID Institución</th>
-                            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                            <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
-                            <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                            <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                            <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                          </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="modalRejectEmail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -540,6 +505,62 @@
       </div>
     </div>
   </div>
+
+  <div id="modalEditarHoras" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog horas modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Editar las horas del voluntario</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nombre_completo">Nombre del voluntario</label>
+                            <input type="text" class="form-control" id="nombre_completo" name="nombre_completo"/>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="emailVoluntary">Nombre de la institución</label>
+                            <input type="text" class="form-control" id="nombre_institucion" name="nombre_institucion"/>
+                        </div>
+                    </div> 
+                </div>  
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <img class="mx-2" src="{{ asset('public/assets/images/mas.svg')}}" style="width: 50px;" onclick="sumar2()"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control mx-2" id="horas2" name="institucion" placeholder="" min="0"/>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <img class="mx-2" src="{{ asset('public/assets/images/menos.svg')}}" style="width: 50px;" onclick="restar2()"/>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <label for="num_voluntarios">Total de horas acumuladas</label>
+                            <input type="text" class="form-control" id="total_horas" name="total_horas"/>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+            <div class="modal-footer mr-auto">
+                <button id="agregarHoras" class="btn btn-success botonEnviar" type="submit">Guardar</button>
+                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 @section('scripts')
@@ -772,10 +793,22 @@
             });
 
             $('#btnRejectEmail').on('click', () => {
-                $('#modalRejectEmail').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
+                let voluntariesAcceptedTable = $voluntariesAcceptedTable.bootstrapTable('getSelections');
+
+                if(voluntariesAcceptedTable.length > 0){
+                    $('#modalRejectEmail').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Advertencia',
+                        text: 'Primero debe elegir todos los voluntarios',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                    });
+                }
             });
 
             $('#btnSendRejecEmail').on('click', () => {
@@ -785,6 +818,26 @@
                 // console.log(idJornada);
                 enviarCorreoCancelacion(idJornada, idsDetalleJornadas, mensaje);
             });
+
+
+            $('#agregarHoras').on('click', () => {
+                if(bandera == true){
+                    if(document.getElementById("horas2").value !== 0){
+                        var horas = document.getElementById("horas2").value;
+                        difhoras = horas - total_horas;
+                        editarHoras(id_volun, difhoras); 
+                    }
+                }else{
+                    $('#modalEditarHoras').modal('hide');
+                    Swal.fire({
+                        title: '¡Error!',
+                        text: 'El voluntario no se encuentra en una jornada o no ha aceptado la jornada por correo electrónico',
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
+                }
+            });     
         }
 
         function getAllTowns(actionType){
@@ -1031,38 +1084,6 @@
             });
         }
         //#endregion
-
-        function getJornadaDetail(id_jornada){
-            $.ajax({
-                url: "vaccinationDay/getJornadaDetail/" + id_jornada,
-                type: "GET",
-                success: function (response) {
-                    //console.log(response);
-                    let voluntaryData = Array.from(new Set(response.data.map(x => x.id_voluntario))).
-                    map(id_voluntario => {
-                        return {
-                            id_voluntario: id_voluntario,
-                            id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada,
-                            id_insti: response.data.find(s => s.id_voluntario === id_voluntario).id_insti,
-                            nombre: response.data.find(s => s.id_voluntario === id_voluntario).nombre,
-                            ape_pat: response.data.find(s => s.id_voluntario === id_voluntario).ape_pat,
-                            ape_mat: response.data.find(s => s.id_voluntario === id_voluntario).ape_mat,
-                            email: response.data.find(s => s.id_voluntario === id_voluntario).email,
-                            tel: response.data.find(s => s.id_voluntario === id_voluntario).tel,
-                            nombre_municipio: response.data.find(s => s.id_voluntario === id_voluntario).nombre_municipio,
-                            nombre_institucion: response.data.find(s => s.id_voluntario === id_voluntario).nombre_institucion
-                        };
-                    });
-
-                    //console.log(voluntaryData);
-                    $viewDetailVoluntariesTable.bootstrapTable('destroy');
-                    $viewDetailVoluntariesTable.bootstrapTable({data: voluntaryData});
-                },
-                error: function (error, resp, text) {
-                    console.error(error.responseJSON.message);
-                }
-            });
-        }
 
         function getJornadaDetailForEmails(id_jornada){
             $.ajax({
@@ -1343,6 +1364,98 @@
             });
         }
 
+                /**
+        * Método que consulta al getDetalleVoluntario de la clase de VoluntariosController
+        * que consulta los datos del voluntario y permite visualizarla en los campos correspondientes de 
+        * la ventana modal para edita las horas del voluntario
+        */
+        function getHorasvoluntario(id_voluntario){
+            $.ajax({
+                url: "voluntario/detalles/" + id_voluntario,
+                type: "GET",
+                success: function (response) {
+                     //console.log(response);
+                    //idVoluntario = response.data.id_voluntario;
+                    if(response.bandera == false){
+                        $('#nombre_completo').val(response.data.nombre + ' ' + response.data.ape_pat + ' ' + response.data.ape_mat);
+                        $('#nombre_completo').prop( "disabled", true );
+                        $('#municipio').val(response.data.nombre_municipio);
+                        $('#municipio').prop( "disabled", true );
+                        $('#nombre_institucion').val(response.data.nombre_institucion);
+                        $('#nombre_institucion').prop( "disabled", true );
+                    
+                        $('#total_horas').val(0);
+                        $('#total_horas').prop( "disabled", true );
+                        $('#horas2').val(0);
+                    }
+                    else{
+                        $('#nombre_completo').val(response.data[0].nombre + ' ' + response.data[0].ape_pat + ' ' + response.data[0].ape_mat);
+                        $('#nombre_completo').prop( "disabled", true );
+                        $('#municipio').val(response.data[0].nombre_municipio);
+                        $('#municipio').prop( "disabled", true );
+                        $('#nombre_institucion').val(response.data[0].nombre_institucion);
+                        $('#nombre_institucion').prop( "disabled", true );
+                        if(response.data.length == 1){
+                            $('#total_horas').val(response.data[0].horas);
+                            $('#total_horas').prop( "disabled", true );
+                            $('#horas2').val(response.data[0].horas);
+                            total_horas = response.data[0].horas;
+                        }else{
+                            var t_horas = 0;
+                            for(var i = 0; i < response.data.length; i++){
+                                t_horas = t_horas + response.data[i].horas;
+                            }
+                            $('#total_horas').val(t_horas);
+                            $('#total_horas').prop( "disabled", true );
+                            $('#horas2').val(t_horas);
+                            total_horas = t_horas;
+                        }
+                    }
+                    id_volun = id_voluntario;
+                    bandera = response.bandera;
+                    
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+
+                /**
+        * Método para editar las horas de los voluntarios
+         */
+         function editarHoras(id_voluntario, horas){
+            $.ajax({
+                url: "voluntario/editarHoras/" + id_voluntario + "/" + horas,
+                type: "GET",
+                success: function (response) {
+                    //console.log(response);
+                    $('#modalEditarHoras').modal('hide');
+                    if(response.isOk == true){
+                        Swal.fire({
+                        title: '¡Registro completado!',
+                        text: response.message,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
+                    }else{
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: response.message,
+                            icon: 'error',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                            });
+                    }
+                    
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+
         function validateFields(actionType){
             let isEmpty;
             if(actionType == 'createJornada'){
@@ -1398,14 +1511,19 @@
             return isEmpty;
         }
 
+        function volAcepFormatter(value, row, index) {
+            return [
+            '<a class="edit_horas mr-2" href="javascript:void(0)" title="Editar horas voluntario">',
+                '<img src="{{ asset('public/assets/images/reloj_azul.svg')}}" style="width: 15px; padding:0px;"/>',
+            '</a>'
+            ].join('');
+        }
+
         function operateFormatter(value, row, index) {
             return [
             '<a class="email mr-2" href="javascript:void(0)" title="Email">',
                 '<i class="far fa-envelope"></i>',
             '</a>',                
-            '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
-                '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
-            '</a>',
             '<a class="edit mr-2" href="javascript:void(0)" title="Editar">',
                 '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
@@ -1439,6 +1557,16 @@
             return value;
         }
 
+        window.volAcepEvents = {
+            'click .edit_horas': function (e, value, row, index) {
+                $('#modalEditarHoras').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                getHorasvoluntario(row.id_voluntario);
+            }
+        }
+
         window.operateEvents = {
             'click .edit': function (e, value, row, index) {
                 $('#modalEditJornada').modal({
@@ -1464,14 +1592,6 @@
                         deleteJornada(row.id_jornada);
                     }
                     });
-            },
-
-            'click .detail': function (e, value, row, index) {
-                $('#modalViewJornadaDetail').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                getJornadaDetail(row.id_jornada);
             },
 
             'click .email': function (e, value, row, index) {
@@ -1512,6 +1632,21 @@
                     return false;
                 }
             }
+        }
+
+        //funcionalidad para el botón + 
+        function sumar2() {
+            var horas = document.getElementById("horas2").value;
+            horas++;
+            document.getElementById("horas2").value=horas;
+        }
+        //funcionalidad del boton -
+        function restar2() {
+            var horas2 = document.getElementById("horas2").value;
+            if (!(horas2 == 0)){
+                horas2--;
+                document.getElementById("horas2").value=horas2;
+            } 
         }
     </script>
 @endsection
