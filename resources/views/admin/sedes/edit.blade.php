@@ -58,7 +58,7 @@
 
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 font-weight-bold text-gray-800">Editar centro de vacunación</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Editar sede de vacunación</h1>
 <p class="mb-4"> </p>
 
 <!-- DataTales Example -->
@@ -97,7 +97,7 @@
 @endif 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos del centro</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos de la sede</h5>
         </div>
         <div class="card-body">
             <div class="content">

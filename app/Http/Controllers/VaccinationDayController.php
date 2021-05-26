@@ -539,11 +539,101 @@ class VaccinationDayController extends Controller
                 ->where('detalle_jornadas.id_jornada', '=',  $detalle_jornadas->id_jornada)
                 ->where('detalle_jornadas.id_voluntario', '=',  $voluntario->id_voluntario)
                 ->get();
+                $fecha = $jornada->fecha_inicio;
+                $year = substr($fecha, 0, 4);
+                $mes = substr($fecha, 5, 2);
+                $dia = substr($fecha, 8, 2);
+
+                switch ($mes) {
+                    case '01':
+                        $fecha_inicio = $dia.'/enero/'.$year;
+                        break;
+                    case '02':
+                        $fecha_inicio = $dia.'/febrero/'.$year;
+                        break;
+                    case '03':
+                        $fecha_inicio = $dia.'/marzo/'.$year;
+                        break;
+                    case '04':
+                        $fecha_inicio = $dia.'/abril/'.$year;
+                        break;
+                    case '05':
+                        $fecha_inicio = $dia.'/mayo/'.$year;
+                        break;
+                    case '06':
+                        $fecha_inicio = $dia.'/junio/'.$year;
+                        break;
+                    case '07':
+                        $fecha_inicio = $dia.'/julio/'.$year;
+                        break;
+                    case '08':
+                        $fecha_inicio = $dia.'/agosto/'.$year;
+                        break;
+                    case '09':
+                        $fecha_inicio = $dia.'/septiembre/'.$year;
+                        break;
+                    case '10':
+                        $fecha_inicio = $dia.'/octubre/'.$year;
+                        break;
+                    case '11':
+                        $fecha_inicio = $dia.'/noviembre/'.$year;
+                        break;
+                    case '12':
+                        $fecha_inicio = $dia.'/diciembre/'.$year;
+                        break;
+                }
+
+                $fecha = $jornada->fecha_fin;
+                $year = substr($fecha, 0, 4);
+                $mes = substr($fecha, 5, 2);
+                $dia = substr($fecha, 8, 2);
+
+                switch ($mes) {
+                    case '01':
+                        $fecha_fin = $dia.'/enero/'.$year;
+                        break;
+                    case '02':
+                        $fecha_fin = $dia.'/febrero/'.$year;
+                        break;
+                    case '03':
+                        $fecha_fin = $dia.'/marzo/'.$year;
+                        break;
+                    case '04':
+                        $fecha_fin = $dia.'/abril/'.$year;
+                        break;
+                    case '05':
+                        $fecha_fin = $dia.'/mayo/'.$year;
+                        break;
+                    case '06':
+                        $fecha_fin = $dia.'/junio/'.$year;
+                        break;
+                    case '07':
+                        $fecha_fin = $dia.'/julio/'.$year;
+                        break;
+                    case '08':
+                        $fecha_fin = $dia.'/agosto/'.$year;
+                        break;
+                    case '09':
+                        $fecha_fin = $dia.'/septiembre/'.$year;
+                        break;
+                    case '10':
+                        $fecha_fin = $dia.'/octubre/'.$year;
+                        break;
+                    case '11':
+                        $fecha_fin = $dia.'/noviembre/'.$year;
+                        break;
+                    case '12':
+                        $fecha_fin = $dia.'/diciembre/'.$year;
+                        break;
+                }
+
                 $data = [
                     'uuid' => $detalle_jornada->uuid,
                     'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
                     'id_voluntario' => $voluntario->id_voluntario, 
                     'id_jornada' => $detalle_jornadas->id_jornada,
+                    'fecha_inicio' => $fecha_inicio,
+                    'fecha_fin' => $fecha_fin,
                     'mensaje' => $jornada->mensaje,
                     'sedes' => $sedes,
                     'anexos' => $anexos,

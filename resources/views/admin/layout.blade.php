@@ -120,7 +120,7 @@
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_centros.svg')}}" style="width: 20px;"/>
-                        <span  style="font-family: nutmeg-bold; font-size:18px;">Centros</span></a>
+                        <span  style="font-family: nutmeg-bold; font-size:18px;">Sedes</span></a>
                     </li> 
                 @else
                     <!-- Divider -->

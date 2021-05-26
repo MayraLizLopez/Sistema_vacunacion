@@ -102,7 +102,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;" >
-                                Centros</div>
+                                Sedes</div>
                             <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $centros }}</div>
                         </div>
                         <div class="col-auto">

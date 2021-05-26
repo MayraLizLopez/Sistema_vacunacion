@@ -197,7 +197,7 @@
                 <div class="form-group">
                     <label for="inTown">Municipio
                         <span style="font-size: 20px; color: red;">*</span>
-                        <span id="spanTown" style="color: red;">Es necesario elegir un municipio para ver la tabla de Centros e Instituciones</span>
+                        <span id="spanTown" style="color: red;">Es necesario elegir un municipio para ver la tabla de Sedes e Instituciones</span>
                     </label>
                     <select class="custom-select" id="inTown">
                     </select>           
@@ -226,7 +226,7 @@
           <div class="row mb-3 divSedesTable">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="sedesTable">Centros</label>           
+                    <label for="sedesTable">Sedes</label>           
                     <table id="sedesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
@@ -379,7 +379,7 @@
           <div class="row mb-3">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <label for="editSedesTable">Centros</label>           
+                    <label for="editSedesTable">Sedes</label>           
                     <table id="editSedesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"

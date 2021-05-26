@@ -30,7 +30,7 @@
             <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="max-width:30%;" />
             <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡{{ $nombre }} Felicidades has sido seleccionado(a) como voluntario(a) para una jornada!</h1>
         </center>
-
+        <h2 style="color: #67737A; font-size:30px; font-weight: bold;">La jornada es del día {{ $fecha_inicio }} al {{ $fecha_fin }} </h2>
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">Mensaje: </h2>
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">{{ $mensaje }} </h2>
         <p style="color: #67737A; font-size:24px;">Para continuar el proceso por favor da click en el botón "Aceptar" para confirmar tu participación en la sede de tu preferencia, una vez seleccionada la sede podras elegir entre participar en el turno <b>completo</b>, <b>matutino</b> o <b>vespertino</b>.  Si no puedes participar por favor da click en "Rechazar". </p>
@@ -50,9 +50,9 @@
                     </p>
                     <div style="padding-bottom: 20px;">
                         <!-- Servidor Jalisco -->
-                        <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailAceptar/{{$sede->uuid}}">Aceptar</a>        
+                        <!-- <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailAceptar/{{$sede->uuid}}">Aceptar</a>         -->
                         <!-- Seridor Local -->
-                        <!-- <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://187.188.251.138/sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a>      -->
+                        <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://187.188.251.138/Sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a>     
                         <!-- Local  -->
                         <!-- <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8888/sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a> -->
                     </div>
@@ -67,9 +67,9 @@
             <!-- <a style="color: #F5F5F5; background-color: #5BC0DE; margin-top: 25px; font-size: 20px; border: 2px solid #5BC0DE; border-radius: 5px;" href="http://localhost:8080/sistema_vacunacion/public/emailAceptar/{{$uuid}}">Aceptar</a> -->
             <div style="padding-bottom: 20px;">
                 <!-- Servidor Jalisco -->
-                <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailRechazar/{{$uuid}}">Rechazar todos</a>
+                <!-- <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://voluntariado.jalisco.gob.mx/emailRechazar/{{$uuid}}">Rechazar todos</a> -->
                 <!-- Seridor Local -->
-                <!-- <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://187.188.251.138/sistema_vacunacion/emailRechazar/{{$uuid}}">Rechazar todos</a> -->
+                <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://187.188.251.138/Sistema_vacunacion/emailRechazar/{{$uuid}}">Rechazar todos</a>
                 <!-- Local  -->
                 <!-- <a style="margin-top: 50px; color: #ffffff; background-color: #7B868C; font-size: 24px; border: 2px solid #7B868C; border-radius: 10px; text-decoration: none; width: 800px; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8888/sistema_vacunacion/emailRechazar/{{$uuid}}">Rechazar todos</a> -->
             </div>

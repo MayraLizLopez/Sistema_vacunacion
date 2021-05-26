@@ -33,7 +33,7 @@
               font-weight: bold;
               ">
                 <img class="mx-1" src="{{ asset('public/assets/images/usuario_desactivado_blanco.svg')}}" style="width: 40px;"/>
-                <span class="h2">Usuarios desactivados</span>
+                <span class="h2">Ir a usuarios desactivados</span>
         </button>
 
         <button 
@@ -47,7 +47,7 @@
               font-weight: bold;
               ">
                 <img class="mx-1" src="{{ asset('public/assets/images/usuario_blanco.svg')}}" style="width: 40px;"/>
-                <span class="h2">Usuarios activos</span>
+                <span class="h2">Ir a usuarios activos</span>
         </button>
     </div>
 </div>
