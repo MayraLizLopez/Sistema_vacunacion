@@ -189,4 +189,16 @@ class InstitucionController extends Controller
             ]);
         }
     }
+
+    /**
+     * Método que consulta a todos los enlaces de las instituciones
+     */
+    public function consultaEnlaces(){
+        $enlaces = DB::table('instituciones')
+        ->join('usuarios', 'instituciones.id_user', '=', 'usuarios.id_user')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre Institucion')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'ASC')
+        ->get();
+    }
 }

@@ -176,8 +176,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
-                            <input type="email" class="form-control" id="email2" name="email2" value="{{ $usuario->email}}" required="required"/>
-                            <input hidden name="email" id="email"/>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}" required="required"/>
+                            <input hidden name="email2" id="email2"/>
                             <span class="text-danger">@error('email2'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>

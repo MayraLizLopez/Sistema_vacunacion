@@ -11,7 +11,31 @@
         <link rel="stylesheet" href="{{ asset('public/assets/css/sweetalert2.min.css') }}">    
         <link href="{{ asset('public/assets/css/all.min.css') }}" rel="stylesheet"> 
     </head>
-    <body style="background-image: url('{{ asset('public/assets/images/FondoRegistro.png')}}'); height:100%;">
+    <style>
+        body {
+            background-image: url('{{ asset('public/assets/images/FondoRegistro.png')}}'); height:100%;
+        }
+        
+        @media only screen and (max-width: 1200px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoRegistro_1100x670.png')}}');
+            }
+        }
+
+        @media only screen and (max-width: 1080px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoRegistro_720x1080.png')}}');
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoRegistro_414x737.png')}}');
+            }
+        }
+    
+    </style>
+    <body>
         @yield('content')
         <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('public/assets/js/bootstrap.min.js') }}"></script>
