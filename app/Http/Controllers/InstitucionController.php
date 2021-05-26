@@ -119,10 +119,12 @@ class InstitucionController extends Controller
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         $institucion = DB::table('instituciones')->where('id_insti', $id)->first();  
         $usuario = DB::table('usuarios')->where('id_user', $institucion->id_user)->first();   
+        $usuarios = DB::table('usuarios')->where('rol', '=', 'Enlace de institución')->orderBy('nombre', 'asc')->get();
         $municipios = DB::table('municipios')->get();   
         $muni = DB::table('municipios')->where('id_municipio', $institucion->id_municipio)->first();   
         $municipio_select = $muni->nombre;
-        return view('admin.edit_institutions', compact('institucion', 'municipios', 'municipio_select', 'usuario'), $data);
+        $i=0;
+        return view('admin.edit_institutions', compact('institucion', 'municipios', 'municipio_select', 'usuario', 'usuarios', 'i'), $data);
     }
 
     /**
@@ -134,34 +136,26 @@ class InstitucionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request);
         //Validación de campos
         $request->validate([
             'nombre' => 'required', 
             'domicilio' => 'required',
             'id_municipio' => 'required',
             'nombre_enlace' => 'required', 
-            'cargo_enlace' => 'required', 
-            'tel' => 'required',
-            'email' => 'required|email', 
+            'email2' => 'required', 
         ]);
         
         $institucionEditado = Institucion::findOrFail($id);
-        $usuarioEditado = Usuario::findOrFail($institucionEditado->id_user);
-        if(($usuarioEditado->nombre != $request->nombre_enlace) || ($usuarioEditado->ape_pat != $request->ape_pat) || ($usuarioEditado->ape_mat != $request->ape_mat) || ($usuarioEditado->cargo != $request->cargo_enlace) || ($usuarioEditado->email != $request->email) || ($usuarioEditado->tel != $request->tel)){
-            $usuarioEditado->nombre = $request->nombre_enlace;
-            $usuarioEditado->ape_pat = $request->ape_pat;
-            $usuarioEditado->ape_mat = $request->ape_mat;
-            $usuarioEditado->cargo = $request->cargo_enlace;
-            $usuarioEditado->rol = 'Enlace de institución';
-            $usuarioEditado->tel = $request->tel;
-            $usuarioEditado->email = $request->email;
-            $usuarioEditado->fecha_edicion = Carbon::now();
-            $save1 = $usuarioEditado->save();
+        $usuarioNuevo = DB::table('usuarios')->where('email', '=', $request->email2)->first();
+        $usuario = Usuario::findOrFail($institucionEditado->id_user);
+        if(($usuario->nombre != $request->nombre_enlace) || ($usuario->cargo != $request->cargo_enlace) || ($usuario->email != $request->email) || ($usuario->tel != $request->tel)){
+            $institucionEditado->id_user = $usuarioNuevo->id_user;
         }
         $institucionEditado->nombre = $request->nombre;
         $institucionEditado->domicilio = $request->domicilio;
         $institucionEditado->id_municipio = (int)$request->id_municipio;
-        $institucionEditado->activo = true;
+        //$institucionEditado->activo = true;
         $institucionEditado->fecha_edicion = Carbon::now();
         $save = $institucionEditado->save();
         
@@ -194,5 +188,17 @@ class InstitucionController extends Controller
                 'message' => 'Error al eliminar la Institución'
             ]);
         }
+    }
+
+    /**
+     * Método que consulta a todos los enlaces de las instituciones
+     */
+    public function consultaEnlaces(){
+        $enlaces = DB::table('instituciones')
+        ->join('usuarios', 'instituciones.id_user', '=', 'usuarios.id_user')
+        ->select('usuarios.*', 'instituciones.nombre AS nombre Institucion')
+        ->where('instituciones.activo', '=', 1)
+        ->orderBy('instituciones.nombre', 'ASC')
+        ->get();
     }
 }

@@ -141,25 +141,20 @@
             <div class="content">
                 <div class="row">
                     <div class="col-md-6">
-                    <div class="form-group">
-                            <label for="maternalSurnameVoluntary">Nombre del enlace</label>
-                            <input type="text" class="form-control" id="maternalSurnameVoluntary" name="nombre_enlace" value="{{ $usuario->nombre }}" required="required"/>
-                            <span class="text-danger">@error('nombre_enlace'){{ 'Ingrese el nombre del enlace' }} @enderror </span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
                         <div class="form-group">
-                            <label for="phoneVoluntary">Apellido paterno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" value="{{ $usuario->ape_pat }}" required="required"/>
-                            <span class="text-danger">@error('ape_pat'){{ 'Ingrese apellido paterno' }} @enderror </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                    <div class="form-group">
-                    <label for="phoneVoluntary">Apellido Materno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_mat" value="{{ $usuario->ape_mat }}" />
+                            <label for="emailVoluntary">Nombre completo del enlace</label>
+                            @foreach ($usuarios as $user)
+                            @if($i == 0)
+                                <select class="form-control" id="nombre_usuario" name="nombre_enlace" onchange="cambiarDatos()">
+                                <option value="{{$usuario->id_user}}">{{$usuario->nombre.' '.$usuario->ape_pat.' '.$usuario->ape_mat }}</option>
+                                <?php $i++; ?>
+                            @endif
+                            @if ($usuario->nombre.' '.$usuario->ape_pat.' '.$usuario->ape_mat != $user->nombre.' '.$user->ape_pat.' '.$user->ape_mat)
+                                <option value="{{$user->id_user}}">{{ $user->nombre.' '.$user->ape_pat.' '.$user->ape_mat }} </option>
+                            @endif
+                            @endforeach
+                            </select>
+                            <span class="text-danger">@error('nombre_enlace'){{ 'Seleccione un municipio' }} @enderror </span>
                         </div>
                     </div>
                 </div>
@@ -167,7 +162,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="phoneVoluntary">Cargo del enlace</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="cargo_enlace" value="{{ $usuario->cargo }}" required="required"/>
+                            <input type="text" class="form-control" id="cargo_enlace" name="cargo_enlace" value="{{ $usuario->cargo }}" required="required"/>
                             <span class="text-danger">@error('cargo_enlace'){{ 'Ingrese el cargo del enlace' }} @enderror </span>
                         </div>
                     </div>
@@ -182,7 +177,8 @@
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}" required="required"/>
-                            <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
+                            <input hidden name="email2" id="email2"/>
+                            <span class="text-danger">@error('email2'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>
                     </div>
@@ -197,4 +193,22 @@
 
 @endsection
 @section('scripts')
+<script>
+    const user = {!! json_encode($usuarios) !!};
+    document.getElementById("cargo_enlace").disabled = true;
+    document.getElementById("tel").disabled = true;
+    document.getElementById("email").disabled = true;
+    function cambiarDatos(){
+        var id = document.getElementById("nombre_usuario").value; 
+        for(var i=0; i < user.length; i++){
+            if(user[i].id_user === parseInt(id)){
+                document.getElementById("cargo_enlace").value = user[i].cargo;
+                document.getElementById("tel").value = user[i].tel;
+                document.getElementById("email").value = user[i].email;
+                document.getElementById("email2").value = user[i].email;
+                break;
+            }
+        }
+    }
+</script>
 @endsection
