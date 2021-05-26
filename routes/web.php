@@ -135,6 +135,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/vaccinationDay/show/', [VaccinationDayController::class, "show"])->name('show');
 
+    Route::get('admin/panel/vaccinationDay/getAllVolunteersAccepted/{folio}', [VaccinationDayController::class, "getAllVolunteersAccepted"])->name('getAllVolunteersAccepted');
+
     Route::post('admin/panel/vaccinationDay/destroy/', [VaccinationDayController::class, "destroy"])->name('destroy');
 
     Route::get('admin/panel/vaccinationDay/getLastJornada/', [VaccinationDayController::class, "getLastJornada"])->name('getLastJornada');
@@ -152,6 +154,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/vaccinationDay/downloadFiles/', [VaccinationDayController::class, "downloadFiles"])->name('downloadFiles');
 
     Route::post('admin/panel/vaccinationDay/sendemail/', [VaccinationDayController::class, "enviarCorreoJornada"])->name('enviarCorreo');
+
+    Route::post('admin/panel/vaccinationDay/sendrejectemail/', [VaccinationDayController::class, "enviarCorreoCancelacionJornada"])->name('enviarCorreoCancelacion');
     
     //Perfil
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
