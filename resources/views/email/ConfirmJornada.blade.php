@@ -55,6 +55,9 @@
                         <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://187.188.251.138/Sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a>     
                         <!-- Local  -->
                         <!-- <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8888/sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a> -->
+
+                        {{-- Local Jaime --}}
+                        <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8080/projects/Sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a>
                     </div>
                 </div>
             </div>
