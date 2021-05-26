@@ -89,13 +89,42 @@
             width: 95%;
             padding-top:20px;
         }
+
+        body {
+            background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');
+        }
+
+        #marco{
+            margin-top: 15vh;
+        }
+
+        @media only screen and (max-width: 1100px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoLogin_1100x670.png')}}');
+            }
+            #marco{
+                margin-top: 5vh;
+            }
+        }
+
+        @media only screen and (max-width: 770px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoLogin_720x1080.png')}}');
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoLogin_414x737.png')}}');
+            }
+        }
 </style>
 
-<body class="background-login" style="background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');">
+<body class="background-login">
     <div class="container">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center" style="margin-top: 15vh;">
+        <div class="row justify-content-center" id="marco">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 

@@ -13,7 +13,9 @@
                 <div class="col-sm-12">
                     <div class="row row justify-content-center">
                         <div class="col-sm-12">
+                        <center></center>
                             <h1 style="margin-top: 30px; margin-bottom: 30px;">¡Gracias por aceptar la jornada!</h1>
+                        </center>
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -24,7 +26,7 @@
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h5 class="m-0 font-weight-bold text-primary">Mensaje importante</h5>
+                                    <h5 class="m-0 font-weight-bold text-primary">Información sobre la jornada</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="content">
@@ -45,7 +47,7 @@
                                         <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="emailVoluntary">Seleciona tu horario de prefernecia para esta jornada:</label>
+                                                        <label for="emailVoluntary">Seleciona tu horario de preferencia para esta jornada:</label>
                                                             <select class="form-control" id="turno" name="nombre_enlace">
                                                             <option value="Completo">Completo</option>
                                                             <option value="Matutino">Matutino (hasta las 12pm)</option>
