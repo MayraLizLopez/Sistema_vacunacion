@@ -49,9 +49,9 @@
                                                     <div class="form-group">
                                                         <label for="emailVoluntary">Seleciona tu horario de preferencia para esta jornada:</label>
                                                             <select class="form-control" id="turno" name="nombre_enlace">
-                                                            <option value="Completo">Completo</option>
-                                                            <option value="Matutino">Matutino (hasta las 12pm)</option>
-                                                            <option value="Vespertino">Vespertino (12pm en adelante)</option>
+                                                            <option value="Completo">Completo (7:00 - 15:30 hrs.)</option>
+                                                            <option value="Matutino">Matutino (7:00 - 11:30 hrs.)</option>
+                                                            <option value="Vespertino">Vespertino (11:00 - 15:30 hrs.)</option>
                                                         </select>
                                                         <span class="text-danger">@error('Turno'){{ 'Seleccione un turno' }} @enderror </span>
                                                         <div class="form-group">
