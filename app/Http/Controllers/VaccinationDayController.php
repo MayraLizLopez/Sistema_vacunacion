@@ -415,6 +415,7 @@ class VaccinationDayController extends Controller
             'detalle_jornadas.id_jornada AS id_jornada',
             'detalle_jornadas.id_detalle_jornada AS id_detalle_jornada',
             'jornadas.folio AS folio',
+            'voluntarios.id_voluntario AS id_voluntario',
             'voluntarios.nombre AS nombre',
             'voluntarios.ape_pat AS ape_pat',
             'voluntarios.ape_mat AS ape_mat',
@@ -422,7 +423,9 @@ class VaccinationDayController extends Controller
             'voluntarios.email AS email',
             'voluntarios.curp AS curp',
             'instituciones.nombre AS nombre_institucion',
-            'municipios.nombre AS nombre_municipio'
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.turno AS turno',
+            'detalle_jornadas.horas AS horas'
         )
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
@@ -482,6 +485,23 @@ class VaccinationDayController extends Controller
         ->get();
         return response()->json([
             'data' => $jornadas        
+        ]); 
+    }
+
+    public function agregarQuitarHoras(Request $request){
+        $horasAteriores = DB::table('detalle_jornadas')->select('id_detalle_jornada','horas')->whereIn('id_detalle_jornada', $request->ids_detalle_jornadas)->get();
+
+        foreach($horasAteriores AS $horaAnterior){
+            $horas = ($horaAnterior->horas + $request->horas);
+            DB::table('detalle_jornadas')
+            ->where('id_detalle_jornada', $horaAnterior->id_detalle_jornada)
+            ->update([
+                'horas' => $horas
+            ]);
+        }
+
+        return response()->json([
+            'mensaje' => 'Las horas han sido guardadas'
         ]); 
     }
     /**
