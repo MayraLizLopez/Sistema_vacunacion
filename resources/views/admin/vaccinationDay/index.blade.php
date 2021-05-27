@@ -1510,7 +1510,6 @@
                     horas: parseInt(horas)
                 },
                 success: function (response) {
-                    //console.log(response);
                     $('#modalLoadHours').modal('hide');
                     Swal.fire({
                         title: '¡Registro completado!',
@@ -1518,8 +1517,7 @@
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
-                    });
-                    
+                    });                    
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
