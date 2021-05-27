@@ -30,7 +30,7 @@
             <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="max-width:30%;" />
             <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡{{ $nombre }} Felicidades has sido seleccionado(a) como voluntario(a) para una jornada!</h1>
         </center>
-        <h2 style="color: #67737A; font-size:30px; font-weight: bold;">La jornada es del día {{ $fecha_inicio }} al {{ $fecha_fin }} </h2>
+        <h2 style="color: #67737A; font-size:30px; font-weight: bold;">La jornada se realizará del día <a style="color: #54A583; font-size:30px; font-weight: bold;">{{ $fecha_inicio }}</a> al <a style="color: #54A583; font-size:30px; font-weight: bold;">{{ $fecha_fin }} </a>
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">Mensaje: </h2>
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">{{ $mensaje }} </h2>
         <p style="color: #67737A; font-size:24px;">Para continuar el proceso por favor da click en el botón "Aceptar" para confirmar tu participación en la sede de tu preferencia, una vez seleccionada la sede podras elegir entre participar en el turno <b>completo</b>, <b>matutino</b> o <b>vespertino</b>.  Si no puedes participar por favor da click en "Rechazar". </p>
@@ -57,7 +57,7 @@
                         <!-- <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8888/sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a> -->
 
                         {{-- Local Jaime --}}
-                        <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8080/projects/Sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a>
+                        <!-- <a style="color: #ffffff; background-color: #54A583; margin-top: 25px; font-size: 24px; border: 2px solid #54A583; border-radius: 10px; text-decoration: none; margin-bottom:45px; padding-top: 5px; padding-bottom: 5px; padding-left: 85px; padding-right: 85px;" href="http://localhost:8080/projects/Sistema_vacunacion/emailAceptar/{{$sede->uuid}}">Aceptar</a> -->
                     </div>
                 </div>
             </div>
