@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\CancelarJornada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 use Carbon\Carbon;
 
 use App\Models\Usuario;
@@ -413,6 +415,7 @@ class VaccinationDayController extends Controller
             'detalle_jornadas.id_jornada AS id_jornada',
             'detalle_jornadas.id_detalle_jornada AS id_detalle_jornada',
             'jornadas.folio AS folio',
+            'voluntarios.id_voluntario AS id_voluntario',
             'voluntarios.nombre AS nombre',
             'voluntarios.ape_pat AS ape_pat',
             'voluntarios.ape_mat AS ape_mat',
@@ -420,7 +423,9 @@ class VaccinationDayController extends Controller
             'voluntarios.email AS email',
             'voluntarios.curp AS curp',
             'instituciones.nombre AS nombre_institucion',
-            'municipios.nombre AS nombre_municipio'
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.turno AS turno',
+            'detalle_jornadas.horas AS horas'
         )
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
@@ -480,6 +485,26 @@ class VaccinationDayController extends Controller
         ->get();
         return response()->json([
             'data' => $jornadas        
+        ]); 
+    }
+
+    public function agregarQuitarHoras(Request $request){
+        $horasAteriores = DB::table('detalle_jornadas')->select('horas')->whereIn('id_detalle_jornada', $request->ids_detalle_jornadas)->get();
+
+        foreach($horasAteriores AS $horaAnterior){
+            $horas = ($horaAnterior->horas + $request->horas);
+
+            foreach($request->ids_detalle_jornadas AS $idDetalleJornada){
+                DB::table('detalle_jornadas')
+                ->where('id_detalle_jornada', $idDetalleJornada)
+                ->update([
+                    'horas' => $horas
+                ]);
+            }
+        }
+
+        return response()->json([
+            'mensaje' => 'horas actualizadas',
         ]); 
     }
     /**
@@ -612,7 +637,7 @@ class VaccinationDayController extends Controller
                     'anexos' => $anexos,
                 ];
                 
-                Mail::to($voluntario->email)->send(new ConfirmJornada($data));
+                Limit::perMinute(50)->by(Mail::to($voluntario->email)->send(new ConfirmJornada($data)));
                  
                 for($k = 0; $k < count($sedes); $k++){
                     $editarJornada = DetalleJornada::findOrFail($sedes[$k]->id_detalle_jornada);

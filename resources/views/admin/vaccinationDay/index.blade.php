@@ -133,6 +133,13 @@
                             <span class="item-label">Cancelación</span>
                         </button>      
                     </div>
+
+                    <div class="form-group ml-1">
+                        <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
+                            <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
+                            <span class="item-label">Agregar horas</span>                 
+                        </a>
+                    </div>
                 </div>
             </div>
 
@@ -153,6 +160,7 @@
                                 <th data-checkbox="true"></th>
                                 <th class="d-none" data-field="id_jornada">ID Jornada</th>
                                 <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
+                                <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
                                 <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
                                 <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                                 <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
@@ -162,14 +170,16 @@
                                 <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                                 <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                                 <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
+                                <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
                                 <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
-                                {{-- <th data-field="horas" data-sortable="true" data-halign="center" data-align="center" data-formatter="statusFormater">Horas</th> --}}
                               </tr>
                             </thead>
                         </table>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
   </div>
@@ -506,6 +516,47 @@
     </div>
   </div>
 
+  <!-- Modal Agregar horas a voluntarios-->
+<div id="modalLoadHours" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog horas modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Agregar horas</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+            </button>
+            </div>
+            <div class="modal-body">
+                <label>Seleccione o ingrese la cantidad de horas que quiere agregar a los voluntarios seleccionados</label>
+                        
+                <div class="row align-items-center">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <img class="mx-2" src="{{ asset('public/assets/images/mas.svg')}}" style="width: 50px;" onclick="sumar()"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control mx-2" id="horas" name="institucion" placeholder="" min="0"/>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="form-group">
+                            <img class="mx-2" src="{{ asset('public/assets/images/menos.svg')}}" style="width: 50px;" onclick="restar()"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mr-auto">
+                <button id="agregarHorarMuti" class="btn btn-success botonEnviar" type="submit" >Guardar</button>
+                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+            </div>
+        </div>
+    </div>
+</div>
+
   <div id="modalEditarHoras" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog horas modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -517,6 +568,11 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div class="col-md-12" hidden>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="id_voluntario" name="id_voluntario"/>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="nombre_completo">Nombre del voluntario</label>
@@ -577,6 +633,8 @@
         let $sedesTable = $('#sedesTable');
         let $editSedesTable = $('#editSedesTable');
         let idJornada = 0;
+        let total_horas = 0;
+        let difhoras = 0;
 
         $(document).ready(()=>{
             getAllJornadas();
@@ -819,15 +877,31 @@
                 enviarCorreoCancelacion(idJornada, idsDetalleJornadas, mensaje);
             });
 
+            $('#btnLoadHours').on('click', () => {
+                $('#modalLoadHours').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            });
+         
+            $('#agregarHorarMuti').on('click', () => {
+                let idsDetalleJornadas = $voluntariesAcceptedTable.bootstrapTable('getSelections').map(element => element.id_detalle_jornada);
+                let horas = document.getElementById("horas").value;
+
+                agregarQuitarHoras(idsDetalleJornadas, horas);
+            });
 
             $('#agregarHoras').on('click', () => {
                 if(bandera == true){
                     if(document.getElementById("horas2").value !== 0){
-                        var horas = document.getElementById("horas2").value;
+                        let horas = document.getElementById("horas2").value;
+                        let id_voluntario = document.getElementById("id_voluntario").value;
+
                         difhoras = horas - total_horas;
-                        editarHoras(id_volun, difhoras); 
+
+                        editarHoras(id_voluntario, difhoras);
                     }
-                }else{
+                } else {
                     $('#modalEditarHoras').modal('hide');
                     Swal.fire({
                         title: '¡Error!',
@@ -1370,6 +1444,7 @@
         * la ventana modal para edita las horas del voluntario
         */
         function getHorasvoluntario(id_voluntario){
+            // console.log(id_voluntario);
             $.ajax({
                 url: "voluntario/detalles/" + id_voluntario,
                 type: "GET",
@@ -1377,6 +1452,7 @@
                      //console.log(response);
                     //idVoluntario = response.data.id_voluntario;
                     if(response.bandera == false){
+                        $('#id_voluntario').val(response.data.id_voluntario);
                         $('#nombre_completo').val(response.data.nombre + ' ' + response.data.ape_pat + ' ' + response.data.ape_mat);
                         $('#nombre_completo').prop( "disabled", true );
                         $('#municipio').val(response.data.nombre_municipio);
@@ -1389,6 +1465,7 @@
                         $('#horas2').val(0);
                     }
                     else{
+                        $('#id_voluntario').val(response.data[0].id_voluntario);
                         $('#nombre_completo').val(response.data[0].nombre + ' ' + response.data[0].ape_pat + ' ' + response.data[0].ape_mat);
                         $('#nombre_completo').prop( "disabled", true );
                         $('#municipio').val(response.data[0].nombre_municipio);
@@ -1421,10 +1498,40 @@
             });
         }
 
-                /**
+        function agregarQuitarHoras(ids_detalle_jornadas, horas){
+            $.ajax({
+                url: "vaccinationDay/agregarQuitarHoras",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    ids_detalle_jornadas: ids_detalle_jornadas,
+                    horas: parseInt(horas)
+                },
+                success: function (response) {
+                    //console.log(response);
+                    $('#modalLoadHours').modal('hide');
+                    Swal.fire({
+                        title: '¡Registro completado!',
+                        text: response.mensaje,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+
+         /**
         * Método para editar las horas de los voluntarios
          */
          function editarHoras(id_voluntario, horas){
+            //  console.log(id_voluntario + ' - ' + horas);
             $.ajax({
                 url: "voluntario/editarHoras/" + id_voluntario + "/" + horas,
                 type: "GET",
@@ -1632,6 +1739,21 @@
                     return false;
                 }
             }
+        }
+
+                //funcionalidad para el botón + 
+        function sumar() {
+            var horas = document.getElementById("horas").value;
+            horas++;
+            document.getElementById("horas").value = horas;
+        }
+        //funcionalidad del boton -
+        function restar() {
+            var horas = document.getElementById("horas").value;
+            if (!(horas == 0)){
+                horas--;
+                document.getElementById("horas").value = horas;
+            } 
         }
 
         //funcionalidad para el botón + 

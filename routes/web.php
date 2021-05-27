@@ -154,6 +154,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::post('admin/panel/vaccinationDay/sendemail/', [VaccinationDayController::class, "enviarCorreoJornada"])->name('enviarCorreo');
 
     Route::post('admin/panel/vaccinationDay/sendrejectemail/', [VaccinationDayController::class, "enviarCorreoCancelacionJornada"])->name('enviarCorreoCancelacion');
+
+    Route::post('admin/panel/vaccinationDay/agregarQuitarHoras/', [VaccinationDayController::class, "agregarQuitarHoras"])->name('agregarQuitarHoras');
     
     //Perfil
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
