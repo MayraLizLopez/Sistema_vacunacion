@@ -94,7 +94,7 @@ class VoluntarioController extends Controller
             'id_municipio' => 'required',
             'id_insti' => 'required',
             'curp' => 'required', 
-            'email' => 'required', 
+            'email' => 'required|email|unique:voluntarios', 
             //'email' => 'required|email|unique:voluntarios|unique:usuarios', 
             'fecha_nacimiento' => 'required',
             'tel' => 'required',
