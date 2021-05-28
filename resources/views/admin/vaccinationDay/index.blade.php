@@ -216,9 +216,9 @@
                     <label for="voluntariesTable">Voluntarios</label>
                     <div id="toolbar2">
                         <div class="row">                           
-                                <h5 class="ml-3"><span class="badge badge-success">Disponible</span></h5>                            
-                                <h5 class="ml-2"><span class="badge badge-warning" style="color: black">Por descansar</span></h5>                      
-                                <h5 class="ml-2"><span class="badge badge-danger">No disponible</span></h5>                        
+                                <h5 class="ml-3"><span class="badge badge-success">Pocas horas</span></h5>                            
+                                <h5 class="ml-2"><span class="badge badge-warning" style="color: black">Por cumplir</span></h5>                      
+                                <h5 class="ml-2"><span class="badge badge-danger">Cumplidas</span></h5>                        
                         </div>
                     </div>     
                     <table id="voluntariesTable" class="table table-striped table-bordered"
@@ -229,7 +229,7 @@
                     data-toolbar="#toolbar2">
                         <thead>
                           <tr>
-                            <th data-checkbox="true" data-formatter="stateFormatter"></th>
+                            <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_voluntario">ID</th>
                             <th class="d-none" data-field="id_insti">ID Institución</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
@@ -369,9 +369,9 @@
                     <label for="editVoluntariesTable">Voluntarios</label>
                     <div id="toolbar3">
                         <div class="row">                           
-                                <h5 class="ml-3"><span class="badge badge-success">Disponible</span></h5>                            
-                                <h5 class="ml-2"><span class="badge badge-warning" style="color: black">Por descansar</span></h5>                      
-                                <h5 class="ml-2"><span class="badge badge-danger">No disponible</span></h5>                        
+                                <h5 class="ml-3"><span class="badge badge-success">Pocas horas</span></h5>                            
+                                <h5 class="ml-2"><span class="badge badge-warning" style="color: black">Por cumplir</span></h5>                      
+                                <h5 class="ml-2"><span class="badge badge-danger">Cumplidas</span></h5>                        
                         </div>
                     </div>          
                     <table id="editVoluntariesTable" class="table table-striped table-bordered"
@@ -382,7 +382,7 @@
                     data-toolbar="#toolbar3">
                         <thead>
                           <tr>
-                            <th data-checkbox="true" data-formatter="stateFormatter"></th>
+                            <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
@@ -1647,26 +1647,26 @@
         function statusFormater(value, row, index){
             let status = '';
 
-            if(row.horas >= 40 && row.horas < 50){
+            if(row.horas >= 400 && row.horas < 480){
                 status = '<h3><span class="badge badge-warning" style="color: black">' + row.horas + '</span></h3>'
             } 
-            else if(row.horas >= 50){
+            else if(row.horas >= 480){
                 status = '<h3><span class="badge badge-danger">' + row.horas + '</span></h3>'
             }
-            else if(row.horas < 40) {
+            else if(row.horas < 400) {
                 status = '<h3><span class="badge badge-success">' + row.horas + '</span><h3>'
             }
             return [status].join('');
         }
 
-        function stateFormatter(value, row, index) {
-            if (row.horas >= 50) {
-                return {
-                    disabled: true
-                }
-            }
-            return value;
-        }
+        // function stateFormatter(value, row, index) {
+        //     if (row.horas >= 50) {
+        //         return {
+        //             disabled: true
+        //         }
+        //     }
+        //     return value;
+        // }
 
         window.volAcepEvents = {
             'click .edit_horas': function (e, value, row, index) {
