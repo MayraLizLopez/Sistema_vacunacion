@@ -569,40 +569,35 @@
                 </div>
     
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-body">
-                        <div class="table-responsive">           
-                            <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
-                            data-pagination="true"
-                            data-search-selector="#inSearchCustom"
-                            data-page-size="5"
-                            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
-                            data-sort-name="nombre"
-                            data-sort-order="desc"
-                            data-toolbar="#voluntariesAcceptedToolbar">
-                                <thead>
-                                  <tr>
-                                    <th data-checkbox="true"></th>
-                                    <th class="d-none" data-field="id_jornada">ID Jornada</th>
-                                    <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
-                                    <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
-                                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
-                                    <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                                    <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
-                                    <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                                    <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                                    <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
-                                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                                    <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                                    <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
-                                    <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
-                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
-                                  </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div>
+                <div class="table">           
+                    <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
+                    data-search-selector="#inSearchCustom"
+                    data-pagination="false"
+                    data-height="500"
+                    data-sort-name="nombre"
+                    data-sort-order="desc"
+                    data-toolbar="#voluntariesAcceptedToolbar">
+                        <thead>
+                            <tr>
+                            <th data-checkbox="true"></th>
+                            <th class="d-none" data-field="id_jornada">ID Jornada</th>
+                            <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
+                            <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
+                            <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                            <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
+                            <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
+                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                            <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                            <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
+                            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                            <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                            <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
+                            <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
+                            <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer mr-auto">
