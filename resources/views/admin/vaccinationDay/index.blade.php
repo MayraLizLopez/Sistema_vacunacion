@@ -61,18 +61,8 @@
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Jornada de vacunación</h1>
 <p class="mb-4">La siguiente vista muestra la tabla de todas las jornadas activas, así como la creación y edición de las mismas.</p>
 
-
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inicio</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Voluntarios aceptados</a>
-    </li>
-  </ul>
-
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+<div class="card shadow mb-4">
+    <div class="card-body">
         <div id="toolbar1">
             <div class="form-inline" role="form">
                 <button type="button" class="btn btn-primary" id="createVaccinationDay">
@@ -83,106 +73,34 @@
         </div>
         
         <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-body">
-                <div class="table-responsive">           
-                    <table id="vaccinationDayTable" class="table table-striped table-bordered"
-                    data-pagination="true"
-                    data-single-select="true"
-                    data-click-to-select="true"
-                    data-search="true"
-                    data-page-size="5"
-                    data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
-                    data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#toolbar1">
-                        <thead>
-                          <tr>
-                            <th class="d-none" data-radio="true"></th>
-                            <th class="d-none" data-field="id_jornada">ID</th>    
-                            <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
-                            <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
-                            <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
-                            <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
-                            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                            <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
-                            <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
-                          </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
+        <div class="table-responsive">           
+            <table id="vaccinationDayTable" class="table table-striped table-bordered"
+            data-pagination="true"
+            data-single-select="true"
+            data-click-to-select="true"
+            data-search="true"
+            data-page-size="5"
+            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+            data-sort-name="nombre"
+            data-sort-order="desc"
+            data-toolbar="#toolbar1">
+                <thead>
+                    <tr>
+                    <th class="d-none" data-radio="true"></th>
+                    <th class="d-none" data-field="id_jornada">ID</th>    
+                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                    <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
+                    <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
+                    <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
+                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                    <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
+                    <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-
-            <div id="voluntariesAcceptedToolbar">
-                <div class="form-inline" role="form">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Folio" id="inSearchByFolio">
-                    </div>
-
-                    <div class="form-group ml-1">
-                        <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
-                    </div>
-
-                    <div class="form-group ml-1">
-                        <button type="button" class="btn btn-primary" id="btnRejectEmail" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
-                            <i class="far fa-envelope"></i>
-                            <span class="item-label">Cancelación</span>
-                        </button>      
-                    </div>
-
-                    <div class="form-group ml-1">
-                        <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
-                            <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
-                            <span class="item-label">Agregar horas</span>                 
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DataTales Example -->
-            <div class="card shadow mb-4">
-                <div class="card-body">
-                    <div class="table-responsive">           
-                        <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
-                        data-pagination="true"
-                        data-search-selector="#inSearchCustom"
-                        data-page-size="5"
-                        data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
-                        data-sort-name="nombre"
-                        data-sort-order="desc"
-                        data-toolbar="#voluntariesAcceptedToolbar">
-                            <thead>
-                              <tr>
-                                <th data-checkbox="true"></th>
-                                <th class="d-none" data-field="id_jornada">ID Jornada</th>
-                                <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
-                                <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
-                                <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
-                                <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                                <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
-                                <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                                <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                                <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                                <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
-                                <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                                <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                                <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
-                                <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
-                                <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
-                              </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-  </div>
+</div>
 
 <div id="modalCreateVaccinationDay" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -557,7 +475,7 @@
     </div>
 </div>
 
-  <div id="modalEditarHoras" class="modal" tabindex="-1" role="dialog">
+<div id="modalEditarHoras" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog horas modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -618,6 +536,83 @@
     </div>
 </div>
 
+<div id="modalJornadasAceptadas" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios Aceptados</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div id="voluntariesAcceptedToolbar">
+                    <div class="form-inline" role="form">
+                        <div class="form-group ml-1">
+                            <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
+                        </div>
+    
+                        <div class="form-group ml-1">
+                            <button type="button" class="btn btn-primary" id="btnRejectEmail" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
+                                <i class="far fa-envelope"></i>
+                                <span class="item-label">Cancelación</span>
+                            </button>      
+                        </div>
+    
+                        <div class="form-group ml-1">
+                            <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
+                                <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
+                                <span class="item-label">Agregar horas</span>                 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">           
+                            <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
+                            data-pagination="true"
+                            data-search-selector="#inSearchCustom"
+                            data-page-size="5"
+                            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+                            data-sort-name="nombre"
+                            data-sort-order="desc"
+                            data-toolbar="#voluntariesAcceptedToolbar">
+                                <thead>
+                                  <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th class="d-none" data-field="id_jornada">ID Jornada</th>
+                                    <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
+                                    <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
+                                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                                    <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                                    <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
+                                    <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
+                                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                                    <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                                    <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
+                                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                                    <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                    <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
+                                    <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
+                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
+                                  </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mr-auto">
+                <button id="agregarHoras" class="btn btn-success botonEnviar" type="submit">Guardar</button>
+                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
@@ -656,15 +651,6 @@
         }
 
         function startEvents(){
-            $('#inSearchByFolio').on('keypress', (event) => {
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-                if(keycode == '13'){
-                    if($('#inSearchByFolio').val().length > 0){
-                        getAllVolunteersAccepted($('#inSearchByFolio').val());
-                    }                
-                }               
-            });
-
             $('#inFile').on('change', (e) => {
                 let fileNames = e.target.files;
                 let names = [];
@@ -1628,6 +1614,9 @@
             return [
             '<a class="email mr-2" href="javascript:void(0)" title="Email">',
                 '<i class="far fa-envelope"></i>',
+            '</a>',
+            '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
+            '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',                
             '<a class="edit mr-2" href="javascript:void(0)" title="Editar">',
                 '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
@@ -1701,6 +1690,15 @@
 
             'click .email': function (e, value, row, index) {
                 getJornadaDetailForEmails(row.id_jornada);
+            },
+
+            'click .detail': function (e, value, row, index) {
+                $('#modalJornadasAceptadas').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                getAllVolunteersAccepted(row.folio);
             }
         }
 
