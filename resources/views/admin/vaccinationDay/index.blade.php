@@ -565,6 +565,13 @@
                                 <span class="item-label">Agregar horas</span>                 
                             </a>
                         </div>
+
+                        <div class="form-group ml-1">
+                            <a class="btn btn-success btn-table" id="btnExportToExcel" data-bs-toggle="tooltip" data-bs-placement="top" title="Generar reporte">
+                                <img class="mx-2" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 20px; height: 20px"/>
+                                <span class="item-label">Generar reporte</span>                 
+                            </a>
+                        </div>
                     </div>
                 </div>
     
@@ -614,6 +621,7 @@
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/bootstrap-table-es-MX.js') }}"></script>
+    <script src="{{ asset('public/assets/js/xls-export.js') }}"></script>
     <script>
         let $vaccinationDayTable = $('#vaccinationDayTable');
         let $voluntariesTable = $('#voluntariesTable');
@@ -627,6 +635,7 @@
         let idJornada = 0;
         let total_horas = 0;
         let difhoras = 0;
+        let voluntariosData = [];
 
         $(document).ready(()=>{
             getAllJornadas();
@@ -914,6 +923,26 @@
                         confirmButtonText: 'Aceptar'
                         });
                 }
+            });
+            
+            $('#btnExportToExcel').on('click', () => {
+                let today = new Date();
+
+                const xls = new xlsExport(
+                    voluntariosData, 
+                    'Jornadas'
+                );
+
+                xls.exportToXLS(
+                    'reporte voluntarios por jornadas_' 
+                    + today.getDay() 
+                    + '-' + (today.getMonth() + 1) 
+                    + '-' +today.getFullYear()
+                    + ' ' +today.getHours()
+                    + '.' +today.getMinutes()
+                    + '.' +today.getSeconds()
+                    + '.xls'
+                );
             });     
         }
 
@@ -985,6 +1014,26 @@
                 success: function (response) {
                     // console.log(response.data);
                     if(response.data != []){
+
+                        let voluntarios = response.data.map(item => {
+                            let data = {
+                                'Nombre': item.nombre,
+                                'Apellido Paterno': item.ape_pat,
+                                'Apellido Materno': item. ape_mat,
+                                'Email': item.email,
+                                'Teléfono': item.tel,
+                                'CURP': item.curp,
+                                'Municipio': item.nombre_municipio,
+                                'Institución': item.nombre_institucion,
+                                'Turno': item.turno,
+                                'Horas': item.horas
+                            };
+                            return data;
+                        });
+
+                        voluntariosData = [];
+                        voluntariosData = voluntarios;
+
                         $voluntariesAcceptedTable.bootstrapTable('destroy');
                         $voluntariesAcceptedTable.bootstrapTable({data: response.data});
                     }else{
