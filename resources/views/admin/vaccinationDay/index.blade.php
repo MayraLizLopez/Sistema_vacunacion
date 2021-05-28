@@ -569,35 +569,37 @@
                 </div>
     
                 <!-- DataTales Example -->
-                <div class="table">           
-                    <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
-                    data-search-selector="#inSearchCustom"
-                    data-pagination="false"
-                    data-height="500"
-                    data-sort-name="nombre"
-                    data-sort-order="desc"
-                    data-toolbar="#voluntariesAcceptedToolbar">
-                        <thead>
-                            <tr>
-                            <th data-checkbox="true"></th>
-                            <th class="d-none" data-field="id_jornada">ID Jornada</th>
-                            <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
-                            <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
-                            <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
-                            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                            <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
-                            <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                            <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                            <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
-                            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                            <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                            <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
-                            <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
-                            <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
-                            </tr>
-                        </thead>
-                    </table>
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="table-responsive">           
+                            <table id="voluntariesAcceptedTable" class="table table-striped table-bordered"
+                            data-search-selector="#inSearchCustom"
+                            data-sort-name="nombre"
+                            data-sort-order="desc"
+                            data-toolbar="#voluntariesAcceptedToolbar">
+                                <thead>
+                                  <tr>
+                                    <th data-checkbox="true"></th>
+                                    <th class="d-none" data-field="id_jornada">ID Jornada</th>
+                                    <th class="d-none" data-field="id_detalle_jornada">ID Jornada</th>
+                                    <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
+                                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                                    <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
+                                    <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
+                                    <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
+                                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                                    <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
+                                    <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
+                                    <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
+                                    <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                    <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
+                                    <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
+                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
+                                  </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer mr-auto">
@@ -631,6 +633,14 @@
             startEvents();
 
             $voluntariesAcceptedTable.bootstrapTable({data: []});
+
+            $(document).on('show.bs.modal', '.modal', function (event) {
+                let zIndex = 1040 + (10 * $('.modal:visible').length);
+                $(this).css('z-index', zIndex);
+                setTimeout(function() {
+                    $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+                }, 0);
+            });
         });
 
         function defaultValues(actionType){
@@ -859,10 +869,22 @@
             });
 
             $('#btnLoadHours').on('click', () => {
-                $('#modalLoadHours').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
+                let idsDetalleJornadas = $voluntariesAcceptedTable.bootstrapTable('getSelections').map(element => element.id_detalle_jornada);
+                
+                if(idsDetalleJornadas.length > 0){
+                    $('#modalLoadHours').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+                } else {
+                    Swal.fire({
+                        title: '¡Advertencia!',
+                        text: 'Debe seleccionar al menos un voluntario',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
+                }
             });
          
             $('#agregarHorarMuti').on('click', () => {
