@@ -1348,7 +1348,7 @@
                     Swal.fire({
                         showConfirmButton: false,
                         imageUrl: "{{ asset('public/assets/images/loading.png') }}",
-                        title: 'Por favor espere.',
+                        title: 'Por favor espere. Este proceso puede tardar varios minutos.',
                         text: 'enviando correo(s)',
                         allowOutsideClick: false,
                         allowEscapeKey: false,

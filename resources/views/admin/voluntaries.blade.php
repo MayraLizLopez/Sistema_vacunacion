@@ -819,10 +819,14 @@
         }
 
         function operateFormatter(value, row, index) {
+            let actionButton = '';
+            if(row.activo == 1){
+                actionButton = '<a class="edit_horas mr-2" href="javascript:void(0)" title="Editar horas voluntario">'
+                +'<img src="{{ asset('public/assets/images/reloj_azul.svg')}}" style="width: 15px; padding:0px;"/>'
+                +'</a>';
+            } 
             return [
-            '<a class="edit_horas mr-2" href="javascript:void(0)" title="Editar horas voluntario">',
-            '<img src="{{ asset('public/assets/images/reloj_azul.svg')}}" style="width: 15px; padding:0px;"/>',
-            '</a>',
+            actionButton,
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
             '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',

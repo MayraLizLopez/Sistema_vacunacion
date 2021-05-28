@@ -107,20 +107,20 @@
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Jornadas</span></a>
                     </li>
 
-                    <!-- Divider -->
-                    {{-- <hr class="sidebar-divider my-0"> --}}
-                    <li class="nav-item active">
-                        <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
-                        <span style="font-family: nutmeg-bold; font-size:20px;">Usuarios</span></a>
-                    </li>
-
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
                         <img class="mx-2" src="{{ asset('public/assets/images/menu_centros.svg')}}" style="width: 20px;"/>
                         <span  style="font-family: nutmeg-bold; font-size:18px;">Sedes</span></a>
+                    </li>
+
+                    <!-- Usuarios -->
+                    {{-- <hr class="sidebar-divider my-0"> --}}
+                    <li class="nav-item active">
+                        <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
+                        <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
+                        <span style="font-family: nutmeg-bold; font-size:20px;">Panel de Usuarios</span></a>
                     </li> 
                 @else
                     <!-- Divider -->

@@ -16,6 +16,8 @@ use App\Mail\ConfirmJornada;
 use App\Models\AnexoJornada;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 
 class VaccinationDayController extends Controller
 {
@@ -621,7 +623,7 @@ class VaccinationDayController extends Controller
                 }
 
                 $data = [
-                    'uuid' => $detalle_jornada->uuid,
+                    'uuid' => $detalle_jornadas->uuid,
                     'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
                     'id_voluntario' => $voluntario->id_voluntario, 
                     'id_jornada' => $detalle_jornadas->id_jornada,
@@ -632,7 +634,8 @@ class VaccinationDayController extends Controller
                     'anexos' => $anexos,
                 ];
                 
-                Mail::to($voluntario->email)->send(new ConfirmJornada($data));
+                //Mail::to($voluntario->email)->send(new ConfirmJornada($data));
+                Limit::perMinute(50)->by(Mail::to($voluntario->email)->send(new ConfirmJornada($data)));
                  
                 for($k = 0; $k < count($sedes); $k++){
                     $editarJornada = DetalleJornada::findOrFail($sedes[$k]->id_detalle_jornada);
@@ -663,6 +666,7 @@ class VaccinationDayController extends Controller
             ];
             
             Mail::to($voluntario->email)->send(new CancelarJornada($data));
+            
         }
 
         return response()->json([
