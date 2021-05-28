@@ -321,4 +321,25 @@ class UsuarioController extends Controller
             ]);    
         }
     }
+
+    /**
+     * Método que cambia el estatus del campo aviso a true(1) cuando el administrador general o enlace aceptan el aviso de privacidad
+     */
+    public function aceptarAviso($id){
+        $user = Usuario::findOrFail($id);
+        $user->aviso = true;
+        $save = $user->save();
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Aceptaste el aviso de privacidad!'
+            ]);    
+        }else{
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡error al aceptar el aviso de privacidad!'
+            ]);
+        }
+
+    }
 }

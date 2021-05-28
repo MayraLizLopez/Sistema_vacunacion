@@ -109,7 +109,6 @@ class VoluntarioController extends Controller
         $voluntario->fecha_nacimiento = $request->fecha_nacimiento;
         $voluntario->tel = $request->tel;
         $voluntario->email = $request->email;
-        $voluntario->activo = false;
         $voluntario->eliminado = false;
         $voluntario->fecha_creacion = Carbon::now();
         $save = $voluntario->save();
@@ -214,7 +213,6 @@ class VoluntarioController extends Controller
         $voluntarioEditado->fecha_nacimiento = $request->fecha_nacimiento;
         $voluntarioEditado->tel = $request->tel;
         $voluntarioEditado->email = $request->email;
-        $voluntarioEditado->activo = false;
         $voluntarioEditado->eliminado = false;
         $voluntarioEditado->fecha_edicion = Carbon::now();
         $save = $voluntarioEditado->save();
