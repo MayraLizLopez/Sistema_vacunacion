@@ -623,7 +623,7 @@ class VaccinationDayController extends Controller
                 }
 
                 $data = [
-                    'uuid' => $detalle_jornada->uuid,
+                    'uuid' => $detalle_jornadas->uuid,
                     'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
                     'id_voluntario' => $voluntario->id_voluntario, 
                     'id_jornada' => $detalle_jornadas->id_jornada,
