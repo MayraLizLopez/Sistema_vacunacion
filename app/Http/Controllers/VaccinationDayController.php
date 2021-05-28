@@ -725,6 +725,11 @@ class VaccinationDayController extends Controller
                 if($save){
                     return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
                 }
+            }else{
+                $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+                $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+                $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
+                return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();

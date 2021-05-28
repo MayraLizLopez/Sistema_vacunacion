@@ -206,4 +206,6 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/users/create', [UsuarioController::class, "createAdmin"])->name('createUser');
 
     Route::get('admin/panel/users/edit/{id_user}', [UsuarioController::class, "edit"])->name('editarUser');
+
+    Route::get('admin/panel/aceptarAviso/{id_user}', [UsuarioController::class, "aceptarAviso"])->name('aceptarAviso');
 });
