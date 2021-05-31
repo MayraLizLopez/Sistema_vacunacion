@@ -819,7 +819,7 @@
 
                         updVaccinationDay(form, 'edit');
 
-                        if(anexoFiles.files != []){
+                        if(anexoFiles.files.length > 0){
                             for(let i = 0; i < anexoFiles.files.length; i++){
                                 if(anexoFiles.files[i].size <= 2097152){ // 2MB
                                     filesForm.set('id_jornada', idJornada);
@@ -1138,9 +1138,13 @@
                 url: "vaccinationDay/getFilesJornada/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    if(response.data != []){
+                    console.log(response);
+
+                    if(response.data.length > 0){
                         let filesName = response.data.map(item => item.nombre);
                         $('#editInFile').next('.custom-file-label').html(filesName.join(', '));
+                    } else {
+                        $('#editInFile').next('.custom-file-label').html('Cada uno de los archivos no deben ser mayor a 2MB, de lo contrario estos no se guardaran.');
                     }
                 },
                 error: function (error, resp, text) {
@@ -1342,7 +1346,7 @@
         }
 
         function updAnexos(data){
-            console.log(data.get('file'));
+            // console.log(data.get('file'));
             $.ajax({
                 url: "vaccinationDay/updateFiles",
                 type: "POST",
