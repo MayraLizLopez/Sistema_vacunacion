@@ -58,7 +58,7 @@
 
 
 <!-- Page Heading -->
-<h1 class="h3 mb-2 font-weight-bold text-gray-800">Agregar centro de vacunación</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Agregar sede de vacunación</h1>
 <p class="mb-4"> </p>
 
 <!-- DataTales Example -->
@@ -69,7 +69,7 @@
     <script>    
         Swal.fire({
             title: '¡Registro completado!',
-            text: '¡El centro fue registrado correctamente!',
+            text: '¡La sede fue registrado correctamente!',
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Aceptar'
@@ -86,7 +86,7 @@
     <script>    
         Swal.fire({
             title: '¡Error!',
-            text: 'Al registrar el centro',
+            text: 'Al registrar la sede',
             icon: 'error',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Aceptar'
@@ -96,7 +96,7 @@
 @endif 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos del centro</h5>
+            <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos de la sede</h5>
         </div>
         <div class="card-body">
             <div class="content">
@@ -176,7 +176,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="nameVoluntary">Telefóno del encargado</label>
+<<<<<<< HEAD
                             <input type="text" class="form-control" id="nameVoluntary" data-mask="000 000 0000" name="tel_encargado" placeholder="Teléfono"/>
+=======
+                            <input type="text" class="form-control" id="nameVoluntary" name="tel_encargado" data-mask="000 000 0000" placeholder="Teléfono"/>
+>>>>>>> origin/master
                         </div>
                     </div>
                     <div class="col-md-4">

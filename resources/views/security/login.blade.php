@@ -89,13 +89,42 @@
             width: 95%;
             padding-top:20px;
         }
+
+        body {
+            background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');
+        }
+
+        #marco{
+            margin-top: 15vh;
+        }
+
+        @media only screen and (max-width: 1100px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoLogin_1100x670.png')}}');
+            }
+            #marco{
+                margin-top: 5vh;
+            }
+        }
+
+        @media only screen and (max-width: 770px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoLogin_720x1080.png')}}');
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            body {
+                background-image: url('{{ asset('public/assets/images/FondoLogin_414x737.png')}}');
+            }
+        }
 </style>
 
-<body class="background-login" style="background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');">
+<body class="background-login">
     <div class="container">
 
         <!-- Outer Row -->
-        <div class="row justify-content-center" style="margin-top: 15vh;">
+        <div class="row justify-content-center" id="marco">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
@@ -132,13 +161,17 @@
                                                 <img class="ojo" onclick="mostrar()" src="{{ asset('public/assets/images/ojo.svg')}}" style="width: 25px; float: right; margin-left: -65px !important; margin-right: 15px; margin-top: -27px; position: relative; z-index: 2;"/>
                                                 <span class="text-danger">@error('password') Ingresa una contraseña @enderror </span>
                                         </div>
-
-                                        <div class="form-group">
+                                        <center>
+                                            <div class="form-group">
+                                                <a href="{{route('password')}}" style="color: #1877f2;">¿Olvidaste tu contraseña?</a>
+                                            </div>
+                                        </center>
+                                        <!-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck"> 
                                                 <label class="custom-control-label" for="customCheck">Recordar mis datos</label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <center>
                                             <button type="submit" class="btn btn-success" style="font-family: montserrat; font-weight: bold; font-size: 15px; width:184px;">
                                                 Entrar

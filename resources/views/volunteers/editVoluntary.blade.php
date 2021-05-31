@@ -189,8 +189,11 @@
                                         <label for="townVoluntary">Institución</label>
                                         @if ($LoggedUserInfo['rol'] == 'Administrador General')
                                             <select class="form-control" id="instututionVoluntary" name="id_insti">
+                                                <option value="{{$voluntarioEdit->id_insti}}">{{$institucion_select}}</option>
                                                 @foreach ($instituciones as $institucion)
+                                                    @if ($institucion_select != $institucion->nombre)
                                                     <option value="{{$institucion->id_insti}}">{{$institucion->nombre}} </option>
+                                                    @endif
                                                 @endforeach
                                                 <span class="text-danger">@error('id_insti'){{ 'Seleccione una institución' }} @enderror </span>
                                             </select>

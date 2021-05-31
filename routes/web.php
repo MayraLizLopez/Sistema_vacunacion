@@ -45,6 +45,12 @@ Route::get('emailRechazar/{uuid}', [VaccinationDayController::class, "rechazarJo
 
 Route::get('emailAceptar/{uuid}', [VaccinationDayController::class, "aceptarJornada"]);
 
+Route::get('emailAceptar/guardar/{uuid}/{turno}', [VaccinationDayController::class, "guardarTurno"])->name('guardarTurno');
+
+Route::get('security/password', [LoginController::class, "password"])->name('password');
+
+Route::get('security/sendPassword/{email}/{pass}', [LoginController::class, "restartPassword"])->name('sendPassword');
+
 //seguridad
 Route::group(['middleware' =>['AuthCheck']], function(){
     //login
@@ -90,6 +96,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::get('admin/panel/voluntario/detalles/{id_voluntario}', [VoluntarioController::class, "getDetalleVoluntario"])->name('getDetalleVoluntario');
 
+    Route::get('admin/panel/voluntario/editarHoras/{id_voluntaro}/{horas}', [VoluntarioController::class, "editarHoras"])->name('editarHoras');
+
     //Instituciones
     Route::get('admin/panel/institutions', [InstitucionController::class, "show"])->name('tabla_insti');
 
@@ -109,7 +117,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/vaccinationDay/getVoluntariesByInstitution', [VaccinationDayController::class, "getVoluntariesByInstitution"])->name('getVoluntariesByInstitution');
 
-    Route::get('admin/panel/vaccinationDay/getJornadaDetail/{id_jornada}', [VaccinationDayController::class, "getJornadaDetail"])->name('getJornadaDetail');
+    Route::get('admin/panel/vaccinationDay/getJornadaDetailForEmails/{id_jornada}', [VaccinationDayController::class, "getJornadaDetailForEmails"])->name('getJornadaDetailForEmails');
 
     Route::get('admin/panel/vaccinationDay/getJornadaDetailForEmails/{id_jornada}', [VaccinationDayController::class, "getJornadaDetailForEmails"])->name('getJornadaDetailForEmails');
 
@@ -126,6 +134,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::post('admin/panel/vaccinationDay/updateFiles/', [VaccinationDayController::class, "updateFiles"])->name('updateFiles');
 
     Route::get('admin/panel/vaccinationDay/show/', [VaccinationDayController::class, "show"])->name('show');
+
+    Route::get('admin/panel/vaccinationDay/getAllVolunteersAccepted/{folio}', [VaccinationDayController::class, "getAllVolunteersAccepted"])->name('getAllVolunteersAccepted');
 
     Route::post('admin/panel/vaccinationDay/destroy/', [VaccinationDayController::class, "destroy"])->name('destroy');
 
@@ -144,6 +154,10 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/vaccinationDay/downloadFiles/', [VaccinationDayController::class, "downloadFiles"])->name('downloadFiles');
 
     Route::post('admin/panel/vaccinationDay/sendemail/', [VaccinationDayController::class, "enviarCorreoJornada"])->name('enviarCorreo');
+
+    Route::post('admin/panel/vaccinationDay/sendrejectemail/', [VaccinationDayController::class, "enviarCorreoCancelacionJornada"])->name('enviarCorreoCancelacion');
+
+    Route::post('admin/panel/vaccinationDay/agregarQuitarHoras/', [VaccinationDayController::class, "agregarQuitarHoras"])->name('agregarQuitarHoras');
     
     //Perfil
     Route::get('admin/panel/profile', [UsuarioController::class, "show"])->name('perfil');
@@ -194,4 +208,6 @@ Route::group(['middleware' =>['AuthCheck']], function(){
     Route::get('admin/panel/users/create', [UsuarioController::class, "createAdmin"])->name('createUser');
 
     Route::get('admin/panel/users/edit/{id_user}', [UsuarioController::class, "edit"])->name('editarUser');
+
+    Route::get('admin/panel/aceptarAviso/{id_user}', [UsuarioController::class, "aceptarAviso"])->name('aceptarAviso');
 });

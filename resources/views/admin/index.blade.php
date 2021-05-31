@@ -16,7 +16,45 @@
             font-family: montserrat;
             src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
         }
+      
+        button{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
 
+        #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        .botonEnviar{
+            margin-right: 16px;
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+        h1{
+            font-family: nutmeg-bold;
+        }
+
+        h5{
+            font-family: nutmeg-bold;
+        }
+        
+        label{
+            font-family: montserrat;
+        }
+        
+        input{
+            font-family: montserrat;
+        }
+
+        a{
+            font-family: montserrat;
+        }
         
     </style>
 
@@ -102,7 +140,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-mb font-weight-bold" style="color:#54A583; font-family: nutmeg-bold; font-size: 18px;" >
-                                Centros</div>
+                                Sedes</div>
                             <div class="h5 mb-0 font-weight-bold" style="color:#6A7379">{{ $centros }}</div>
                         </div>
                         <div class="col-auto">
@@ -190,6 +228,11 @@
         </div>           
     @endif
         
+    <div class="row">
+        <div class="col-xl-4 col-md-4 mb-4">
+            <a class="btn btn-success" href="{{route('aviso')}}" target="_blank" rel="noopener noreferrer">Aviso de Privacidad</a>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-xl-4 col-md-4 mb-4">
@@ -202,6 +245,42 @@
         <div class="col-xl-4 col-md-4 mb-4">
         </div>
     </div>
+
+
+
+
+    <!-- Modal Aviso provacidad horas a voluntarios-->
+<div id="modalAviso" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Aviso de privacidad</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+            </button> -->
+            <a href="{{ route('logout')}}"><img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/></a>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="row align-items-center">
+                            Se informa que el enlace que se tenga a bien designar por parte de su institución, deberá guardad la debida confidencialidad de la información y/o documentación a la cual se tenga acceso con motivo de la ejecución de su designación, la cual deberá ser utilizada única y exclusivamente para los fines de la misma, comprometiéndose a hacerse responsables de su resguardo y buen uso.
+                            Asimismo, se obligan a cumplir con la legislación vigente en materia de protección de datos personales, por lo que garantizaran que aplicarán la confidencialidad debida de los datos personales a los cuales se tenga acceso.
+                            </div>
+                        </div>
+                    </div> 
+                </div>  
+            </div>
+            <div class="modal-footer mr-auto">
+                <button id="aceptarAviso" class="btn btn-success botonEnviar" type="submit">Aceptar</button>
+                <a class="btn btn-secondary" id="boton" style="color:white;" href="{{ route('logout')}}">Cancelar</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- Content Row -->
 
@@ -435,3 +514,48 @@
     </div> -->
     @endsection
 <!-- /.container-fluid -->
+@section('scripts')
+    <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
+    <script>
+        if({!! json_encode($LoggedUserInfo['aviso']) !!} == 0){
+            $('#modalAviso').modal({ show: true });    
+        }
+
+         /**
+        * Método para guardar las horas del voluntario
+        */
+        $('#aceptarAviso').on('click', () => {
+            $.ajax({
+                url: "aceptarAviso/" + {!! json_encode($LoggedUserInfo['id_user']) !!},
+                type: "GET",
+                success: function (response) {
+                    //console.log(response);
+                    $('#modalAviso').modal('hide');
+                    if(response.isOk == true){
+                        Swal.fire({
+                        title: response.message,
+                        icon: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
+                    }else{
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: response.message,
+                            icon: 'error',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                            });
+                    }
+                    
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+                
+            
+        });
+        
+    </script>
+@endsection

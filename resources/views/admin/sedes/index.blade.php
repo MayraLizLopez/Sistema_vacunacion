@@ -4,11 +4,11 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 font-weight-bold text-gray-800">Centros de Vacunación</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Sedes de Vacunación</h1>
 <p class="mb-4">La siguiente tabla contiene todos los centros de vacunación registrados</p>
 <div id="toolbar">
     <div class="form-inline">
-        <a class="btn btn-primary" style="color:white;" href="{{route('createSede')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Agregar centro</a>
+        <a class="btn btn-primary" style="color:white;" href="{{route('createSede')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Agregar sede</a>
     </div>
 </div>
 <!-- DataTales Example -->
@@ -50,7 +50,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="m-0 font-weight-bold text-primary">Información del centro</h5>
+                <h5 class="m-0 font-weight-bold text-primary">Información de la sede</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 20px;"/>
                 </button>
@@ -367,5 +367,5 @@
 
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvIjiJbFWxtsjZnXzcr_UTolRreZRVkUo&libraries=&v=weekly" async></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArelYYPGecMIlIwE5UUmC_e5FJr6qBh8M&libraries=&v=weekly" async></script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CancelarJornada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -15,6 +16,8 @@ use App\Mail\ConfirmJornada;
 use App\Models\AnexoJornada;
 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Support\Facades\RateLimiter;
 
 class VaccinationDayController extends Controller
 {
@@ -245,9 +248,9 @@ class VaccinationDayController extends Controller
             DB::raw('COUNT(DISTINCT detalle_jornadas.id_voluntario) as total_voluntarios'),
             DB::raw("group_concat(DISTINCT sedes.nombre SEPARATOR ', ') as nombres_sedes"))
         ->where('jornadas.activo', '=', true)
+        ->orderByDesc('jornadas.fecha_creacion')
         ->groupBy('jornadas.id_jornada', 'id_municipio')
         ->get();
-
 
         return response()->json([
             'data' => $jornadas        
@@ -287,6 +290,10 @@ class VaccinationDayController extends Controller
 
     public function getVoluntariesByInstitution(Request $request){
         $voluntarios = DB::table('detalle_jornadas')
+<<<<<<< HEAD
+=======
+        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+>>>>>>> origin/master
         ->rightJoin('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -299,14 +306,24 @@ class VaccinationDayController extends Controller
             'voluntarios.tel AS tel',
             'voluntarios.curp AS curp',
             'instituciones.nombre AS nombre_institucion',
+<<<<<<< HEAD
             'municipios.nombre AS nombre_municipio'
         )
         ->whereIn('voluntarios.id_insti', $request->ids_institution)
         ->where('voluntarios.eliminado', 0)
+=======
+            'municipios.nombre AS nombre_municipio',
+            DB::raw('SUM(detalle_jornadas.horas) AS horas')
+        )
+        ->where('voluntarios.eliminado', '=', 0)
+        ->whereIn('voluntarios.id_insti', $request->ids_institution)
+        ->groupBy('voluntarios.id_voluntario')
+>>>>>>> origin/master
         ->distinct()
         ->get();
         
         
+<<<<<<< HEAD
         // DB::table('voluntarios')
         // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -314,6 +331,17 @@ class VaccinationDayController extends Controller
         //  'instituciones.id_municipio AS id_instituciones_municipio',
         //  'instituciones.nombre AS nombre_institucion',
         //  'municipios.nombre AS nombre_municipio')
+=======
+        // $voluntarios = DB::table('voluntarios')
+        // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
+        // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
+        // ->select(
+        //     'voluntarios.*',
+        //     'instituciones.id_municipio AS id_instituciones_municipio',
+        //     'instituciones.nombre AS nombre_institucion',
+        //     'municipios.nombre AS nombre_municipio'
+        //  )
+>>>>>>> origin/master
         // ->where([['eliminado', '=', 0],
         //         ['voluntarios.activo', '=', 0]])
         // ->whereIn('voluntarios.id_insti', $request->ids_institution)
@@ -360,8 +388,7 @@ class VaccinationDayController extends Controller
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select(
-            'id_detalle_jornada',               
+        ->select(              
             'voluntarios.id_voluntario as id_voluntario',
             'voluntarios.nombre AS nombre',
             'voluntarios.ape_pat AS ape_pat',
@@ -370,10 +397,15 @@ class VaccinationDayController extends Controller
             'voluntarios.email AS email',
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio',
+<<<<<<< HEAD
             'detalle_jornadas.horas AS horas'
+=======
+            DB::raw('SUM(detalle_jornadas.horas) AS horas')
+>>>>>>> origin/master
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
         ->where('detalle_jornadas.correo_enviado', '=', 0)
+        ->groupBy('voluntarios.id_voluntario')
         ->get();
 
         return response()->json([
@@ -401,42 +433,59 @@ class VaccinationDayController extends Controller
         ]);
     }
 
-    public function getJornadaDetail($id_jornada){
-        $jornadas = DB::table('detalle_jornadas')
+    public function getAllVolunteersAccepted($folio){
+        $voluntarios = DB::table('detalle_jornadas')
         ->select(
-            'detalle_jornadas.id_voluntario AS id_voluntario',
+            'detalle_jornadas.id_jornada AS id_jornada',
             'detalle_jornadas.id_detalle_jornada AS id_detalle_jornada',
+            'jornadas.folio AS folio',
+            'voluntarios.id_voluntario AS id_voluntario',
             'voluntarios.nombre AS nombre',
             'voluntarios.ape_pat AS ape_pat',
             'voluntarios.ape_mat AS ape_mat',
             'voluntarios.tel AS tel',
             'voluntarios.email AS email',
+            'voluntarios.curp AS curp',
             'instituciones.nombre AS nombre_institucion',
-            'municipios.nombre AS nombre_municipio'
+            'municipios.nombre AS nombre_municipio',
+            'detalle_jornadas.turno AS turno',
+            'detalle_jornadas.horas AS horas'
         )
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
-        ->where('detalle_jornadas.correo_enviado', '=', 0)
+        ->where('detalle_jornadas.activo', '=', 1)
+        ->where('jornadas.folio', '=', $folio)
         ->get();
 
         return response()->json([
-            'data' => $jornadas      
+            'data' => $voluntarios      
         ]);
     }
 
     public function getJornadaDetailForEmails($id_jornada){
         $jornadas = DB::table('detalle_jornadas')
+<<<<<<< HEAD
         ->select('id_detalle_jornada')
         ->where('id_jornada', '=', $id_jornada)
         ->get();
 
+=======
+        ->select(
+            'id_voluntario',
+            'id_detalle_jornada'
+        )
+        ->where('id_jornada', $id_jornada)
+        ->where('correo_enviado', 0)
+        ->get();
+    
+>>>>>>> origin/master
         return response()->json([
             'data' => $jornadas      
         ]);
     }
+<<<<<<< HEAD
 
     // public function getLastJornada(){
     //     $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
@@ -444,6 +493,8 @@ class VaccinationDayController extends Controller
     //         'data' => $jornadas        
     //     ]); 
     // }
+=======
+>>>>>>> origin/master
 
     public function getAllInstitutions()
     {  
@@ -478,6 +529,23 @@ class VaccinationDayController extends Controller
             'data' => $jornadas        
         ]); 
     }
+
+    public function agregarQuitarHoras(Request $request){
+        $horasAteriores = DB::table('detalle_jornadas')->select('id_detalle_jornada','horas')->whereIn('id_detalle_jornada', $request->ids_detalle_jornadas)->get();
+
+        foreach($horasAteriores AS $horaAnterior){
+            $horas = ($horaAnterior->horas + $request->horas);
+            DB::table('detalle_jornadas')
+            ->where('id_detalle_jornada', $horaAnterior->id_detalle_jornada)
+            ->update([
+                'horas' => $horas
+            ]);
+        }
+
+        return response()->json([
+            'mensaje' => 'Las horas han sido guardadas'
+        ]); 
+    }
     /**
      * Método que permite el envio de correos en la vista de jornadas al hacer click sobre el botón "Enviar Correos". El correo enviado es personalizado para cada voluntario
      * permitiendo elegir entre las sedes que de la joranada que fue convocado, así como la opción de rechazar su participación en la jornada. En base de datos cambiara el 
@@ -508,17 +576,112 @@ class VaccinationDayController extends Controller
                 ->where('detalle_jornadas.id_jornada', '=',  $detalle_jornadas->id_jornada)
                 ->where('detalle_jornadas.id_voluntario', '=',  $voluntario->id_voluntario)
                 ->get();
+                $fecha = $jornada->fecha_inicio;
+                $year = substr($fecha, 0, 4);
+                $mes = substr($fecha, 5, 2);
+                $dia = substr($fecha, 8, 2);
+
+                switch ($mes) {
+                    case '01':
+                        $fecha_inicio = $dia.'/enero/'.$year;
+                        break;
+                    case '02':
+                        $fecha_inicio = $dia.'/febrero/'.$year;
+                        break;
+                    case '03':
+                        $fecha_inicio = $dia.'/marzo/'.$year;
+                        break;
+                    case '04':
+                        $fecha_inicio = $dia.'/abril/'.$year;
+                        break;
+                    case '05':
+                        $fecha_inicio = $dia.'/mayo/'.$year;
+                        break;
+                    case '06':
+                        $fecha_inicio = $dia.'/junio/'.$year;
+                        break;
+                    case '07':
+                        $fecha_inicio = $dia.'/julio/'.$year;
+                        break;
+                    case '08':
+                        $fecha_inicio = $dia.'/agosto/'.$year;
+                        break;
+                    case '09':
+                        $fecha_inicio = $dia.'/septiembre/'.$year;
+                        break;
+                    case '10':
+                        $fecha_inicio = $dia.'/octubre/'.$year;
+                        break;
+                    case '11':
+                        $fecha_inicio = $dia.'/noviembre/'.$year;
+                        break;
+                    case '12':
+                        $fecha_inicio = $dia.'/diciembre/'.$year;
+                        break;
+                }
+
+                $fecha = $jornada->fecha_fin;
+                $year = substr($fecha, 0, 4);
+                $mes = substr($fecha, 5, 2);
+                $dia = substr($fecha, 8, 2);
+
+                switch ($mes) {
+                    case '01':
+                        $fecha_fin = $dia.'/enero/'.$year;
+                        break;
+                    case '02':
+                        $fecha_fin = $dia.'/febrero/'.$year;
+                        break;
+                    case '03':
+                        $fecha_fin = $dia.'/marzo/'.$year;
+                        break;
+                    case '04':
+                        $fecha_fin = $dia.'/abril/'.$year;
+                        break;
+                    case '05':
+                        $fecha_fin = $dia.'/mayo/'.$year;
+                        break;
+                    case '06':
+                        $fecha_fin = $dia.'/junio/'.$year;
+                        break;
+                    case '07':
+                        $fecha_fin = $dia.'/julio/'.$year;
+                        break;
+                    case '08':
+                        $fecha_fin = $dia.'/agosto/'.$year;
+                        break;
+                    case '09':
+                        $fecha_fin = $dia.'/septiembre/'.$year;
+                        break;
+                    case '10':
+                        $fecha_fin = $dia.'/octubre/'.$year;
+                        break;
+                    case '11':
+                        $fecha_fin = $dia.'/noviembre/'.$year;
+                        break;
+                    case '12':
+                        $fecha_fin = $dia.'/diciembre/'.$year;
+                        break;
+                }
+
                 $data = [
-                    'uuid' => $detalle_jornada->uuid,
+                    'uuid' => $detalle_jornadas->uuid,
                     'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
                     'id_voluntario' => $voluntario->id_voluntario, 
                     'id_jornada' => $detalle_jornadas->id_jornada,
+                    'fecha_inicio' => $fecha_inicio,
+                    'fecha_fin' => $fecha_fin,
                     'mensaje' => $jornada->mensaje,
                     'sedes' => $sedes,
+<<<<<<< HEAD
                     //'anexos' => $anexos
+=======
+                    'anexos' => $anexos,
+>>>>>>> origin/master
                 ];
                 
-                Mail::to($voluntario->email)->send(new ConfirmJornada($data));
+                //Mail::to($voluntario->email)->send(new ConfirmJornada($data));
+                Limit::perMinute(50)->by(Mail::to($voluntario->email)->send(new ConfirmJornada($data)));
                  
                 for($k = 0; $k < count($sedes); $k++){
                     $editarJornada = DetalleJornada::findOrFail($sedes[$k]->id_detalle_jornada);
@@ -534,25 +697,74 @@ class VaccinationDayController extends Controller
 
     }
 
+    public function enviarCorreoCancelacionJornada(Request $request){ 
+        $jornada = DB::table('jornadas')->where('id_jornada', '=', $request->id_jornada)->first();
+
+        for ($j = 0; $j < count($request->ids_detalle_jornada); $j++) {
+            $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornada[$j])->first();
+            $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detalle_jornadas->id_voluntario)->first();
+
+            $data = [
+                'nombre' => $voluntario->nombre . ' ' . $voluntario->ape_pat . ' ' . $voluntario->ape_mat,
+                'fecha_inicio' => $jornada->fecha_inicio,
+                'fecha_fin' => $jornada->fecha_fin,
+                'mensaje' => $request->mensaje
+            ];
+            
+            Mail::to($voluntario->email)->send(new CancelarJornada($data));
+            
+        }
+
+        return response()->json([
+            'mensaje' => 'Correos enviados',
+        ]); 
+    }
+
     /**
      * Método que permite al voluntario rechazar la jornada cambiado el estatus del campo activo de la tabla detalle_jornadas, por false(0) indicando que se rechazo la jornada.
      */
     public static function rechazarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+<<<<<<< HEAD
+=======
+        if($detallejornada == null){
+            return view('volunteers.paginaError');
+        }
+>>>>>>> origin/master
         if($detallejornada->horas == 0){
             $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
             for ($i=0; $i<count($detalles); $i++){
                 $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
                 $jornada->activo = false;
+<<<<<<< HEAD
                 $save = $jornada->save();   
             }
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+=======
+                $jornada->turno = null;
+                $save = $jornada->save();   
+            }
+            $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+            $activo = DB::table('detalle_jornadas')->where('id_voluntario', '=', $detallejornada->id_voluntario)->where('activo', '=', 1)->first();
+            if($activo == null){
+                $volu = Voluntario::findOrFail($detallejornada->id_voluntario);
+                $volu->activo = false;
+                $volu->save();
+            }
+>>>>>>> origin/master
             if($save){
                 return view('volunteers.rechazarJornada', compact('voluntario'));
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+<<<<<<< HEAD
             return view('volunteers.rechazarJornada', compact('voluntario'));
+=======
+            $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
+            $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+            $turno = $detallejornada->turno;
+            return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
+>>>>>>> origin/master
         }
         
     }
@@ -563,32 +775,89 @@ class VaccinationDayController extends Controller
      */
     public static function aceptarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+<<<<<<< HEAD
+=======
+        if($detallejornada == null){
+            return view('volunteers.paginaError');
+        }
+>>>>>>> origin/master
         if($detallejornada->horas == 0){
             if($detallejornada->activo == null){
                 $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
                 for ($i=0; $i<count($detalles); $i++){
                     $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
                     $jornada->activo = false;
+<<<<<<< HEAD
+=======
+                    $jornada->turno = null;
+>>>>>>> origin/master
                     $save = $jornada->save();   
                 }
                 $jornada = DetalleJornada::findOrFail($detallejornada->id_detalle_jornada);
                 $jornada->activo = true;
                 $save = $jornada->save();
+<<<<<<< HEAD
                 $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
+=======
+                $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+>>>>>>> origin/master
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
                 $voluntarioActivo = Voluntario::findOrFail($detallejornada->id_voluntario);
                 $voluntarioActivo->activo = true;
                 $voluntarioActivo->save();
                 $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
                 if($save){
+<<<<<<< HEAD
                     return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
                 }
+=======
+                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+                }
+            }else{
+                $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+                $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+                $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
+                if($detallejornada->turno == null){
+                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+                }else{
+                    $turno = $detallejornada->turno;
+                    return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
+                }
+                
+>>>>>>> origin/master
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
             $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
+<<<<<<< HEAD
             $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
             return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
+=======
+            $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+            $turno = $detallejornada->turno;
+            return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
+        }
+    }
+
+    /**
+     * Método que permite al voluntario seleccionar el turno de su preferencia para la jornada.
+     */
+    public static function guardarTurno($uuid, $turno){
+        $detalle = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+        $detallejornada = DetalleJornada::findOrFail($detalle->id_detalle_jornada);
+        $detallejornada->turno = $turno;
+        $save = $detallejornada->save();
+        if($save){
+            return response()->json([
+                'isOk' => true,
+                'message' => '¡Elegiste el turno '.$turno.', este se guardo exitosamente!'
+            ]); 
+        }else{
+            return response()->json([
+                'isOk' => true,
+                'message' => 'Error al intentar guardar el turno'       
+            ]); 
+>>>>>>> origin/master
         }
     }
 }
