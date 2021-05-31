@@ -1223,9 +1223,20 @@
                             id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada
                         };
                     });
-                    //console.log(jornadaData);¿
-                    let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
-                    enviarCorreoJornada(ids_detalle_jornadas);
+
+                    // console.log(jornadaData);
+
+                    if(jornadaData.length > 0){
+                        let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
+                        enviarCorreoJornada(ids_detalle_jornadas);
+                    } else {
+                        Swal.fire({
+                        title: 'Sin correos pendientes',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
@@ -1421,7 +1432,18 @@
                     //console.log(response);
                 },
                 error: function (error, resp, text) {
-                    console.error(error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        console.error(error);
                 }
             });
         }

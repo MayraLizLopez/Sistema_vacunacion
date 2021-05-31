@@ -248,9 +248,9 @@ class VaccinationDayController extends Controller
             DB::raw('COUNT(DISTINCT detalle_jornadas.id_voluntario) as total_voluntarios'),
             DB::raw("group_concat(DISTINCT sedes.nombre SEPARATOR ', ') as nombres_sedes"))
         ->where('jornadas.activo', '=', true)
+        ->orderByDesc('jornadas.fecha_creacion')
         ->groupBy('jornadas.id_jornada', 'id_municipio')
         ->get();
-
 
         return response()->json([
             'data' => $jornadas        
@@ -446,7 +446,8 @@ class VaccinationDayController extends Controller
             'id_voluntario',
             'id_detalle_jornada'
         )
-        ->where('id_jornada', '=', $id_jornada)
+        ->where('id_jornada', $id_jornada)
+        ->where('correo_enviado', 0)
         ->get();
     
         return response()->json([
