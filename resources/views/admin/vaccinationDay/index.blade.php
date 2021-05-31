@@ -1343,22 +1343,22 @@
 
         function updAnexos(data){
             console.log(data.get('file'));
-            // $.ajax({
-            //     url: "vaccinationDay/updateFiles",
-            //     type: "POST",
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     data: data,
-            //     processData: false,
-            //     contentType: false,
-            //     success: function (response) {
-            //         console.log(response);
-            //     },
-            //     error: function (error, resp, text) {
-            //         console.error(error);
-            //     }
-            // });
+            $.ajax({
+                url: "vaccinationDay/updateFiles",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
         }
 
         function deleteJornada(id_jornada){
