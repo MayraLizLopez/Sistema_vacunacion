@@ -1421,7 +1421,18 @@
                     //console.log(response);
                 },
                 error: function (error, resp, text) {
-                    console.error(error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        console.error(error);
                 }
             });
         }
