@@ -552,12 +552,12 @@
                             <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
                         </div>
     
-                        <div class="form-group ml-1">
+                        {{-- <div class="form-group ml-1">
                             <button type="button" class="btn btn-primary" id="btnRejectEmail" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
                                 <i class="far fa-envelope"></i>
                                 <span class="item-label">Cancelación</span>
                             </button>      
-                        </div>
+                        </div> --}}
     
                         <div class="form-group ml-1">
                             <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
