@@ -694,7 +694,10 @@ class VaccinationDayController extends Controller
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
-            return view('volunteers.rechazarJornada', compact('voluntario'));
+            $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
+            $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+            $turno = $detallejornada->turno;
+            return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
         }
         
     }
@@ -730,13 +733,20 @@ class VaccinationDayController extends Controller
                 $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
                 $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
-                return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+                if($detallejornada->turno == null){
+                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+                }else{
+                    $turno = $detallejornada->turno;
+                    return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
+                }
+                
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
             $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
-            $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
-            return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+            $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
+            $turno = $detallejornada->turno;
+            return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
         }
     }
 

@@ -463,7 +463,6 @@ class VoluntarioController extends Controller
         ->where('voluntarios.id_voluntario', '=', $id_voluntario)        
         ->where('detalle_jornadas.activo', '=', 1)
         ->get();
-
         if(count($voluntario) == 0 ){
             $voluntario = DB::table('voluntarios')
             ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')

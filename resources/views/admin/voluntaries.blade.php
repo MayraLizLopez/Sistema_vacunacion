@@ -945,7 +945,7 @@
                 url: "voluntario/detalles/" + id_voluntario,
                 type: "GET",
                 success: function (response) {
-                     //console.log(response);
+                     console.log(response);
                     //idVoluntario = response.data.id_voluntario;
                     if(response.bandera == false){
                         $('#nombre_completo').val(response.data.nombre + ' ' + response.data.ape_pat + ' ' + response.data.ape_mat);
@@ -1022,7 +1022,7 @@
                 url: "voluntario/editarHoras/" + id_voluntario + "/" + horas,
                 type: "GET",
                 success: function (response) {
-                    //console.log(response);
+                    console.log(response);
                     $('#modalEditarHoras').modal('hide');
                     if(response.isOk == true){
                         Swal.fire({
