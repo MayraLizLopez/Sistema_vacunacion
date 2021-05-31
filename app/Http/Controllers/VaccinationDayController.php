@@ -290,10 +290,7 @@ class VaccinationDayController extends Controller
 
     public function getVoluntariesByInstitution(Request $request){
         $voluntarios = DB::table('detalle_jornadas')
-<<<<<<< HEAD
-=======
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
->>>>>>> origin/master
         ->rightJoin('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -306,32 +303,16 @@ class VaccinationDayController extends Controller
             'voluntarios.tel AS tel',
             'voluntarios.curp AS curp',
             'instituciones.nombre AS nombre_institucion',
-<<<<<<< HEAD
-            'municipios.nombre AS nombre_municipio'
-        )
-        ->whereIn('voluntarios.id_insti', $request->ids_institution)
-        ->where('voluntarios.eliminado', 0)
-=======
             'municipios.nombre AS nombre_municipio',
             DB::raw('SUM(detalle_jornadas.horas) AS horas')
         )
         ->where('voluntarios.eliminado', '=', 0)
         ->whereIn('voluntarios.id_insti', $request->ids_institution)
         ->groupBy('voluntarios.id_voluntario')
->>>>>>> origin/master
         ->distinct()
         ->get();
         
         
-<<<<<<< HEAD
-        // DB::table('voluntarios')
-        // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
-        // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        // ->select('voluntarios.*',
-        //  'instituciones.id_municipio AS id_instituciones_municipio',
-        //  'instituciones.nombre AS nombre_institucion',
-        //  'municipios.nombre AS nombre_municipio')
-=======
         // $voluntarios = DB::table('voluntarios')
         // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
@@ -341,7 +322,6 @@ class VaccinationDayController extends Controller
         //     'instituciones.nombre AS nombre_institucion',
         //     'municipios.nombre AS nombre_municipio'
         //  )
->>>>>>> origin/master
         // ->where([['eliminado', '=', 0],
         //         ['voluntarios.activo', '=', 0]])
         // ->whereIn('voluntarios.id_insti', $request->ids_institution)
@@ -397,11 +377,7 @@ class VaccinationDayController extends Controller
             'voluntarios.email AS email',
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio',
-<<<<<<< HEAD
-            'detalle_jornadas.horas AS horas'
-=======
             DB::raw('SUM(detalle_jornadas.horas) AS horas')
->>>>>>> origin/master
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
         ->where('detalle_jornadas.correo_enviado', '=', 0)
@@ -466,12 +442,6 @@ class VaccinationDayController extends Controller
 
     public function getJornadaDetailForEmails($id_jornada){
         $jornadas = DB::table('detalle_jornadas')
-<<<<<<< HEAD
-        ->select('id_detalle_jornada')
-        ->where('id_jornada', '=', $id_jornada)
-        ->get();
-
-=======
         ->select(
             'id_voluntario',
             'id_detalle_jornada'
@@ -480,21 +450,10 @@ class VaccinationDayController extends Controller
         ->where('correo_enviado', 0)
         ->get();
     
->>>>>>> origin/master
         return response()->json([
             'data' => $jornadas      
         ]);
     }
-<<<<<<< HEAD
-
-    // public function getLastJornada(){
-    //     $jornadas = DB::table('jornadas')->latest('id_jornada')->first();
-    //     return response()->json([
-    //         'data' => $jornadas        
-    //     ]); 
-    // }
-=======
->>>>>>> origin/master
 
     public function getAllInstitutions()
     {  
@@ -555,7 +514,7 @@ class VaccinationDayController extends Controller
         if(count($request->ids_detalle_jornadas) != 0){  
             $detalle_jornada = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[0])->first();
             $jornada = DB::table('jornadas')->where('id_jornada', '=', $detalle_jornada->id_jornada)->first();
-            //$anexos = DB::table('anexo_jornadas')->select('nombre', 'anexo', 'tipo')->where('id_jornada', '=', $detalle_jornada->id_jornada)->distinct()->get();
+            $anexos = DB::table('anexo_jornadas')->select('nombre', 'anexo', 'tipo')->where('id_jornada', '=', $detalle_jornada->id_jornada)->distinct()->get();
 
             for ($j = 0; $j < count($request->ids_detalle_jornadas); $j++) {
                 $detalle_jornadas = DB::table('detalle_jornadas')->where('id_detalle_jornada', '=', (int)$request->ids_detalle_jornadas[$j])->first();
@@ -673,11 +632,7 @@ class VaccinationDayController extends Controller
                     'fecha_fin' => $fecha_fin,
                     'mensaje' => $jornada->mensaje,
                     'sedes' => $sedes,
-<<<<<<< HEAD
-                    //'anexos' => $anexos
-=======
                     'anexos' => $anexos,
->>>>>>> origin/master
                 ];
                 
                 //Mail::to($voluntario->email)->send(new ConfirmJornada($data));
@@ -725,22 +680,14 @@ class VaccinationDayController extends Controller
      */
     public static function rechazarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
-<<<<<<< HEAD
-=======
         if($detallejornada == null){
             return view('volunteers.paginaError');
         }
->>>>>>> origin/master
         if($detallejornada->horas == 0){
             $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
             for ($i=0; $i<count($detalles); $i++){
                 $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
                 $jornada->activo = false;
-<<<<<<< HEAD
-                $save = $jornada->save();   
-            }
-            $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
-=======
                 $jornada->turno = null;
                 $save = $jornada->save();   
             }
@@ -751,20 +698,15 @@ class VaccinationDayController extends Controller
                 $volu->activo = false;
                 $volu->save();
             }
->>>>>>> origin/master
             if($save){
                 return view('volunteers.rechazarJornada', compact('voluntario'));
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
-<<<<<<< HEAD
-            return view('volunteers.rechazarJornada', compact('voluntario'));
-=======
             $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
             $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
             $turno = $detallejornada->turno;
             return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
->>>>>>> origin/master
         }
         
     }
@@ -775,42 +717,28 @@ class VaccinationDayController extends Controller
      */
     public static function aceptarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
-<<<<<<< HEAD
-=======
         if($detallejornada == null){
             return view('volunteers.paginaError');
         }
->>>>>>> origin/master
         if($detallejornada->horas == 0){
             if($detallejornada->activo == null){
                 $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
                 for ($i=0; $i<count($detalles); $i++){
                     $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
                     $jornada->activo = false;
-<<<<<<< HEAD
-=======
                     $jornada->turno = null;
->>>>>>> origin/master
                     $save = $jornada->save();   
                 }
                 $jornada = DetalleJornada::findOrFail($detallejornada->id_detalle_jornada);
                 $jornada->activo = true;
                 $save = $jornada->save();
-<<<<<<< HEAD
-                $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
-=======
                 $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
->>>>>>> origin/master
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
                 $voluntarioActivo = Voluntario::findOrFail($detallejornada->id_voluntario);
                 $voluntarioActivo->activo = true;
                 $voluntarioActivo->save();
                 $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
                 if($save){
-<<<<<<< HEAD
-                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
-                }
-=======
                     return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
                 }
             }else{
@@ -824,15 +752,10 @@ class VaccinationDayController extends Controller
                     return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
                 }
                 
->>>>>>> origin/master
             }
         }else{
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
             $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
-<<<<<<< HEAD
-            $mensaje_jornada = DetalleJornada::findOrFail($detallejornada->id_jornada);
-            return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede'));
-=======
             $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
             $turno = $detallejornada->turno;
             return view('volunteers.jornadaAceptada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid', 'turno'));
@@ -857,7 +780,6 @@ class VaccinationDayController extends Controller
                 'isOk' => true,
                 'message' => 'Error al intentar guardar el turno'       
             ]); 
->>>>>>> origin/master
         }
     }
 }
