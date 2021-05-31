@@ -679,6 +679,9 @@ class VaccinationDayController extends Controller
      */
     public static function rechazarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+        if($detallejornada == null){
+            return view('volunteers.paginaError');
+        }
         if($detallejornada->horas == 0){
             $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
             for ($i=0; $i<count($detalles); $i++){
@@ -688,6 +691,12 @@ class VaccinationDayController extends Controller
                 $save = $jornada->save();   
             }
             $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
+            $activo = DB::table('detalle_jornadas')->where('id_voluntario', '=', $detallejornada->id_voluntario)->where('activo', '=', 1)->first();
+            if($activo == null){
+                $volu = Voluntario::findOrFail($detallejornada->id_voluntario);
+                $volu->activo = false;
+                $volu->save();
+            }
             if($save){
                 return view('volunteers.rechazarJornada', compact('voluntario'));
             }
@@ -707,6 +716,9 @@ class VaccinationDayController extends Controller
      */
     public static function aceptarJornada($uuid){
         $detallejornada = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+        if($detallejornada == null){
+            return view('volunteers.paginaError');
+        }
         if($detallejornada->horas == 0){
             if($detallejornada->activo == null){
                 $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
