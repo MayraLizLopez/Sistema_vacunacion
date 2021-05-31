@@ -204,7 +204,7 @@ class VaccinationDayController extends Controller
         if($save){
             return response()->json([
                 'isOk' => true,
-                'message' => '¡Los anexos fueron guardados exitosamente!'
+                'message' => '¡Los anexos fueron guardados exitosamente! ' . $nombre_archivo
             ]); 
         }else{
             return response()->json([
