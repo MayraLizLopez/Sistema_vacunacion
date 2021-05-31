@@ -28,7 +28,7 @@
     <body>
         <center>
             <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="max-width:30%;" />
-            <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡{{ $nombre }}. Algunas de las sedes en las que participa fueron canceladas!</h1>
+            <h1 style="color: #00326C; font-size:40px; font-weight: bold;">¡Hola, {{ $nombre }}!</h1>
         </center>
 
         <h2 style="color: #67737A; font-size:30px; font-weight: bold;">Jornada del {{ $fecha_inicio }} al {{ $fecha_fin }}</h2>
