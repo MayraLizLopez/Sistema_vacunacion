@@ -380,7 +380,6 @@ class VaccinationDayController extends Controller
             DB::raw('SUM(detalle_jornadas.horas) AS horas')
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
-        ->where('detalle_jornadas.correo_enviado', '=', 0)
         ->groupBy('voluntarios.id_voluntario')
         ->get();
 
