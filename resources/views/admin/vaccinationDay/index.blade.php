@@ -1312,32 +1312,14 @@
                 contentType: false,
                 success: function (response) {
                     Swal.fire({
-                        icon: 'success',
                         title: 'Hecho',
-                        text: response.message + '\n¿Desea realizar cambios antes de salir?',
+                        text: response.message,
+                        icon: 'success',
                         confirmButtonColor: '#3085d6',
-                        showDenyButton: true,
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowEnterKey: false,
-                        confirmButtonText: 'Aceptar',
-                        denyButtonText: 'Cancelar',
+                        confirmButtonText: 'Aceptar'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                if(actionType == 'create'){
-                                    idJornada = parseInt(response.id_jornada);
-                                    //getLastJornada();
-                                }                             
-                            } else if(result.isDenied){
-                                if(actionType == 'create'){
-                                    idJornada = 0;
-                                    $('#modalCreateVaccinationDay').modal('hide');
-                                    location.reload();
-                                } else if(actionType == 'edit'){
-                                    idJornada = 0;
-                                    $('#modalEditJornada').modal('hide');
-                                    location.reload();                  
-                                }
+                                location.reload();
                             }
                         });
                     //console.log(response);
