@@ -420,35 +420,10 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
-<<<<<<< HEAD
-                <div class="table-responsive">           
-                    <table id="viewDetailVoluntariesTable" class="table table-striped table-bordered"
-                    data-pagination="true"
-                    data-sort-name="nombre"
-                    data-sort-order="desc">
-                        <thead>
-                          <tr>
-                            <th data-checkbox="true"></th>
-                            <th class="d-none" data-field="id_voluntario">ID</th>
-                            <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
-                            <th class="d-none" data-field="id_insti">ID Institución</th>
-                            <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
-                            <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
-                            <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
-                            <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                            <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                            <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                          </tr>
-                        </thead>
-                    </table>
-                </div>
-=======
                 <div class="form-group">
                     <label for="rejectMessage">Mensaje para el voluntario</label>
                     <textarea class="form-control" id="rejectMessage" rows="3"></textarea>
                   </div>
->>>>>>> origin/master
             </div>
           </div>
         </div>
@@ -1251,29 +1226,6 @@
 
                     // console.log(jornadaData);
 
-<<<<<<< HEAD
-        function getJornadaDetailForEmails(id_jornada){
-            $.ajax({
-                url: "vaccinationDay/getJornadaDetailForEmails/" + id_jornada,
-                type: "GET",
-                success: function (response) {
-                    //console.log(response);
-                    let ids_detalle_jornadas = response.data.map(item => item.id_detalle_jornada);
-                    enviarCorreoJornada(ids_detalle_jornadas);
-                },
-                error: function (error, resp, text) {
-                    console.error(error.responseJSON.message);
-                }
-            });
-        }
-
-        function getLastJornada(){
-            $.ajax({
-                url: "vaccinationDay/getLastJornada/",
-                type: "GET",
-                success: function (response) {
-                    idJornada = parseInt(response.data.id_jornada);
-=======
                     if(jornadaData.length > 0){
                         let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
                         enviarCorreoJornada(ids_detalle_jornadas);
@@ -1285,7 +1237,6 @@
                         confirmButtonText: 'Aceptar'
                         });
                     }
->>>>>>> origin/master
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
@@ -1308,19 +1259,6 @@
                 contentType: false,
                 success: function (response) {
 
-<<<<<<< HEAD
-                    // if(anexoFiles.files != []){
-                    //     for(let i = 0; i < anexoFiles.files.length; i++){
-                    //         if(anexoFiles.files[i].size <= 2097152){ // 2MB
-                    //             filesForm.set('id_jornada', response.id_jornada);
-                    //             filesForm.set('idsVoluntarios', data.get('idsVoluntarios'));
-                    //             filesForm.set('file', anexoFiles.files[i]);
-
-                    //             insAnexos(filesForm);
-                    //         }
-                    //     }
-                    // }
-=======
                     if(anexoFiles != null){
                         if(anexoFiles.files != []){
                             for(let i = 0; i < anexoFiles.files.length; i++){
@@ -1334,7 +1272,6 @@
                             }
                         }
                     }
->>>>>>> origin/master
 
                     Swal.fire({
                         title: 'Hecho',
@@ -1769,12 +1706,6 @@
             return [
             '<a class="email mr-2" href="javascript:void(0)" title="Email">',
                 '<i class="far fa-envelope"></i>',
-<<<<<<< HEAD
-            '</a>',
-            '<a class="detail mr-2" href="javascript:void(0)" title="Detalle">',
-                '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
-=======
->>>>>>> origin/master
             '</a>',
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
             '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
@@ -1858,16 +1789,8 @@
                     backdrop: 'static',
                     keyboard: false
                 });
-<<<<<<< HEAD
-                getJornadaDetail(row.id_jornada);
-            },
-
-            'click .email': function (e, value, row, index) {
-                getJornadaDetailForEmails(row.id_jornada);
-=======
 
                 getAllVolunteersAccepted(row.folio);
->>>>>>> origin/master
             }
         }
 
