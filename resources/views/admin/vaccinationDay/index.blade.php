@@ -1359,7 +1359,7 @@
                     console.error(error);
                 }
             });
-        }
+        } 
 
         function deleteJornada(id_jornada){
             $.ajax({
