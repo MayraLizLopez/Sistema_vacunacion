@@ -533,8 +533,7 @@
                     $('#modalAviso').modal('hide');
                     if(response.isOk == true){
                         Swal.fire({
-                        title: '¡Registro completado!',
-                        text: response.message,
+                        title: response.message,
                         icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
