@@ -106,7 +106,6 @@ class VaccinationDayController extends Controller
         $data_archivo = file_get_contents($request->file->getRealPath());
 
         foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
-
             $anexo_jornada = new AnexoJornada;
             $anexo_jornada->id_jornada = $request->id_jornada;
             $anexo_jornada->id_voluntario = (int)$id_voluntario;
@@ -182,7 +181,7 @@ class VaccinationDayController extends Controller
 
     public function updateFiles(Request $request){
         DB::table('anexo_jornadas')
-        ->where('id_jornada', '=', $request->id_jornada)
+        ->where('id_jornada', $request->id_jornada)
         ->delete();
         
         $nombre_archivo = $request->file->getClientOriginalName();
@@ -190,10 +189,8 @@ class VaccinationDayController extends Controller
         $data_archivo = file_get_contents($request->file->getRealPath());
 
         foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
-            $jornada = DB::table('jornadas')->latest('id_jornada')->first();
-
             $anexo_jornada = new AnexoJornada;
-            $anexo_jornada->id_jornada = $jornada->id_jornada;
+            $anexo_jornada->id_jornada = $request->id_jornada;
             $anexo_jornada->id_voluntario = (int)$id_voluntario;
             $anexo_jornada->nombre = $nombre_archivo;
             $anexo_jornada->anexo = base64_encode($data_archivo);
