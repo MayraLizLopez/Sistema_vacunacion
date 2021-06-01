@@ -180,14 +180,7 @@ class VaccinationDayController extends Controller
     }
 
     public function updateFiles(Request $request){
-        $exist_jornada = DB::table('anexo_jornadas')->where('id_jornada', $request->id_jornada)->get();
-
-
-        if($exist_jornada->count() > 0){
-            DB::table('anexo_jornadas')
-            ->where('id_jornada', $request->id_jornada)
-            ->delete();
-        }
+       $this->deleteFilesForUpdate($request->id_jornada);
         
         $nombre_archivo = $request->file->getClientOriginalName();
         $tipo_archivo = $request->file->getMimeType();
@@ -213,6 +206,17 @@ class VaccinationDayController extends Controller
                 'isOk' => true,
                 'message' => 'Error al intentar guardar los anexos'       
             ]); 
+        }
+    }
+
+    //Funcion auxiliar que elimina los anexos si existen en el id de jornada dado.
+    public function deleteFilesForUpdate($id_jornada){
+        $exist_jornada = DB::table('anexo_jornadas')->where('id_jornada', $id_jornada)->get();
+
+        if($exist_jornada->count() > 0){
+            DB::table('anexo_jornadas')
+            ->where('id_jornada', $id_jornada)
+            ->delete();
         }
     }
 
