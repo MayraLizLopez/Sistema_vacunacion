@@ -180,9 +180,14 @@ class VaccinationDayController extends Controller
     }
 
     public function updateFiles(Request $request){
-        DB::table('anexo_jornadas')
-        ->where('id_jornada', $request->id_jornada)
-        ->delete();
+        $exist_jornada = DB::table('anexo_jornadas')->where('id_jornada', $request->id_jornada)->get();
+
+
+        if($exist_jornada->count() > 0){
+            DB::table('anexo_jornadas')
+            ->where('id_jornada', $request->id_jornada)
+            ->delete();
+        }
         
         $nombre_archivo = $request->file->getClientOriginalName();
         $tipo_archivo = $request->file->getMimeType();
