@@ -785,7 +785,7 @@
                                         filesForm.set('id_jornada', idJornada);
                                         filesForm.set('idsVoluntarios', JSON.stringify(idsVoluntarios));
                                         filesForm.set('file', anexoFiles.files[i]);
-
+                                    
                                         updAnexos(filesForm); 
                                     }
                                 }
@@ -1138,8 +1138,6 @@
                 url: "vaccinationDay/getFilesJornada/" + id_jornada,
                 type: "GET",
                 success: function (response) {
-                    console.log(response);
-
                     if(response.data.length > 0){
                         let filesName = response.data.map(item => item.nombre);
                         $('#editInFile').next('.custom-file-label').html(filesName.join(', '));
@@ -1347,6 +1345,8 @@
 
         function updAnexos(data){
             // console.log(data.get('file'));
+            deleteFilesForUpdate(data.get('id_jornada'));
+
             $.ajax({
                 url: "vaccinationDay/updateFiles",
                 type: "POST",
@@ -1363,7 +1363,27 @@
                     console.error(error);
                 }
             });
-        } 
+        }
+
+        function deleteFilesForUpdate(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/deleteFilesForUpdate",
+                type: "POST",
+                async: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id_jornada: id_jornada
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error, resp, text) {
+                    console.error(error);
+                }
+            });
+        }
 
         function deleteJornada(id_jornada){
             $.ajax({

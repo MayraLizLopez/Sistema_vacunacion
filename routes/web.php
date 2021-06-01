@@ -131,6 +131,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/vaccinationDay/updateFiles/', [VaccinationDayController::class, "updateFiles"])->name('updateFiles');
 
+    Route::post('admin/panel/vaccinationDay/deleteFilesForUpdate/', [VaccinationDayController::class, "deleteFilesForUpdate"])->name('deleteFilesForUpdate');
+
     Route::get('admin/panel/vaccinationDay/show/', [VaccinationDayController::class, "show"])->name('show');
 
     Route::get('admin/panel/vaccinationDay/getAllVolunteersAccepted/{folio}', [VaccinationDayController::class, "getAllVolunteersAccepted"])->name('getAllVolunteersAccepted');
