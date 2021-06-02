@@ -111,6 +111,8 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');
 
+    Route::post('admin/panel/institutions/enviarCorreo', [InstitucionController::class, "enviarCorreo"]);
+
 
     //jornada de vacunacion
     Route::get('admin/panel/vaccinationDay', [VaccinationDayController::class, "index"])->name('index');

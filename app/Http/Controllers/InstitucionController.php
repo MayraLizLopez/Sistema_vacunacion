@@ -201,4 +201,8 @@ class InstitucionController extends Controller
         ->orderBy('instituciones.nombre', 'ASC')
         ->get();
     }
+
+    public function enviarCorreo(){
+        
+    }
 }

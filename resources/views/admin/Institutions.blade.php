@@ -3,6 +3,42 @@
     <link href="{{ asset('public/assets/css/bootstrap-table.min.css') }}" rel="stylesheet" type="text/css">
 @endsection
 @section('content')  
+<style type="text/css">
+    @font-face {
+        font-family: nutmeg-bold;
+        src: url("{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}");
+        font-weight: bold;
+    }
+
+    @font-face {
+        font-family: montserrat;
+        src: url("{{ asset('public/assets/fonts/Montserrat-Regular.ttf')}}");
+    }
+
+    .modal-dialog {
+        max-width: 800px;
+        margin: 1.75rem auto;
+    }
+
+    .large{
+        max-width: 1500px;
+        margin: 1.75rem auto;
+    }
+
+    #boton{
+            width: 184px;
+            font-family: montserrat;
+            font-weight: bold;
+        }
+
+    .botonEnviar{
+        margin-right: 16px;
+        width: 184px;
+        font-family: montserrat;
+        font-weight: bold;
+    }
+    
+</style> 
 <!-- Page Heading --> 
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Instituciones</h1>
 <p class="mb-4">La siguiente tabla contiene todas las instituciones registradas.</p>
@@ -10,6 +46,12 @@
 <div id="toolbar">
     <div class="form-inline">
         <a class="btn btn-primary" style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a>
+        <!-- <div class="form-group ml-1">
+            <a class="btn btn-success btn-table" id="btnModalCorreo" data-bs-toggle="tooltip" data-bs-placement="top" title="Enviar correo">
+                <img class="mx-2" src="{{ asset('public/assets/images/carta_correo.svg')}}" style="width: 20px;"/>
+                <span class="item-label">Enviar correo</span>                 
+            </a>
+        </div> -->
     </div>
 </div>
 <!-- DataTales Example -->
@@ -19,17 +61,16 @@
             <table id="institutionsTable" class="table table-striped table-bordered"
             data-locale="es-MX"
             data-pagination="true" 
-            data-single-select="true" 
             data-click-to-select="true"
             data-search="true"
-            data-page-size="10"
+            data-page-size="50"
             data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
-            data-sort-order="desc"
+            data-sort-order="asc"
             data-toolbar="#toolbar"> 
                 <thead>
                     <tr>
-                        <th class="d-none" data-radio="true"></th>
+                        <!-- <th id="selectTable" data-checkbox="true"></th> -->
                         <th class="d-none" data-field="id_insti">ID</th>
                         <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                         <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
@@ -41,6 +82,48 @@
                     </tr>
                 </thead>
             </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal enviar correo-->
+<div id="modalCorreo" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Envíar Correo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="inMessage">Mensaje para los enlaces</label><span class="text-danger">*</span>
+                            <textarea class="form-control" id="inMessage" rows="3"></textarea>
+                            <span id="errorMensaje" class="text-danger"> </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
+                            <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB.</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        
+            </div>
+            <div class="modal-footer mr-auto">
+                <button id="enviarCorreo" class="btn btn-success botonEnviar" type="submit" >Guardar</button>
+                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+            </div>
         </div>
     </div>
 </div>
@@ -58,7 +141,8 @@
         //Start table actions & operations
         function getAllInstitutions(){      
             let instituciones = @json($instituciones);       
-            $table.bootstrapTable({data: instituciones});           
+            $table.bootstrapTable({data: instituciones});     
+            //console.log($table);      
         }
 
         function operateFormatter(value, row, index) {
@@ -123,6 +207,108 @@
                 }
             });
         }
+        $('#btnModalCorreo').on('click', () => {
+            let idsInsti = $table.bootstrapTable('getSelections').map(element => element.id_user);
+            if(idsInsti.length > 0){
+                $('#modalCorreo').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+            } else {
+                Swal.fire({
+                    title: '¡Advertencia!',
+                    text: 'Debe seleccionar al menos una institución',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        });
+        $('#enviarCorreo').on('click', () => {
+            if(document.getElementById('inMessage').value === ""){
+                console.log(document.getElementById('inMessage').value);
+                document.getElementById('errorMensaje').innerHTML = "Ingrese un mensaje";
+            }else{
+                let idsInsti = $table.bootstrapTable('getSelections').map(element => element.id_user);
+                enviarCorreo
+                console.log("enviar");
+            }
+        });
+
+        function enviarCorreo(id_insti, archivos){
+            $.ajax({
+                url: "enviarCorreo",
+                type: "POST",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    ids_insti: id_insti,
+                },
+                beforeSend: () => {
+                    Swal.fire({
+                        showConfirmButton: false,
+                        imageUrl: "{{ asset('public/assets/images/loading.png') }}",
+                        title: 'Por favor espere. Este proceso puede tardar varios minutos.',
+                        text: 'enviando correo(s)',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                    });  
+                },
+                success: function (response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Hecho',
+                        text: response.mensaje,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    //console.log(response);
+                },
+                error: function (error, resp, text) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.responseJSON.message,
+                        icon: 'error',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                        console.error(error);
+                }
+            });
+        }
+
+        $(document).ready(()=>{
+            startEvents();
+    
+        });
+
+        function startEvents(){
+            $('#inFile').on('change', (e) => {
+                let fileNames = e.target.files;
+                let names = [];
+
+                for(let i = 0; i < fileNames.length; i++){
+                    names.push(fileNames[i].name);
+                }
+
+                $('#inFile').next('.custom-file-label').html(names.join(', '));
+            });
+        }
+
+        
         //End table actions & operations
     </script>
 @endsection

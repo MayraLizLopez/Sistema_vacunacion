@@ -101,14 +101,14 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="nameVoluntary">Nombre(s)</label>
+                                                        <label for="nameVoluntary">Nombre(s)</label><span class="text-danger">*</span>
                                                         <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" required="required"/>
                                                         <span class="text-danger">@error('nombre'){{ 'Ingrese su nombre o nombres' }} @enderror </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="paternalSurnameVoluntary">Apellido Paterno</label>
+                                                        <label for="paternalSurnameVoluntary">Apellido Paterno</label><span class="text-danger">*</span>
                                                         <input type="text" class="form-control" id="paternalSurnameVoluntary" name="ape_pat" placeholder="Apellido Paterno" required="required"/>
                                                         <span class="text-danger">@error('ape_pat'){{ 'Ingrese su apellido paterno' }} @enderror </span>
                                                     </div>
@@ -124,21 +124,21 @@
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="nameVoluntary">Correo electrónico</label>
+                                                        <label for="nameVoluntary">Correo electrónico</label><span class="text-danger">*</span>
                                                         <input type="email" class="form-control" id="nameVoluntary" name="email" placeholder="Correo" required="required"/>
                                                         <span class="text-danger">@error('email'){{ 'Ingrese un email correcto o no registrado en la plataforma' }} @enderror </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="paternalSurnameVoluntary">Teléfono / Celular</label>
+                                                        <label for="paternalSurnameVoluntary">Teléfono / Celular</label><span class="text-danger">*</span>
                                                         <input type="text" class="form-control" id="phoneVoluntary" name="tel" placeholder="Número celular o fijo" data-mask="000 000 0000" required="required">
                                                         <span class="text-danger">@error('tel'){{ 'Ingrese un número telefónico' }} @enderror </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="curpVoluntary">CURP</label>
+                                                        <label for="curpVoluntary">CURP</label><span class="text-danger">*</span>
                                                         <input type="text" class="form-control" id="curpVoluntary" name="curp" placeholder="CURP" data-mask="SSSS000000SSSSSSA0"    />
                                                         <span class="text-danger">@error('curp'){{ 'Ingrese su CURP' }} @enderror </span>
                                                     </div>
@@ -148,14 +148,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="fecha">Fecha de nacimiento</label>
+                                                        <label for="fecha">Fecha de nacimiento</label><span class="text-danger">*</span>
                                                         <input type="date" class="form-control" id="fecha" name="fecha_nacimiento" placeholder="Ejem. 15/12/1993" required="required">
                                                         <span class="text-danger">@error('fecha_nacimiento'){{ 'Ingrese su fecha de nacimiento' }} @enderror </span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="townVoluntary">Municipio de residencia</label>
+                                                        <label for="townVoluntary">Municipio de residencia</label><span class="text-danger">*</span>
                                                         <select class="form-control" id="townVoluntary" name="id_municipio">
                                                         @foreach ($municipios as $municipio)
                                                             <option value="{{$municipio->id_municipio}}">{{$municipio->nombre}} </option>
@@ -178,7 +178,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label for="instututionVoluntary">Institución</label>
+                                                        <label for="instututionVoluntary">Institución</label><span class="text-danger">*</span>
                                                         <select class="form-control" id="instututionVoluntary" name="id_insti">
                                                         {{--<option value=""> Elija una institución</option>--}}
                                                         @foreach ($instituciones as $institucion)
