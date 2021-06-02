@@ -29,6 +29,7 @@
         <center>
             <img src="http://voluntariado.jalisco.gob.mx/public/assets/images/correo1.png" style="max-width:30%;" />
             <h1 style="color: #00326C; font-size:40px; font-weight: bold;">Hola, {{ $nombre }} </h1>
+            <!-- <h4 style="color: #67737A; font-size:30px;">Solicitaste el restablecimiento de tu cotraseña para acceder al sistema de <a style="color: #54A583;" href="http://voluntariado.jalisco.gob.mx/security/login"> Voluntariado Jalisco </a> </h4> -->
             <h4 style="color: #67737A; font-size:30px;">Solicitaste el restablecimiento de tu cotraseña para acceder al sistema de <a style="color: #54A583;" href="http://voluntariado.jalisco.gob.mx/security/login"> Voluntariado Jalisco </a> </h4>
             <h4 style="color: #67737A; font-size:30px;">Tu nueva contraseña es:</h4>
             <div style="padding-bottom: 20px;">  

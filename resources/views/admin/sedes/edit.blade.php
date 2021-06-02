@@ -104,14 +104,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nameVoluntary">Nombre de la sede</label>
+                            <label for="nameVoluntary">Nombre de la sede</label><span class="text-danger">*</span>
                             <input type="text" class="form-control" id="nameVoluntary" name="nombre" placeholder="Nombre" value="{{ $sede->nombre }}"/>
                             <span class="text-danger">@error('nombre'){{ 'Ingrese el nombre' }} @enderror </span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="paternalSurnameVoluntary">Domicilio de la institución</label>
+                            <label for="paternalSurnameVoluntary">Domicilio de la institución</label><span class="text-danger">*</span>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="direccion" placeholder="Domicilio"  value="{{ $sede->direccion }}"/>
                             <span class="text-danger">@error('direccion'){{ 'Ingrese el domicilio' }} @enderror </span>
                         </div>
@@ -146,7 +146,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="emailVoluntary">Municipio</label>
+                            <label for="emailVoluntary">Municipio</label><span class="text-danger">*</span>
                             <select class="form-control" id="townVoluntary" name="id_municipio">
                             <option value="{{$sede->id_municipio}}">{{$municipio_select}}</option>
                             @foreach ($municipios as $municipio)
@@ -160,7 +160,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="paternalSurnameVoluntary">Número de voluntarios necesarios</label>
+                            <label for="paternalSurnameVoluntary">Número de voluntarios necesarios</label><span class="text-danger">*</span>
                             <input type="number" class="form-control" id="paternalSurnameVoluntary" name="cupo" placeholder="Max. 50" min="1" max="50"  value="{{ $sede->cupo }}"/>
                             <span class="text-danger">@error('cupo'){{ 'Ingrese el número de voluntarios' }} @enderror </span>
                         </div>
