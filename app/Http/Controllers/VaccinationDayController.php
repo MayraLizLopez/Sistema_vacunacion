@@ -106,7 +106,6 @@ class VaccinationDayController extends Controller
         $data_archivo = file_get_contents($request->file->getRealPath());
 
         foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
-
             $anexo_jornada = new AnexoJornada;
             $anexo_jornada->id_jornada = $request->id_jornada;
             $anexo_jornada->id_voluntario = (int)$id_voluntario;
@@ -180,20 +179,14 @@ class VaccinationDayController extends Controller
         }
     }
 
-    public function updateFiles(Request $request){
-        DB::table('anexo_jornadas')
-        ->where('id_jornada', '=', $request->id_jornada)
-        ->delete();
-        
+    public function updateFiles(Request $request){     
         $nombre_archivo = $request->file->getClientOriginalName();
         $tipo_archivo = $request->file->getMimeType();
         $data_archivo = file_get_contents($request->file->getRealPath());
 
         foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
-            $jornada = DB::table('jornadas')->latest('id_jornada')->first();
-
             $anexo_jornada = new AnexoJornada;
-            $anexo_jornada->id_jornada = $jornada->id_jornada;
+            $anexo_jornada->id_jornada = $request->id_jornada;
             $anexo_jornada->id_voluntario = (int)$id_voluntario;
             $anexo_jornada->nombre = $nombre_archivo;
             $anexo_jornada->anexo = base64_encode($data_archivo);
@@ -204,12 +197,31 @@ class VaccinationDayController extends Controller
         if($save){
             return response()->json([
                 'isOk' => true,
-                'message' => '¡Los anexos fueron guardados exitosamente!'
+                'message' => '¡Los anexos fueron guardados exitosamente! ' . $nombre_archivo
             ]); 
         }else{
             return response()->json([
                 'isOk' => true,
                 'message' => 'Error al intentar guardar los anexos'       
+            ]); 
+        }
+    }
+
+    //Funcion auxiliar que elimina los anexos si existen en el id de jornada dado.
+    public function deleteFilesForUpdate(Request $request){
+        $exist_jornada = DB::table('anexo_jornadas')->where('id_jornada', $request->id_jornada)->get();
+
+        if($exist_jornada->count() > 0){
+            DB::table('anexo_jornadas')
+            ->where('id_jornada', $request->id_jornada)
+            ->delete();
+
+            return response()->json([
+                'message' => '¡Los anexos fueron eliminados!'
+            ]); 
+        } else {
+            return response()->json([
+                'message' => '¡No se eliminó nada porque no habia registros!'
             ]); 
         }
     }
@@ -380,7 +392,6 @@ class VaccinationDayController extends Controller
             DB::raw('SUM(detalle_jornadas.horas) AS horas')
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
-        ->where('detalle_jornadas.correo_enviado', '=', 0)
         ->groupBy('voluntarios.id_voluntario')
         ->get();
 
