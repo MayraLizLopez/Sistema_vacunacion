@@ -32,7 +32,7 @@
         }
 
     .botonEnviar{
-        margin-right: 16px;
+        margin-right: 16px; 
         width: 184px;
         font-family: montserrat;
         font-weight: bold;
@@ -42,19 +42,51 @@
 <!-- Page Heading --> 
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Instituciones</h1>
 <p class="mb-4">La siguiente tabla contiene todas las instituciones registradas.</p>
-
 <div id="toolbar">
     <div class="form-inline">
         <a class="btn btn-primary" style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a>
-        <!-- <div class="form-group ml-1">
+        <div class="form-group ml-1">
             <a class="btn btn-success btn-table" id="btnModalCorreo" data-bs-toggle="tooltip" data-bs-placement="top" title="Enviar correo">
                 <img class="mx-2" src="{{ asset('public/assets/images/carta_correo.svg')}}" style="width: 20px;"/>
                 <span class="item-label">Enviar correo</span>                 
             </a>
-        </div> -->
+        </div>
     </div>
 </div>
 <!-- DataTales Example -->
+<form action= "{{route('enviarCorreoInsti')}}"  method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    @if(Session::get('success'))
+    @section('scripts')
+        <script>    
+            Swal.fire({
+                title: '¡Hecho!',
+                text: '¡Correo enviado!',
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "{{route('tabla_insti')}}";
+                    }
+                });
+        </script>
+    @endsection
+    @endif
+    @if(Session::get('fail'))
+    @section('scripts')
+        <script>    
+            Swal.fire({
+                title: '¡Error!',
+                text: 'no fue posible envíar el correo',
+                icon: 'error',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+                });
+        </script>
+    @endsection
+    @endif 
+
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive"> 
@@ -70,7 +102,7 @@
             data-toolbar="#toolbar"> 
                 <thead>
                     <tr>
-                        <!-- <th id="selectTable" data-checkbox="true"></th> -->
+                        <th id="selectTable" data-checkbox="true"></th>
                         <th class="d-none" data-field="id_insti">ID</th>
                         <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                         <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
@@ -89,44 +121,49 @@
 
 <!-- Modal enviar correo-->
 <div id="modalCorreo" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Envíar Correo</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
-            </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="inMessage">Mensaje para los enlaces</label><span class="text-danger">*</span>
-                            <textarea class="form-control" id="inMessage" rows="3"></textarea>
-                            <span id="errorMensaje" class="text-danger"> </span>
-                        </div>
-                    </div>
+    
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Envíar Correo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+                </button>
                 </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-group mb-3">
-                            <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
-                            <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB.</label>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inMessage">Mensaje para los enlaces</label><span class="text-danger">*</span>
+                                <textarea class="form-control" id="inMessage" rows="3" name="mensaje" required="required"></textarea>
+                                <span id="errorMensaje" class="text-danger"> </span>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                <input class="form-contol bg-light shadow-sm" type="file" lang="es" name="archivo" multiple>
+                                <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+                                <input type="file" class="custom-file-input" name="archivo" lang="es" id="inFile" multiple >
+                                <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB.</label>
+                                <input hidden type="text" name="ids" id="ids">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                            
                 </div>
-                        
-            </div>
-            <div class="modal-footer mr-auto">
-                <button id="enviarCorreo" class="btn btn-success botonEnviar" type="submit" >Guardar</button>
-                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+                <div class="modal-footer mr-auto">
+                    <button id="enviarCorreo" class="btn btn-success botonEnviar" type="submit" >Enviar</button>
+                    <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+                </div>
             </div>
         </div>
-    </div>
 </div>
+</form>
 @endsection
 @section('scripts')
 <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
@@ -209,6 +246,7 @@
         }
         $('#btnModalCorreo').on('click', () => {
             let idsInsti = $table.bootstrapTable('getSelections').map(element => element.id_user);
+            document.getElementById('ids').value = $table.bootstrapTable('getSelections').map(element => element.email);
             if(idsInsti.length > 0){
                 $('#modalCorreo').modal({
                     backdrop: 'static',
@@ -229,21 +267,38 @@
                 console.log(document.getElementById('inMessage').value);
                 document.getElementById('errorMensaje').innerHTML = "Ingrese un mensaje";
             }else{
-                let idsInsti = $table.bootstrapTable('getSelections').map(element => element.id_user);
-                enviarCorreo
-                console.log("enviar");
+                let idsInsti = $table.bootstrapTable('getSelections');
+                let filesForm = new FormData();
+                let anexoFiles =  document.getElementById('inFile');
+                var file = $('#inFile').prop("files")[0];
+                var mensaje = document.getElementById('inMessage').value;
+                if(anexoFiles != null){
+                    if(anexoFiles.files != []){
+                        for(let i = 0; i < anexoFiles.files.length; i++){
+                            if(anexoFiles.files[i].size <= 2097152){ // 2MB
+                                filesForm.set('file', anexoFiles.files[i]);
+                            }
+                        }
+                    }
+                }
+                //console.log(filesForm.get('file'));
+                //console.log(mensaje);
+                //enviarCorreo(idsInsti, filesForm, mensaje);
+                //console.log("enviar");
             }
         });
 
-        function enviarCorreo(id_insti, archivos){
+        function enviarCorreo(id_insti, archivos, mensaje){
+           // console.log(archivos);
             $.ajax({
-                url: "enviarCorreo",
+                url: "institutions/enviarCorreo",
                 type: "POST",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    ids_insti: id_insti,
+                    ids: id_insti,
+                    message: mensaje,
                 },
                 beforeSend: () => {
                     Swal.fire({
@@ -271,7 +326,7 @@
                                 location.reload();
                             }
                         });
-                    //console.log(response);
+                    console.log(response);
                 },
                 error: function (error, resp, text) {
                     Swal.fire({
@@ -286,7 +341,7 @@
                             }
                         });
                         console.error(error);
-                }
+                 }
             });
         }
 

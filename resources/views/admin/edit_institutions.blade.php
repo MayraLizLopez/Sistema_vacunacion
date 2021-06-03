@@ -177,7 +177,7 @@
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ $usuario->email}}" required="required"/>
-                            <input hidden name="email2" id="email2"/>
+                            <input hidden name="email2" id="email2" value="{{ $usuario->email}}"/>
                             <span class="text-danger">@error('email2'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>
@@ -206,6 +206,7 @@
                 document.getElementById("tel").value = user[i].tel;
                 document.getElementById("email").value = user[i].email;
                 document.getElementById("email2").value = user[i].email;
+                console.log(user[i].email);
                 break;
             }
         }

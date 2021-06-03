@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
 use Carbon\Carbon;
 
+use App\Mail\Enlaces;
+use App\Mail\RestartPassword;
+use Illuminate\Support\Facades\Mail;
+
 class InstitucionController extends Controller
 {
     /**
@@ -202,7 +206,37 @@ class InstitucionController extends Controller
         ->get();
     }
 
-    public function enviarCorreo(){
-        
+    public function enviarCorreo(Request $request){
+        //dd($request->file('archivo'));
+        if(!$request->mensaje == null){
+            if(!$request->file('archivo') == null){
+                $file = $request->file('archivo');
+                $nombre = $file->getClientOriginalName();
+                $tipo_archivo = $file->getMimeType();
+                $data_archivo = file_get_contents($file->getRealPath());
+                $correos = explode(",", $request->ids);
+                $data = [
+                    'mensaje' => $request->mensaje,
+                    'archivo' => $data_archivo,
+                    'nombreArchivo' =>  $nombre,
+                ];
+
+                Mail::to($correos)->send(new Enlaces($data));
+
+                return back()->with('success', '¡Correo enviado!');
+            }else{
+                $correos = explode(",", $request->ids);
+                $data = [
+                    'mensaje' => $request->mensaje,
+                    'archivo' => "",
+                    'nombreArchivo' => "",
+                ];
+
+                Mail::to($correos)->send(new Enlaces($data));
+
+                return back()->with('success', '¡Correo enviado!');
+            }
+        }
+        return back();
     }
 }

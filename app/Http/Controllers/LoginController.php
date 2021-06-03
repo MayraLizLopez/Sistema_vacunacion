@@ -70,7 +70,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Método para la vista de recuperar contraseña envia correo
+     * Método para la vista de recuperar contraseña envia correo al usuario
      */
     public function restartPassword($email, $pass){
         $usuario1 = DB::table('usuarios')->where('email', '=', $email)->first(); 

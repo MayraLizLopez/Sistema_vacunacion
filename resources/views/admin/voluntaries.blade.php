@@ -111,7 +111,7 @@
         </div>
 
         <div class="form-group ml-1">
-            <input type="text" class="form-control" placeholder="Busqueda general" id="inSearchCustom">
+            <input type="text" class="form-control" placeholder="Búsqueda general" id="inSearchCustom">
         </div>
         
         <div class="form-group ml-1">

@@ -111,7 +111,7 @@ Route::group(['middleware' =>['AuthCheck']], function(){
 
     Route::post('admin/panel/institutions/', [InstitucionController::class, "store"])->name('storeInstitucion');
 
-    Route::post('admin/panel/institutions/enviarCorreo', [InstitucionController::class, "enviarCorreo"]);
+    Route::post('admin/panel/institutions/enviarCorreo', [InstitucionController::class, "enviarCorreo"])->name('enviarCorreoInsti');
 
 
     //jornada de vacunacion
