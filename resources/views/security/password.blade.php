@@ -190,6 +190,17 @@
             $.ajax({
                 url: "sendPassword/" + document.getElementById("InputEmail").value + "/" + makeid(5),
                 type: "GET",
+                beforeSend: () => {
+                    Swal.fire({
+                        showConfirmButton: false,
+                        imageUrl: "{{ asset('public/assets/images/loading.png') }}",
+                        title: 'Por favor espere.',
+                        text: 'enviando correo',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false
+                    });  
+                },
                 success: function (response) {
                     //console.log(response);
                     $('#modalEditarHoras').modal('hide');
