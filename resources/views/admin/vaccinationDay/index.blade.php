@@ -469,7 +469,7 @@
             </div>
             <div class="modal-footer mr-auto">
                 <button id="agregarHorarMuti" class="btn btn-success botonEnviar" type="submit" >Guardar</button>
-                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+                <button id="button-largo" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>       
             </div>
         </div>
     </div>
@@ -530,7 +530,7 @@
             </div>
             <div class="modal-footer mr-auto">
                 <button id="agregarHoras" class="btn btn-success botonEnviar" type="submit">Guardar</button>
-                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+                <button id="button-largo" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>       
             </div>
         </div>
     </div>
@@ -611,7 +611,7 @@
             </div>
             <div class="modal-footer mr-auto">
                 <button id="agregarHoras" class="btn btn-success botonEnviar" type="submit">Guardar</button>
-                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
+                <button id="button-largo" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>       
             </div>
         </div>
     </div>
@@ -1365,6 +1365,7 @@
             });
         }
 
+        //Funcion auxiliar que elimina los anexos si existen en el id de jornada dado.
         function deleteFilesForUpdate(id_jornada){
             $.ajax({
                 url: "vaccinationDay/deleteFilesForUpdate",
