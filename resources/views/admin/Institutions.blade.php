@@ -145,9 +145,9 @@
                         <div class="col-md-12">
                             <div class="input-group mb-3">
                                 <div class="custom-file">
-                                <input class="form-contol bg-light shadow-sm" type="file" lang="es" name="archivo" multiple>
+                                <input class="form-contol bg-light shadow-sm" type="file" lang="es" name="archivo">
                                 <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
-                                <input type="file" class="custom-file-input" name="archivo" lang="es" id="inFile" multiple >
+                                <input type="file" class="custom-file-input" name="archivo" lang="es" id="inFile" >
                                 <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB.</label>
                                 <input hidden type="text" name="ids" id="ids">
                                 </div>
