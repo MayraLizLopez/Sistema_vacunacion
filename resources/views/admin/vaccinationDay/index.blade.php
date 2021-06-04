@@ -599,6 +599,7 @@
                                     <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                    <th data-field="nombre_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
                                     <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
                                     <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
                                     <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
@@ -1025,6 +1026,7 @@
                                 'CURP': item.curp,
                                 'Municipio': item.nombre_municipio,
                                 'Institución': item.nombre_institucion,
+                                'Sedes': item.nombre_sedes,
                                 'Turno': item.turno,
                                 'Horas': item.horas
                             };

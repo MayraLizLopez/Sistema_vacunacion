@@ -436,14 +436,17 @@ class VaccinationDayController extends Controller
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio',
             'detalle_jornadas.turno AS turno',
-            'detalle_jornadas.horas AS horas'
+            'detalle_jornadas.horas AS horas',
+            DB::raw("group_concat(DISTINCT sedes.nombre SEPARATOR ', ') as nombres_sedes")
         )
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('sedes', 'detalle_jornadas.id_sede', '=', 'sedes.id_sede')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
         ->where('detalle_jornadas.activo', '=', 1)
         ->where('jornadas.folio', '=', $folio)
+        ->groupBy('jornadas.id_jornada', 'detalle_jornadas.id_detalle_jornada')
         ->get();
 
         return response()->json([
