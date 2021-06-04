@@ -206,6 +206,9 @@ class InstitucionController extends Controller
         ->get();
     }
 
+    /**
+     * Método que permite el envio de correos electrónicos a los enlaces de las instituciones con archivos adjuntos
+     */
     public function enviarCorreo(Request $request){
         //dd($request->file('archivo'));
         if(!$request->mensaje == null){
