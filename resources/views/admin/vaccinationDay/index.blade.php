@@ -21,6 +21,11 @@
             margin: 1.75rem auto;
         }
 
+        .jornadas-aceptadas{
+            max-width: 2000px;
+            margin: 1.75rem auto;
+        }
+
         #button-largo{
             width: 184px;
             font-family: montserrat;
@@ -537,7 +542,7 @@
 </div>
 
 <div id="modalJornadasAceptadas" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog jornadas-aceptadas modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios Aceptados</h5>
