@@ -446,7 +446,7 @@ class VaccinationDayController extends Controller
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
         ->where('detalle_jornadas.activo', '=', 1)
         ->where('jornadas.folio', '=', $folio)
-        ->groupBy('jornadas.id_jornada', 'detalle_jornadas.id_detalle_jornada')
+        ->groupBy('jornadas.id_jornada', 'detalle_jornadas.id_detalle_jornada', 'voluntarios.id_voluntario')
         ->get();
 
         return response()->json([
