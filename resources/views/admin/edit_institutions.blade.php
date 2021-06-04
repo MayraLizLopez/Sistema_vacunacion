@@ -60,6 +60,7 @@
 <form action= "{{route('updateInstitucion', $institucion->id_insti)}}"  method="POST">
     @method('PATCH')
     @csrf
+    <!-- SweetAlert institución editar correctamente -->
     @if(Session::get('success'))
     @section('scripts')
         <script>    
@@ -77,6 +78,7 @@
         </script>
     @endsection
     @endif
+    <!-- SweetAlert error al editar la institución -->
     @if(Session::get('fail'))
     @section('scripts')
         <script>    
@@ -90,7 +92,7 @@
         </script>
     @endsection
     @endif 
-
+<!-- formulario editar institución -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos de la Institución</h5>
@@ -190,7 +192,7 @@
         </div>
     </div>
 </form>
-
+<!-- FIN formulario editar institución -->
 @endsection
 @section('scripts')
 <script>

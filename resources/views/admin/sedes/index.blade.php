@@ -45,7 +45,7 @@
     </div>
 </div>
 
-
+<!-- Modal para ver la información de la sede -->
 <div id="modalViewSedeDetail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -146,7 +146,7 @@
         </div>
     </div>
 </div>
-
+<!-- FIN Modal para ver la información de la sede -->
 @endsection
 @section('scripts')
     <script src="{{ asset('public/assets/js/bootstrap-table.min.js') }}"></script>
@@ -158,12 +158,17 @@
             getAllSedes();
         });
 
-
+        /**
+         * Método para ingresar los  datos a la tabla de sedes
+         */
         function getAllSedes(){      
             let sedes = @json($sedes); 
             $table.bootstrapTable({data: sedes});            
         }
 
+        /**
+         * Método para agregar los botones de lado derecho de la tabla
+         */
         function operateFormatter(value, row, index) {
             return [
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
@@ -178,6 +183,9 @@
             ].join('')
         }
 
+        /**
+         * Sweetalert para eliminar sedes 
+         */
         window.operateEvents = {
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
@@ -193,7 +201,9 @@
                     }
                     });
             },
-
+            /**
+            * Acción para eliminar sedes 
+            */
             'click .detail': function (e, value, row, index) {
                 $('#modalViewSedeDetail').modal({
                     backdrop: 'static',
@@ -203,6 +213,9 @@
             }
         }
 
+        /**
+         * método para mostrarlos datos de los detalles de la modal y para la visualización de mapa, ya sea busqueda de coordenadas o por dirección
+         */
         function getDetalleSede(id_sede){
             $.ajax({
                 url: "detalles/" + id_sede,
@@ -308,6 +321,9 @@
             });
         }
 
+        /**
+         * método para guardar las coordenadas de la sede si la dirección es correcta
+         */
         function saveCoordenadas(data){
             $.ajax({
                 url: "coordenadas",
@@ -326,7 +342,9 @@
                 }
             });
         }
-
+        /**
+         * método para eliminar sede
+         */
         function deleteSede(id){
             $.ajax({
                 url: "eliminar/" + id,

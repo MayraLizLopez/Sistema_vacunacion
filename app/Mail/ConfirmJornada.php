@@ -20,11 +20,10 @@ class ConfirmJornada extends Mailable
     public function __construct($data)
     {
         $this->data = $data;
-        //$archivo = "{{ asset('public/assets/images/Vacio.pdf') }}";
     }
 
     /**
-     * Método que permite el envió de correos electónicos.
+     * Método que permite el envió de correos electónicos para las jornadas.
      *
      * @return $this
      */

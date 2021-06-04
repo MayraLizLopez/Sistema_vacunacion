@@ -437,7 +437,9 @@ class VoluntarioController extends Controller
         }
         
     }
-
+    /***
+     * Método para redireccionar al aviso de privacidad
+     */
     public function aviso()
     {
         return view('volunteers.aviso');

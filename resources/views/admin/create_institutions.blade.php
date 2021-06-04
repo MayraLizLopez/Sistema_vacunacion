@@ -62,6 +62,7 @@
 <!-- DataTales Example -->
 <form action= "{{route('storeInstitucion')}}"  method="POST">
 {{ csrf_field() }}
+<!-- SweetAlert la institución se agrego correctamente -->
 @if(Session::get('success'))
 @section('scripts')
     <script>    
@@ -79,6 +80,7 @@
     </script>
 @endsection
 @endif
+<!-- SweetAlert error al agregar la institución -->
 @if(Session::get('fail'))
 @section('scripts')
     <script>    
@@ -92,6 +94,7 @@
     </script>
 @endsection
 @endif 
+<!-- Formularios para agregar institución -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Ingrese los datos de la Institución</h5>
@@ -199,6 +202,7 @@
         </div>
     </div>
 </form>
+<!-- FIN Formularios para agregar institución -->
 @endsection
 @section('scripts')
 @endsection

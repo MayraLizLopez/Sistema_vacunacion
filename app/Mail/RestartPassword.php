@@ -23,7 +23,7 @@ class RestartPassword extends Mailable
     }
 
     /**
-     * Build the message.
+     * método para enviar correo electrónico con la una contraseña random
      *
      * @return $this
      */

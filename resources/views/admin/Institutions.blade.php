@@ -56,6 +56,7 @@
 <!-- DataTales Example -->
 <form action= "{{route('enviarCorreoInsti')}}"  method="POST" enctype="multipart/form-data">
     {{ csrf_field() }}
+    <!-- sweetAlert correos enviados -->
     @if(Session::get('success'))
     @section('scripts')
         <script>    
@@ -73,6 +74,7 @@
         </script>
     @endsection
     @endif
+    <!-- sweetAlert error al enviar correos -->
     @if(Session::get('fail'))
     @section('scripts')
         <script>    
@@ -86,7 +88,7 @@
         </script>
     @endsection
     @endif 
-
+<!-- Tabla instituciones -->
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive"> 
@@ -117,52 +119,54 @@
         </div>
     </div>
 </div>
-
+<!-- FIN Tabla instituciones -->
 
 <!-- Modal enviar correo-->
 <div id="modalCorreo" class="modal" tabindex="-1" role="dialog">
     
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Envíar Correo</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="inMessage">Mensaje para los enlaces</label><span class="text-danger">*</span>
-                                <textarea class="form-control" id="inMessage" rows="3" name="mensaje" required="required"></textarea>
-                                <span id="errorMensaje" class="text-danger"> </span>
-                            </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Envíar Correo</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="inMessage">Mensaje para los enlaces</label><span class="text-danger">*</span>
+                            <textarea class="form-control" id="inMessage" rows="3" name="mensaje" required="required"></textarea>
+                            <span id="errorMensaje" class="text-danger"> </span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="input-group mb-3">
-                                <div class="custom-file">
-                                <input class="form-contol bg-light shadow-sm" type="file" lang="es" name="archivo">
-                                <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
-                                <input type="file" class="custom-file-input" name="archivo" lang="es" id="inFile" >
-                                <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB.</label>
-                                <input hidden type="text" name="ids" id="ids">
-                                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group mb-3">
+                            <div class="custom-file">
+                            <input class="form-contol bg-light shadow-sm" type="file" lang="es" name="archivo" max-size="200">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="1082942" maxlength="1082942"/>
+                            <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
+                            <input type="file" class="custom-file-input" name="archivo" lang="es" id="inFile">
+                            <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB.</label>
+                            <input hidden type="text" name="ids" id="ids">
                             </div>
                         </div>
                     </div>
-                            
                 </div>
-                <div class="modal-footer mr-auto">
-                    <button id="enviarCorreo" class="btn btn-success botonEnviar" type="submit" >Enviar</button>
-                    <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
-                </div>
+                        
+            </div>
+            <div class="modal-footer mr-auto">
+                <button id="enviarCorreo" class="btn btn-success botonEnviar" type="submit" >Enviar</button>
+                <a class="btn btn-secondary" id="boton" style="color:white;" data-dismiss="modal">Cancelar</a>       
             </div>
         </div>
+    </div>
 </div>
+<!-- FIN Modal enviar correo-->
 </form>
 @endsection
 @section('scripts')
@@ -182,6 +186,7 @@
             //console.log($table);      
         }
 
+        //Botones de la parte derecha de la tabla
         function operateFormatter(value, row, index) {
             return [
             '<a class="like mr-3" href="institutions/edit/' + row.id_insti + '"' + 'title="Edit">',
@@ -193,6 +198,9 @@
             ].join('')
         }
 
+        /**
+         * Método que detona una sweetAlert para el eliminado de instituciones
+         */
         window.operateEvents = {
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
@@ -209,7 +217,9 @@
                     });
             }
         }
-
+        /**
+         * Método de consulta para eliminado lógico de instituciones
+         */
         function deleteInstitution(id){
             $.ajax({
                 url: "institutions/destroy/" + id,
@@ -244,6 +254,7 @@
                 }
             });
         }
+        //Acción que detona abrir la ventana model para envió de correos, envia un alerta si no se han seleccionado instituciones
         $('#btnModalCorreo').on('click', () => {
             let idsInsti = $table.bootstrapTable('getSelections').map(element => element.id_user);
             document.getElementById('ids').value = $table.bootstrapTable('getSelections').map(element => element.email);
@@ -262,94 +273,30 @@
                 });
             }
         });
+        //Acción al hacer click en el botón para enviar correos en la modal, en caso que el campo mensaje este vacio, 
+        //pondrá mensaje de error, en caso contrarió detona un sweetAlert para la espera del envio de correos
         $('#enviarCorreo').on('click', () => {
             if(document.getElementById('inMessage').value === ""){
                 console.log(document.getElementById('inMessage').value);
                 document.getElementById('errorMensaje').innerHTML = "Ingrese un mensaje";
             }else{
-                let idsInsti = $table.bootstrapTable('getSelections');
-                let filesForm = new FormData();
-                let anexoFiles =  document.getElementById('inFile');
-                var file = $('#inFile').prop("files")[0];
-                var mensaje = document.getElementById('inMessage').value;
-                if(anexoFiles != null){
-                    if(anexoFiles.files != []){
-                        for(let i = 0; i < anexoFiles.files.length; i++){
-                            if(anexoFiles.files[i].size <= 2097152){ // 2MB
-                                filesForm.set('file', anexoFiles.files[i]);
-                            }
-                        }
-                    }
-                }
-                //console.log(filesForm.get('file'));
-                //console.log(mensaje);
-                //enviarCorreo(idsInsti, filesForm, mensaje);
-                //console.log("enviar");
-            }
-        });
-
-        function enviarCorreo(id_insti, archivos, mensaje){
-           // console.log(archivos);
-            $.ajax({
-                url: "institutions/enviarCorreo",
-                type: "POST",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                data: {
-                    ids: id_insti,
-                    message: mensaje,
-                },
-                beforeSend: () => {
-                    Swal.fire({
+                Swal.fire({
                         showConfirmButton: false,
                         imageUrl: "{{ asset('public/assets/images/loading.png') }}",
-                        title: 'Por favor espere. Este proceso puede tardar varios minutos.',
+                        title: 'Por favor espere.',
                         text: 'enviando correo(s)',
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                         allowEnterKey: false
-                    });  
-                },
-                success: function (response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Hecho',
-                        text: response.mensaje,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Aceptar',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        allowEnterKey: false
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
-                    console.log(response);
-                },
-                error: function (error, resp, text) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: error.responseJSON.message,
-                        icon: 'error',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Aceptar'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
-                        console.error(error);
-                 }
-            });
-        }
+                });  
+            }
+        });
 
         $(document).ready(()=>{
             startEvents();
     
         });
-
+        //Método para agregar nombre de archivos al input
         function startEvents(){
             $('#inFile').on('change', (e) => {
                 let fileNames = e.target.files;

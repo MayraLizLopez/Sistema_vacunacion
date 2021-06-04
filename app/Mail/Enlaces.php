@@ -23,7 +23,7 @@ class Enlaces extends Mailable
     }
 
     /**
-     * Build the message.
+     * Método para el envio de correos electrónicos para los enlaces de las instituciones.
      *
      * @return $this
      */

@@ -63,6 +63,7 @@
 
 <!-- DataTales Example -->
 <form>
+<!-- Sweetalert contraseña actualizado correctamente -->
 @if(Session::get('success'))
 @section('scripts')
     <script>    
@@ -76,6 +77,7 @@
     </script>
 @endsection
 @endif
+<!-- Sweetalert error al actualizar la contraseña -->
 @if(Session::get('fail'))
 @section('scripts')
     <script>    
@@ -89,6 +91,7 @@
     </script>
 @endsection
 @endif 
+<!-- Formulario con los datos del usuario -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h5 class="m-0 font-weight-bold text-primary">Mis datos</h5>
@@ -152,41 +155,13 @@
     </div>
     <button type="button" class="btn btn-success botonCambiarPass" onclick="modal()">Cambiar contraseña</button>
 </form>
-
-<!-- password Modal-->
-{{-- <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Cambiar contraseña</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="POST" action="{{ route('savePassword')}}">
-            {{ csrf_field() }}
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="paternalSurnameVoluntary">Nueva Contraseña</label>
-                                <input type="password" class="form-control" id="paternalSurnameVoluntary" name="password" placeholder="Ingrese la nueva contraseña" required="required"/>
-                                <span class="text-danger">@error('password'){{ 'Ingrese una contraseña' }} @enderror </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer mr-auto">
-                    <button  type="submit" class="btn btn-success botonEnviar">Guardar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="button-largo">Cancelar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> --}}
+<!-- FIN Formulario con los datos del usuario -->
 @endsection
 @section('scripts')
 <script>
+/**
+ * SweetAlert que permite cambiar la contraseña 
+ */
 async function modal(){
     const { value: password } = await Swal.fire({
         title: 'Cambiar contraseña',
@@ -209,7 +184,9 @@ async function modal(){
         }
 }
 
-
+/**
+ * Método que permite actualizar la contraseña 
+ */
 function cambiarPass(pass){
             $.ajax({
                 url: "profile/savePassword/" + pass,
