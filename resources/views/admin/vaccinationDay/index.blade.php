@@ -1026,7 +1026,7 @@
                                 'CURP': item.curp,
                                 'Municipio': item.nombre_municipio,
                                 'Institución': item.nombre_institucion,
-                                'Sedes': item.nombre_sedes,
+                                'Sedes': item.nombres_sedes,
                                 'Turno': item.turno,
                                 'Horas': item.horas
                             };
