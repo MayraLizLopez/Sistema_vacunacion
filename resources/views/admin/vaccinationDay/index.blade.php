@@ -1237,7 +1237,7 @@
 
                     if(jornadaData.length > 0){
                         let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
-                        enviarCorreoJornada(ids_detalle_jornadas);
+                        enviarCorreoJornada(ids_detalle_jornadas, id_jornada);
                     } else {
                         Swal.fire({
                         title: 'Sin correos pendientes',
@@ -1249,7 +1249,6 @@
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
-                    getJornadaDetailForEmailsNoSend(id_jornada);
                 }
             });
         }
@@ -1447,7 +1446,7 @@
             });
         }
 
-        function enviarCorreoJornada(idsDetalleJornadas){
+        function enviarCorreoJornada(idsDetalleJornadas, id_jornada){
             $.ajax({
                 url: "vaccinationDay/sendemail",
                 type: "POST",
@@ -1497,6 +1496,9 @@
                                 location.reload();
                             }
                         });
+
+                        getJornadaDetailForEmailsNoSend(id_jornada);
+
                         console.error(error);
                 }
             });
