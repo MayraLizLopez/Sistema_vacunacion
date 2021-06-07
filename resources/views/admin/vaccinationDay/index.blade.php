@@ -1241,11 +1241,32 @@
                     } else {
                         Swal.fire({
                         title: 'Sin correos pendientes',
-                        icon: 'warning',
+                        icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
                         });
                     }
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                    getJornadaDetailForEmailsNoSend(id_jornada);
+                }
+            });
+        }
+
+        function getJornadaDetailForEmailsNoSend(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/getJornadaDetailForEmailsNoSend/" + id_jornada,
+                type: "GET",
+                success: function (response) {
+                    console.log(response.data);
+                    Swal.fire({
+                        title: 'Correos pendientes',
+                        text: 'No fue posible enviar todos los correos. Faltan' + response.data[0].total_voluntarios + 'voluntarios. Vuelva a intentarlo'
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);

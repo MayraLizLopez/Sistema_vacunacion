@@ -469,6 +469,20 @@ class VaccinationDayController extends Controller
         ]);
     }
 
+    public function getJornadaDetailForEmailsNoSend($id_jornada){
+        $jornadas = DB::table('detalle_jornadas')
+        ->select(
+            DB::raw('COUNT(DISTINCT id_voluntario) as total_voluntarios')
+        )
+        ->where('id_jornada', $id_jornada)
+        ->where('correo_enviado', 0)
+        ->get();
+    
+        return response()->json([
+            'data' => $jornadas      
+        ]);
+    }
+
     public function getAllInstitutions()
     {  
         $institutions = DB::table('instituciones')
