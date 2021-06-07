@@ -72,8 +72,8 @@ class VaccinationDayController extends Controller
             'folio' => 'F000' . $jornada->id_jornada
         ]);
 
-        foreach(json_decode($request->idSedes) as $id_sede){
-            foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+        foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
+            foreach(json_decode($request->idSedes) as $id_sede){
                 $detalle_jornada = new DetalleJornada;
                 $detalle_jornada->id_jornada = $jornada->id_jornada;
                 $detalle_jornada->id_voluntario = (int)$id_voluntario;
@@ -151,8 +151,8 @@ class VaccinationDayController extends Controller
         ->where('id_jornada', '=', $request->id_jornada)
         ->delete();
 
-        foreach(json_decode($request->idSedes) as $id_sede){
-            foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+        foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
+            foreach(json_decode($request->idSedes) as $id_sede){
                 $detalle_jornada = new DetalleJornada;
                 $detalle_jornada->id_jornada = $request->id_jornada;
                 $detalle_jornada->id_voluntario = (int)$id_voluntario;
