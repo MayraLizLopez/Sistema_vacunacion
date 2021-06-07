@@ -72,8 +72,8 @@ class VaccinationDayController extends Controller
             'folio' => 'F000' . $jornada->id_jornada
         ]);
 
-        foreach(json_decode($request->idSedes) as $id_sede){
-            foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+        foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
+            foreach(json_decode($request->idSedes) as $id_sede){
                 $detalle_jornada = new DetalleJornada;
                 $detalle_jornada->id_jornada = $jornada->id_jornada;
                 $detalle_jornada->id_voluntario = (int)$id_voluntario;
@@ -151,8 +151,8 @@ class VaccinationDayController extends Controller
         ->where('id_jornada', '=', $request->id_jornada)
         ->delete();
 
-        foreach(json_decode($request->idSedes) as $id_sede){
-            foreach(json_decode($request->idsVoluntarios) as $id_voluntario){
+        foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
+            foreach(json_decode($request->idSedes) as $id_sede){
                 $detalle_jornada = new DetalleJornada;
                 $detalle_jornada->id_jornada = $request->id_jornada;
                 $detalle_jornada->id_voluntario = (int)$id_voluntario;
@@ -436,14 +436,17 @@ class VaccinationDayController extends Controller
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio',
             'detalle_jornadas.turno AS turno',
-            'detalle_jornadas.horas AS horas'
+            'detalle_jornadas.horas AS horas',
+            DB::raw("group_concat(DISTINCT sedes.nombre SEPARATOR ', ') as nombres_sedes")
         )
         ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
         ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
+        ->join('sedes', 'detalle_jornadas.id_sede', '=', 'sedes.id_sede')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
         ->where('detalle_jornadas.activo', '=', 1)
         ->where('jornadas.folio', '=', $folio)
+        ->groupBy('jornadas.id_jornada', 'detalle_jornadas.id_detalle_jornada', 'voluntarios.id_voluntario')
         ->get();
 
         return response()->json([
@@ -456,6 +459,20 @@ class VaccinationDayController extends Controller
         ->select(
             'id_voluntario',
             'id_detalle_jornada'
+        )
+        ->where('id_jornada', $id_jornada)
+        ->where('correo_enviado', 0)
+        ->get();
+    
+        return response()->json([
+            'data' => $jornadas      
+        ]);
+    }
+
+    public function getJornadaDetailForEmailsNoSend($id_jornada){
+        $jornadas = DB::table('detalle_jornadas')
+        ->select(
+            DB::raw('COUNT(DISTINCT id_voluntario) as total_voluntarios')
         )
         ->where('id_jornada', $id_jornada)
         ->where('correo_enviado', 0)

@@ -21,6 +21,11 @@
             margin: 1.75rem auto;
         }
 
+        .jornadas-aceptadas{
+            max-width: 2000px;
+            margin: 1.75rem auto;
+        }
+
         #button-largo{
             width: 184px;
             font-family: montserrat;
@@ -537,7 +542,7 @@
 </div>
 
 <div id="modalJornadasAceptadas" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog jornadas-aceptadas modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios Aceptados</h5>
@@ -599,6 +604,7 @@
                                     <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                                    <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
                                     <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
                                     <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
                                     <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
@@ -1025,6 +1031,7 @@
                                 'CURP': item.curp,
                                 'Municipio': item.nombre_municipio,
                                 'Institución': item.nombre_institucion,
+                                'Sedes': item.nombres_sedes,
                                 'Turno': item.turno,
                                 'Horas': item.horas
                             };
@@ -1230,15 +1237,35 @@
 
                     if(jornadaData.length > 0){
                         let ids_detalle_jornadas = jornadaData.map(item => item.id_detalle_jornada);
-                        enviarCorreoJornada(ids_detalle_jornadas);
+                        enviarCorreoJornada(ids_detalle_jornadas, id_jornada);
                     } else {
                         Swal.fire({
                         title: 'Sin correos pendientes',
-                        icon: 'warning',
+                        icon: 'success',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
                         });
                     }
+                },
+                error: function (error, resp, text) {
+                    console.error(error.responseJSON.message);
+                }
+            });
+        }
+
+        function getJornadaDetailForEmailsNoSend(id_jornada){
+            $.ajax({
+                url: "vaccinationDay/getJornadaDetailForEmailsNoSend/" + id_jornada,
+                type: "GET",
+                success: function (response) {
+                    console.log(response.data);
+                    Swal.fire({
+                        title: 'Correos pendientes',
+                        text: 'No fue posible enviar todos los correos. Faltan' + response.data[0].total_voluntarios + 'voluntarios. Vuelva a intentarlo',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Aceptar'
+                        });
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
@@ -1419,7 +1446,7 @@
             });
         }
 
-        function enviarCorreoJornada(idsDetalleJornadas){
+        function enviarCorreoJornada(idsDetalleJornadas, id_jornada){
             $.ajax({
                 url: "vaccinationDay/sendemail",
                 type: "POST",
@@ -1469,6 +1496,9 @@
                                 location.reload();
                             }
                         });
+
+                        getJornadaDetailForEmailsNoSend(id_jornada);
+
                         console.error(error);
                 }
             });
