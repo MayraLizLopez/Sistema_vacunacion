@@ -176,7 +176,7 @@
             <span id="green-text">ante la Pandemia 2021?</span>
         </center> -->
         <div class="row justify-content-center" style="padding-bottom: 45px;">
-            <a href="{{ url("voluntario/index") }}" class="btn btn-success" id="boton">¡Regístrate ahora!</a>
+            <a href="{{ url('voluntario/index') }}" class="btn btn-success" id="boton">¡Regístrate ahora!</a>
         </div>
     </div>
 </div>
