@@ -229,8 +229,6 @@
                     <table id="voluntariesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
-                    data-sort-name="nombre"
-                    data-sort-order="desc"
                     data-toolbar="#toolbar2">
                         <thead>
                           <tr>
@@ -382,8 +380,6 @@
                     <table id="editVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="false"
                     data-height="300"
-                    data-sort-name="nombre"
-                    data-sort-order="desc"
                     data-toolbar="#toolbar3">
                         <thead>
                           <tr>

@@ -14,15 +14,15 @@
                     <div class="row row justify-content-center">
                         <div class="col-sm-12">
                         <center></center>
-                            <h1 style="margin-top: 30px; margin-bottom: 30px;">¡Gracias por aceptar la jornada!</h1>
+                            <h1 style="margin-top: 30px; margin-bottom: 30px;">¡Ya casi perteneces a la jornada!</h1>
                         </center>
                         </div>
                     </div>
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            <div class="alert alert-success">
+                            <!-- <div class="alert alert-success">
                                 {{ $voluntario->nombre}} aceptaste trabajar en la jornada
-                            </div>
+                            </div> -->
 
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
@@ -33,7 +33,8 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-12">
-                                                    <h4>{{ $mensaje_jornada->mensaje}}</h4>
+                                                    <h3>Hola {{ $voluntario->nombre }}. Por favor selecciona el turno que deseas para esta jornada. Una vez que selecciones el turno, da clic en el botón "Guardar".</h3>
+                                                    <!-- <h4>{{ $mensaje_jornada->mensaje}}</h4> -->
                                                     <h4>Seleccionaste participar en la sede: </h3>
                                                     <h4 class="card-text" style="color:#54A583; font-weight: bold; font-size: 24px;">{{ $sede->nombre }}</h4>
                                                     <p class="card-text" style="color: #7B868C; font-size: 24px;">Dirección: {{ $sede->direccion }} 
@@ -90,7 +91,7 @@
             success: function (response) {
                 if(response.isOk == true){
                     Swal.fire({
-                    title: 'Hecho',
+                    title: '¡Gracias por aceptar la jornada!',
                     text: response.message,
                     icon: 'success',
                     confirmButtonColor: '#3085d6',

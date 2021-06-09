@@ -158,8 +158,6 @@
             data-search-selector="#inSearchCustom"
             data-page-size="5"
             data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
-            data-sort-name="nombre"
-            data-sort-order="desc"
             data-toolbar="#toolbar">
                 <thead>
                   <tr>

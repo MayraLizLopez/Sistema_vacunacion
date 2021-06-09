@@ -321,6 +321,7 @@ class VaccinationDayController extends Controller
         ->where('voluntarios.eliminado', '=', 0)
         ->whereIn('voluntarios.id_insti', $request->ids_institution)
         ->groupBy('voluntarios.id_voluntario')
+        ->orderBy('voluntarios.id_voluntario', 'DESC')
         ->distinct()
         ->get();
         
@@ -393,6 +394,7 @@ class VaccinationDayController extends Controller
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
         ->groupBy('voluntarios.id_voluntario')
+        ->orderBy('voluntarios.id_voluntario', 'DESC')
         ->get();
 
         return response()->json([
@@ -751,24 +753,12 @@ class VaccinationDayController extends Controller
         if($detallejornada->horas == 0){
             if($detallejornada->activo == null){
                 $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detallejornada->id_jornada)->where('id_voluntario', '=', $detallejornada->id_voluntario)->get();
-                for ($i=0; $i<count($detalles); $i++){
-                    $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
-                    $jornada->activo = false;
-                    $jornada->turno = null;
-                    $save = $jornada->save();   
-                }
-                $jornada = DetalleJornada::findOrFail($detallejornada->id_detalle_jornada);
-                $jornada->activo = true;
-                $save = $jornada->save();
                 $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
-                $voluntarioActivo = Voluntario::findOrFail($detallejornada->id_voluntario);
-                $voluntarioActivo->activo = true;
-                $voluntarioActivo->save();
                 $sede = DB::table('sedes')->where('id_sede', '=', $detallejornada->id_sede)->first();
-                if($save){
-                    return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
-                }
+
+                return view('volunteers.aceptarjornada', compact('voluntario', 'mensaje_jornada', 'sede', 'uuid'));
+                
             }else{
                 $mensaje_jornada = Jornada::findOrFail($detallejornada->id_jornada);
                 $voluntario = DB::table('voluntarios')->where('id_voluntario', '=', $detallejornada->id_voluntario)->first();
@@ -795,13 +785,32 @@ class VaccinationDayController extends Controller
      */
     public static function guardarTurno($uuid, $turno){
         $detalle = DB::table('detalle_jornadas')->where('uuid', '=', $uuid)->first();
+
+        if($detalle->horas == 0){
+            if($detalle->activo == null){
+                $detalles = DB::table('detalle_jornadas')->where('id_jornada', '=', $detalle->id_jornada)->where('id_voluntario', '=', $detalle->id_voluntario)->get();
+                for ($i=0; $i<count($detalles); $i++){
+                    $jornada = DetalleJornada::findOrFail($detalles[$i]->id_detalle_jornada);
+                    $jornada->activo = false;
+                    $jornada->turno = null;
+                    $save = $jornada->save();   
+                }
+                $jornada = DetalleJornada::findOrFail($detalle->id_detalle_jornada);
+                $jornada->activo = true;
+                $save = $jornada->save();
+                $voluntarioActivo = Voluntario::findOrFail($detalle->id_voluntario);
+                $voluntarioActivo->activo = true;
+                $voluntarioActivo->save();             
+            }
+        }
+
         $detallejornada = DetalleJornada::findOrFail($detalle->id_detalle_jornada);
         $detallejornada->turno = $turno;
         $save = $detallejornada->save();
         if($save){
             return response()->json([
                 'isOk' => true,
-                'message' => '¡Elegiste el turno '.$turno.', este se guardo exitosamente!'
+                'message' => '¡Elegiste el turno '.$turno.'. La sede y turno fueron guardados exitosamente.'
             ]); 
         }else{
             return response()->json([
