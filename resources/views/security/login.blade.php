@@ -97,6 +97,29 @@
         #marco{
             margin-top: 15vh;
         }
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px dotted black;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+        }
 
         @media only screen and (max-width: 1100px) {
             body {
@@ -158,7 +181,7 @@
                                         <div class="form-group">
                                             <input type="password" class="form-control"
                                                 id="InputPassword" name="password" placeholder="Contraseña"> 
-                                                <img class="ojo" onclick="mostrar()" src="{{ asset('public/assets/images/ojo.svg')}}" style="width: 25px; float: right; margin-left: -65px !important; margin-right: 15px; margin-top: -27px; position: relative; z-index: 2;"/>
+                                                <img id="ojos" class="ojo" onclick="mostrar()" src="{{ asset('public/assets/images/ojo.svg')}}" data-toggle="tooltip" data-placement="top" title="Mostrar contraseña" style="width: 25px; float: right; margin-left: -65px !important; margin-right: 15px; margin-top: -27px; position: relative; z-index: 2;"/>
                                                 <span class="text-danger">@error('password') Ingresa una contraseña @enderror </span>
                                         </div>
                                         <center>
@@ -213,8 +236,10 @@
         var checkBox = document.getElementById("InputPassword");
         if (checkBox.type == "password"){
             document.getElementById("InputPassword").type = "text";
+            document.getElementById("ojos").title = "Ocultar contraseña";
         } else {
             document.getElementById("InputPassword").type = "password";
+            document.getElementById("ojos").title = "Mostrar contraseña";
         }
     }
 </script>

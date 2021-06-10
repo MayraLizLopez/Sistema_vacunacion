@@ -137,6 +137,7 @@ class VoluntarioController extends Controller
      */
     public function show()
     {
+       
         $rol = session('LoggedUserNivel');
         $data =  ['LoggedUserInfo'=>Usuario::where('id_user', '=', session('LoggedUser'))->first()]; 
         if($rol == 'Administrador General'){
@@ -145,6 +146,7 @@ class VoluntarioController extends Controller
             ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
             ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
             ->where('eliminado', '=', 0)
+            ->orderBy('voluntarios.id_voluntario', 'DESC')
             ->get();
         }
         else{
@@ -155,6 +157,7 @@ class VoluntarioController extends Controller
             ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
             ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
             ->where([[ 'voluntarios.id_insti', '=', $id], ['eliminado', '=', 0]])
+            ->orderBy('voluntarios.id_voluntario', 'DESC')
             ->get();
         }
         return view('admin.voluntaries', compact('voluntarios'), $data);
