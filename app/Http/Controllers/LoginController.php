@@ -74,6 +74,12 @@ class LoginController extends Controller
      */
     public function restartPassword($email, $pass){
         $usuario1 = DB::table('usuarios')->where('email', '=', $email)->first(); 
+        if($usuario1 == null){
+            return response()->json([
+                'isOk' => false,
+                'message' => 'Correo incorrecto, ingrese un correo valido'
+            ]);    
+        }
         $usuario = Usuario::findOrFail($usuario1->id_user);
         $data = [
             'nombre' => $usuario->nombre . ' ' . $usuario->ape_pat . ' ' . $usuario->ape_mat,
