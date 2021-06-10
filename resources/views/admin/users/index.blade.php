@@ -356,17 +356,17 @@
             let actionButton = '';
 
              if(row.activo == 1){
-                actionButton = '<a class="disable" href="javascript:void(0)" title="Disable">'
+                actionButton = '<a class="disable" href="javascript:void(0)" title="Deshabilitar">'
                 + '<img src="{{ asset('public/assets/images/desactivar_usuario.svg')}}" style="width: 15px; padding:0px;"/>',         
                 + '</a>';
              } else {
-                actionButton = '<a class="enable" href="javascript:void(0)" title="Enable">'
+                actionButton = '<a class="enable" href="javascript:void(0)" title="Habilitar">'
                 + '<img src="{{ asset('public/assets/images/activar_usuario.svg')}}" style="width: 15px; padding:0px;"/>'         
                 + '</a>';
              }
 
             return [
-            '<a class="like mr-3" href="edit/' + row.id_user + '"' + 'title="Edit">',
+            '<a class="like mr-3" href="edit/' + row.id_user + '"' + 'title="Editar">',
                 '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>', actionButton
             ].join('')
