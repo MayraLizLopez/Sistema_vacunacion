@@ -181,6 +181,9 @@ class InstitucionController extends Controller
         $InstitucionEliminar = Institucion::findOrFail($id);
         $InstitucionEliminar->activo = false;
         $save = $InstitucionEliminar->save();
+        $user = Usuario::findOrFail($InstitucionEliminar->id_user);
+        $user->activo = false;
+        $user->save();
         if($save){
             return response()->json([
                 'isOk' => true,
