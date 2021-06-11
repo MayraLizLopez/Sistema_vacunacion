@@ -195,7 +195,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" value="" id="myCheck" onclick="myFunction()">
                                                             <label class="form-check-label" for="flexCheckChecked">
-                                                               <b> Acepto <a style="color:#b9134b;">términos y condiciones</a>, así como el <a style="color:#b9134b;"  href="{{ asset('public/assets/archivos/aviso_privacidad.pdf')}}" target="_blank" rel="noopener noreferrer">aviso de privacidad</a></b>
+                                                               <b> Acepto <a style="color:#b9134b;" href="{{ route('terminos_y_condiciones')}}" target="_blank" rel="noopener noreferrer">términos y condiciones</a>, así como el <a style="color:#b9134b;"  href="{{ asset('public/assets/archivos/aviso_privacidad.pdf')}}" target="_blank" rel="noopener noreferrer">aviso de privacidad</a></b>
                                                             </label>
                                                         </div>
                                                     </div>

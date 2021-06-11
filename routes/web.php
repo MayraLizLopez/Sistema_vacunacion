@@ -33,6 +33,8 @@ Route::post('voluntario/store', [VoluntarioController::class, "store"]);
 
 Route::get('voluntario/aviso', [VoluntarioController::class, "aviso"])->name('aviso');
 
+Route::get('voluntario/terminos_y_condiciones', [VoluntarioController::class, "terminos"])->name('terminos_y_condiciones');
+
 //Securitys
 Route::get('security/logout', [LoginController::class, "logout"])->name('logout');
 

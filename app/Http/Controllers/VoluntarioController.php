@@ -448,6 +448,14 @@ class VoluntarioController extends Controller
         return view('volunteers.aviso');
     }
 
+    /***
+     * Método para redireccionar al aviso de privacidad
+     */
+    public function terminos()
+    {
+        return view('volunteers.terminosYcondiciones');
+    }
+
     /**
      * Método que retorna los detalles del voluntario seleccionado.
      */
