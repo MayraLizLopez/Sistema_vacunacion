@@ -80,14 +80,14 @@
         <div class="form-group ml-1">
             <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
             <img class="mx-2" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 20px;"/>
-                <span class="item-label">Limpiar Filtros</span>
+                <span class="item-label">Limpiar filtros</span>
             </button>      
         </div>
 
         <div class="form-group ml-1">
             <a class="btn btn-primary" style="color:white;" href="{{route('createUser')}}">
                 <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
-                Registrar Usuario
+                Registrar usuario
             </a>
         </div>
 
