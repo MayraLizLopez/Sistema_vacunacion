@@ -39,12 +39,16 @@ class LoginController extends Controller
         if(!$userInfo){
             return back()->with('fail', 'Correo incorrecto');
         }else{
-            if(Hash::check($request->password, $userInfo->password)){
-                $request->session()->put('LoggedUserNivel', $userInfo->rol);
-                $request->session()->put('LoggedUser', $userInfo->id_user);
-                return redirect('admin/panel/index');
-            }else{
-                return back()->with('fail', 'Contraseña incorrecta');
+            if($userInfo->activo == 1){
+                if(Hash::check($request->password, $userInfo->password)){
+                    $request->session()->put('LoggedUserNivel', $userInfo->rol);
+                    $request->session()->put('LoggedUser', $userInfo->id_user);
+                    return redirect('admin/panel/index');
+                }else{
+                    return back()->with('fail', 'Contraseña incorrecta');
+                }
+            } else {
+                return back()->with('fail', 'Usuario deshabilitado');
             }
         }
     }
