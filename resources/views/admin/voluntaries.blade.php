@@ -89,11 +89,11 @@
         @endif
 
         <div class="form-group second-form">
-            <input type="date" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate">
+            <input type="date" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha inicio">
         </div>
 
         <div class="form-group second-form ml-1">
-            <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate">
+            <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha fin">
         </div>
 
         {{-- <div class="form-group second-form ml-1">
@@ -121,9 +121,9 @@
         </div>
 
         <div class="form-group ml-1">
-            <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar Filtros">
+            <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar filtros">
             <img class="mx-2" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 20px;"/>
-                <span class="item-label"> Limpiar Filtros</span>
+                <span class="item-label"> Limpiar filtros</span>
             </button>      
         </div>
 
@@ -137,7 +137,7 @@
         <div class="form-group ml-1">
             <a class="btn btn-primary btn-table" href="{{route('crearVoluntario')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntarios">
                 <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
-                <span class="item-label">Registrar Voluntario</span>                 
+                <span class="item-label">Registrar voluntario</span>                 
             </a>
         </div>
 
@@ -171,7 +171,7 @@
                     <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents"></th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents">Acciones</th>
                   </tr>
                 </thead>
             </table>
@@ -840,7 +840,7 @@
         window.operateEvents = {
             'click .remove': function (e, value, row, index) {
                 Swal.fire({
-                    title: '¿Está seguro que desea eliminar este voluntario?',
+                    title: '¿Está seguro de que desea eliminar este voluntario?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

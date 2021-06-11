@@ -44,7 +44,7 @@
 <p class="mb-4">La siguiente tabla contiene todas las instituciones registradas.</p>
 <div id="toolbar">
     <div class="form-inline">
-        <a class="btn btn-primary" style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar Institución</a>
+        <a class="btn btn-primary" style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar institución</a>
         <div class="form-group ml-1">
             <a class="btn btn-success btn-table" id="btnModalCorreo" data-bs-toggle="tooltip" data-bs-placement="top" title="Enviar correo">
                 <img class="mx-2" src="{{ asset('public/assets/images/carta_correo.svg')}}" style="width: 20px;"/>
@@ -108,7 +108,7 @@
                         <th class="d-none" data-field="id_insti">ID</th>
                         <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                         <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
-                        <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Nombre Enlace</th>
+                        <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Enlace</th>
                         <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                         <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
                         <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
@@ -127,7 +127,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Enviar Correo</h5>
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Enviar correo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
             </button>
@@ -189,10 +189,10 @@
         //Botones de la parte derecha de la tabla
         function operateFormatter(value, row, index) {
             return [
-            '<a class="like mr-3" href="institutions/edit/' + row.id_insti + '"' + 'title="Edit">',
+            '<a class="like mr-3" href="institutions/edit/' + row.id_insti + '"' + 'title="Editar">',
                 '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
-            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<a class="remove" href="javascript:void(0)" title="Eliminar">',
                 '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')

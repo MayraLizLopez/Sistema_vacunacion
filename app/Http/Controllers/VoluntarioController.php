@@ -93,7 +93,7 @@ class VoluntarioController extends Controller
             'ape_pat' => 'required',
             'id_municipio' => 'required',
             'id_insti' => 'required',
-            'curp' => 'required', 
+            'curp' => 'required|curp|unique:voluntarios', 
             'email' => 'required|email|unique:voluntarios', 
             //'email' => 'required|email|unique:voluntarios|unique:usuarios', 
             'fecha_nacimiento' => 'required',

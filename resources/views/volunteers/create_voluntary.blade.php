@@ -53,12 +53,12 @@
             font-family: montserrat;
         }
 </style>
-    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registo Voluntario</h1>
+    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registo de voluntario</h1>
     <p class="mb-4"> </p>
     
     <div class="row justify-content-center">
         <div class="col-sm-12">
-            <form method="POST" action="{{url("/voluntario/store")}}">
+            <form method="POST" action="{{url('/voluntario/store')}}">
                 @if(Session::get('success'))
                 @section('scripts')
                     <script>    
