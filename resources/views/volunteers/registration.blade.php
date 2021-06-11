@@ -62,7 +62,7 @@
                     
                     <div class="row justify-content-center">
                         <div class="col-sm-12">
-                            <form method="POST" action="{{url("/voluntario/store")}}">
+                            <form method="POST" action="{{url('/voluntario/store')}}">
                                 @if(Session::get('success'))
                                 @section('scripts')
                                     <script>    

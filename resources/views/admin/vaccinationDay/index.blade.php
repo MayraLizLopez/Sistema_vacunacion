@@ -1734,7 +1734,7 @@
 
         function operateFormatter(value, row, index) {
             return [
-            '<a class="email mr-2" href="javascript:void(0)" title="Email">',
+            '<a class="email mr-2" href="javascript:void(0)" title="Enviar correos">',
                 '<i class="far fa-envelope"></i>',
             '</a>',
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
