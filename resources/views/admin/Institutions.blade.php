@@ -112,7 +112,7 @@
                         <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                         <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
                         <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
-                        <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                        <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
                     </tr>
                 </thead>
             </table>

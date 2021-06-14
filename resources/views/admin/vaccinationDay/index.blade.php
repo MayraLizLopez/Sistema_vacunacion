@@ -99,7 +99,7 @@
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
-                    <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
                     </tr>
                 </thead>
             </table>
@@ -603,7 +603,7 @@
                                     <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
                                     <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
                                     <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
-                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
+                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents">Acciones</th>
                                   </tr>
                                 </thead>
                             </table>

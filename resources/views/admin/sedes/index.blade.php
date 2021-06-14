@@ -37,7 +37,7 @@
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombre_encargado" data-sortable="true" data-halign="center" data-align="center">Encargado del centro</th>
                     <th data-field="cupo" data-sortable="true" data-halign="center" data-align="center">Voluntarios necesarios</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
                   </tr>
                 </thead>
             </table>

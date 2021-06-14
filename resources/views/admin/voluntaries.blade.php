@@ -818,23 +818,34 @@
 
         function operateFormatter(value, row, index) {
             let actionButton = '';
-            if(row.activo == 1){
-                actionButton = '<a class="edit_horas mr-2" href="javascript:void(0)" title="Editar horas voluntario">'
-                +'<img src="{{ asset('public/assets/images/reloj_azul.svg')}}" style="width: 15px; padding:0px;"/>'
-                +'</a>';
-            } 
-            return [
-            actionButton,
-            '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
-            '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
-            '</a>',
-            '<a class="like mr-3" href="voluntario/edit/' + row.id_voluntario + '"' + 'title="Editar">',
-            '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
-            '</a>',
-            '<a class="remove" href="javascript:void(0)" title="Eliminar">',
-            '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
-            '</a>'
-            ].join('')
+            if({!! json_encode($LoggedUserInfo['rol']) !!} !== 'Administrador General'){
+                return [
+                    '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
+                    '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
+                    '</a>',
+                    '<a class="like mr-3" href="voluntario/edit/' + row.id_voluntario + '"' + 'title="Editar">',
+                    '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
+                    '</a>'
+                ].join('')
+            }else{
+                if(row.activo == 1){
+                    actionButton = '<a class="edit_horas mr-2" href="javascript:void(0)" title="Editar horas voluntario">'
+                    +'<img src="{{ asset('public/assets/images/reloj_azul.svg')}}" style="width: 15px; padding:0px;"/>'
+                    +'</a>';
+                } 
+                return [
+                    actionButton,
+                    '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
+                    '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
+                    '</a>',
+                    '<a class="like mr-3" href="voluntario/edit/' + row.id_voluntario + '"' + 'title="Editar">',
+                    '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
+                    '</a>',
+                    '<a class="remove" href="javascript:void(0)" title="Eliminar">',
+                    '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
+                    '</a>'
+                ].join('')
+            }
         }
 
         window.operateEvents = {

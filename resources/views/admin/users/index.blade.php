@@ -124,7 +124,7 @@
                     <th data-field="rol" data-sortable="true" data-halign="center" data-align="center">Rol</th>
                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
                     <th class="d-none" data-field="activo" data-sortable="true" data-halign="center" data-align="center">Activo</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents"></th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents">Acciones</th>
                   </tr>
                 </thead>
             </table>
