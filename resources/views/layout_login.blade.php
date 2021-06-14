@@ -13,7 +13,7 @@
     </head>
     <style>
         body {
-            background-image: url('{{ asset('public/assets/images/fondo_inicio_xl.png')}}');
+            background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');
             
             background-position: center center;
             
@@ -24,26 +24,24 @@
             background-size: cover;
             
             background-color:#464646;
-
             height: 100%; 
-
         }
 
         @media only screen and (max-width: 1200px) {
             body {
-                background-image: url('{{ asset('public/assets/images/fondo_inicio_1100_670.png')}}');
+                background-image: url('{{ asset('public/assets/images/FondoLogin_1100x670.png')}}');
             }
         }
 
         @media only screen and (max-width: 1024px) {
             body {
-                background-image: url('{{ asset('public/assets/images/fondo_inicio_720_1080.png')}}');
+                background-image: url('{{ asset('public/assets/images/FondoLogin_720x1080.png')}}');
             }
         }
 
         @media only screen and (max-width: 500px) {
             body {
-                background-image: url('{{ asset('public/assets/images/fondo_inicio_414_737.png')}}');
+                background-image: url('{{ asset('public/assets/images/FondoLogin_414x737.png')}}');
             }
         }
     </style>
@@ -75,6 +73,5 @@
             <!-- validator -->
             <script src="{{ asset('public/assets/vendors/validator/validator.js') }}"></script>
         @yield('scripts')
-        <div class="clearfix"></div>
     </body>
 </html>
