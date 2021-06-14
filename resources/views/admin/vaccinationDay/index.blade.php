@@ -541,7 +541,7 @@
     <div class="modal-dialog jornadas-aceptadas modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios Aceptados</h5>
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios registrados en la jornada</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
             </button>
