@@ -4,7 +4,7 @@
 @endsection
 @section('content')  
 <!-- Page Heading -->
-<h1 class="h3 mb-2 font-weight-bold text-gray-800">Sedes de Vacunación</h1>
+<h1 class="h3 mb-2 font-weight-bold text-gray-800">Sedes de vacunación</h1>
 <p class="mb-4">La siguiente tabla contiene todos los centros de vacunación registrados</p>
 <div id="toolbar">
     <div class="form-inline">

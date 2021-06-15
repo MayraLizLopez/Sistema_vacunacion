@@ -110,7 +110,7 @@
                         <th data-field="domicilio" data-sortable="true" data-halign="center" data-align="center">Domicilio</th>
                         <th data-field="nombre_enlace" data-sortable="true" data-halign="center" data-align="center">Enlace</th>
                         <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                        <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                        <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Correo electrónico</th>
                         <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                         <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
                     </tr>

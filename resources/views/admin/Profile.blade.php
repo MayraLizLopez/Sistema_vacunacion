@@ -145,7 +145,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="paternalSurnameVoluntary">Correo</label>
+                            <label for="paternalSurnameVoluntary">Correo electrónico</label>
                             <input type="text" class="form-control" id="paternalSurnameVoluntary" name="institucion" placeholder="" value="{{ $user->email }}" disabled/>
                         </div>
                     </div>

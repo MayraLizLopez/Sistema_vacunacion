@@ -182,7 +182,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="nameVoluntary">Correo del encargado</label>
+                            <label for="nameVoluntary">Correo electrónico del encargado</label>
                             <input type="text" class="form-control" id="nameVoluntary" name="email_encargado" placeholder="Correo" value="{{ $sede->email_encargado }}"/>
                         </div>
                     </div>

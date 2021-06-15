@@ -167,7 +167,7 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control"
                                                 id="InputEmail" aria-describedby="emailHelp" name="email"
-                                                placeholder="Email">
+                                                placeholder="Correo electrónico">
                                                 <span class="text-danger">@error('email') Ingresa tu correo @enderror </span>
                                         </div>
                                         <div class="form-group">

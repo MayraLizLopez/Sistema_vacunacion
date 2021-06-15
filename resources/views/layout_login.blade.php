@@ -21,7 +21,7 @@
             
             background-attachment: fixed;
             
-            background-size: cover;
+            background-size: 100% 105%; 
             
             background-color:#464646;
             height: 100%; 
