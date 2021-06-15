@@ -51,6 +51,7 @@ class LoginController extends Controller
                 return back()->with('fail', 'Usuario deshabilitado');
             }
         }
+        return view('security.login');
     }
 
     /**
