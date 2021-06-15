@@ -13,7 +13,21 @@
     </head>
     <style>
         body {
-            background-image: url('{{ asset('public/assets/images/FondoRegistro.png')}}'); height:100%;
+            background-image: url('{{ asset('public/assets/images/FondoRegistro.png')}}');
+            
+            background-position: center center;
+            
+            background-repeat: no-repeat;
+            
+            background-attachment: fixed;
+            
+            background-size: 100% 105%; 
+            
+            background-color:#464646;
+
+            height: 100%; 
+
+        
         }
         
         @media only screen and (max-width: 1200px) {
