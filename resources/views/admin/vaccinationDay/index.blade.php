@@ -84,8 +84,8 @@
             data-single-select="true"
             data-click-to-select="true"
             data-search="true"
-            data-page-size="5"
-            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+            data-page-size="15"
+            data-page-list="[15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"
             data-toolbar="#toolbar1">
@@ -99,7 +99,7 @@
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
-                    <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
                     </tr>
                 </thead>
             </table>
@@ -156,8 +156,8 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="inFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB,
-                           de lo contrario estos no se guardaran.</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Los archivos adjuntos no pueden exceder de 2MB por cada uno,
+                        caso contrario, estos no serán cargados al mensaje.</label>
                     </div>
                   </div>
             </div>
@@ -228,7 +228,7 @@
                     </div>     
                     <table id="voluntariesTable" class="table table-striped table-bordered"
                     data-pagination="false"
-                    data-height="300"
+                    data-height="500"
                     data-toolbar="#toolbar2">
                         <thead>
                           <tr>
@@ -307,8 +307,8 @@
                 <div class="input-group mb-3">
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="editInFile" lang="es" multiple>
-                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Cada uno de los archivos no deben ser mayor a 2MB,
-                           de lo contrario estos no se guardaran.</label>
+                      <label class="custom-file-label" for="inFile" data-browse="Anexo(s)">Los archivos adjuntos no pueden exceder de 2MB por cada uno,
+                           caso contrario, estos no serán cargados al mensaje.</label>
                     </div>
                   </div>
             </div>
@@ -379,7 +379,7 @@
                     </div>          
                     <table id="editVoluntariesTable" class="table table-striped table-bordered"
                     data-pagination="false"
-                    data-height="300"
+                    data-height="500"
                     data-toolbar="#toolbar3">
                         <thead>
                           <tr>

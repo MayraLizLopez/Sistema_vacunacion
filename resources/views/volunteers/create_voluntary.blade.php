@@ -201,7 +201,7 @@
                             </div>
                         </div>
 
-                            <button type="submit" class="btn btn-success" id="botonEnviar">Enviar</button>
+                            <button type="submit" class="btn btn-success" id="botonEnviar">Guardar</button>
                             <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a>
                         </div>
                     </div>

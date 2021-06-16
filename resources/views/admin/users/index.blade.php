@@ -31,9 +31,11 @@
               nutmeg-bold; 
               src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
+              height: 70px;
+              width: 300px;
               ">
-                <img class="mx-1" src="{{ asset('public/assets/images/usuario_desactivado_blanco.svg')}}" style="width: 40px;"/>
-                <span class="h2">Ir a usuarios desactivados</span>
+                <img class="mx-1" src="{{ asset('public/assets/images/usuario_desactivado_blanco.svg')}}" style="width: 30px;"/>
+                <span class="h6">Ir a usuarios desactivados</span>
         </button>
 
         <button 
@@ -45,9 +47,11 @@
               nutmeg-bold; 
               src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
+              height: 70px;
+              width: 300px;
               ">
-                <img class="mx-1" src="{{ asset('public/assets/images/usuario_blanco.svg')}}" style="width: 40px;"/>
-                <span class="h2">Ir a usuarios activos</span>
+                <img class="mx-1" src="{{ asset('public/assets/images/usuario_blanco.svg')}}" style="width: 30px;"/>
+                <span class="h5">Ir a usuarios activos</span>
         </button>
     </div>
 </div>
@@ -106,8 +110,8 @@
             data-single-select="true"
             data-click-to-select="true"
             data-search-selector="#inSearchCustom"
-            data-page-size="5"
-            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+            data-page-size="15"
+            data-page-list="[15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"
             data-toolbar="#toolbar">
@@ -124,7 +128,7 @@
                     <th data-field="rol" data-sortable="true" data-halign="center" data-align="center">Rol</th>
                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
                     <th class="d-none" data-field="activo" data-sortable="true" data-halign="center" data-align="center">Activo</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents"></th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents">Acciones</th>
                   </tr>
                 </thead>
             </table>

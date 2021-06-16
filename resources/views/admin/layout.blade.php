@@ -51,6 +51,16 @@
             } */
             #menu {
                 color: #0B55B8;     
+            }
+
+            @media only screen and (max-width: 770px) {
+                .titles-side-bar{
+                    display: none !important;
+                }
+
+                .icon-side-bar{
+                    width: 40px !important;
+                }
             }  
         </style>
         @yield('css')    
@@ -76,8 +86,8 @@
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
                     <a id="menu" class="nav-link" id="inicio" href="{{url('/admin/panel/index')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/index.svg')}}" style="width: 23px;"/>
-                        <span style="font-family: nutmeg-bold; font-size:18px;">Inicio</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/index.svg')}}" style="width: 23px;"/>
+                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:18px;">Inicio</span></a>
                         
                 </li>
 
@@ -87,48 +97,48 @@
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('/admin/panel/show')}}">                           
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
-                        <span  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
+                        <span class="titles-side-bar"  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>
 
                     <!-- Instituciones -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('/admin/panel/institutions')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_instituciones.svg')}}" style="width: 20px;"/>
-                        <span  style="font-family: nutmeg-bold; font-size:18px;">Instituciones</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_instituciones.svg')}}" style="width: 20px;"/>
+                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:18px;">Instituciones</span></a>
                     </li>
 
                     <!-- Jornadas -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('/admin/panel/vaccinationDay')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_jornadas.svg')}}" style="width: 20px;"/>
-                        <span  style="font-family: nutmeg-bold; font-size:18px;">Jornadas</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_jornadas.svg')}}" style="width: 20px;"/>
+                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:18px;">Jornadas</span></a>
                     </li>
 
                     <!-- Sedes -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/sedes/index')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_centros.svg')}}" style="width: 20px;"/>
-                        <span  style="font-family: nutmeg-bold; font-size:18px;">Sedes</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_centros.svg')}}" style="width: 20px;"/>
+                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:18px;">Sedes</span></a>
                     </li>
 
                     <!-- Usuarios -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
-                        <span style="font-family: nutmeg-bold; font-size:20px;">Panel de Usuarios</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
+                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:20px;">Panel de Usuarios</span></a>
                     </li> 
                 @else
                     <!-- Divider -->
                     {{-- <hr class="sidebar-divider my-0"> --}}
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('/admin/panel/show')}}">
-                        <img class="mx-2" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
-                        <span   style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
+                        <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_voluntarios.svg')}}" style="width: 25px;"/>
+                        <span class="titles-side-bar"  style="font-family: nutmeg-bold; font-size:18px;">Voluntarios</span></a>
                     </li>                 
                 @endif
 
@@ -303,7 +313,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline small" style="color:#707070; font-family:montserrat">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
+                                    <span class="mr-2 d-lg-inline small" style="color:#707070; font-family:montserrat">{{ $LoggedUserInfo['nombre']. ' ' . $LoggedUserInfo['ape_pat']}} </span>
                                     <div class="col-auto">
                                         <i class="fas fa-user fa-2x" style="color: #F5F5F5; background-color: #6a7379; border: 2px solid #6a7379; border-radius: 5px; padding: 3px;"></i>
                                     </div>
@@ -409,6 +419,19 @@
 
         <!-- validator -->
         <script src="{{ asset('public/assets/vendors/validator/validator.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                if(window.innerWidth <= 770){
+                    $('#accordionSidebar').addClass('toggled');
+                }
+
+                $(window).resize(function(){
+                    if(window.innerWidth > 770){
+                        $('#accordionSidebar').removeClass('toggled');
+                    }
+                });
+            });
+        </script>
         @yield('scripts')
     </body>
 </html>

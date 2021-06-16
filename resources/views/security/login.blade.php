@@ -140,6 +140,10 @@
             body {
                 background-image: url('{{ asset('public/assets/images/FondoLogin_414x737.png')}}');
             }
+
+            .text-size-login{
+                font-size: 25px;
+            }
         }
 </style>
 
@@ -163,7 +167,7 @@
                             <div class="col-lg-8">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1>¡Bienvenido!</h1>
+                                        <h1 class="text-size-login">¡Bienvenido!</h1>
                                     </div>
                                     <form class="user"  method="POST" action="{{url('/security/authenticate')}}">
                                         @if(Session::get('fail'))

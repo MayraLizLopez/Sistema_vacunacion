@@ -151,7 +151,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phoneVoluntary">Apellido paterno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" placeholder="apellido paterno" required="required"/>
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_pat" placeholder="Apellido paterno" required="required"/>
                             <span class="text-danger">@error('ape_pat'){{ 'Ingrese apellido paterno' }} @enderror </span>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                     <div class="col-md-6">
                     <div class="form-group">
                     <label for="phoneVoluntary">Apellido Materno</label>
-                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_mat" placeholder="apellido materno" />
+                            <input type="text" class="form-control" id="phoneVoluntary" name="ape_mat" placeholder="Apellido materno" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -189,7 +189,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="instututionVoluntary">Correo del enlace</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo" required="required"/>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Correo electrónico" required="required"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese un correo electrónico valido.' }} @enderror </span>
                             </select>
                         </div>

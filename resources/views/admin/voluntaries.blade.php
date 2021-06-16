@@ -55,93 +55,101 @@
               nutmeg-bold; 
               src: url('{{ asset('public/assets/fonts/Nutmeg-Bold.ttf')}}');
               font-weight: bold;
+              height: 70px;
+              width: 300px;
               ">
-                <img class="mx-1" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 40px;"/>
-                <span style="font-size: 30px;">Generar reporte</span>
+                <img class="mx-1" src="{{ asset('public/assets/images/documento.svg')}}" style="width: 30px;"/>
+                <span style="font-size: 25px;">Generar reporte</span>
         </button>
     </div> 
 </div>
 
 <div id="toolbar">
-    <div class="form-inline" role="form">
+    <fieldset>
+        <legend>Buscar por: </legend>
+        <div class="form-inline" role="form">
 
-        <div class="form-group main-form">
-            <input type="text" class="form-control" placeholder="Voluntario" id="inSearchByVoluntary">
-        </div>
-
-        <div class="form-group main-form ml-1">
-            <input type="text" class="form-control" placeholder="CURP" id="inSearchByCURP">
-        </div>
-
-        <div class="form-group main-form ml-1">
-            <select class="custom-select" id="inSearchByTown">
-                <option value="" selected disabled hidden>Elija un municipio</option>
-            </select>           
-        </div>
-
-        @if ($LoggedUserInfo['rol'] == 'Administrador General')
+            <div class="form-group main-form">
+                <input type="text" class="form-control" placeholder="Voluntario" id="inSearchByVoluntary">
+            </div>
+    
             <div class="form-group main-form ml-1">
-                <select class="custom-select" id="inSearchByInstitution">
-                    <option value="" selected disabled hidden>Elija una institución</option>
+                <input type="text" class="form-control" placeholder="CURP" id="inSearchByCURP">
+            </div>
+    
+            <div class="form-group main-form ml-1">
+                <select class="custom-select" id="inSearchByTown">
+                    <option value="" selected disabled hidden>Municipio</option>
                 </select>           
             </div>
+    
+            @if ($LoggedUserInfo['rol'] == 'Administrador General')
+                <div class="form-group main-form ml-1">
+                    <select class="custom-select" id="inSearchByInstitution">
+                        <option value="" selected disabled hidden>Institución</option>
+                    </select>           
+                </div>
+                
+            @endif
+    
+            <div class="form-group second-form">
+                <input type="date" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha inicio">
+            </div>
+    
+            <div class="form-group second-form ml-1">
+                <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha fin">
+            </div>
+    
+            {{-- <div class="form-group second-form ml-1">
+                <input type="text" class="form-control" placeholder="Nombre del Enlace" id="inLinkName">
+            </div> --}}
+    
+            <div class="form-group second-form ml-1">
+                <select class="custom-select" id="inSearchBySede">
+                    <option value="" selected disabled hidden>Nombre de la Sede</option>
+                </select>  
+            </div>
+    
+            <div class="form-group second-form ml-1">
+                <input type="number" class="form-control" placeholder="Horas del voluntario" id="inSearchByHours">
+            </div>
+    
+            <div class="form-group ml-1">
+                <input type="text" class="form-control" placeholder="Búsqueda general" id="inSearchCustom">
+            </div>
             
-        @endif
-
-        <div class="form-group second-form">
-            <input type="date" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha inicio">
+            <div class="form-group ml-1">
+                <button type="button" class="btn btn-info btn-table" id="showMoreFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros"
+                style="height: 39px;">
+                    <i class="fas fa-chevron-circle-down" style="height: 24px; padding-top: 1px;"></i>
+                      Más filtros
+                </button>      
+            </div>
+    
+            <div class="form-group ml-1">
+                <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar filtros">
+                <img class="mx-2" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 20px;"/>
+                    <span class="item-label"> Limpiar filtros</span>
+                </button>      
+            </div>
+    
+            <!-- <div class="form-group ml-1">
+                <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
+                    <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
+                    <span class="item-label">Agregar horas</span>                 
+                </a>
+            </div> -->
+    
+            <div class="form-group ml-1">
+                <a class="btn btn-primary btn-table" href="{{route('crearVoluntario')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntarios">
+                    <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
+                    <span class="item-label">Registrar voluntario</span>                 
+                </a>
+            </div>
+    
         </div>
+    </fieldset>
 
-        <div class="form-group second-form ml-1">
-            <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha fin">
-        </div>
-
-        {{-- <div class="form-group second-form ml-1">
-            <input type="text" class="form-control" placeholder="Nombre del Enlace" id="inLinkName">
-        </div> --}}
-
-        <div class="form-group second-form ml-1">
-            <select class="custom-select" id="inSearchBySede">
-                <option value="" selected disabled hidden>Nombre de la Sede</option>
-            </select>  
-        </div>
-
-        <div class="form-group second-form ml-1">
-            <input type="number" class="form-control" placeholder="Horas del voluntario" id="inSearchByHours">
-        </div>
-
-        <div class="form-group ml-1">
-            <input type="text" class="form-control" placeholder="Búsqueda general" id="inSearchCustom">
-        </div>
-        
-        <div class="form-group ml-1">
-            <button type="button" class="btn btn-info btn-table" id="showMoreFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros">
-                <i class="fas fa-chevron-circle-down" style="height: 24px;"></i>
-            </button>      
-        </div>
-
-        <div class="form-group ml-1">
-            <button type="button" class="btn btn-success btn-table" id="cleanFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar filtros">
-            <img class="mx-2" src="{{ asset('public/assets/images/borrador.svg')}}" style="width: 20px;"/>
-                <span class="item-label"> Limpiar filtros</span>
-            </button>      
-        </div>
-
-        <!-- <div class="form-group ml-1">
-            <a class="btn btn-info btn-table" id="btnLoadHours" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar horas">
-                <img class="mx-2" src="{{ asset('public/assets/images/reloj.svg')}}" style="width: 20px;"/>
-                <span class="item-label">Agregar horas</span>                 
-            </a>
-        </div> -->
-
-        <div class="form-group ml-1">
-            <a class="btn btn-primary btn-table" href="{{route('crearVoluntario')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Registrar voluntarios">
-                <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
-                <span class="item-label">Registrar voluntario</span>                 
-            </a>
-        </div>
-
-    </div>
 </div>
 
 
@@ -156,8 +164,8 @@
             data-single-select="true"
             data-click-to-select="true"
             data-search-selector="#inSearchCustom"
-            data-page-size="5"
-            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+            data-page-size="15"
+            data-page-list="[15, 25, 50, 100]"
             data-toolbar="#toolbar">
                 <thead>
                   <tr>

@@ -21,8 +21,8 @@
             data-single-select="true"
             data-click-to-select="true"
             data-search="true"
-            data-page-size="10"
-            data-page-list="[5, 10, 15, 50, 100, 200, 500, 1000]"
+            data-page-size="15"
+            data-page-list="[15, 50, 100, 200, 500, 1000]"
             data-sort-name="nombre"
             data-sort-order="desc"
             data-toolbar="#toolbar">
@@ -35,9 +35,9 @@
                     <th data-field="colonia" data-sortable="true" data-halign="center" data-align="center">Colonia</th>
                     <th data-field="cp" data-sortable="true" data-halign="center" data-align="center">Código Postal</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
-                    <th data-field="nombre_encargado" data-sortable="true" data-halign="center" data-align="center">Encargado del centro</th>
+                    <th data-field="nombre_encargado" data-sortable="true" data-halign="center" data-align="center">Encargado</th>
                     <th data-field="cupo" data-sortable="true" data-halign="center" data-align="center">Voluntarios necesarios</th>
-                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"></th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
                   </tr>
                 </thead>
             </table>
