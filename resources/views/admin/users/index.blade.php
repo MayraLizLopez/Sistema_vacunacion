@@ -122,7 +122,7 @@
                     <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                     <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                     <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Correo electrónico</th>
                     <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                     <th data-field="cargo" data-sortable="true" data-halign="center" data-align="center">Cargo</th>
                     <th data-field="rol" data-sortable="true" data-halign="center" data-align="center">Rol</th>

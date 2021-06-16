@@ -238,7 +238,7 @@
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                             <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Correo electrónico</th>
                             <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                             <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                             <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
@@ -389,7 +389,7 @@
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                             <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                            <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Correo electrónico</th>
                             <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                             <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                             <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
@@ -541,7 +541,7 @@
     <div class="modal-dialog jornadas-aceptadas modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios Aceptados</h5>
+                <h5 class="modal-title m-0 font-weight-bold text-primary" id="staticBackdropLabel">Voluntarios registrados en la jornada</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <img class="mx-2" src="{{ asset('public/assets/images/salir.svg')}}" style="width: 30px;"/>
             </button>
@@ -595,7 +595,7 @@
                                     <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                                     <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                                     <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
-                                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Email</th>
+                                    <th data-field="email" data-sortable="true" data-halign="center" data-align="center">Correo electrónico</th>
                                     <th data-field="tel" data-sortable="true" data-halign="center" data-align="center">Teléfono</th>
                                     <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
@@ -603,7 +603,7 @@
                                     <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
                                     <th data-field="turno" data-sortable="true" data-halign="center" data-align="center">Turno</th>
                                     <th data-field="horas" data-sortable="true" data-halign="center" data-align="center">Horas</th>
-                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents"></th>
+                                    <th data-field="operate" data-formatter="volAcepFormatter" data-halign="center" data-align="center" data-events="volAcepEvents">Acciones</th>
                                   </tr>
                                 </thead>
                             </table>

@@ -125,8 +125,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="emailUser">Email</label>
-                            <input type="email" class="form-control" id="emailUser" name="email" placeholder="Email" value="{{ $userEdit->email }}" required="required"/>
+                            <label for="emailUser">Correo electrónico</label>
+                            <input type="email" class="form-control" id="emailUser" name="email" placeholder="Correo electrónico" value="{{ $userEdit->email }}" required="required"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese el email' }} @enderror </span>
                         </div>
                     </div>

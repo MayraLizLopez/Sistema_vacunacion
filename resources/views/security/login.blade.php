@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Login</title>
+@extends('layout_login')
+@section('title', 'Login')
+@section('content')
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('public/assets/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -21,7 +14,6 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/sb-admin-2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/login.css') }}">
-</head>
 
 <style type="text/css">
         @font-face {
@@ -90,9 +82,9 @@
             padding-top:20px;
         }
 
-        body {
+        /* body {
             background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');
-        }
+        } */
 
         #marco{
             margin-top: 15vh;
@@ -121,7 +113,7 @@
             visibility: visible;
         }
 
-        @media only screen and (max-width: 1100px) {
+        /* @media only screen and (max-width: 1100px) {
             body {
                 background-image: url('{{ asset('public/assets/images/FondoLogin_1100x670.png')}}');
             }
@@ -134,7 +126,7 @@
             body {
                 background-image: url('{{ asset('public/assets/images/FondoLogin_720x1080.png')}}');
             }
-        }
+        }*/
 
         @media only screen and (max-width: 500px) {
             body {
@@ -179,7 +171,7 @@
                                         <div class="form-group">
                                             <input type="email" class="form-control"
                                                 id="InputEmail" aria-describedby="emailHelp" name="email"
-                                                placeholder="Email">
+                                                placeholder="Correo electrónico">
                                                 <span class="text-danger">@error('email') Ingresa tu correo @enderror </span>
                                         </div>
                                         <div class="form-group">
@@ -247,3 +239,4 @@
         }
     }
 </script>
+@endsection

@@ -124,8 +124,8 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="nameUser">Email</label>
-                            <input type="email" class="form-control" id="emailUser" name="email" placeholder="Email"/>
+                            <label for="nameUser">Correo electrónico</label>
+                            <input type="email" class="form-control" id="emailUser" name="email" placeholder="Correo electrónico"/>
                             <span class="text-danger">@error('email'){{ 'Ingrese el email' }} @enderror </span>
                         </div>
                     </div>
