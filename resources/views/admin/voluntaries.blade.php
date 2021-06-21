@@ -560,7 +560,8 @@
                     'Teléfono': item.tel,
                     'CURP': item.curp,
                     'Municipio': item.nombre_municipio,
-                    'Institución': item.nombre_institucion
+                    'Institución': item.nombre_institucion,
+                    'Fecha de registro': item.fecha_creacion
                 };
                 return data;
             });
@@ -587,7 +588,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
@@ -619,7 +621,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
@@ -651,7 +654,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
@@ -683,7 +687,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
@@ -715,7 +720,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
@@ -747,7 +753,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
@@ -779,7 +786,8 @@
                             'Teléfono': item.tel,
                             'CURP': item.curp,
                             'Municipio': item.nombre_municipio,
-                            'Institución': item.nombre_institucion
+                            'Institución': item.nombre_institucion,
+                            'Fecha de registro': item.fecha_creacion
                         };
                         return data;
                     });
