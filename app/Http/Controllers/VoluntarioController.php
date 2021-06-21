@@ -144,7 +144,17 @@ class VoluntarioController extends Controller
             $voluntarios = DB::table('voluntarios')
             ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
             ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-            ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+            ->select(
+                'voluntarios.id_voluntario AS id_voluntario',              
+                'voluntarios.nombre AS nombre',
+                'voluntarios.ape_pat AS ape_pat',
+                'voluntarios.ape_mat AS ape_mat',
+                'voluntarios.email AS email',
+                'voluntarios.tel AS tel',
+                'voluntarios.curp AS curp',
+                DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
+                'instituciones.nombre AS nombre_institucion',
+                'municipios.nombre AS nombre_municipio')
             ->where('eliminado', '=', 0)
             ->orderBy('voluntarios.id_voluntario', 'DESC')
             ->get();
@@ -155,7 +165,17 @@ class VoluntarioController extends Controller
             $voluntarios = DB::table('voluntarios')
             ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
             ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-            ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+            ->select(
+                'voluntarios.id_voluntario AS id_voluntario',              
+                'voluntarios.nombre AS nombre',
+                'voluntarios.ape_pat AS ape_pat',
+                'voluntarios.ape_mat AS ape_mat',
+                'voluntarios.email AS email',
+                'voluntarios.tel AS tel',
+                'voluntarios.curp AS curp',
+                DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
+                'instituciones.nombre AS nombre_institucion',
+                'municipios.nombre AS nombre_municipio')
             ->where([[ 'voluntarios.id_insti', '=', $id], ['eliminado', '=', 0]])
             ->orderBy('voluntarios.id_voluntario', 'DESC')
             ->get();
@@ -258,7 +278,17 @@ class VoluntarioController extends Controller
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio')
         ->where([
             ['eliminado', '=', 0],
             ['voluntarios.nombre', '=', $name]
@@ -274,7 +304,17 @@ class VoluntarioController extends Controller
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio')
         ->where([
             ['eliminado', '=', 0],
             ['voluntarios.id_municipio', '=', $id]
@@ -289,7 +329,17 @@ class VoluntarioController extends Controller
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio')
         ->where([
             ['eliminado', '=', 0],
             ['voluntarios.curp', '=', $id]
@@ -305,7 +355,17 @@ class VoluntarioController extends Controller
         $nameVoluntary = DB::table('voluntarios')
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        ->select('voluntarios.*', 'instituciones.nombre AS nombre_institucion', 'municipios.nombre AS nombre_municipio')
+        ->select(
+            'voluntarios.id_voluntario AS id_voluntario',              
+            'voluntarios.nombre AS nombre',
+            'voluntarios.ape_pat AS ape_pat',
+            'voluntarios.ape_mat AS ape_mat',
+            'voluntarios.email AS email',
+            'voluntarios.tel AS tel',
+            'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'), 
+            'instituciones.nombre AS nombre_institucion',
+            'municipios.nombre AS nombre_municipio')
         ->where([
             ['eliminado', '=', 0],
             ['voluntarios.id_insti', '=', $id]
@@ -317,9 +377,7 @@ class VoluntarioController extends Controller
     }
 
     public function searchByDates($fecha_inicio, $fecha_fin){
-        $nameVoluntary = DB::table('detalle_jornadas')
-        ->join('jornadas', 'detalle_jornadas.id_jornada', '=', 'jornadas.id_jornada')
-        ->join('voluntarios', 'detalle_jornadas.id_voluntario', '=', 'voluntarios.id_voluntario')
+        $nameVoluntary = DB::table('voluntarios')       
         ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
         ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
         ->select(
@@ -330,11 +388,12 @@ class VoluntarioController extends Controller
             'voluntarios.email AS email',
             'voluntarios.tel AS tel',
             'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio'
         )
-        ->where('jornadas.fecha_inicio', '=', $fecha_inicio)
-        ->where('jornadas.fecha_fin', '=', $fecha_fin)
+        ->where(DB::raw('DATE(voluntarios.fecha_creacion)'), '>=', $fecha_inicio)
+        ->where(DB::raw('DATE(voluntarios.fecha_creacion)'), '<=', $fecha_fin)
         ->distinct()
         ->get();
 
@@ -357,6 +416,7 @@ class VoluntarioController extends Controller
             'voluntarios.email AS email',
             'voluntarios.tel AS tel',
             'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio'
         )
@@ -383,6 +443,7 @@ class VoluntarioController extends Controller
             'voluntarios.email AS email',
             'voluntarios.tel AS tel',
             'voluntarios.curp AS curp',
+            DB::raw('DATE_FORMAT(DATE(voluntarios.fecha_creacion), "%d/%m/%y") AS fecha_creacion'),
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio'
         )

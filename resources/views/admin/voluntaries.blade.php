@@ -93,18 +93,20 @@
             @endif
     
             <div class="form-group second-form">
-                <input type="date" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha inicio">
+                <input type="text" class="form-control" placeholder="Fecha Inicio" id="inSearchByBeginDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha inicio"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
     
             <div class="form-group second-form ml-1">
-                <input type="date" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha fin">
+                <input type="text" class="form-control" placeholder="Fecha Fin" id="inSearchByEndDate" data-bs-toggle="tooltip" data-bs-placement="top" title="Fecha fin"
+                onfocus="(this.type='date')" onblur="(this.type='text')">
             </div>
     
             {{-- <div class="form-group second-form ml-1">
                 <input type="text" class="form-control" placeholder="Nombre del Enlace" id="inLinkName">
             </div> --}}
     
-            <div class="form-group second-form ml-1">
+            {{-- <div class="form-group second-form ml-1">
                 <select class="custom-select" id="inSearchBySede">
                     <option value="" selected disabled hidden>Nombre de la Sede</option>
                 </select>  
@@ -112,18 +114,23 @@
     
             <div class="form-group second-form ml-1">
                 <input type="number" class="form-control" placeholder="Horas del voluntario" id="inSearchByHours">
-            </div>
+            </div> --}}
     
             <div class="form-group ml-1">
                 <input type="text" class="form-control" placeholder="Búsqueda general" id="inSearchCustom">
             </div>
             
             <div class="form-group ml-1">
-                <button type="button" class="btn btn-info btn-table" id="showMoreFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros"
+                {{-- <button type="button" class="btn btn-info btn-table" id="showMoreFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Mostar mas filtros"
                 style="height: 39px;">
                     <i class="fas fa-chevron-circle-down" style="height: 24px; padding-top: 1px;"></i>
-                      Más filtros
-                </button>      
+                      <span style="height: 24px; padding-top: 1px;">Más filtros</span> 
+                </button> --}}
+                
+                <button type="button" class="btn btn-info btn-table" id="showMoreFilters" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar filtros">
+                    <img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/>
+                        <span class="item-label"> Más filtros</span>
+                    </button> 
             </div>
     
             <div class="form-group ml-1">
@@ -179,6 +186,7 @@
                     <th data-field="curp" data-sortable="true" data-halign="center" data-align="center">CURP</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombre_institucion" data-sortable="true" data-halign="center" data-align="center">Institución</th>
+                    <th data-field="fecha_creacion" data-sortable="true" data-halign="center" data-align="center">Fecha de registro</th>
                     <th data-field="operate" data-formatter="operateFormatter" data-halign="center" data-align="center" data-events="operateEvents">Acciones</th>
                   </tr>
                 </thead>
