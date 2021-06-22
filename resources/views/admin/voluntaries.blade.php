@@ -342,19 +342,25 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="nombre_encargado">Correo electrónico</label>
                                 <input type="text" class="form-control" id="email" name="email"/>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="emailVoluntary">Teléfono / Celular</label>
                                 <input type="text" class="form-control" id="tel" name="tel"/>
                             </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="curp">CURP</label>
+                                <input type="text" class="form-control" id="curp" name="curp"/>
+                            </div>
                         </div> 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="num_voluntarios">Número de horas</label>
                                 <input type="text" class="form-control" id="num_horas" name="num_horas"/>
@@ -915,7 +921,7 @@
                 url: "voluntario/detalles/" + id_voluntario,
                 type: "GET",
                 success: function (response) {
-                    //console.log(response);
+                    // console.log(response);
                     if(response.bandera == false){
                         $('#nombre').val(response.data.nombre);
                         $('#nombre').prop( "disabled", true );
@@ -929,6 +935,8 @@
                         $('#insti').prop( "disabled", true );
                         $('#tel').val(response.data.tel);
                         $('#tel').prop( "disabled", true );
+                        $('#curp').val(response.data.curp);
+                        $('#curp').prop( "disabled", true );
                         $('#email').val(response.data.email);
                         $('#email').prop( "disabled", true );
                         $('#num_horas').val(0);
@@ -947,6 +955,8 @@
                         $('#insti').prop( "disabled", true );
                         $('#tel').val(response.data[0].tel);
                         $('#tel').prop( "disabled", true );
+                        $('#curp').val(response.data[0].curp);
+                        $('#curp').prop( "disabled", true );
                         $('#email').val(response.data[0].email);
                         $('#email').prop( "disabled", true );
                         if(response.data.length == 1){
