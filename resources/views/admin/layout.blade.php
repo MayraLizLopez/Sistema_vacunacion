@@ -130,7 +130,7 @@
                     <li class="nav-item active">
                         <a id="menu" class="nav-link" href="{{url('admin/panel/users/index')}}">
                         <img class="mx-2 icon-side-bar" src="{{ asset('public/assets/images/menu_usuarios.svg')}}" style="width: 20px;"/>
-                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:20px;">Panel de Usuarios</span></a>
+                        <span class="titles-side-bar" style="font-family: nutmeg-bold; font-size:18px;">Panel de Usuarios</span></a>
                     </li> 
                 @else
                     <!-- Divider -->

@@ -70,7 +70,7 @@
     <script>    
         Swal.fire({
             title: '¡Registro completado!',
-            text: '¡El centro fue registrado correctamente!',
+            text: '¡La sede fue registrada correctamente!',
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Aceptar'
@@ -87,7 +87,7 @@
     <script>    
         Swal.fire({
             title: '¡Error!',
-            text: 'Al registrar el centro',
+            text: 'Al registrar la sede',
             icon: 'error',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Aceptar'
