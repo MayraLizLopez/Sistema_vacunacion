@@ -97,6 +97,7 @@
                     <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
                     <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>
+                    <th data-field="total_correos_enviados" data-sortable="true" data-halign="center" data-align="center">Total Correos Enviados</th>
                     <th data-field="nombre_municipio" data-sortable="true" data-halign="center" data-align="center">Municipio</th>
                     <th data-field="nombres_sedes" data-sortable="true" data-halign="center" data-align="center">Sedes</th>
                     <th data-field="operate" data-halign="center" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
@@ -235,6 +236,7 @@
                             <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_voluntario">ID</th>
                             <th class="d-none" data-field="id_insti">ID Institución</th>
+                            <th data-field="correo_enviado" data-sortable="true" data-halign="center" data-align="center">Correo Enviado</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                             <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
@@ -386,6 +388,7 @@
                             <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
+                            <th data-field="correo_enviado" data-sortable="true" data-halign="center" data-align="center">Correo Enviado</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                             <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
@@ -998,10 +1001,22 @@
                 url: "vaccinationDay/show/",
                 type: "GET",
                 success: function (response) {
-                    //console.log(response.data);
+                    // console.log(response.data);
+                    let sedes = response.data.map(item => {
+                        return {
+                            id_jornada: item.id_jornada,
+                            folio: item.folio,
+                            fecha_inicio: item.fecha_inicio,
+                            fecha_fin: item.fecha_fin,
+                            total_voluntarios: item.total_voluntarios,
+                            total_correos_enviados: (parseInt(item.total_correos_enviados) / (item.total_registros / item.total_voluntarios)),
+                            nombre_municipio: item.nombre_municipio,
+                            nombres_sedes: item.nombres_sedes
+                        }
+                    });
+
                     $vaccinationDayTable.bootstrapTable('destroy');
-                    //console.log(response);
-                    $vaccinationDayTable.bootstrapTable({data: response.data});
+                    $vaccinationDayTable.bootstrapTable({data: sedes});
                 },
                 error: function (error, resp, text) {
                     console.error(error);
@@ -1060,12 +1075,13 @@
                     ids_institution: ids_institution
                 },
                 success: function (response) {
-                    // console.log(response);
+                    console.log(response.data);
                     if(response.data.length > 0){
 
                         let data = response.data.map(item => {
                             return {
                                 id_voluntario: item.id_voluntario,
+                                correo_enviado: item.correo_enviado == null ? 0 : item.correo_enviado == 0 ? item.correo_enviado : 1,
                                 nombre: item.nombre,
                                 ape_pat: item.ape_pat,
                                 ape_mat: item.ape_mat,
@@ -1074,7 +1090,7 @@
                                 curp: item.curp,
                                 nombre_municipio: item.nombre_municipio,
                                 nombre_institucion: item.nombre_institucion,
-                                horas: item.horas == null ? "0" : item.horas
+                                horas: item.horas == null ? 0 : item.horas
                             }
                         });
 
@@ -1166,6 +1182,7 @@
                         return {
                             id_voluntario: id_voluntario,
                             id_detalle_jornada: response.data.find(s => s.id_voluntario === id_voluntario).id_detalle_jornada,
+                            correo_enviado: response.data.find(s => s.id_voluntario === id_voluntario).correo_enviado > 0 ? 1 : 0,
                             nombre: response.data.find(s => s.id_voluntario === id_voluntario).nombre,
                             ape_pat: response.data.find(s => s.id_voluntario === id_voluntario).ape_pat,
                             ape_mat: response.data.find(s => s.id_voluntario === id_voluntario).ape_mat,
