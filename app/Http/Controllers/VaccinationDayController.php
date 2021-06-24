@@ -258,7 +258,10 @@ class VaccinationDayController extends Controller
             'municipios.id_municipio AS id_municipio',
             'municipios.nombre AS nombre_municipio',    
             DB::raw('COUNT(DISTINCT detalle_jornadas.id_voluntario) as total_voluntarios'),
-            DB::raw("group_concat(DISTINCT sedes.nombre SEPARATOR ', ') as nombres_sedes"))
+            DB::raw("group_concat(DISTINCT sedes.nombre SEPARATOR ', ') as nombres_sedes"),
+            DB::raw('SUM(detalle_jornadas.correo_enviado) AS total_correos_enviados'),
+            DB::raw('COUNT(detalle_jornadas.id_voluntario) AS total_registros'),
+        )
         ->where('jornadas.activo', '=', true)
         ->orderByDesc('jornadas.fecha_creacion')
         ->groupBy('jornadas.id_jornada', 'id_municipio')
@@ -316,7 +319,8 @@ class VaccinationDayController extends Controller
             'voluntarios.curp AS curp',
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio',
-            DB::raw('SUM(detalle_jornadas.horas) AS horas')
+            DB::raw('SUM(detalle_jornadas.horas) AS horas'),
+            DB::raw('SUM(detalle_jornadas.correo_enviado) AS correo_enviado')
         )
         ->where('voluntarios.eliminado', '=', 0)
         ->whereIn('voluntarios.id_insti', $request->ids_institution)
@@ -324,22 +328,6 @@ class VaccinationDayController extends Controller
         ->orderBy('voluntarios.id_voluntario', 'DESC')
         ->distinct()
         ->get();
-        
-        
-        // $voluntarios = DB::table('voluntarios')
-        // ->join('instituciones', 'voluntarios.id_insti', '=', 'instituciones.id_insti')
-        // ->join('municipios', 'voluntarios.id_municipio', '=', 'municipios.id_municipio')
-        // ->select(
-        //     'voluntarios.*',
-        //     'instituciones.id_municipio AS id_instituciones_municipio',
-        //     'instituciones.nombre AS nombre_institucion',
-        //     'municipios.nombre AS nombre_municipio'
-        //  )
-        // ->where([['eliminado', '=', 0],
-        //         ['voluntarios.activo', '=', 0]])
-        // ->whereIn('voluntarios.id_insti', $request->ids_institution)
-        // ->get();
-
 
         return response()->json([
             'data' => $voluntarios       
@@ -390,7 +378,8 @@ class VaccinationDayController extends Controller
             'voluntarios.email AS email',
             'instituciones.nombre AS nombre_institucion',
             'municipios.nombre AS nombre_municipio',
-            DB::raw('SUM(detalle_jornadas.horas) AS horas')
+            DB::raw('SUM(detalle_jornadas.horas) AS horas'),
+            DB::raw('SUM(detalle_jornadas.correo_enviado) AS correo_enviado')
         )
         ->where('detalle_jornadas.id_jornada', '=', $id_jornada)
         ->groupBy('voluntarios.id_voluntario')
