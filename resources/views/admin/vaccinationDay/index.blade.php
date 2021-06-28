@@ -1009,7 +1009,7 @@
                             fecha_inicio: item.fecha_inicio,
                             fecha_fin: item.fecha_fin,
                             total_voluntarios: item.total_voluntarios,
-                            total_correos_enviados: (parseInt(item.total_correos_enviados) / (item.total_registros / item.total_voluntarios)),
+                            total_correos_enviados: Math.trunc((parseInt(item.total_correos_enviados) / (item.total_registros / item.total_voluntarios))),
                             nombre_municipio: item.nombre_municipio,
                             nombres_sedes: item.nombres_sedes
                         }
