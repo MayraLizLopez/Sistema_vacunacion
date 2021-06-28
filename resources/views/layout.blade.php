@@ -37,4 +37,4 @@
         <script src="{{ asset('public/assets/js/sweetalert2.min.js') }}"></script>
         @yield('scripts')
     </body>
-</html>
+</html>   
