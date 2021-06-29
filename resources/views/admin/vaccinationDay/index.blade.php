@@ -388,7 +388,7 @@
                             <th data-checkbox="true"></th>
                             <th class="d-none" data-field="id_detalle_jornada">ID Detalle Jornada</th>
                             <th class="d-none" data-field="id_voluntario">ID Voluntario</th>
-                            <th data-field="correo_enviado" data-sortable="true" data-halign="center" data-align="center">Correo Enviado</th>
+                            <th data-field="correo_enviado" data-sortable="true" data-halign="center" data-align="center" data-formatter="emailFormater">Correo Enviado</th>
                             <th data-field="nombre" data-sortable="true" data-halign="center" data-align="center">Nombre</th>
                             <th data-field="ape_pat" data-sortable="true" data-halign="center" data-align="center">Apellido Paterno</th>
                             <th data-field="ape_mat" data-sortable="true" data-halign="center" data-align="center">Apellido Materno</th>
@@ -1779,6 +1779,18 @@
                 status = '<h3><span class="badge badge-success">' + row.horas + '</span><h3>'
             }
             return [status].join('');
+        }
+
+        function emailFormater(value, row, index){
+            let email = '';
+
+            if(row.correo_enviado > 0){
+                email = '<i class="fas fa-check-circle"></i>'
+            } 
+            else{
+                email = '<i class="fas fa-envelope"></i>'
+            }
+            return [email].join('');
         }
 
         // function stateFormatter(value, row, index) {

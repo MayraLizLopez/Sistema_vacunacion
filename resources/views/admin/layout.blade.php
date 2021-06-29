@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="{{ asset('public/assets/css/sb-admin-2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('public/assets/css/sweetalert2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('public/assets/css/site.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/assets/css/layout.css') }}">
         <style type="text/css">
             @font-face {
                 font-family: nutmeg-bold;
