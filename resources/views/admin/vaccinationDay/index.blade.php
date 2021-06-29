@@ -1778,7 +1778,7 @@
             else if(row.horas < 400) {
                 status = '<h3><span class="badge badge-success">' + row.horas + '</span><h3>'
             }
-            return [status].join('');
+            return [status].join('');   
         }
 
         function emailFormater(value, row, index){
