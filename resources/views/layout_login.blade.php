@@ -8,9 +8,9 @@
         <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('public/assets/css/site.css') }}">
         <link rel="stylesheet" href="{{ asset('public/assets/css/sb-admin-2.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('public/assets/css/sweetalert2.min.css') }}">    
+        <link rel="stylesheet" href="{{ asset('public/assets/css/sweetalert2.min.css') }}">     
         <link href="{{ asset('public/assets/css/all.min.css') }}" rel="stylesheet"> 
-    </head>
+    </head>   
     <style>
         body {
             background-image: url('{{ asset('public/assets/images/FondoLogin.png')}}');
