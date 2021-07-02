@@ -1498,17 +1498,17 @@
                     //console.log(response);
                 },
                 error: function (error, resp, text) {
-                    Swal.fire({
-                        title: 'Error',
-                        text: error.responseJSON == null : "No fue posible enviar todos los correos" ? error.responseJSON.message,
-                        icon: 'error',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Aceptar'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
+                    // Swal.fire({
+                    //     title: 'Error',
+                    //     text: error.responseJSON.message,
+                    //     icon: 'error',
+                    //     confirmButtonColor: '#3085d6',
+                    //     confirmButtonText: 'Aceptar'
+                    //     }).then((result) => {
+                    //         if (result.isConfirmed) {
+                    //             location.reload();
+                    //         }
+                    //     });
 
                         getJornadaDetailForEmailsNoSend(id_jornada);
 
