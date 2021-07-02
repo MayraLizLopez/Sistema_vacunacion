@@ -1500,7 +1500,7 @@
                 error: function (error, resp, text) {
                     Swal.fire({
                         title: 'Error',
-                        text: error.responseJSON.message,
+                        text: error.responseJSON == null : "No fue posible enviar todos los correos" ? error.responseJSON.message,
                         icon: 'error',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
