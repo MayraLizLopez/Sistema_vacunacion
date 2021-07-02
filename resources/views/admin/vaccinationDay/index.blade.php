@@ -1278,8 +1278,11 @@
                         icon: 'warning',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
                         });
-                        location.reload();
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
