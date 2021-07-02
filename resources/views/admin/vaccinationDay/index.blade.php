@@ -1279,6 +1279,7 @@
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'Aceptar'
                         });
+                        location.reload();
                 },
                 error: function (error, resp, text) {
                     console.error(error.responseJSON.message);
