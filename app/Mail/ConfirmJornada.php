@@ -17,9 +17,12 @@ class ConfirmJornada extends Mailable
      * @return void
      */
     public $data;
-    public function __construct($data)
+    public $email_account;
+
+    public function __construct($data, $email_account)
     {
         $this->data = $data;
+        $this->email_account = $email_account;
     }
 
     /**
@@ -35,7 +38,7 @@ class ConfirmJornada extends Mailable
             $email->attachData(base64_decode($anexos->anexo), $anexos->nombre);
         }
 
-        $email->from('voluntariado.jalisco@gmail.com', 'Voluntariado Jalisco');
+        $email->from($this->email_account, 'Voluntariado Jalisco');
         $email->view('email.ConfirmJornada');
         $email->subject('¡Felicidades has sido seleccionado como voluntario!');
         $email->with($email->data);
