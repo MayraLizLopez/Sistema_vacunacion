@@ -654,13 +654,15 @@ class VaccinationDayController extends Controller
                     'anexos' => $anexos
                 ];
 
-                if($j <= 495){
-                    Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado3.jalisco@gmail.com'));
-                } else if($j <=990){
-                    Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado4.jalisco@gmail.com'));
-                } else if($j <=1485){
-                    Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado2.jalisco@gmail.com'));
-                }
+                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado2.jalisco@gmail.com'));
+
+                // if($j <= 495){
+                //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado3.jalisco@gmail.com'));
+                // } else if($j <=990){
+                //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado4.jalisco@gmail.com'));
+                // } else if($j <=1485){
+                //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado2.jalisco@gmail.com'));
+                // }
              
                 for($k = 0; $k < count($sedes); $k++){
                     $editarJornada = DetalleJornada::findOrFail($sedes[$k]->id_detalle_jornada);
