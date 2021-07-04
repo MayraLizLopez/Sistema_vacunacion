@@ -654,7 +654,7 @@ class VaccinationDayController extends Controller
                     'anexos' => $anexos
                 ];
 
-                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado3.jalisco@gmail.com'));
+                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado5.jalisco@gmail.com'));
 
                 // if($j <= 495){
                 //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado3.jalisco@gmail.com'));
