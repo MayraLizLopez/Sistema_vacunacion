@@ -138,43 +138,71 @@ class VaccinationDayController extends Controller
             'idsVoluntarios' => 'required',
             'idSedes' => 'required'
         ]);
-        
-        DB::table('jornadas')
-        ->where('id_jornada', $request->id_jornada)
-        ->update([
-            'fecha_inicio' => $request->fecha_inicio,
-            'fecha_fin' => $request->fecha_fin,
-            'mensaje' => $request->mensaje
-        ]);
 
-        DB::table('detalle_jornadas')
-        ->where('id_jornada', '=', $request->id_jornada)
-        ->delete();
+        $jornada = DB::table('jornadas')->where('id_jornada', $request->id_jornada)->first();
 
-        foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
-            foreach(json_decode($request->idSedes) as $id_sede){
-                $detalle_jornada = new DetalleJornada;
-                $detalle_jornada->id_jornada = $request->id_jornada;
-                $detalle_jornada->id_voluntario = (int)$id_voluntario;
-                $detalle_jornada->uuid = DB::raw('UUID()');
-                $detalle_jornada->id_sede = (int)$id_sede;
-                $detalle_jornada->horas = 0;
-                $detalle_jornada->correo_enviado = false;
-                $detalle_jornada->eliminado = false;
-                $save1 = $detalle_jornada->save();
+        if($request->fecha_inicio != $jornada->fecha_inicio ||
+         $request->fecha_fin != $jornada->fecha_fin || 
+         strlen($request->mensaje) != strlen($jornada->mensaje)){
+            DB::table('jornadas')
+            ->where('id_jornada', $request->id_jornada)
+            ->update([
+                'fecha_inicio' => $request->fecha_inicio,
+                'fecha_fin' => $request->fecha_fin,
+                'mensaje' => $request->mensaje
+            ]);
+    
+            DB::table('detalle_jornadas')
+            ->where('id_jornada', '=', $request->id_jornada)
+            ->delete();
+    
+            foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
+                foreach(json_decode($request->idSedes) as $id_sede){
+                    $detalle_jornada = new DetalleJornada;
+                    $detalle_jornada->id_jornada = $request->id_jornada;
+                    $detalle_jornada->id_voluntario = (int)$id_voluntario;
+                    $detalle_jornada->uuid = DB::raw('UUID()');
+                    $detalle_jornada->id_sede = (int)$id_sede;
+                    $detalle_jornada->horas = 0;
+                    $detalle_jornada->correo_enviado = false;
+                    $detalle_jornada->eliminado = false;
+                    $save1 = $detalle_jornada->save();
+                }
             }
-        }
+    
+            if($save1){
+                return response()->json([
+                    'id_jornada' => $request->id_jornada,
+                    'isOk' => true,
+                    'message' => '¡La jornada fue actualizada exitosamente!'
+                ]); 
+            }else{
+                return response()->json([
+                    'isOk' => false,
+                    'message' => 'Error al editar la jornada'       
+                ]); 
+            }
+        } else {
+            foreach(json_decode($request->idsVoluntarios) as $id_voluntario ){
+                foreach(json_decode($request->idSedes) as $id_sede){
+                    DB::table('detalle_jornadas')->insertOrIgnore([
+                        [
+                            'id_jornada' => $request->id_jornada,
+                            'id_voluntario' => (int)$id_voluntario,
+                            'uuid' => DB::raw('UUID()'),
+                            'id_sede' => (int)$id_sede,
+                            'horas' => 0,
+                            'correo_enviado' => false,
+                            'eliminado' => false
+                        ]
+                    ]);
+                }
+            }
 
-        if($save1){
             return response()->json([
                 'id_jornada' => $request->id_jornada,
                 'isOk' => true,
                 'message' => '¡La jornada fue actualizada exitosamente!'
-            ]); 
-        }else{
-            return response()->json([
-                'isOk' => true,
-                'message' => 'Error al editar la jornada'       
             ]); 
         }
     }
@@ -654,15 +682,7 @@ class VaccinationDayController extends Controller
                     'anexos' => $anexos
                 ];
 
-                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado5.jalisco@gmail.com'));
-
-                // if($j <= 495){
-                //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado3.jalisco@gmail.com'));
-                // } else if($j <=990){
-                //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado4.jalisco@gmail.com'));
-                // } else if($j <=1485){
-                //     Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado2.jalisco@gmail.com'));
-                // }
+                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado.jalisco@gmail.com'));
              
                 for($k = 0; $k < count($sedes); $k++){
                     $editarJornada = DetalleJornada::findOrFail($sedes[$k]->id_detalle_jornada);
