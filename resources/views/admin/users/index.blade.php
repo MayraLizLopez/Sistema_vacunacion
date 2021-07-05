@@ -384,7 +384,7 @@
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#6A7379',
                     confirmButtonText: 'Desactivar',
-                    cancelButtonText: 'Calcelar',
+                    cancelButtonText: 'Cancelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         desableUser(row.id_user);

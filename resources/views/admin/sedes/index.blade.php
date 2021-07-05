@@ -194,7 +194,7 @@
                     confirmButtonColor: '#E33C3C',
                     cancelButtonColor: '#67737A',
                     confirmButtonText: 'Eliminar',
-                    cancelButtonText: 'Calcelar',
+                    cancelButtonText: 'Cancelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteSede(row.id_sede);
