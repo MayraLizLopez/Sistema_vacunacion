@@ -682,7 +682,7 @@ class VaccinationDayController extends Controller
                     'anexos' => $anexos
                 ];
 
-                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'voluntariado.jalisco@gmail.com'));
+                Mail::to($voluntario->email)->send(new ConfirmJornada($data, 'contigo.voluntarios@jalisco.gob.mx'));
              
                 for($k = 0; $k < count($sedes); $k++){
                     $editarJornada = DetalleJornada::findOrFail($sedes[$k]->id_detalle_jornada);
