@@ -41,7 +41,7 @@
 </style> 
 <!-- Page Heading --> 
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Instituciones</h1>
-<p class="mb-4">La siguiente tabla contiene todas las instituciones registradas.</p>
+<p class="mb-4">La siguiente tabla contiene las instituciones registradas.</p>
 <div id="toolbar">
     <div class="form-inline">
         <a class="btn btn-primary" style="color:white;" href="{{route('createInstitucion')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Registrar institución</a>
@@ -209,7 +209,7 @@
                     confirmButtonColor: '#E33C3C',
                     cancelButtonColor: '#67737A',
                     confirmButtonText: 'Eliminar',
-                    cancelButtonText: 'Calcelar',
+                    cancelButtonText: 'Cancelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteInstitution(row.id_insti);

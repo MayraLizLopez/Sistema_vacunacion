@@ -53,7 +53,7 @@
             font-family: montserrat;
         }
 </style>
-    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registo de voluntario</h1>
+    <h1 class="h3 mb-2 font-weight-bold text-gray-800">Registro de voluntario</h1>
     <p class="mb-4"> </p>
     
     <div class="row justify-content-center">

@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-6">
         <h1 class="h3 mb-2 font-weight-bold text-gray-800">Usuarios</h1>
-        <p class="mb-4">La siguiente tabla muestra todos los usuarios registrados</p>
+        <p class="mb-4">La siguiente tabla muestra los usuarios registrados.</p>
     </div>
     <div class="col-md-6">
         <button 
@@ -398,7 +398,7 @@
                     confirmButtonColor: '#54A583',
                     cancelButtonColor: '#6A7379',
                     confirmButtonText: 'Activar',
-                    cancelButtonText: 'Calcelar',
+                    cancelButtonText: 'Cancelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         enableUser(row.id_user);

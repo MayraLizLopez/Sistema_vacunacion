@@ -43,7 +43,7 @@
 <div class="row">
     <div class="col-md-6">
         <h1 class="h3 mb-2 font-weight-bold text-gray-800">Voluntarios</h1>
-        <p class="mb-4">La siguiente tabla muestra todos los voluntarios registrados activos.</p>
+        <p class="mb-4">La siguiente tabla muestra los voluntarios registrados activos.</p>
     </div>
     
     <div class="col-md-6">

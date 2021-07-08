@@ -59,12 +59,18 @@
         a{
             font-family: montserrat;
         }
+
+        @media only screen and (max-width: 1722px) {
+            .icon-resize{
+                width: 10px !important;
+            }
+        }
 </style>
 
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Jornada de vacunación</h1>
-<p class="mb-4">La siguiente vista muestra la tabla de todas las jornadas activas, así como la creación y edición de las mismas.</p>
+<p class="mb-4">La siguiente vista muestra la tabla de las jornadas activas, así como la creación y edición de las mismas.</p>
 
 <div class="card shadow mb-4">
     <div class="card-body">
@@ -1756,16 +1762,16 @@
         function operateFormatter(value, row, index) {
             return [
             '<a class="email mr-2" href="javascript:void(0)" title="Enviar correos">',
-                '<i class="far fa-envelope"></i>',
+                '<i class="far fa-envelope icon-resize"></i>',
             '</a>',
             '<a class="detail mr-2" href="javascript:void(0)" title="Detalles">',
-            '<img src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
+            '<img class="icon-resize" src="{{ asset('public/assets/images/i1.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',                
             '<a class="edit mr-2" href="javascript:void(0)" title="Editar">',
-                '<img src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
+                '<img class="icon-resize" src="{{ asset('public/assets/images/lapiz.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>',
             '<a class="remove mr-2" href="javascript:void(0)" title="Eliminar">',
-                '<img src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
+                '<img class="icon-resize" src="{{ asset('public/assets/images/basura.svg')}}" style="width: 15px; padding:0px;"/>',
             '</a>'
             ].join('')
         }
@@ -1833,6 +1839,7 @@
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#6A7379',
                     confirmButtonText: 'Eliminar',
+                    cancelButtonText: 'Cancelar',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false

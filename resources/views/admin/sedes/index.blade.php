@@ -5,7 +5,7 @@
 @section('content')  
 <!-- Page Heading -->
 <h1 class="h3 mb-2 font-weight-bold text-gray-800">Sedes de vacunación</h1>
-<p class="mb-4">La siguiente tabla contiene todos los centros de vacunación registrados</p>
+<p class="mb-4">La siguiente tabla contiene los centros de vacunación registrados.</p>
 <div id="toolbar">
     <div class="form-inline">
         <a class="btn btn-primary" style="color:white;" href="{{route('createSede')}}"><img class="mx-2" src="{{ asset('public/assets/images/agregar.svg')}}" style="width: 20px;"/> Agregar sede</a>
