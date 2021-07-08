@@ -93,7 +93,7 @@
                     <tr>
                     <th class="d-none" data-radio="true"></th>
                     <th class="d-none" data-field="id_jornada">ID</th>    
-                    <th data-field="folio" data-sortable="true" data-halign="center" data-align="center">Folio</th>
+                    <th data-field="folio" data-sortable="true" data-sort-name="id_jornada" data-halign="center" data-align="center">Folio</th>
                     <th data-field="fecha_inicio" data-sortable="true" data-halign="center" data-align="center">Fecha Inicio</th>
                     <th data-field="fecha_fin" data-sortable="true" data-halign="center" data-align="center">Fecha Fin</th>
                     <th data-field="total_voluntarios" data-sortable="true" data-halign="center" data-align="center">Total de Voluntarios</th>

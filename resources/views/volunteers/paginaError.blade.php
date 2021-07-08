@@ -27,7 +27,7 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-md-12">
-                                                    <h4>!Jornada eliminada, lamentamos el inconveniente!</h4>
+                                                    <h4>¡Jornada eliminada, lamentamos el inconveniente!</h4>
                                                     <h4></h4>
                                                 </div>
                                             </div>
