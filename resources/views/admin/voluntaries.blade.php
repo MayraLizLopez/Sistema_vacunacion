@@ -887,7 +887,7 @@
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#6A7379',
                     confirmButtonText: 'Eliminar',
-                    cancelButtonText: 'Calcelar',
+                    cancelButtonText: 'Cancelar',
                     }).then((result) => {
                     if (result.isConfirmed) {
                         deleteVoluntary(row.id_voluntario);

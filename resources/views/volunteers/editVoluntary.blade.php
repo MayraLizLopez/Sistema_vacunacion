@@ -212,7 +212,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success botonEnviar" id="sendFormVoluntaries">Enviar</button>
+                        <button type="submit" class="btn btn-success botonEnviar" id="sendFormVoluntaries">Guardar</button>
                         <a class="btn btn-secondary" id="boton" style="color:white;" href="{{route('tabla_volu')}}">Cancelar</a>
                         
                     </div>
